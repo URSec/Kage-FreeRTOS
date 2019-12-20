@@ -542,12 +542,12 @@ void vApplicationIdleHook( void )
 }
 /*-----------------------------------------------------------*/
 
-void * malloc( size_t xSize )
-{
-    configASSERT( xSize == ~0 );
-
-    return NULL;
-}
+//void * malloc( size_t xSize )
+//{
+//    configASSERT( xSize == ~0 );
+//
+//    return NULL;
+//}
 /*-----------------------------------------------------------*/
 
 
@@ -570,7 +570,7 @@ void vMainUARTPrintString( char * pcString )
 }
 /*-----------------------------------------------------------*/
 
-void prvGetRegistersFromStack( uint32_t * pulFaultStackAddress )
+void prvGetRegistersFromStack( uint32_t * pulFaultStackAddress ) __attribute__((used))
 {
 /* These are volatile to try and prevent the compiler/linker optimising them
  * away as the variables never actually get used.  If the debugger won't show the
