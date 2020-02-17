@@ -605,6 +605,24 @@ void xPortSysTickHandler( void )
 {
 uint32_t ulDummy;
 
+#ifndef USE_PROCESS_STACK
+	uint32_t *sp, mspUsed = 1;
+
+	__asm volatile
+	(
+		"	tst lr, #4							\n"
+		"	itt ne								\n" /* Silhouette: add an argument indicating which stack is used*/
+		"	mrsne %0, psp						\n"
+		"	movne %1, #0						\n"
+		:"=r"(sp), "=r"(mspUsed)
+	);
+
+	if (!mspUsed)
+	{
+		prvSpillContext(sp);
+	}
+#endif
+
 	ulDummy = portSET_INTERRUPT_MASK_FROM_ISR();
 	{
 		/* Increment the RTOS tick. */
@@ -615,6 +633,14 @@ uint32_t ulDummy;
 		}
 	}
 	portCLEAR_INTERRUPT_MASK_FROM_ISR( ulDummy );
+
+#ifndef USE_PROCESS_STACK
+
+	if (!mspUsed)
+	{
+		prvRestoreContext(sp);
+	}
+#endif
 }
 /*-----------------------------------------------------------*/
 
