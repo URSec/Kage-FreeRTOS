@@ -52,6 +52,12 @@ extern "C" {
 #define portSTACK_TYPE	uint32_t
 #define portBASE_TYPE	long
 
+//Silhouette: Lele: Use a constant stack size for all apps, for easiness of shadow stack setup
+#define portSTACK_SIZE  1024 //256 //128: overflow for fibDyn & print
+#define STACK_SIZE		portSTACK_SIZE
+#define STACK_SIZE_IN_BYTES (STACK_SIZE * sizeof (StackType_t))
+#define STACK_SIZE_INLINE	#STACK_SIZE_IN_BYTES
+
 typedef portSTACK_TYPE StackType_t;
 typedef long BaseType_t;
 typedef unsigned long UBaseType_t;
