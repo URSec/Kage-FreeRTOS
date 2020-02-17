@@ -146,7 +146,17 @@ static void prvRestoreContextOfFirstTask( void ) __attribute__(( naked )) PRIVIL
  * C portion of the SVC handler.  The SVC handler is split between an asm entry
  * and a C wrapper for simplicity of coding and maintenance.
  */
-static void prvSVCHandler( uint32_t *pulRegisters ) __attribute__(( noinline )) PRIVILEGED_FUNCTION;
+static void prvSVCHandler( uint32_t *pulRegisters, uint32_t mspUsed ) __attribute__(( noinline )) PRIVILEGED_FUNCTION;
+
+/*
+ * Silhouette: Spill processor states to psp shadow stack
+ */
+static inline void prvSpillContext( uint32_t *sp ) __attribute__(( always_inline )) PRIVILEGED_FUNCTION;
+
+/*
+ * Silhouette: Restore processor states to psp from shadow stack
+ */
+static inline void prvRestoreContext( uint32_t *sp ) __attribute__(( always_inline )) PRIVILEGED_FUNCTION;
 
 /*
  * Function to enable the VFP.
