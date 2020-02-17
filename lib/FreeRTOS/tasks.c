@@ -3530,11 +3530,48 @@ static portTASK_FUNCTION( prvIdleTask, pvParameters )
 
 	void vTaskAllocateMPURegions( TaskHandle_t xTaskToModify, const MemoryRegion_t * const xRegions )
 	{
+	extern uint32_t __FLASH_segment_start__[];
+	extern uint32_t __FLASH_segment_end__[];
 	TCB_t *pxTCB;
+	TaskStatus_t *pxTaskStatusArray;
+	volatile UBaseType_t uxArraySize, x;
+	uint32_t ul;
 
 		/* If null is passed in here then we are modifying the MPU settings of
 		the calling task. */
 		pxTCB = prvGetTCBFromHandle( xTaskToModify );
+
+		/* Silhouette: Check if new regions are still safe */
+		/* Refer to https://www.freertos.org/uxTaskGetSystemState.html for
+		 * more details of uxTaskGetSystemState() function */
+		uxArraySize = uxCurrentNumberOfTasks;
+		pxTaskStatusArray = pvPortMalloc( uxArraySize * sizeof( TaskStatus_t ));
+
+		configASSERT( pxTaskStatusArray != NULL );
+		uxArraySize = uxTaskGetSystemState(pxTaskStatusArray, uxArraySize, NULL);
+
+		/* Check for overlaps between xRegions and other tasks' stack and shadow stack*/
+		for (ul = 0; ul < portNUM_CONFIGURABLE_REGIONS; ul++){
+			for (x = 0; x < uxArraySize; x++){
+				/* Skip the current task */
+				if (pxTaskStatusArray[x].xHandle == pxTCB){
+					continue;
+				} else {
+					/* TODO: Move the actual checking part to port.c */
+					uint8_t cond = (xRegions[ul].pvBaseAddress + xRegions[ul].ulLengthInBytes < pxTaskStatusArray[x].pxStackBase) ||
+							(xRegions[ul].pvBaseAddress > pxTaskStatusArray[x].pxStackBase + (2 * STACK_SIZE));
+					configASSERT( cond || !(xRegions[ul].ulParameters & portMPU_REGION_READ_WRITE) );
+				}
+			}
+			/* Check for overlaps between xRegions and kernel stack */
+			uint8_t cond = (xRegions[ul].pvBaseAddress + xRegions[ul].ulLengthInBytes < 0x2000CCCC) ||
+					(xRegions[ul].pvBaseAddress > 0x20018000);
+			configASSERT( cond || !(xRegions[ul].ulParameters & portMPU_REGION_READ_WRITE) );
+			/* Check for overlaps between xRegions and FLASH */
+			cond = (xRegions[ul].pvBaseAddress + xRegions[ul].ulLengthInBytes < ( uint32_t ) __FLASH_segment_start__) ||
+					(xRegions[ul].pvBaseAddress > ( uint32_t ) __FLASH_segment_end__);
+			configASSERT( cond || !(xRegions[ul].ulParameters & portMPU_REGION_READ_WRITE) );
+		}
 
 		vPortStoreTaskMPUSettings( &( pxTCB->xMPUSettings ), xRegions, NULL, 0 );
 	}
