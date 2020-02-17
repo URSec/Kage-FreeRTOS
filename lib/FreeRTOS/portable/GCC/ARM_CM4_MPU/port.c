@@ -221,27 +221,34 @@ StackType_t *pxPortInitialiseStack( StackType_t *pxTopOfStack, TaskFunction_t px
 	interrupt. */
 	pxTopOfStack--; /* Offset added to account for the way the MCU uses the stack on entry/exit of interrupts. */
 	*pxTopOfStack = portINITIAL_XPSR;	/* xPSR */
+	pxTopOfStack[STACK_SIZE] = portINITIAL_XPSR; /* Silhouette: Spill to shadow stack */
 	pxTopOfStack--;
 	*pxTopOfStack = ( ( StackType_t ) pxCode ) & portSTART_ADDRESS_MASK;	/* PC */
+	pxTopOfStack[STACK_SIZE] = ( ( StackType_t ) pxCode ) & portSTART_ADDRESS_MASK; /* Silhouette: Spill to shadow stack */
 	pxTopOfStack--;
 	*pxTopOfStack = 0;	/* LR */
+	pxTopOfStack[STACK_SIZE] = 0; /* Silhouette: spill to shadow stack */
 	pxTopOfStack -= 5;	/* R12, R3, R2 and R1. */
 	*pxTopOfStack = ( StackType_t ) pvParameters;	/* R0 */
+	pxTopOfStack = ( StackType_t )pvParameters; /* Silhouette: spill to shadow stack */
 
 	/* A save method is being used that requires each task to maintain its
 	own exec return value. */
 	pxTopOfStack--;
 	*pxTopOfStack = portINITIAL_EXC_RETURN;
+	pxTopOfStack[STACK_SIZE] = portINITIAL_EXC_RETURN; /* Silhouette: spill to shadow stack */
 
 	pxTopOfStack -= 9;	/* R11, R10, R9, R8, R7, R6, R5 and R4. */
 
 	if( xRunPrivileged == pdTRUE )
 	{
 		*pxTopOfStack = portINITIAL_CONTROL_IF_PRIVILEGED;
+		pxTopOfStack[STACK_SIZE] = portINITIAL_CONTROL_IF_PRIVILEGED; /* Silhouette: spill to shadow stack */
 	}
 	else
 	{
 		*pxTopOfStack = portINITIAL_CONTROL_IF_UNPRIVILEGED;
+		pxTopOfStack[STACK_SIZE] = portINITIAL_CONTROL_IF_UNPRIVILEGED; /* Silhouette: spill to shadow stack */
 	}
 
 	return pxTopOfStack;
@@ -255,28 +262,46 @@ void vPortSVCHandler( void )
 	(
 		#ifndef USE_PROCESS_STACK	/* Code should not be required if a main() is using the process stack. */
 			"	tst lr, #4						\n"
-			"	ite eq							\n"
+			"	ittee eq						\n"
 			"	mrseq r0, msp					\n"
+			"	moveq r1, #1					\n"
 			"	mrsne r0, psp					\n"
+			"	moveq r1, #0					\n"
 		#else
 			"	mrs r0, psp						\n"
+			"	moveq r1, #0					\n"
 		#endif
 			"	b %0							\n"
-			::"i"(prvSVCHandler):"r0", "memory"
+			::"i"(prvSVCHandler):"r0", "r1", "memory"
 	);
 }
 /*-----------------------------------------------------------*/
 
-static void prvSVCHandler(	uint32_t *pulParam )
+static void prvSVCHandler(	uint32_t *pulParam, uint32_t mspUsed )
 {
 uint8_t ucSVCNumber;
+	// Silhouette: if PSP is used, spill processor states to shadow stack
+	if (mspUsed == 0)
+	{
+		prvSpillContext(pulParam);
+		/* The stack contains: r0, r1, r2, r3, r12, r14, the return address and
+		xPSR.  The first argument (r0) is pulParam[ 0 ]. */
+		ucSVCNumber = ( ( uint8_t * ) pulParam[ portOFFSET_TO_PC + STACK_SIZE ] )[ -2 ]; // Silhouette; now use shadow stack
+	} else
+	{
+		/* The stack contains: r0, r1, r2, r3, r12, r14, the return address and
+		xPSR.  The first argument (r0) is pulParam[ 0 ]. */
+		ucSVCNumber = ( ( uint8_t * ) pulParam[ portOFFSET_TO_PC ] )[ -2 ];
+	}
 
-	/* The stack contains: r0, r1, r2, r3, r12, r14, the return address and
-	xPSR.  The first argument (r0) is pulParam[ 0 ]. */
-	ucSVCNumber = ( ( uint8_t * ) pulParam[ portOFFSET_TO_PC ] )[ -2 ];
 	switch( ucSVCNumber )
 	{
 		case portSVC_START_SCHEDULER	:	portNVIC_SYSPRI1_REG |= portNVIC_SVC_PRI;
+											// Silhouette: if PSP is used, restore processor states from shadow stack
+											if (mspUsed == 0)
+											{
+												prvRestoreContext(pulParam);
+											}
 											prvRestoreContextOfFirstTask();
 											break;
 
@@ -302,7 +327,38 @@ uint8_t ucSVCNumber;
 		default							:	/* Unknown SVC call. */
 											break;
 	}
+	// Silhouette: if PSP is used, restore processor states from shadow stack
+	if (mspUsed == 0)
+	{
+		prvRestoreContext(pulParam);
+	}
 }
+/*-----------------------------------------------------------*/
+
+// Silhouette: Helper function to spill processor states
+static inline void prvSpillContext( uint32_t *sp )
+{
+	// spill 8 stack frames: r0, r1, r2, r3, r12, r14, return addr, xPSR
+	int index;
+	for (index = 0; index < 8; index++)
+	{
+		sp[index + STACK_SIZE] = sp[index];
+	}
+}
+
+/*-----------------------------------------------------------*/
+
+// Silhouette: Helper function to restore processor states
+static inline void prvRestoreContext( uint32_t *sp )
+{
+	// restore 8 stack frames: r0, r1, r2, r3, r12, r14, return addr, xPSR
+	int index;
+	for (index = 0; index < 8; index++)
+	{
+		sp[index] = sp[index + STACK_SIZE];
+	}
+}
+
 /*-----------------------------------------------------------*/
 
 static void prvRestoreContextOfFirstTask( void )
