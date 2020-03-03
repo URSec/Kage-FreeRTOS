@@ -88,6 +88,33 @@ BaseType_t xLoggingTaskInitialize( uint16_t usStackSize,
 {
     BaseType_t xReturn = pdFAIL;
 
+    /* Structs for logging task
+	 * */
+	/// This is a dynamic task definition
+    static StackType_t* logStackBuffer;
+    logStackBuffer = ( StackType_t * ) pvPortMalloc( STACK_SIZE * 2 );
+//	static StackType_t logStackBuffer[STACK_SIZE * 2] __attribute__ ((aligned (STACK_SIZE * 8)));
+	// Create an TaskParameters_t structure that defines the task to be created.
+	TaskParameters_t logTaskParameters =
+	{
+			prvLoggingTask,		// pvTaskCode - the function that implements the task.
+		"Logging",	// pcName - just a text name for the task to assist debugging.
+		STACK_SIZE,		// usStackDepth	- the stack size DEFINED IN WORDS.
+		NULL,		// pvParameters - passed into the task function as the function parameters.
+		( uxPriority | portPRIVILEGE_BIT ),// uxPriority - task priority, set the portPRIVILEGE_BIT if the task should run in a privileged state.
+		//( 1UL ),// uxPriority - task priority, set the portPRIVILEGE_BIT if the task should run in a privileged state.
+		logStackBuffer,// puxStackBuffer - the buffer to be used as the task stack.
+
+		// xRegions - Allocate up to three separate memory regions for access by
+		// the task, with appropriate access permissions.
+		{
+			// {Base address,	Length,	Parameters}
+			{ &logStackBuffer[STACK_SIZE],	STACK_SIZE_IN_BYTES, portMPU_REGION_PRIVILEGED_READ_WRITE }, // shadow stack.
+			{ 0,0,0 }, // the other two region left unused.
+			{ 0,0,0 }
+		}
+	};
+
     /* Ensure the logging task has not been created already. */
     if( xQueue == NULL )
     {
@@ -96,7 +123,8 @@ BaseType_t xLoggingTaskInitialize( uint16_t usStackSize,
 
         if( xQueue != NULL )
         {
-            if( xTaskCreate( prvLoggingTask, "Logging", usStackSize, NULL, uxPriority, NULL ) == pdPASS )
+        	if( xTaskCreateRestricted( &logTaskParameters, NULL ) == pdPASS )
+//            if( xTaskCreate( prvLoggingTask, "Logging", usStackSize, NULL, uxPriority, NULL ) == pdPASS )
             {
                 xReturn = pdPASS;
             }

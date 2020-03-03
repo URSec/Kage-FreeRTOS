@@ -107,7 +107,7 @@ static void prvWifiConnect( void );
  *
  * Initialization of clock, LEDs, RNG, RTC, and WIFI module.
  */
-static void prvMiscInitialization( void );
+static void prvMiscInitialization( void ) PRIVILEGED_FUNCTION;
 
 /**
  * @brief Initializes the FreeRTOS heap.
@@ -542,12 +542,12 @@ void vApplicationIdleHook( void )
 }
 /*-----------------------------------------------------------*/
 
-void * malloc( size_t xSize )
-{
-    configASSERT( xSize == ~0 );
-
-    return NULL;
-}
+//void * malloc( size_t xSize )
+//{
+//    configASSERT( xSize == ~0 );
+//
+//    return NULL;
+//}
 /*-----------------------------------------------------------*/
 
 
@@ -649,8 +649,8 @@ int iMainRand32( void )
 static void prvInitializeHeap( void )
 {
     static uint8_t ucHeap1[ configTOTAL_HEAP_SIZE ];
-    // Silhouette: Reduced heap2 size from 27KB to 25KB due to size of RAM2
-    static uint8_t ucHeap2[ 25 * 1024 ] __attribute__( ( section( ".freertos_heap2" ) ) );
+    // Silhouette: Reduced heap2 size from 27KB to 5KB due to size of RAM2
+    static uint8_t ucHeap2[ 5 * 1024 ] __attribute__( ( section( ".freertos_heap2" ) ) );
 
     HeapRegion_t xHeapRegions[] =
     {

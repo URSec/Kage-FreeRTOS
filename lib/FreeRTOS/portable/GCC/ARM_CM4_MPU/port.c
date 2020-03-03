@@ -266,7 +266,7 @@ void vPortSVCHandler( void )
 			"	mrseq r0, msp					\n"
 			"	moveq r1, #1					\n"
 			"	mrsne r0, psp					\n"
-			"	moveq r1, #0					\n"
+			"	movne r1, #0					\n"
 		#else
 			"	mrs r0, psp						\n"
 			"	moveq r1, #0					\n"
@@ -372,14 +372,14 @@ static void prvRestoreContextOfFirstTask( void )
 		"	ldr	r3, pxCurrentTCBConst2		\n" /* Restore the context. */
 		"	ldr r1, [r3]					\n"
 		"	ldr r0, [r1]					\n" /* The first item in the TCB is the task top of stack. */
-		"	add r0, r0, " STACK_SIZE_INLINE "	\n"	/* Silhouette: switch to shadow stack to access secure data */
+		"	add r0, r0, " STACK_SIZE_INLINE(STACK_SIZE_IN_BYTES_STATIC) "	\n"	/* Silhouette: switch to shadow stack to access secure data */
 		"	add r1, r1, #4					\n" /* Move onto the second item in the TCB... */
 		"	ldr r2, =0xe000ed9c				\n" /* Region Base Address register. */
 		"	ldmia r1!, {r4-r11}				\n" /* Read 4 sets of MPU registers. */
 		"	stmia r2!, {r4-r11}				\n" /* Write 4 sets of MPU registers. */
 		"	ldmia r0!, {r3-r11, r14}		\n" /* Pop the registers that are not automatically saved on exception entry. */
 		"	msr control, r3					\n"
-		"	sub r0, r0, " STACK_SIZE_INLINE "	\n" /* Silhouette: switch back to regular stack */
+		"	sub r0, r0, " STACK_SIZE_INLINE(STACK_SIZE_IN_BYTES_STATIC) "	\n" /* Silhouette: switch back to regular stack */
 		"	msr psp, r0						\n" /* Restore the task stack pointer. */
 		"	mov r0, #0						\n"
 		"	msr	basepri, r0					\n"
@@ -550,7 +550,7 @@ void xPortPendSVHandler( void )
 		"	mrs r0, psp							\n"
 		"	isb									\n"
 		"										\n"
-		"	add r0, r0, " STACK_SIZE_INLINE "		\n" /* Silhouette: switch to shadow stack to backup processor states */
+		"	add r0, r0, " STACK_SIZE_INLINE(STACK_SIZE_IN_BYTES_STATIC)  "		\n" /* Silhouette: switch to shadow stack to backup processor states */
 		"	ldr	r3, pxCurrentTCBConst			\n" /* Get the location of the current TCB. */
 		"	ldr	r2, [r3]						\n"
 		"										\n"
@@ -560,7 +560,7 @@ void xPortPendSVHandler( void )
 		"										\n"
 		"	mrs r1, control						\n"
 		"	stmdb r0!, {r1, r4-r11, r14}		\n" /* Save the remaining registers. */
-		"	sub r0, r0, " STACK_SIZE_INLINE "		\n" /* Silhouette: switch back to regular stack */
+		"	sub r0, r0, " STACK_SIZE_INLINE(STACK_SIZE_IN_BYTES_STATIC) "		\n" /* Silhouette: switch back to regular stack */
 		"	str r0, [r2]						\n" /* Save the new top of stack into the first member of the TCB. */
 		"										\n"
 		"	stmdb sp!, {r0, r3}					\n"
@@ -575,7 +575,7 @@ void xPortPendSVHandler( void )
 		"										\n" /* Restore the context. */
 		"	ldr r1, [r3]						\n"
 		"	ldr r0, [r1]						\n" /* The first item in the TCB is the task top of stack. */
-		"	add r0, r0, " STACK_SIZE_INLINE "		\n" /* Silhouette: switch to shadow stack to restore processor states */
+		"	add r0, r0, " STACK_SIZE_INLINE(STACK_SIZE_IN_BYTES_STATIC) "		\n" /* Silhouette: switch to shadow stack to restore processor states */
 		"	add r1, r1, #4						\n" /* Move onto the second item in the TCB... */
 		"	ldr r2, =0xe000ed9c					\n" /* Region Base Address register. */
 		"	ldmia r1!, {r4-r11}					\n" /* Read 4 sets of MPU registers. */
@@ -586,7 +586,7 @@ void xPortPendSVHandler( void )
 		"	tst r14, #0x10						\n" /* Is the task using the FPU context?  If so, pop the high vfp registers too. */
 		"	it eq								\n"
 		"	vldmiaeq r0!, {s16-s31}				\n"
-		"	sub r0, r0, " STACK_SIZE_INLINE "		\n" /* Silhouette: switch back to regular stack */
+		"	sub r0, r0, " STACK_SIZE_INLINE(STACK_SIZE_IN_BYTES_STATIC) "		\n" /* Silhouette: switch back to regular stack */
 		"										\n"
 		"	msr psp, r0							\n"
 		"	bx r14								\n"
