@@ -230,7 +230,7 @@ StackType_t *pxPortInitialiseStack( StackType_t *pxTopOfStack, TaskFunction_t px
 	pxTopOfStack[STACK_SIZE] = 0; /* Silhouette: spill to shadow stack */
 	pxTopOfStack -= 5;	/* R12, R3, R2 and R1. */
 	*pxTopOfStack = ( StackType_t ) pvParameters;	/* R0 */
-	pxTopOfStack = ( StackType_t )pvParameters; /* Silhouette: spill to shadow stack */
+	pxTopOfStack[STACK_SIZE] = ( StackType_t )pvParameters; /* Silhouette: spill to shadow stack */
 
 	/* A save method is being used that requires each task to maintain its
 	own exec return value. */

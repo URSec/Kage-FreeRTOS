@@ -84,7 +84,7 @@ functions but without including stdio.h here. */
 value so the high water mark can be determined.  If none of the following are
 set then don't fill the stack so there is no unnecessary dependency on memset. */
 #if( ( configCHECK_FOR_STACK_OVERFLOW > 1 ) || ( configUSE_TRACE_FACILITY == 1 ) || ( INCLUDE_uxTaskGetStackHighWaterMark == 1 ) || ( INCLUDE_uxTaskGetStackHighWaterMark2 == 1 ) )
-	#define tskSET_NEW_STACKS_TO_KNOWN_VALUE	1
+	#define tskSET_NEW_STACKS_TO_KNOWN_VALUE	1 /* Silhouette: Temporarily disallow this option */
 #else
 	#define tskSET_NEW_STACKS_TO_KNOWN_VALUE	0
 #endif
@@ -848,7 +848,8 @@ UBaseType_t x;
 	#if( tskSET_NEW_STACKS_TO_KNOWN_VALUE == 1 )
 	{
 		/* Fill the stack with a known value to assist debugging. */
-		( void ) memset( pxNewTCB->pxStack, ( int ) tskSTACK_FILL_BYTE, ( size_t ) ulStackDepth * sizeof( StackType_t ) );
+		/* Silhouette: Fill twice the size of the regular stack*/
+		( void ) memset( pxNewTCB->pxStack, ( int ) tskSTACK_FILL_BYTE, ( size_t )  ulStackDepth * sizeof( StackType_t ) );
 	}
 	#endif /* tskSET_NEW_STACKS_TO_KNOWN_VALUE */
 

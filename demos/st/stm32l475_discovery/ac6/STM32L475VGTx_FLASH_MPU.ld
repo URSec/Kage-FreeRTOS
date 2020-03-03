@@ -181,6 +181,13 @@ SECTIONS
   } >RAM2 AT> FLASH 
   /* >FLASH AT>FLASH */
   /* >RAM2 AT> FLASH */
+  
+  .freertos_heap2 :
+  {
+  	. = ALIGN(4);
+  	*(.freertos_heap2);
+  	. = ALIGN(4);
+  } > RAM2 AT>FLASH
 
   
   /* Uninitialized data section */
@@ -200,13 +207,6 @@ SECTIONS
     _ebss = .;         /* define a global symbol at bss end */
     __bss_end__ = _ebss;
   } >RAM
-  
-  .freertos_heap2 :
-  {
-  	. = ALIGN(4);
-  	*(.freertos_heap2);
-  	. = ALIGN(4);
-  } > RAM AT>FLASH
 
   /* User_heap_stack section, used to check that there is enough RAM left */
   ._user_heap_stack :

@@ -92,8 +92,8 @@ BaseType_t xLoggingTaskInitialize( uint16_t usStackSize,
 	 * */
 	/// This is a dynamic task definition
     static StackType_t* logStackBuffer;
-    logStackBuffer = ( StackType_t * ) pvPortMalloc( STACK_SIZE * 2 );
-//	static StackType_t logStackBuffer[STACK_SIZE * 2] __attribute__ ((aligned (STACK_SIZE * 8)));
+    logStackBuffer = ( StackType_t * ) pvPortMalloc( STACK_SIZE * 3 );
+//	static StackType_t logStackBuffer[STACK_SIZE * 2] __attribute__ ((aligned (STACK_SIZE * 2)));
 	// Create an TaskParameters_t structure that defines the task to be created.
 	TaskParameters_t logTaskParameters =
 	{
