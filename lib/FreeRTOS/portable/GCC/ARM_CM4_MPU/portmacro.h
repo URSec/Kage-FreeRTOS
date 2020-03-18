@@ -56,7 +56,7 @@ extern "C" {
 #define portSTACK_SIZE  1024 //256 //128: overflow for fibDyn & print
 #define STACK_SIZE		portSTACK_SIZE
 #define STACK_SIZE_IN_BYTES (STACK_SIZE * sizeof (StackType_t))
-#define STACK_SIZE_IN_BYTES_STATIC	4092
+#define STACK_SIZE_IN_BYTES_STATIC	4096
 #define STACK_SIZE_TAG(X)	#X
 #define STACK_SIZE_INLINE(X) STACK_SIZE_TAG(X)
 
