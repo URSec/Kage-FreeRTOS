@@ -292,12 +292,21 @@
 			</matcher>
 		</filter>
 		<filter>
-			<id>1511217105896</id>
+			<id>1584722983413</id>
 			<name>lib/aws/FreeRTOS/portable/MemMang</name>
 			<type>5</type>
 			<matcher>
 				<id>org.eclipse.ui.ide.multiFilter</id>
 				<arguments>1.0-name-matches-false-false-heap_5.c</arguments>
+			</matcher>
+		</filter>
+		<filter>
+			<id>1584722983417</id>
+			<name>lib/aws/FreeRTOS/portable/MemMang</name>
+			<type>5</type>
+			<matcher>
+				<id>org.eclipse.ui.ide.multiFilter</id>
+				<arguments>1.0-name-matches-false-false-heap_4_user.c</arguments>
 			</matcher>
 		</filter>
 		<filter>
