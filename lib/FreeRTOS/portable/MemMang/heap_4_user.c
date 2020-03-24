@@ -80,7 +80,7 @@ typedef struct A_BLOCK_LINK
  * the block in front it and/or the block behind it if the memory blocks are
  * adjacent to each other.
  */
-static void prvInsertBlockIntoFreeListUser( BlockLink_t *pxBlockToInsert );
+static void prvInsertBlockIntoFreeListUser( BlockLink_t *pxBlockToInsert ) PRIVILEGED_FUNCTION;
 
 /*
  * Called automatically to setup the required heap structures the first time

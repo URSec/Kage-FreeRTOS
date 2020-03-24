@@ -29,10 +29,10 @@
  * Implementation of functions defined in portable.h for the ARM CM3 port.
  *----------------------------------------------------------*/
 
-/* Defining MPU_WRAPPERS_INCLUDED_FROM_API_FILE prevents task.h from redefining
-all the API functions to use the MPU wrappers.  That should only be done when
-task.h is included from an application file. */
-#define MPU_WRAPPERS_INCLUDED_FROM_API_FILE
+///* Defining MPU_WRAPPERS_INCLUDED_FROM_API_FILE prevents task.h from redefining
+//all the API functions to use the MPU wrappers.  That should only be done when
+//task.h is included from an application file. */
+//#define MPU_WRAPPERS_INCLUDED_FROM_API_FILE
 
 /* Scheduler includes. */
 #include "FreeRTOS.h"
@@ -128,7 +128,7 @@ static uint32_t prvGetMPURegionSizeSetting( uint32_t ulActualSizeInBytes ) PRIVI
  * file is weak to allow application writers to change the timer used to
  * generate the tick interrupt.
  */
-void vPortSetupTimerInterrupt( void );
+void vPortSetupTimerInterrupt( void ) PRIVILEGED_FUNCTION;
 
 /*
  * Standard FreeRTOS exception handlers.
@@ -516,7 +516,7 @@ void vPortEndScheduler( void )
 }
 /*-----------------------------------------------------------*/
 
-void vPortEnterCritical( void )
+void vPortEnterCritical( void ) PRIVILEGED_FUNCTION
 {
 BaseType_t xRunningPrivileged = xPortRaisePrivilege();
 
@@ -527,7 +527,7 @@ BaseType_t xRunningPrivileged = xPortRaisePrivilege();
 }
 /*-----------------------------------------------------------*/
 
-void vPortExitCritical( void )
+void vPortExitCritical( void ) PRIVILEGED_FUNCTION
 {
 BaseType_t xRunningPrivileged = xPortRaisePrivilege();
 

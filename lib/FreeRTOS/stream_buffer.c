@@ -255,7 +255,7 @@ static void prvInitialiseNewStreamBuffer( StreamBuffer_t * const pxStreamBuffer,
 		space would be reported as one byte smaller than would be logically
 		expected. */
 		xBufferSizeBytes++;
-		pucAllocatedMemory = ( uint8_t * ) pvPortMalloc( xBufferSizeBytes + sizeof( StreamBuffer_t ) ); /*lint !e9079 malloc() only returns void*. */
+		pucAllocatedMemory = ( uint8_t * ) pvPortMallocUser( xBufferSizeBytes + sizeof( StreamBuffer_t ) ); /*lint !e9079 malloc() only returns void*. */
 
 		if( pucAllocatedMemory != NULL )
 		{
@@ -370,7 +370,7 @@ StreamBuffer_t * pxStreamBuffer = xStreamBuffer;
 		{
 			/* Both the structure and the buffer were allocated using a single call
 			to pvPortMalloc(), hence only one call to vPortFree() is required. */
-			vPortFree( ( void * ) pxStreamBuffer ); /*lint !e9087 Standard free() semantics require void *, plus pxStreamBuffer was allocated by pvPortMalloc(). */
+			vPortFreeUser( ( void * ) pxStreamBuffer ); /*lint !e9087 Standard free() semantics require void *, plus pxStreamBuffer was allocated by pvPortMalloc(). */
 		}
 		#else
 		{

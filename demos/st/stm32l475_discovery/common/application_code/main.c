@@ -147,6 +147,7 @@ int main( void )
     /* Start the scheduler.  Initialization that requires the OS to be running,
      * including the WiFi initialization, is performed in the RTOS daemon task
      * startup hook. */
+    configPRINTF( ( "Test\r\n" ) );
     vTaskStartScheduler();
 
     return 0;
@@ -155,6 +156,7 @@ int main( void )
 
 void vApplicationDaemonTaskStartupHook( void )
 {
+	configPRINTF( ( "WiFi module initializing.\r\n" ) );
     WIFIReturnCode_t xWifiStatus;
 
     /* Turn on the WiFi before key provisioning. This is needed because
@@ -631,6 +633,24 @@ void HardFault_Handler( void )
         " handler2_address_const: .word prvGetRegistersFromStack    \n"
     );
 }
+/*-----------------------------------------------------------*/
+
+///* The fault handler implementation calls a function called
+// * prvGetRegistersFromStack(). */
+//void MemManage_Handler( void )
+//{
+//    __asm volatile
+//    (
+//        " tst lr, #4                                                \n"
+//        " ite eq                                                    \n"
+//        " mrseq r0, msp                                             \n"
+//        " mrsne r0, psp                                             \n"
+//        " ldr r1, [r0, #24]                                         \n"
+//        " ldr r2, handler3_address_const                            \n"
+//        " bx r2                                                     \n"
+//        " handler3_address_const: .word prvGetRegistersFromStack    \n"
+//    );
+//}
 /*-----------------------------------------------------------*/
 
 /* Psuedo random number generator.  Just used by demos so does not need to be

@@ -61,7 +61,7 @@ typedef struct SignatureVerificationState
 static void * prvCalloc( size_t xNmemb,
                          size_t xSize )
 {
-    void * pvNew = pvPortMalloc( xNmemb * xSize );
+    void * pvNew = pvPortMallocUser( xNmemb * xSize );
 
     if( NULL != pvNew )
     {
@@ -146,7 +146,7 @@ void CRYPTO_ConfigureHeap( void )
     /*
      * Ensure that the FreeRTOS heap is used
      */
-    mbedtls_platform_set_calloc_free( prvCalloc, vPortFree ); /*lint !e534 This function always return 0. */
+    mbedtls_platform_set_calloc_free( prvCalloc, vPortFreeUser ); /*lint !e534 This function always return 0. */
 }
 
 /**

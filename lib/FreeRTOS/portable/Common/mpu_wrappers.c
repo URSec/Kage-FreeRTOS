@@ -51,13 +51,13 @@ task.h is included from an application file. */
  *
  * @return pdFALSE if privilege was raised, pdTRUE otherwise.
  */
-BaseType_t xPortRaisePrivilege( void ) FREERTOS_SYSTEM_CALL;
+BaseType_t xPortRaisePrivilege( void ) PRIVILEGED_FUNCTION; // Silhouette: Changed this function from FreeRTOS Syscall region to Privileged region
 
 /**
  * @brief If xRunningPrivileged is not pdTRUE, calls the port specific
  * code to reset the privilege, otherwise does nothing.
  */
-void vPortResetPrivilege( BaseType_t xRunningPrivileged );
+void vPortResetPrivilege( BaseType_t xRunningPrivileged ) PRIVILEGED_FUNCTION;
 /*-----------------------------------------------------------*/
 
 BaseType_t xPortRaisePrivilege( void ) /* FREERTOS_SYSTEM_CALL */

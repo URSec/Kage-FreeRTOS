@@ -143,7 +143,7 @@
                                 								
                                 <option id="fr.ac6.managedbuild.gnu.c.compiler.option.misc.other.475607660" superClass="fr.ac6.managedbuild.gnu.c.compiler.option.misc.other" useByScannerDiscovery="false" value="-fmessage-length=0" valueType="string"/>
                                 								
-                                <option id="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other.1976542995" name="Other flags" superClass="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other" useByScannerDiscovery="false" value="-flto --target=arm-none-eabi " valueType="string"/>
+                                <option id="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other.1976542995" name="Other flags" superClass="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other" useByScannerDiscovery="false" value="--target=arm-none-eabi -mllvm -enable-arm-silhouette-str2strt -mllvm -enable-arm-silhouette-cfi" valueType="string"/>
                                 								
                                 <option id="gnu.c.compiler.option.misc.verbose.1908222080" name="Verbose (-v)" superClass="gnu.c.compiler.option.misc.verbose" useByScannerDiscovery="false" value="false" valueType="boolean"/>
                                 								
@@ -191,7 +191,7 @@
                                     								
                                 </option>
                                 								
-                                <option id="gnu.c.link.option.ldflags.685268909" name="Linker flags" superClass="gnu.c.link.option.ldflags" useByScannerDiscovery="false" value="-flto -fuse-ld=lld --target=arm-none-eabi -Wl,-mllvm,-enable-arm-silhouette-shadowstack" valueType="string"/>
+                                <option id="gnu.c.link.option.ldflags.685268909" name="Linker flags" superClass="gnu.c.link.option.ldflags" useByScannerDiscovery="false" value="-fuse-ld=lld --target=arm-none-eabi" valueType="string"/>
                                 								
                                 <option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="gnu.c.link.option.userobjs.895400424" name="Other objects" superClass="gnu.c.link.option.userobjs" useByScannerDiscovery="false" valueType="userObjs">
                                     									

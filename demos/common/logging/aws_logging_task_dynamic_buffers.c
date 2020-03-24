@@ -71,6 +71,7 @@
  * the log message is freed after it has been output.
  */
 static void prvLoggingTask( void * pvParameters );
+static void prvLoggingTaskDup( void * pvParameters );
 
 /*-----------------------------------------------------------*/
 
@@ -109,8 +110,8 @@ BaseType_t xLoggingTaskInitialize( uint16_t usStackSize,
 		// the task, with appropriate access permissions.
 		{
 			// {Base address,	Length,	Parameters}
-			{ &logStackBuffer[STACK_SIZE],	STACK_SIZE_IN_BYTES, portMPU_REGION_PRIVILEGED_READ_WRITE }, // shadow stack.
-			{ 0,0,0 }, // the other two region left unused.
+			{ &logStackBuffer[STACK_SIZE],	STACK_SIZE_IN_BYTES, portMPU_REGION_READ_WRITE }, // shadow stack.
+			{ &logStackBuffer[0],	STACK_SIZE_IN_BYTES, portMPU_REGION_READ_WRITE }, // the other two region left unused.
 			{ 0,0,0 }
 		}
 	};
@@ -150,7 +151,24 @@ static void prvLoggingTask( void * pvParameters )
         if( xQueueReceive( xQueue, &pcReceivedString, portMAX_DELAY ) == pdPASS )
         {
             configPRINT_STRING( pcReceivedString );
-            vPortFree( ( void * ) pcReceivedString );
+            vPortFreeUser( ( void * ) pcReceivedString );
+        }
+    }
+}
+/*-----------------------------------------------------------*/
+
+static void prvLoggingTaskDup( void * pvParameters )
+{
+    char * pcReceivedString = NULL;
+    configPRINT_STRING( "Logging2\r\n" );
+    for( ; ; )
+    {
+        /* Block to wait for the next string to print. */
+//        if( xQueueReceive( xQueue, &pcReceivedString, portMAX_DELAY ) == pdPASS )
+        {
+
+//            configPRINT_STRING( pcReceivedString );
+//            vPortFreeUser( ( void * ) pcReceivedString );
         }
     }
 }
@@ -168,6 +186,7 @@ static void prvLoggingTask( void * pvParameters )
 void vLoggingPrintf( const char * pcFormat,
                      ... )
 {
+//	configPRINT_STRING( "vLoggingPrintf called\r\n" );
     size_t xLength = 0;
     int32_t xLength2 = 0;
     va_list args;
@@ -178,7 +197,7 @@ void vLoggingPrintf( const char * pcFormat,
     configASSERT( xQueue );
 
     /* Allocate a buffer to hold the log message. */
-    pcPrintString = pvPortMalloc( configLOGGING_MAX_MESSAGE_LENGTH );
+    pcPrintString = pvPortMallocUser( configLOGGING_MAX_MESSAGE_LENGTH );
 
     if( pcPrintString != NULL )
     {
@@ -243,14 +262,14 @@ void vLoggingPrintf( const char * pcFormat,
             if( xQueueSend( xQueue, &pcPrintString, loggingDONT_BLOCK ) != pdPASS )
             {
                 /* The buffer was not sent so must be freed again. */
-                vPortFree( ( void * ) pcPrintString );
+                vPortFreeUser( ( void * ) pcPrintString );
             }
         }
         else
         {
             /* The buffer was not sent, so it must be
              * freed. */
-            vPortFree( ( void * ) pcPrintString );
+            vPortFreeUser( ( void * ) pcPrintString );
         }
     }
 }
@@ -266,7 +285,7 @@ void vLoggingPrint( const char * pcMessage )
     configASSERT( xQueue );
 
     xLength = strlen( pcMessage ) + 1;
-    pcPrintString = pvPortMalloc( xLength );
+    pcPrintString = pvPortMallocUser( xLength );
 
     if( pcPrintString != NULL )
     {

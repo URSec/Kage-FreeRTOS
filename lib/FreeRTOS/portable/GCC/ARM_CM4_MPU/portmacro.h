@@ -77,6 +77,12 @@ typedef unsigned long UBaseType_t;
 #endif
 /*-----------------------------------------------------------*/
 
+/* Defining MPU_WRAPPERS_INCLUDED_FROM_API_FILE prevents task.h from redefining
+all the API functions to use the MPU wrappers.  That should only be done when
+task.h is included from an application file. */
+// Silhouette: Moved from port.c to here in order to take effect
+#define MPU_WRAPPERS_INCLUDED_FROM_API_FILE
+
 /* MPU specific constants. */
 #define portUSING_MPU_WRAPPERS		1
 #define portPRIVILEGE_BIT			( 0x80000000UL )
