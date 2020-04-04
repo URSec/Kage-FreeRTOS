@@ -43,7 +43,7 @@ _Min_Stack_Size = 0x800; /* 0x758, 0x800 required amount of stack 2K */ /* reduc
 MEMORY
 {
 RAM_SS (xrw)    : ORIGIN = 0x20017000, LENGTH = 4K
-RAM (xrw)       : ORIGIN = 0x20000000, LENGTH = 96K /* 96K --> 0x2001,8000 */
+RAM (xrw)       : ORIGIN = 0x20000000, LENGTH = 92K /* 96K --> 0x2001,8000 */
 RAM2 (xrw)      : ORIGIN = 0x10000000, LENGTH = 32K  /* 32K --> 0x1000,8000 */
 FLASH (rx)      : ORIGIN = 0x08000000, LENGTH = 464K  /*1012K, 464K, Use only the first bank */
 FLASH_UC (r)	: ORIGIN = 0x08074000, LENGTH = 9K	/* Fixed-location area */
@@ -172,12 +172,14 @@ SECTIONS
   /* Initialized data sections goes into RAM, load LMA copy after code */
   .data : 
   {
-    . = ALIGN(8);
+    . = ALIGN(4096);
     /* _sdata = .;*/   /* sdata is defined in privileged_data section now */
+    __data_region_start__ = .;
     *(.data)           /* .data sections */
     *(.data*)          /* .data* sections */
     /* *(.freertos_heap2)*/
-    . = ALIGN(8);
+    __data_region_end__ = .;
+    . = ALIGN(4096);
     _edata = .;        /* define a global symbol at data end */
   } >RAM2 AT> FLASH 
   /* >FLASH AT>FLASH */
@@ -191,7 +193,19 @@ SECTIONS
   } > RAM2 AT>FLASH
 
   
-  /* Uninitialized data section */
+	/* Silhouette: Put user stacks in the beginning of RAM
+	   for alignment
+	 */
+  task_stack :
+  {
+  	. = ALIGN(4096);
+  	__task_stack_start__ = .;
+  	*(task_stack);
+  	.=ALIGH(4096);
+  	__task_stack_end__ = .;
+  } > RAM
+  
+    /* Uninitialized data section */
   . = ALIGN(4);
   .bss :
   {
@@ -245,10 +259,19 @@ __FLASH_segment_end__ = __FLASH_segment_start__ + LENGTH( FLASH );
 __privileged_functions_start__ = ORIGIN( FLASH );
 __privileged_functions_end__ = __privileged_functions_start__ + _Privileged_Functions_Region_Size;
 __SRAM_segment_start__ = ORIGIN( RAM2 );
+__TSTACK_segment_start__ = ORIGIN( RAM );
 /* __SRAM_segment_end__ = __SRAM_segment_start__ + LENGTH( RAM2 ); */
 __SRAM_segment_end__ = ORIGIN( RAM ) + LENGTH( RAM ); /* regard RAM as a single region, with a hole in it. */
 
 _Privileged_Data_Region_Size = __privileged_data_end__ - __privileged_data_start__;
+
+/* Silhouette: Define variables for kernel stack */
+__kstack_end__ = ORIGIN( RAM ) + LENGTH( RAM );
+__kstack_start__ = __kstack_end__ - LENGTH( RAM_SS );
+
+/* Silhouette: Define kernel shadow stack */
+__SS_segment_start__ = ORIGIN( RAM_SS );
+__SS_segment_end__ = ORIGIN( RAM_SS ) + LENGTH( RAM_SS );
 
 /*__privileged_data_start__ = ORIGIN( RAM2 ); */
 /*__privileged_data_end__ = ORIGIN( RAM2 ) + _Privileged_Data_Region_Size;*/

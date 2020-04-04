@@ -169,6 +169,8 @@ only for ports that are using the MPU. */
 		#define PRIVILEGED_FUNCTION __attribute__((section("privileged_functions")))
 		#define PRIVILEGED_DATA __attribute__((section("privileged_data")))
 		#define FREERTOS_SYSTEM_CALL __attribute__((section( "freertos_system_calls")))
+		// Silhouette: Define user stack region
+		#define TASK_STACK __attribute__((section("task_stack")))
 
 	#endif /* MPU_WRAPPERS_INCLUDED_FROM_API_FILE */
 

@@ -49,6 +49,9 @@
 #include "aws_clientcredential.h"
 #include "aws_dev_mode_key_provisioning.h"
 
+/* Kage Demo includes */
+#include "sil_demo.h"
+
 /* WiFi driver includes. */
 #include "es_wifi.h"
 
@@ -156,45 +159,58 @@ int main( void )
 
 void vApplicationDaemonTaskStartupHook( void )
 {
-	configPRINTF( ( "WiFi module initializing.\r\n" ) );
-    WIFIReturnCode_t xWifiStatus;
+#if 0
+	printMPUConfig(0);
+	printMPUConfig(1);
+	printMPUConfig(2);
+	printMPUConfig(3);
+	printMPUConfig(4);
+	printMPUConfig(5);
+	printMPUConfig(6);
+	printMPUConfig(7);
+#endif
+//	configPRINTF( ( "WiFi module initializing.\r\n" ) );
+//    WIFIReturnCode_t xWifiStatus;
+//
+//    /* Turn on the WiFi before key provisioning. This is needed because
+//     * if we want to use offload SSL, device certificate and key is stored
+//     * on the WiFi module during key provisioning which requires the WiFi
+//     * module to be initialized. */
+//    xWifiStatus = WIFI_On();
+//
+//    if( xWifiStatus == eWiFiSuccess )
+//    {
+//        configPRINTF( ( "WiFi module initialized.\r\n" ) );
+//
+//        /* A simple example to demonstrate key and certificate provisioning in
+//         * microcontroller flash using PKCS#11 interface. This should be replaced
+//         * by production ready key provisioning mechanism. */
+//        vDevModeKeyProvisioning();
+//
+//        if( SYSTEM_Init() == pdPASS )
+//        {
+//            /* Connect to the WiFi before running the demos */
+//            prvWifiConnect();
+//
+//            #ifdef USE_OFFLOAD_SSL
+//                /* Check if WiFi firmware needs to be updated. */
+//                prvCheckWiFiFirmwareVersion();
+//            #endif /* USE_OFFLOAD_SSL */
+//
+//            /* Start demos. */
+//            DEMO_RUNNER_RunDemos();
+//        }
+//    }
+//    else
+//    {
+//        configPRINTF( ( "WiFi module failed to initialize.\r\n" ) );
+//
+//        /* Stop here if we fail to initialize WiFi. */
+//        configASSERT( xWifiStatus == eWiFiSuccess );
+//    }
 
-    /* Turn on the WiFi before key provisioning. This is needed because
-     * if we want to use offload SSL, device certificate and key is stored
-     * on the WiFi module during key provisioning which requires the WiFi
-     * module to be initialized. */
-    xWifiStatus = WIFI_On();
-
-    if( xWifiStatus == eWiFiSuccess )
-    {
-        configPRINTF( ( "WiFi module initialized.\r\n" ) );
-
-        /* A simple example to demonstrate key and certificate provisioning in
-         * microcontroller flash using PKCS#11 interface. This should be replaced
-         * by production ready key provisioning mechanism. */
-        vDevModeKeyProvisioning();
-
-        if( SYSTEM_Init() == pdPASS )
-        {
-            /* Connect to the WiFi before running the demos */
-            prvWifiConnect();
-
-            #ifdef USE_OFFLOAD_SSL
-                /* Check if WiFi firmware needs to be updated. */
-                prvCheckWiFiFirmwareVersion();
-            #endif /* USE_OFFLOAD_SSL */
-
-            /* Start demos. */
-            DEMO_RUNNER_RunDemos();
-        }
-    }
-    else
-    {
-        configPRINTF( ( "WiFi module failed to initialize.\r\n" ) );
-
-        /* Stop here if we fail to initialize WiFi. */
-        configASSERT( xWifiStatus == eWiFiSuccess );
-    }
+	start_microbenchmark();
+//	start_beebsbenchmark();
 }
 /*-----------------------------------------------------------*/
 
@@ -635,22 +651,22 @@ void HardFault_Handler( void )
 }
 /*-----------------------------------------------------------*/
 
-///* The fault handler implementation calls a function called
-// * prvGetRegistersFromStack(). */
-//void MemManage_Handler( void )
-//{
-//    __asm volatile
-//    (
-//        " tst lr, #4                                                \n"
-//        " ite eq                                                    \n"
-//        " mrseq r0, msp                                             \n"
-//        " mrsne r0, psp                                             \n"
-//        " ldr r1, [r0, #24]                                         \n"
-//        " ldr r2, handler3_address_const                            \n"
-//        " bx r2                                                     \n"
-//        " handler3_address_const: .word prvGetRegistersFromStack    \n"
-//    );
-//}
+/* The fault handler implementation calls a function called
+ * prvGetRegistersFromStack(). */
+void MemManage_Handler( void )
+{
+    __asm volatile
+    (
+        " tst lr, #4                                                \n"
+        " ite eq                                                    \n"
+        " mrseq r0, msp                                             \n"
+        " mrsne r0, psp                                             \n"
+        " ldr r1, [r0, #24]                                         \n"
+        " ldr r2, handler3_address_const                            \n"
+        " bx r2                                                     \n"
+        " handler3_address_const: .word prvGetRegistersFromStack    \n"
+    );
+}
 /*-----------------------------------------------------------*/
 
 /* Psuedo random number generator.  Just used by demos so does not need to be
@@ -671,14 +687,15 @@ int iMainRand32( void )
 
 static void prvInitializeHeap( void )
 {
-    static uint8_t ucHeap1[ configTOTAL_HEAP_SIZE ];
+    static uint8_t ucHeap1[ configTOTAL_HEAP_SIZE ] PRIVILEGED_DATA;
     // Silhouette: Reduced heap2 size from 27KB to 7KB due to size of RAM2
-    static uint8_t ucHeap2[ 15 * 1024 ] __attribute__( ( section( ".freertos_heap2" ) ) );
+//    static uint8_t ucHeap2[ 15 * 1024 ] __attribute__( ( section( ".freertos_heap2" ) ) );
 
     HeapRegion_t xHeapRegions[] =
     {
-        { ( unsigned char * ) ucHeap2, sizeof( ucHeap2 ) },
+//        { ( unsigned char * ) ucHeap2, sizeof( ucHeap2 ) },
         { ( unsigned char * ) ucHeap1, sizeof( ucHeap1 ) },
+		{ NULL,                                        0 },
         { NULL,                                        0 }
     };
 

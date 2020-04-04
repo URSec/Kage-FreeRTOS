@@ -157,7 +157,7 @@ typedef struct StreamBufferDef_t /*lint !e9058 Style convention uses tag. */
 /*
  * The number of bytes available to be read from the buffer.
  */
-static size_t prvBytesInBuffer( const StreamBuffer_t * const pxStreamBuffer ) PRIVILEGED_FUNCTION;
+static size_t prvBytesInBuffer( const StreamBuffer_t * const pxStreamBuffer ) ;
 
 /*
  * Add xCount bytes from pucData into the pxStreamBuffer message buffer.
@@ -165,7 +165,7 @@ static size_t prvBytesInBuffer( const StreamBuffer_t * const pxStreamBuffer ) PR
  * success case, or 0 if there was not enough space in the buffer (in which case
  * no data is written into the buffer).
  */
-static size_t prvWriteBytesToBuffer( StreamBuffer_t * const pxStreamBuffer, const uint8_t *pucData, size_t xCount ) PRIVILEGED_FUNCTION;
+static size_t prvWriteBytesToBuffer( StreamBuffer_t * const pxStreamBuffer, const uint8_t *pucData, size_t xCount ) ;
 
 /*
  * If the stream buffer is being used as a message buffer, then reads an entire
@@ -178,7 +178,7 @@ static size_t prvReadMessageFromBuffer( StreamBuffer_t *pxStreamBuffer,
 										void *pvRxData,
 										size_t xBufferLengthBytes,
 										size_t xBytesAvailable,
-										size_t xBytesToStoreMessageLength ) PRIVILEGED_FUNCTION;
+										size_t xBytesToStoreMessageLength ) ;
 
 /*
  * If the stream buffer is being used as a message buffer, then writes an entire
@@ -191,7 +191,7 @@ static size_t prvWriteMessageToBuffer(  StreamBuffer_t * const pxStreamBuffer,
 										const void * pvTxData,
 										size_t xDataLengthBytes,
 										size_t xSpace,
-										size_t xRequiredSpace ) PRIVILEGED_FUNCTION;
+										size_t xRequiredSpace ) ;
 
 /*
  * Read xMaxCount bytes from the pxStreamBuffer message buffer and write them
@@ -200,7 +200,7 @@ static size_t prvWriteMessageToBuffer(  StreamBuffer_t * const pxStreamBuffer,
 static size_t prvReadBytesFromBuffer( StreamBuffer_t *pxStreamBuffer,
 									  uint8_t *pucData,
 									  size_t xMaxCount,
-									  size_t xBytesAvailable ) PRIVILEGED_FUNCTION;
+									  size_t xBytesAvailable ) ;
 
 /*
  * Called by both pxStreamBufferCreate() and pxStreamBufferCreateStatic() to
@@ -210,7 +210,7 @@ static void prvInitialiseNewStreamBuffer( StreamBuffer_t * const pxStreamBuffer,
 										  uint8_t * const pucBuffer,
 										  size_t xBufferSizeBytes,
 										  size_t xTriggerLevelBytes,
-										  uint8_t ucFlags ) PRIVILEGED_FUNCTION;
+										  uint8_t ucFlags ) ;
 
 /*-----------------------------------------------------------*/
 

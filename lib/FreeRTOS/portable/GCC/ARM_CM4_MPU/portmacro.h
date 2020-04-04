@@ -90,12 +90,13 @@ task.h is included from an application file. */
 #define portMPU_REGION_READ_WRITE				( 0x03UL << 24UL )
 #define portMPU_REGION_PRIVILEGED_READ_ONLY		( 0x05UL << 24UL )
 #define portMPU_REGION_READ_ONLY				( 0x06UL << 24UL )
-#define portMPU_REGION_PRIVILEGED_READ_WRITE	( 0x01UL << 24UL )
+#define portMPU_REGION_PRIVILEGED_READ_WRITE	( 0x02UL << 24UL ) // Silhouette: Changed from "RW None" to "RW RO"
 #define portMPU_REGION_CACHEABLE_BUFFERABLE		( 0x07UL << 16UL )
 #define portMPU_REGION_EXECUTE_NEVER			( 0x01UL << 28UL )
 
 #define portUNPRIVILEGED_FLASH_REGION		( 0UL )
-#define portPRIVILEGED_FLASH_REGION			( 1UL )
+// #define portPRIVILEGED_FLASH_REGION			( 1UL )
+#define portUNPRIVILEGED_RAM_REGION			( 1UL ) // Silhouette
 #define portPRIVILEGED_RAM_REGION			( 2UL )
 #define portGENERAL_PERIPHERALS_REGION		( 3UL )
 #define portSTACK_REGION					( 4UL )

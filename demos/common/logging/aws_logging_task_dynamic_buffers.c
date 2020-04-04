@@ -92,8 +92,7 @@ BaseType_t xLoggingTaskInitialize( uint16_t usStackSize,
     /* Structs for logging task
 	 * */
 	/// This is a dynamic task definition
-    static StackType_t* logStackBuffer;
-    logStackBuffer = ( StackType_t * ) pvPortMallocUser( STACK_SIZE_IN_BYTES * 2 );
+    static StackType_t logStackBuffer[STACK_SIZE * 2] TASK_STACK;
 //	static StackType_t logStackBuffer[STACK_SIZE * 2] __attribute__ ((aligned (STACK_SIZE * 2)));
 	// Create an TaskParameters_t structure that defines the task to be created.
 	TaskParameters_t logTaskParameters =
@@ -110,8 +109,9 @@ BaseType_t xLoggingTaskInitialize( uint16_t usStackSize,
 		// the task, with appropriate access permissions.
 		{
 			// {Base address,	Length,	Parameters}
-			{ &logStackBuffer[STACK_SIZE],	STACK_SIZE_IN_BYTES, portMPU_REGION_READ_WRITE }, // shadow stack.
+//			{ &logStackBuffer[STACK_SIZE],	STACK_SIZE_IN_BYTES, portMPU_REGION_PRIVILEGED_READ_WRITE }, // shadow stack.
 			{ &logStackBuffer[0],	STACK_SIZE_IN_BYTES, portMPU_REGION_READ_WRITE }, // the other two region left unused.
+			{ 0,0,0 },
 			{ 0,0,0 }
 		}
 	};
@@ -144,7 +144,6 @@ BaseType_t xLoggingTaskInitialize( uint16_t usStackSize,
 static void prvLoggingTask( void * pvParameters )
 {
     char * pcReceivedString = NULL;
-
     for( ; ; )
     {
         /* Block to wait for the next string to print. */

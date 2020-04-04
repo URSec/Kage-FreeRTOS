@@ -239,17 +239,44 @@ BaseType_t xReturn = pdFAIL;
 		#if( configSUPPORT_STATIC_ALLOCATION == 1 )
 		{
 			StaticTask_t *pxTimerTaskTCBBuffer = NULL;
-			StackType_t *pxTimerTaskStackBuffer = NULL;
-			uint32_t ulTimerTaskStackSize;
+			static StackType_t pxTimerTaskStackBuffer[ 2 * STACK_SIZE ] TASK_STACK;
+//			StackType_t *pxTimerTaskStackBuffer = NULL;
+			uint32_t ulTimerTaskStackSize = STACK_SIZE;
 
-			vApplicationGetTimerTaskMemory( &pxTimerTaskTCBBuffer, &pxTimerTaskStackBuffer, &ulTimerTaskStackSize );
-			xTimerTaskHandle = xTaskCreateStatic(	prvTimerTask,
-													configTIMER_SERVICE_TASK_NAME,
-													ulTimerTaskStackSize,
-													NULL,
-													( ( UBaseType_t ) configTIMER_TASK_PRIORITY ) | portPRIVILEGE_BIT,
-													pxTimerTaskStackBuffer,
-													pxTimerTaskTCBBuffer );
+//			pxTimerTaskStackBuffer = pvPortMallocUser(2 * STACK_SIZE_IN_BYTES);
+			TaskParameters_t timerTaskParameters =
+			{
+				prvTimerTask,		// pvTaskCode - the function that implements the task.
+				configTIMER_SERVICE_TASK_NAME,	// pcName - just a text name for the task to assist debugging.
+				STACK_SIZE,		// usStackDepth	- the stack size DEFINED IN WORDS.
+				NULL,		// pvParameters - passed into the task function as the function parameters.
+				( ( UBaseType_t ) configTIMER_TASK_PRIORITY ) | portPRIVILEGE_BIT,// uxPriority - task priority, set the portPRIVILEGE_BIT if the task should run in a privileged state.
+				//( 1UL ),// uxPriority - task priority, set the portPRIVILEGE_BIT if the task should run in a privileged state.
+				pxTimerTaskStackBuffer,// puxStackBuffer - the buffer to be used as the task stack.
+
+				// xRegions - Allocate up to three separate memory regions for access by
+				// the task, with appropriate access permissions.
+				{
+					// {Base address,	Length,	Parameters}
+//					{ &pxTimerTaskStackBuffer[STACK_SIZE],	STACK_SIZE_IN_BYTES, portMPU_REGION_PRIVILEGED_READ_WRITE }, // shadow stack.
+					{ &pxTimerTaskStackBuffer[0],	STACK_SIZE_IN_BYTES , portMPU_REGION_READ_WRITE }, // the other two region left unused.
+//					{ 0,0,0 },
+					{ 0,0,0 },
+					{ 0,0,0 }
+				}
+			};
+
+//			vApplicationGetTimerTaskMemory( &pxTimerTaskTCBBuffer, &pxTimerTaskStackBuffer, &ulTimerTaskStackSize );
+//
+//			xTimerTaskHandle = xTaskCreateStatic(	prvTimerTask,
+//													configTIMER_SERVICE_TASK_NAME,
+//													STACK_SIZE,
+//													NULL,
+//													( ( UBaseType_t ) configTIMER_TASK_PRIORITY ) | portPRIVILEGE_BIT,
+//													pxTimerTaskStackBuffer,
+//													pxTimerTaskTCBBuffer );
+
+			xTaskCreateRestricted(&timerTaskParameters, &xTimerTaskHandle);
 
 			if( xTimerTaskHandle != NULL )
 			{
@@ -542,6 +569,7 @@ BaseType_t xListWasEmpty;
 
 	for( ;; )
 	{
+//		configPRINTF( ( "Timer Task!!\r\n" ) );
 		/* Query the timers list to see if it contains any timers, and if so,
 		obtain the time at which the next timer will expire. */
 		xNextExpireTime = prvGetNextExpireTime( &xListWasEmpty );

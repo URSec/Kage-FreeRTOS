@@ -50,7 +50,7 @@ task.h is included from an application file. */
 #endif
 
 /* Block sizes must not get too small. */
-#define heapMINIMUM_BLOCK_SIZE	( ( size_t ) ( xHeapStructSize << 1 ) )
+#define heapMINIMUM_BLOCK_SIZE	( ( size_t ) ( xHeapStructSizeUser << 1 ) )
 
 /* Assumes 8bit bytes! */
 #define heapBITS_PER_BYTE		( ( size_t ) 8 )
@@ -59,9 +59,9 @@ task.h is included from an application file. */
 #if( configAPPLICATION_ALLOCATED_HEAP == 1 )
 	/* The application writer has already defined the array used for the RTOS
 	heap - probably so it can be placed in a special segment or address. */
-	extern uint8_t ucHeap[ configTOTAL_USER_HEAP_SIZE ];
+	extern uint8_t ucHeapUser[ configTOTAL_USER_HEAP_SIZE ];
 #else
-	static uint8_t ucHeap[ configTOTAL_USER_HEAP_SIZE ];
+	static uint8_t ucHeapUser[ configTOTAL_USER_HEAP_SIZE ];
 #endif /* configAPPLICATION_ALLOCATED_HEAP */
 
 /* Define the linked list structure.  This is used to link free blocks in order
@@ -80,7 +80,7 @@ typedef struct A_BLOCK_LINK
  * the block in front it and/or the block behind it if the memory blocks are
  * adjacent to each other.
  */
-static void prvInsertBlockIntoFreeListUser( BlockLink_t *pxBlockToInsert ) PRIVILEGED_FUNCTION;
+static void prvInsertBlockIntoFreeListUser( BlockLink_t *pxBlockToInsert );
 
 /*
  * Called automatically to setup the required heap structures the first time
@@ -92,7 +92,7 @@ static void prvHeapInitUser( void );
 
 /* The size of the structure placed at the beginning of each allocated memory
 block must by correctly byte aligned. */
-static const size_t xHeapStructSize	= ( sizeof( BlockLink_t ) + ( ( size_t ) ( portBYTE_ALIGNMENT - 1 ) ) ) & ~( ( size_t ) portBYTE_ALIGNMENT_MASK );
+static const size_t xHeapStructSizeUser	= ( sizeof( BlockLink_t ) + ( ( size_t ) ( portBYTE_ALIGNMENT - 1 ) ) ) & ~( ( size_t ) portBYTE_ALIGNMENT_MASK );
 
 /* Create a couple of list links to mark the start and end of the list. */
 static BlockLink_t xStartUser, *pxEndUser = NULL;
@@ -138,7 +138,7 @@ void *pvReturn = NULL;
 			structure in addition to the requested amount of bytes. */
 			if( xWantedSize > 0 )
 			{
-				xWantedSize += xHeapStructSize;
+				xWantedSize += xHeapStructSizeUser;
 
 				/* Ensure that blocks are always aligned to the required number
 				of bytes. */
@@ -176,7 +176,7 @@ void *pvReturn = NULL;
 				{
 					/* Return the memory space pointed to - jumping over the
 					BlockLink_t structure at its start. */
-					pvReturn = ( void * ) ( ( ( uint8_t * ) pxPreviousBlock->pxNextFreeBlock ) + xHeapStructSize );
+					pvReturn = ( void * ) ( ( ( uint8_t * ) pxPreviousBlock->pxNextFreeBlock ) + xHeapStructSizeUser );
 
 					/* This block is being returned for use so must be taken out
 					of the list of free blocks. */
@@ -269,7 +269,7 @@ BlockLink_t *pxLink;
 	{
 		/* The memory being freed will have an BlockLink_t structure immediately
 		before it. */
-		puc -= xHeapStructSize;
+		puc -= xHeapStructSizeUser;
 
 		/* This casting is to keep the compiler from issuing warnings. */
 		pxLink = ( void * ) puc;
@@ -334,13 +334,13 @@ size_t uxAddress;
 size_t xTotalHeapSize = configTOTAL_USER_HEAP_SIZE;
 
 	/* Ensure the heap starts on a correctly aligned boundary. */
-	uxAddress = ( size_t ) ucHeap;
+	uxAddress = ( size_t ) ucHeapUser;
 
 	if( ( uxAddress & portBYTE_ALIGNMENT_MASK ) != 0 )
 	{
 		uxAddress += ( portBYTE_ALIGNMENT - 1 );
 		uxAddress &= ~( ( size_t ) portBYTE_ALIGNMENT_MASK );
-		xTotalHeapSize -= uxAddress - ( size_t ) ucHeap;
+		xTotalHeapSize -= uxAddress - ( size_t ) ucHeapUser;
 	}
 
 	pucAlignedHeap = ( uint8_t * ) uxAddress;
@@ -353,7 +353,7 @@ size_t xTotalHeapSize = configTOTAL_USER_HEAP_SIZE;
 	/* pxEndUser is used to mark the end of the list of free blocks and is inserted
 	at the end of the heap space. */
 	uxAddress = ( ( size_t ) pucAlignedHeap ) + xTotalHeapSize;
-	uxAddress -= xHeapStructSize;
+	uxAddress -= xHeapStructSizeUser;
 	uxAddress &= ~( ( size_t ) portBYTE_ALIGNMENT_MASK );
 	pxEndUser = ( void * ) uxAddress;
 	pxEndUser->xBlockSize = 0;

@@ -56,8 +56,8 @@
 #define configTICK_RATE_HZ                           ( ( TickType_t ) 1000 )
 #define configMAX_PRIORITIES                         ( 7 )
 #define configMINIMAL_STACK_SIZE                     ( ( uint16_t ) 90 )
-#define configTOTAL_HEAP_SIZE                        ( ( size_t ) ( 32 * 1024 ) ) /* Silhouette: re-sized from 60 to 32 */
-#define configTOTAL_USER_HEAP_SIZE					 ( ( size_t ) ( 20 * 1024 ) ) /* Silhouette: user heap */
+#define configTOTAL_HEAP_SIZE                        ( ( size_t ) ( 20 * 1024 ) ) /* Silhouette: re-sized from 60 to 28 */
+#define configTOTAL_USER_HEAP_SIZE					 ( ( size_t ) ( 28 * 1024 ) ) /* Silhouette: user heap */
 #define configMAX_TASK_NAME_LEN                      ( 16 )
 #define configUSE_TRACE_FACILITY                     1
 #define configUSE_16_BIT_TICKS                       0

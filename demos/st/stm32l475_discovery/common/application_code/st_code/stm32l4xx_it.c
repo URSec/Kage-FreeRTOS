@@ -82,12 +82,12 @@ void HardFault_Handler(void)
 /**
 * @brief This function handles Memory management fault.
 */
-void MemManage_Handler(void)
-{
-  while (1)
-  {
-  }
-}
+//void MemManage_Handler(void)
+//{
+//  while (1)
+//  {
+//  }
+//}
 
 /**
 * @brief This function handles Prefetch fault, memory access fault.

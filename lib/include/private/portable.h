@@ -147,11 +147,11 @@ size_t xPortGetMinimumEverFreeHeapSize( void ) PRIVILEGED_FUNCTION;
 /*
  * Silhouette: User mode memory management routines
  */
-void *pvPortMallocUser( size_t xSize ) PRIVILEGED_FUNCTION;
-void vPortFreeUser( void *pv ) PRIVILEGED_FUNCTION;
-void vPortInitialiseBlocksUser( void ) PRIVILEGED_FUNCTION;
-size_t xPortGetFreeHeapSizeUser( void ) PRIVILEGED_FUNCTION;
-size_t xPortGetMinimumEverFreeHeapSizeUser( void ) PRIVILEGED_FUNCTION;
+void *pvPortMallocUser( size_t xSize );
+void vPortFreeUser( void *pv );
+void vPortInitialiseBlocksUser( void );
+size_t xPortGetFreeHeapSizeUser( void );
+size_t xPortGetMinimumEverFreeHeapSizeUser( void );
 
 /*
  * Setup the hardware ready for the scheduler to take control.  This generally
