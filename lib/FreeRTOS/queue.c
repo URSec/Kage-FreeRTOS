@@ -86,7 +86,7 @@ zero. */
 	performed just because a higher priority task has been woken. */
 	#define queueYIELD_IF_USING_PREEMPTION()
 #else
-	#define queueYIELD_IF_USING_PREEMPTION() portYIELD_WITHIN_API()
+	#define queueYIELD_IF_USING_PREEMPTION() portYIELD()
 #endif
 
 /*
@@ -171,46 +171,46 @@ typedef xQUEUE Queue_t;
  * to indicate that a task may require unblocking.  When the queue in unlocked
  * these lock counts are inspected, and the appropriate action taken.
  */
-static void prvUnlockQueue( Queue_t * const pxQueue ) PRIVILEGED_FUNCTION;
+static void prvUnlockQueue( Queue_t * const pxQueue );
 
 /*
  * Uses a critical section to determine if there is any data in a queue.
  *
  * @return pdTRUE if the queue contains no items, otherwise pdFALSE.
  */
-static BaseType_t prvIsQueueEmpty( const Queue_t *pxQueue ) PRIVILEGED_FUNCTION;
+static BaseType_t prvIsQueueEmpty( const Queue_t *pxQueue );
 
 /*
  * Uses a critical section to determine if there is any space in a queue.
  *
  * @return pdTRUE if there is no space, otherwise pdFALSE;
  */
-static BaseType_t prvIsQueueFull( const Queue_t *pxQueue ) PRIVILEGED_FUNCTION;
+static BaseType_t prvIsQueueFull( const Queue_t *pxQueue );
 
 /*
  * Copies an item into the queue, either at the front of the queue or the
  * back of the queue.
  */
-static BaseType_t prvCopyDataToQueue( Queue_t * const pxQueue, const void *pvItemToQueue, const BaseType_t xPosition ) PRIVILEGED_FUNCTION;
+static BaseType_t prvCopyDataToQueue( Queue_t * const pxQueue, const void *pvItemToQueue, const BaseType_t xPosition );
 
 /*
  * Copies an item out of a queue.
  */
-static void prvCopyDataFromQueue( Queue_t * const pxQueue, void * const pvBuffer ) PRIVILEGED_FUNCTION;
+static void prvCopyDataFromQueue( Queue_t * const pxQueue, void * const pvBuffer );
 
 #if ( configUSE_QUEUE_SETS == 1 )
 	/*
 	 * Checks to see if a queue is a member of a queue set, and if so, notifies
 	 * the queue set that the queue contains data.
 	 */
-	static BaseType_t prvNotifyQueueSetContainer( const Queue_t * const pxQueue, const BaseType_t xCopyPosition ) PRIVILEGED_FUNCTION;
+	static BaseType_t prvNotifyQueueSetContainer( const Queue_t * const pxQueue, const BaseType_t xCopyPosition );
 #endif
 
 /*
  * Called after a Queue_t structure has been allocated either statically or
  * dynamically to fill in the structure's members.
  */
-static void prvInitialiseNewQueue( const UBaseType_t uxQueueLength, const UBaseType_t uxItemSize, uint8_t *pucQueueStorage, const uint8_t ucQueueType, Queue_t *pxNewQueue ) PRIVILEGED_FUNCTION;
+static void prvInitialiseNewQueue( const UBaseType_t uxQueueLength, const UBaseType_t uxItemSize, uint8_t *pucQueueStorage, const uint8_t ucQueueType, Queue_t *pxNewQueue );
 
 /*
  * Mutexes are a special type of queue.  When a mutex is created, first the
@@ -218,7 +218,7 @@ static void prvInitialiseNewQueue( const UBaseType_t uxQueueLength, const UBaseT
  * as a mutex.
  */
 #if( configUSE_MUTEXES == 1 )
-	static void prvInitialiseMutex( Queue_t *pxNewQueue ) PRIVILEGED_FUNCTION;
+	static void prvInitialiseMutex( Queue_t *pxNewQueue );
 #endif
 
 #if( configUSE_MUTEXES == 1 )
@@ -229,7 +229,7 @@ static void prvInitialiseNewQueue( const UBaseType_t uxQueueLength, const UBaseT
 	 * other tasks that are waiting for the same mutex.  This function returns
 	 * that priority.
 	 */
-	static UBaseType_t prvGetDisinheritPriorityAfterTimeout( const Queue_t * const pxQueue ) PRIVILEGED_FUNCTION;
+	static UBaseType_t prvGetDisinheritPriorityAfterTimeout( const Queue_t * const pxQueue );
 #endif
 /*-----------------------------------------------------------*/
 
@@ -394,7 +394,7 @@ Queue_t * const pxQueue = xQueue;
 		are greater than or equal to the pointer to char requirements the cast
 		is safe.  In other cases alignment requirements are not strict (one or
 		two bytes). */
-		pxNewQueue = ( Queue_t * ) pvPortMalloc( sizeof( Queue_t ) + xQueueSizeInBytes ); /*lint !e9087 !e9079 see comment above. */
+		pxNewQueue = ( Queue_t * ) pvPortMallocUser( sizeof( Queue_t ) + xQueueSizeInBytes ); /*lint !e9087 !e9079 see comment above. */
 
 		if( pxNewQueue != NULL )
 		{
@@ -931,7 +931,7 @@ Queue_t * const pxQueue = xQueue;
 				is also a higher priority task in the pending ready list. */
 				if( xTaskResumeAll() == pdFALSE )
 				{
-					portYIELD_WITHIN_API();
+					portYIELD();
 				}
 			}
 			else
@@ -1375,7 +1375,7 @@ Queue_t * const pxQueue = xQueue;
 				prvUnlockQueue( pxQueue );
 				if( xTaskResumeAll() == pdFALSE )
 				{
-					portYIELD_WITHIN_API();
+					portYIELD();
 				}
 				else
 				{
@@ -1566,7 +1566,7 @@ Queue_t * const pxQueue = xQueue;
 				prvUnlockQueue( pxQueue );
 				if( xTaskResumeAll() == pdFALSE )
 				{
-					portYIELD_WITHIN_API();
+					portYIELD();
 				}
 				else
 				{
@@ -1742,7 +1742,7 @@ Queue_t * const pxQueue = xQueue;
 				prvUnlockQueue( pxQueue );
 				if( xTaskResumeAll() == pdFALSE )
 				{
-					portYIELD_WITHIN_API();
+					portYIELD();
 				}
 				else
 				{
@@ -1993,7 +1993,7 @@ Queue_t * const pxQueue = xQueue;
 		check before attempting to free the memory. */
 		if( pxQueue->ucStaticallyAllocated == ( uint8_t ) pdFALSE )
 		{
-			vPortFree( pxQueue );
+			vPortFreeUser( pxQueue );
 		}
 		else
 		{
