@@ -1,0 +1,142 @@
+/* FreeRTOS includes. */
+#include "FreeRTOS.h"
+#include "task.h"
+#include "support.h"
+
+static void silMicroTask( void * pvParameters );
+static void silBeebsTask( void * pvParameters );
+
+static StackType_t demoStackBuffer[STACK_SIZE * 2] TASK_STACK;
+
+void start_microbenchmark()
+{
+	BaseType_t xReturn = pdFAIL;
+
+	/* Structs for logging task
+	 * */
+	/// This is a dynamic task definition
+
+//	static StackType_t logStackBuffer[STACK_SIZE * 2] __attribute__ ((aligned (STACK_SIZE * 2)));
+	// Create an TaskParameters_t structure that defines the task to be created.
+	TaskParameters_t microTaskParameters =
+	{
+		silMicroTask,		// pvTaskCode - the function that implements the task.
+		"MicroBenchmark",	// pcName - just a text name for the task to assist debugging.
+		STACK_SIZE,		// usStackDepth	- the stack size DEFINED IN WORDS.
+		NULL,		// pvParameters - passed into the task function as the function parameters.
+		( configMAX_PRIORITIES | portPRIVILEGE_BIT ),// uxPriority - task priority, set the portPRIVILEGE_BIT if the task should run in a privileged state.
+		//( 1UL ),// uxPriority - task priority, set the portPRIVILEGE_BIT if the task should run in a privileged state.
+		demoStackBuffer,// puxStackBuffer - the buffer to be used as the task stack.
+
+		// xRegions - Allocate up to three separate memory regions for access by
+		// the task, with appropriate access permissions.
+		{
+			// {Base address,	Length,	Parameters}
+//			{ &logStackBuffer[STACK_SIZE],	STACK_SIZE_IN_BYTES, portMPU_REGION_PRIVILEGED_READ_WRITE }, // shadow stack.
+			{ &demoStackBuffer[0],	STACK_SIZE_IN_BYTES, portMPU_REGION_READ_WRITE }, // the other two region left unused.
+			{ 0,0,0 },
+			{ 0,0,0 }
+		}
+	};
+	if( xTaskCreateRestricted( &microTaskParameters, NULL ) == pdPASS )
+//            if( xTaskCreate( prvLoggingTask, "Logging", usStackSize, NULL, uxPriority, NULL ) == pdPASS )
+	{
+		xReturn = pdPASS;
+	}
+	else
+	{
+
+	}
+}
+
+static void silMicroTask( void * pvParameters )
+{
+	configPRINTF( ( "Started Microbenchmark \r\n" ) );
+	int iterations = 1000000;
+	int i = 0;
+	for (i = 0; i < iterations; i++)
+	{
+		portYIELD_WITHIN_API();
+	}
+	configPRINTF( ( "Finished %d yields\r\n", iterations ) );
+	for(;;){
+
+	}
+}
+
+void start_beebsbenchmark()
+{
+	BaseType_t xReturn = pdFAIL;
+
+	/* Structs for logging task
+	 * */
+//	static StackType_t logStackBuffer[STACK_SIZE * 2] __attribute__ ((aligned (STACK_SIZE * 2)));
+	// Create an TaskParameters_t structure that defines the task to be created.
+	TaskParameters_t beebsTaskParameters =
+	{
+		silBeebsTask,		// pvTaskCode - the function that implements the task.
+		"BEEBSBenchmark",	// pcName - just a text name for the task to assist debugging.
+		STACK_SIZE,		// usStackDepth	- the stack size DEFINED IN WORDS.
+		NULL,		// pvParameters - passed into the task function as the function parameters.
+		( configMAX_PRIORITIES | portPRIVILEGE_BIT ),// uxPriority - task priority, set the portPRIVILEGE_BIT if the task should run in a privileged state.
+		//( 1UL ),// uxPriority - task priority, set the portPRIVILEGE_BIT if the task should run in a privileged state.
+		demoStackBuffer,// puxStackBuffer - the buffer to be used as the task stack.
+
+		// xRegions - Allocate up to three separate memory regions for access by
+		// the task, with appropriate access permissions.
+		{
+			// {Base address,	Length,	Parameters}
+//			{ &logStackBuffer[STACK_SIZE],	STACK_SIZE_IN_BYTES, portMPU_REGION_PRIVILEGED_READ_WRITE }, // shadow stack.
+			{ &demoStackBuffer[0],	STACK_SIZE_IN_BYTES, portMPU_REGION_READ_WRITE }, // the other two region left unused.
+			{ 0,0,0 },
+			{ 0,0,0 }
+		}
+	};
+	if( xTaskCreateRestricted( &beebsTaskParameters, NULL ) == pdPASS )
+//            if( xTaskCreate( prvLoggingTask, "Logging", usStackSize, NULL, uxPriority, NULL ) == pdPASS )
+	{
+		xReturn = pdPASS;
+	}
+	else
+	{
+
+	}
+}
+
+static void silBeebsTask( void * pvParameters ){
+	int i;
+	volatile int result = 0;
+	int correct;
+
+	uint32_t t_start, t;
+
+	configPRINTF( ( "Starting BEEBS benchmark\r\n" ) );
+
+	t_start = xTaskGetTickCount();
+
+	for (i = 0; i < REPEAT_FACTOR; i++) {
+		initialise_benchmark();
+		asm volatile ("" :: "r" (result) : "memory");
+		result = benchmark();
+		asm volatile ("" :: "r" (result) : "memory");
+	}
+
+	t = xTaskGetTickCount() - t_start;
+
+	switch (verify_benchmark(result)) {
+	case 1:
+		configPRINTF( ( "Finished successfully: in %u ms.\r\n", t ) );
+		break;
+	case -1:
+		configPRINTF( ( "Finished in %u ms, but no verify_benchmark() run.\r\n", t ) );
+		break;
+	default:
+		configPRINTF( ( "Finished in %u ms, but verify_benchmark() found errors.\r\n", t ) );
+		break;
+	}
+
+	for(;;){
+
+	}
+}
+
