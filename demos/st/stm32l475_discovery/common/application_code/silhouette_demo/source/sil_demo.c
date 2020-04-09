@@ -5,8 +5,10 @@
 
 static void silMicroTask( void * pvParameters );
 static void silBeebsTask( void * pvParameters );
+static void silEmptyTask( void * pvParameters );
 
 static StackType_t demoStackBuffer[STACK_SIZE * 2] TASK_STACK;
+static StackType_t demoStackBufferT[STACK_SIZE * 2] TASK_STACK;
 
 void start_microbenchmark()
 {
@@ -24,7 +26,7 @@ void start_microbenchmark()
 		"MicroBenchmark",	// pcName - just a text name for the task to assist debugging.
 		STACK_SIZE,		// usStackDepth	- the stack size DEFINED IN WORDS.
 		NULL,		// pvParameters - passed into the task function as the function parameters.
-		( configMAX_PRIORITIES | portPRIVILEGE_BIT ),// uxPriority - task priority, set the portPRIVILEGE_BIT if the task should run in a privileged state.
+		( configMAX_PRIORITIES - 3 | portPRIVILEGE_BIT ),// uxPriority - task priority, set the portPRIVILEGE_BIT if the task should run in a privileged state.
 		//( 1UL ),// uxPriority - task priority, set the portPRIVILEGE_BIT if the task should run in a privileged state.
 		demoStackBuffer,// puxStackBuffer - the buffer to be used as the task stack.
 
@@ -47,6 +49,28 @@ void start_microbenchmark()
 	{
 
 	}
+
+	TaskParameters_t microTaskParametersT =
+		{
+			silMicroTask,		// pvTaskCode - the function that implements the task.
+			"MicroBenchmark2",	// pcName - just a text name for the task to assist debugging.
+			STACK_SIZE,		// usStackDepth	- the stack size DEFINED IN WORDS.
+			NULL,		// pvParameters - passed into the task function as the function parameters.
+			( configMAX_PRIORITIES - 3 | portPRIVILEGE_BIT ),// uxPriority - task priority, set the portPRIVILEGE_BIT if the task should run in a privileged state.
+			//( 1UL ),// uxPriority - task priority, set the portPRIVILEGE_BIT if the task should run in a privileged state.
+			demoStackBufferT,// puxStackBuffer - the buffer to be used as the task stack.
+
+			// xRegions - Allocate up to three separate memory regions for access by
+			// the task, with appropriate access permissions.
+			{
+				// {Base address,	Length,	Parameters}
+	//			{ &logStackBuffer[STACK_SIZE],	STACK_SIZE_IN_BYTES, portMPU_REGION_PRIVILEGED_READ_WRITE }, // shadow stack.
+				{ &demoStackBufferT[0],	STACK_SIZE_IN_BYTES, portMPU_REGION_READ_WRITE }, // the other two region left unused.
+				{ 0,0,0 },
+				{ 0,0,0 }
+			}
+		};
+	xTaskCreateRestricted( &microTaskParametersT, NULL );
 }
 
 static void silMicroTask( void * pvParameters )
@@ -56,7 +80,7 @@ static void silMicroTask( void * pvParameters )
 	int i = 0;
 	for (i = 0; i < iterations; i++)
 	{
-		portYIELD_WITHIN_API();
+		portYIELD();
 	}
 	configPRINTF( ( "Finished %d yields\r\n", iterations ) );
 	for(;;){
@@ -78,7 +102,7 @@ void start_beebsbenchmark()
 		"BEEBSBenchmark",	// pcName - just a text name for the task to assist debugging.
 		STACK_SIZE,		// usStackDepth	- the stack size DEFINED IN WORDS.
 		NULL,		// pvParameters - passed into the task function as the function parameters.
-		( configMAX_PRIORITIES | portPRIVILEGE_BIT ),// uxPriority - task priority, set the portPRIVILEGE_BIT if the task should run in a privileged state.
+		( configMAX_PRIORITIES - 3 | portPRIVILEGE_BIT ),// uxPriority - task priority, set the portPRIVILEGE_BIT if the task should run in a privileged state.
 		//( 1UL ),// uxPriority - task priority, set the portPRIVILEGE_BIT if the task should run in a privileged state.
 		demoStackBuffer,// puxStackBuffer - the buffer to be used as the task stack.
 
@@ -93,6 +117,41 @@ void start_beebsbenchmark()
 		}
 	};
 	if( xTaskCreateRestricted( &beebsTaskParameters, NULL ) == pdPASS )
+//            if( xTaskCreate( prvLoggingTask, "Logging", usStackSize, NULL, uxPriority, NULL ) == pdPASS )
+	{
+		xReturn = pdPASS;
+	}
+	else
+	{
+
+	}
+
+
+	/* Structs for logging task
+	 * */
+//	static StackType_t logStackBuffer[STACK_SIZE * 2] __attribute__ ((aligned (STACK_SIZE * 2)));
+	// Create an TaskParameters_t structure that defines the task to be created.
+	TaskParameters_t emptyTaskParameters =
+	{
+		silEmptyTask,		// pvTaskCode - the function that implements the task.
+		"BEEBSBenchmark",	// pcName - just a text name for the task to assist debugging.
+		STACK_SIZE,		// usStackDepth	- the stack size DEFINED IN WORDS.
+		NULL,		// pvParameters - passed into the task function as the function parameters.
+		( configMAX_PRIORITIES - 3 | portPRIVILEGE_BIT ),// uxPriority - task priority, set the portPRIVILEGE_BIT if the task should run in a privileged state.
+		//( 1UL ),// uxPriority - task priority, set the portPRIVILEGE_BIT if the task should run in a privileged state.
+		demoStackBufferT,// puxStackBuffer - the buffer to be used as the task stack.
+
+		// xRegions - Allocate up to three separate memory regions for access by
+		// the task, with appropriate access permissions.
+		{
+			// {Base address,	Length,	Parameters}
+//			{ &logStackBuffer[STACK_SIZE],	STACK_SIZE_IN_BYTES, portMPU_REGION_PRIVILEGED_READ_WRITE }, // shadow stack.
+			{ &demoStackBufferT[0],	STACK_SIZE_IN_BYTES, portMPU_REGION_READ_WRITE }, // the other two region left unused.
+			{ 0,0,0 },
+			{ 0,0,0 }
+		}
+	};
+	if( xTaskCreateRestricted( &emptyTaskParameters, NULL ) == pdPASS )
 //            if( xTaskCreate( prvLoggingTask, "Logging", usStackSize, NULL, uxPriority, NULL ) == pdPASS )
 	{
 		xReturn = pdPASS;
@@ -136,6 +195,12 @@ static void silBeebsTask( void * pvParameters ){
 	}
 
 	for(;;){
+
+	}
+}
+
+static void silEmptyTask( void *pvParameters ){
+	while(1){
 
 	}
 }

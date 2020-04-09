@@ -284,19 +284,19 @@ static void prvSVCHandler(	uint32_t *pulParam, uint32_t mspUsed )
 uint8_t ucSVCNumber;
 	// Silhouette: Always spill regs since kernel stack is unprivileged
 	prvSpillContext(pulParam);
-	// Silhouette: if PSP is used, spill processor states to shadow stack
-	if (mspUsed == 0)
-	{
-		prvSpillContext(pulParam);
-		/* The stack contains: r0, r1, r2, r3, r12, r14, the return address and
-		xPSR.  The first argument (r0) is pulParam[ 0 ]. */
-		ucSVCNumber = ( ( uint8_t * ) pulParam[ portOFFSET_TO_PC + STACK_SIZE ] )[ -2 ]; // Silhouette; now use shadow stack
-	} else
-	{
-		/* The stack contains: r0, r1, r2, r3, r12, r14, the return address and
-		xPSR.  The first argument (r0) is pulParam[ 0 ]. */
-		ucSVCNumber = ( ( uint8_t * ) pulParam[ portOFFSET_TO_PC ] )[ -2 ];
-	}
+	ucSVCNumber = ( ( uint8_t * ) pulParam[ portOFFSET_TO_PC + STACK_SIZE ] )[ -2 ]; // Silhouette; now use shadow stack
+//	// Silhouette: if PSP is used, spill processor states to shadow stack
+//	if (mspUsed == 0)
+//	{
+//		/* The stack contains: r0, r1, r2, r3, r12, r14, the return address and
+//		xPSR.  The first argument (r0) is pulParam[ 0 ]. */
+//		ucSVCNumber = ( ( uint8_t * ) pulParam[ portOFFSET_TO_PC + STACK_SIZE ] )[ -2 ]; // Silhouette; now use shadow stack
+//	} else
+//	{
+//		/* The stack contains: r0, r1, r2, r3, r12, r14, the return address and
+//		xPSR.  The first argument (r0) is pulParam[ 0 ]. */
+//		ucSVCNumber = ( ( uint8_t * ) pulParam[ portOFFSET_TO_PC ] )[ -2 ];
+//	}
 
 	switch( ucSVCNumber )
 	{
@@ -335,11 +335,11 @@ uint8_t ucSVCNumber;
 		default							:	/* Unknown SVC call. */
 											break;
 	}
-	// Silhouette: if PSP is used, restore processor states from shadow stack
-	if (mspUsed == 0)
-	{
+//	// Silhouette: if PSP is used, restore processor states from shadow stack
+//	if (mspUsed == 0)
+//	{
 		prvRestoreContext(pulParam);
-	}
+//	}
 }
 /*-----------------------------------------------------------*/
 
@@ -752,7 +752,7 @@ extern uint32_t __data_region_end__[];
 											( portMPU_REGION_VALID ) |
 											( portGENERAL_PERIPHERALS_REGION );
 
-		portMPU_REGION_ATTRIBUTE_REG =	( portMPU_REGION_READ_WRITE | portMPU_REGION_EXECUTE_NEVER ) |
+		portMPU_REGION_ATTRIBUTE_REG =	( portMPU_REGION_PRIVILEGED_READ_WRITE | portMPU_REGION_EXECUTE_NEVER ) |
 										( prvGetMPURegionSizeSetting( portPERIPHERALS_END_ADDRESS - portPERIPHERALS_START_ADDRESS ) ) |
 										( portMPU_REGION_ENABLE );
 
@@ -832,6 +832,8 @@ void vResetPrivilege( void ) /* __attribute__ (( naked )) */
 
 void vPortStoreTaskMPUSettings( xMPU_SETTINGS *xMPUSettings, const struct xMEMORY_REGION * const xRegions, StackType_t *pxBottomOfStack, uint32_t ulStackDepth )
 {
+extern uint32_t __FLASH_segment_start__[];
+extern uint32_t __FLASH_segment_end__[];
 extern uint32_t __SRAM_segment_start__[];
 extern uint32_t __SRAM_segment_end__[];
 extern uint32_t __privileged_data_start__[];
@@ -840,6 +842,7 @@ extern uint32_t __data_region_start__[];
 extern uint32_t __data_region_end__[];
 extern uint32_t __task_stack_start__[];
 extern uint32_t __task_stack_end__[];
+extern uint32_t __kstack_start__[];
 extern uint32_t __SS_segment_start__[];
 extern uint32_t __SS_segment_end__[];
 int32_t lIndex;
@@ -847,40 +850,89 @@ uint32_t ul;
 
 	if( xRegions == NULL )
 	{
-		/* No MPU regions are specified so allow access to all RAM. */
+		/* Define the region that disallows access to other stacks or shadow stack. */
 		xMPUSettings->xRegion[ 0 ].ulRegionBaseAddress =
-				( ( uint32_t ) __SRAM_segment_start__ ) | /* Base address. */
+				( ( uint32_t ) __task_stack_start__ ) |
 				( portMPU_REGION_VALID ) |
-				( portSTACK_REGION );
+				( portSTACK_REGION ); /* Region number. */
 
 		xMPUSettings->xRegion[ 0 ].ulRegionAttribute =
-				( portMPU_REGION_READ_WRITE ) |
+				( portMPU_REGION_PRIVILEGED_READ_WRITE | portMPU_REGION_EXECUTE_NEVER ) | /* Read and write. */
+				( prvGetMPURegionSizeSetting( ( uint32_t ) __task_stack_end__ - ( uint32_t ) __task_stack_start__ ) ) |
 				( portMPU_REGION_CACHEABLE_BUFFERABLE ) |
-				( prvGetMPURegionSizeSetting( ( uint32_t ) __SRAM_segment_end__ - ( uint32_t ) __SRAM_segment_start__ ) ) |
 				( portMPU_REGION_ENABLE );
 
-		/* Re-instate the privileged only RAM region as xRegion[ 0 ] will have
-		just removed the privileged only parameters. */
+		/* Define the region that allows access to data. */
 		xMPUSettings->xRegion[ 1 ].ulRegionBaseAddress =
-				( ( uint32_t ) __privileged_data_start__ ) | /* Base address. */
+				( ( uint32_t ) __data_region_start__ ) |
 				( portMPU_REGION_VALID ) |
-				( portSTACK_REGION + 1 );
+				( portSTACK_REGION + 1 ); /* Region number. */
 
 		xMPUSettings->xRegion[ 1 ].ulRegionAttribute =
-				( portMPU_REGION_PRIVILEGED_READ_WRITE ) |
+				( portMPU_REGION_READ_WRITE | portMPU_REGION_EXECUTE_NEVER ) | /* Read and write. */
+				( prvGetMPURegionSizeSetting( ( uint32_t ) __data_region_end__ - ( uint32_t ) __data_region_start__ ) ) |
 				( portMPU_REGION_CACHEABLE_BUFFERABLE ) |
-				prvGetMPURegionSizeSetting( ( uint32_t ) __privileged_data_end__ - ( uint32_t ) __privileged_data_start__ ) |
 				( portMPU_REGION_ENABLE );
 
-		/* Invalidate all other regions. */
-		for( ul = 2; ul <= portNUM_CONFIGURABLE_REGIONS; ul++ )
-		{
-			xMPUSettings->xRegion[ ul ].ulRegionBaseAddress = ( portSTACK_REGION + ul ) | portMPU_REGION_VALID;
-			xMPUSettings->xRegion[ ul ].ulRegionAttribute = 0UL;
-		}
+		/* Define the region that disallows access to kernel shadow stack. */
+		xMPUSettings->xRegion[ 2 ].ulRegionBaseAddress =
+				( ( uint32_t ) __SS_segment_start__ ) |
+				( portMPU_REGION_VALID ) |
+				( portSTACK_REGION + 2 ); /* Region number. */
+
+		xMPUSettings->xRegion[ 2 ].ulRegionAttribute =
+				( portMPU_REGION_PRIVILEGED_READ_WRITE | portMPU_REGION_EXECUTE_NEVER ) | /* Read and write. */
+				( prvGetMPURegionSizeSetting( ( uint32_t ) __SS_segment_end__ - ( uint32_t ) __SS_segment_start__ ) ) |
+				( portMPU_REGION_CACHEABLE_BUFFERABLE ) |
+				( portMPU_REGION_ENABLE );
+
+		/* Define the region that disallows access to kernel shadow stack. */
+		xMPUSettings->xRegion[ 3 ].ulRegionBaseAddress =
+				( ( uint32_t ) pxBottomOfStack - STACK_SIZE_IN_BYTES ) |
+				( portMPU_REGION_VALID ) |
+				( portSTACK_REGION + 2 ); /* Region number. */
+
+		xMPUSettings->xRegion[ 3 ].ulRegionAttribute =
+				( portMPU_REGION_READ_WRITE | portMPU_REGION_EXECUTE_NEVER ) | /* Read and write. */
+				( prvGetMPURegionSizeSetting( ( uint32_t ) STACK_SIZE_IN_BYTES ) ) |
+				( portMPU_REGION_CACHEABLE_BUFFERABLE ) |
+				( portMPU_REGION_ENABLE );
+
+//		/* Invalidate all other regions. */
+//		for( ul = 2; ul <= portNUM_CONFIGURABLE_REGIONS; ul++ )
+//		{
+//			xMPUSettings->xRegion[ ul ].ulRegionBaseAddress = ( portSTACK_REGION + ul ) | portMPU_REGION_VALID;
+//			xMPUSettings->xRegion[ ul ].ulRegionAttribute = 0UL;
+//		}
 	}
 	else
 	{
+		/* Runtime check for new MPU configurations */
+		for (ul = 0; ul < portNUM_CONFIGURABLE_REGIONS; ul++){
+			/* Check for overlaps between xRegions and FLASH */
+			uint8_t cond = ( (( uint32_t) xRegions[ul].pvBaseAddress) + xRegions[ul].ulLengthInBytes <= ( uint32_t ) __FLASH_segment_start__) ||
+					(( uint32_t )xRegions[ul].pvBaseAddress >= ( uint32_t ) __FLASH_segment_end__);
+			configASSERT( cond || !(xRegions[ul].ulParameters & portMPU_REGION_READ_WRITE) );
+			/* Check for execute never */
+			cond = ( (( uint32_t) xRegions[ul].pvBaseAddress) + xRegions[ul].ulLengthInBytes <= ( uint32_t ) __SRAM_segment_start__);
+			configASSERT( cond || !(xRegions[ul].ulParameters & (!portMPU_REGION_EXECUTE_NEVER)) );
+			/* Check for overlaps between xRegions and privileged data */
+			cond = ( (( uint32_t) xRegions[ul].pvBaseAddress) + xRegions[ul].ulLengthInBytes <= ( uint32_t ) __privileged_data_start__) ||
+					(( uint32_t )xRegions[ul].pvBaseAddress >= ( uint32_t ) __privileged_data_end__);
+			configASSERT( cond || !(xRegions[ul].ulParameters & portMPU_REGION_READ_WRITE) );
+			/* Check for overlaps between xRegions and task stacks before this task */
+			cond = ( (( uint32_t) xRegions[ul].pvBaseAddress) + xRegions[ul].ulLengthInBytes <= ( uint32_t ) __task_stack_start__) ||
+					(( uint32_t )xRegions[ul].pvBaseAddress >= ( uint32_t ) pxBottomOfStack);
+			configASSERT( cond || !(xRegions[ul].ulParameters & portMPU_REGION_READ_WRITE) );
+			/* Check for overlaps between xRegions and task stacks after this task */
+			cond = ( (( uint32_t) xRegions[ul].pvBaseAddress) + xRegions[ul].ulLengthInBytes <= ( uint32_t ) pxBottomOfStack + ( uint32_t ) STACK_SIZE_IN_BYTES) ||
+					(( uint32_t )xRegions[ul].pvBaseAddress >= ( uint32_t ) __task_stack_end__);
+			configASSERT( cond || !(xRegions[ul].ulParameters & portMPU_REGION_READ_WRITE) );
+			/* Check for overlaps between xRegions and kernel shadow stacks */
+			cond = ( (( uint32_t) xRegions[ul].pvBaseAddress) + xRegions[ul].ulLengthInBytes <= ( uint32_t ) __SS_segment_start__) ||
+					(( uint32_t )xRegions[ul].pvBaseAddress >= ( uint32_t ) __SS_segment_end__);
+			configASSERT( cond || !(xRegions[ul].ulParameters & portMPU_REGION_READ_WRITE) );
+		}
 		/* This function is called automatically when the task is created - in
 		which case the stack region parameters will be valid.  At all other
 		times the stack parameters will not be valid and it is assumed that the

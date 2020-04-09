@@ -57,7 +57,7 @@
 #define configMAX_PRIORITIES                         ( 7 )
 #define configMINIMAL_STACK_SIZE                     ( ( uint16_t ) 90 )
 #define configTOTAL_HEAP_SIZE                        ( ( size_t ) ( 20 * 1024 ) ) /* Silhouette: re-sized from 60 to 28 */
-#define configTOTAL_USER_HEAP_SIZE					 ( ( size_t ) ( 28 * 1024 ) ) /* Silhouette: user heap */
+#define configTOTAL_USER_HEAP_SIZE					 ( ( size_t ) ( 8 * 1024 ) ) /* Silhouette: user heap */ // was 28
 #define configMAX_TASK_NAME_LEN                      ( 16 )
 #define configUSE_TRACE_FACILITY                     1
 #define configUSE_16_BIT_TICKS                       0
@@ -72,6 +72,7 @@
 #define configGENERATE_RUN_TIME_STATS                0
 #define configOVERRIDE_DEFAULT_TICK_CONFIGURATION    1
 #define configRECORD_STACK_HIGH_ADDRESS              1
+#define configUSE_LIST_DATA_INTEGRITY_CHECK_BYTES    1
 
 /* Co-routine definitions. */
 #define configUSE_CO_ROUTINES                        0

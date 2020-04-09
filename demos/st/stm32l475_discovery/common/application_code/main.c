@@ -150,6 +150,7 @@ int main( void )
     /* Start the scheduler.  Initialization that requires the OS to be running,
      * including the WiFi initialization, is performed in the RTOS daemon task
      * startup hook. */
+//    start_microbenchmark();
     configPRINTF( ( "Test\r\n" ) );
     vTaskStartScheduler();
 
@@ -209,8 +210,8 @@ void vApplicationDaemonTaskStartupHook( void )
 //        configASSERT( xWifiStatus == eWiFiSuccess );
 //    }
 
-	start_microbenchmark();
-//	start_beebsbenchmark();
+//	start_microbenchmark();
+	start_beebsbenchmark();
 }
 /*-----------------------------------------------------------*/
 

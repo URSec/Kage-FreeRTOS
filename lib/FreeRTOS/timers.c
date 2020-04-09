@@ -554,6 +554,7 @@ BaseType_t xListWasEmpty;
 
 	/* Just to avoid compiler warnings. */
 	( void ) pvParameters;
+//	configPRINT_STRING( "timer called\r\n" );
 
 	#if( configUSE_DAEMON_TASK_STARTUP_HOOK == 1 )
 	{

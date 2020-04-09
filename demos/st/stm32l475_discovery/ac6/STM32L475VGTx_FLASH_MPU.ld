@@ -33,17 +33,18 @@
 ENTRY(Reset_Handler)
 
 /* Highest address of the user mode stack */
-_estack = 0x20017000;    /* end of RAM 96k*/
+/*_estack = 0x20017000;    /* end of RAM 96k*/
 
 /* Generate a link error if heap and stack don't fit into RAM */
+_Stack_Size = 0x1000;
 _Min_Heap_Size = 0x0000;     /* required amount of heap */  
 _Min_Stack_Size = 0x800; /* 0x758, 0x800 required amount of stack 2K */ /* reduced due to overflow 168 bytes in RAM2 */
 
 /* Specify the memory areas */
 MEMORY
 {
-RAM_SS (xrw)    : ORIGIN = 0x20017000, LENGTH = 4K
-RAM (xrw)       : ORIGIN = 0x20000000, LENGTH = 92K /* 96K --> 0x2001,8000 */
+/*RAM_SS (xrw)    : ORIGIN = 0x20017000, LENGTH = 4K*/
+RAM (xrw)       : ORIGIN = 0x20000000, LENGTH = 96K /* 96K --> 0x2001,8000 */
 RAM2 (xrw)      : ORIGIN = 0x10000000, LENGTH = 32K  /* 32K --> 0x1000,8000 */
 FLASH (rx)      : ORIGIN = 0x08000000, LENGTH = 464K  /*1012K, 464K, Use only the first bank */
 FLASH_UC (r)	: ORIGIN = 0x08074000, LENGTH = 9K	/* Fixed-location area */
@@ -201,8 +202,19 @@ SECTIONS
   	. = ALIGN(4096);
   	__task_stack_start__ = .;
   	*(task_stack);
-  	.=ALIGH(4096);
+  	. = ALIGN(4096);
   	__task_stack_end__ = .;
+  	. = . + 24576; /* Silhouette: Align with MPU */
+  } > RAM
+  
+  kernel_stack :
+  {
+  	__kernel_stack_start__ = .;
+  	. = . + _Stack_Size;
+  	__kernel_stack_end__ = .;
+  	_estack = __kernel_stack_end__;
+  	. = . + _Stack_Size;
+  	__kernel_ss_end__ = .;
   } > RAM
   
     /* Uninitialized data section */
@@ -266,12 +278,12 @@ __SRAM_segment_end__ = ORIGIN( RAM ) + LENGTH( RAM ); /* regard RAM as a single 
 _Privileged_Data_Region_Size = __privileged_data_end__ - __privileged_data_start__;
 
 /* Silhouette: Define variables for kernel stack */
-__kstack_end__ = ORIGIN( RAM ) + LENGTH( RAM );
-__kstack_start__ = __kstack_end__ - LENGTH( RAM_SS );
+__kstack_end__ = __kernel_stack_start__;
+__kstack_start__ = __kernel_stack_end__;
 
 /* Silhouette: Define kernel shadow stack */
-__SS_segment_start__ = ORIGIN( RAM_SS );
-__SS_segment_end__ = ORIGIN( RAM_SS ) + LENGTH( RAM_SS );
+__SS_segment_start__ = __kernel_stack_end__;
+__SS_segment_end__ = __kernel_ss_end__;
 
 /*__privileged_data_start__ = ORIGIN( RAM2 ); */
 /*__privileged_data_end__ = ORIGIN( RAM2 ) + _Privileged_Data_Region_Size;*/

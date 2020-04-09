@@ -561,6 +561,17 @@ static void prvInitialiseNewTask( 	TaskFunction_t pxTaskCode,
 static void prvAddNewTaskToReadyList( TCB_t *pxNewTCB ) PRIVILEGED_FUNCTION;
 
 /*
+ * Silhouette: Verify that the TCB pointer is actually a TCB pointer
+ */
+static BaseType_t xVerifyTCB( const TCB_t* taskTCB );
+
+/*
+ * Silhouette: Verify that the data pointer does not point to privileged
+ * data
+ */
+static void vVerifyUntrustedData(void* dataUser, size_t size);
+
+/*
  * freertos_tasks_c_additions_init() should only be called if the user definable
  * macro FREERTOS_TASKS_C_ADDITIONS_INIT() is defined, as that is the only macro
  * called by the function.
@@ -1158,13 +1169,13 @@ static void prvAddNewTaskToReadyList( TCB_t *pxNewTCB )
 	void vTaskDelete( TaskHandle_t xTaskToDelete )
 	{
 	TCB_t *pxTCB;
-
 		taskENTER_CRITICAL();
 		{
 			/* If null is passed in here then it is the calling task that is
 			being deleted. */
 			pxTCB = prvGetTCBFromHandle( xTaskToDelete );
-
+			// Silhouette: Add runtime check for pointer to TCB
+			configASSERT( xVerifyTCB(pxTCB) );
 			/* Remove task from the ready list. */
 			if( uxListRemove( &( pxTCB->xStateListItem ) ) == ( UBaseType_t ) 0 )
 			{
@@ -1255,6 +1266,9 @@ static void prvAddNewTaskToReadyList( TCB_t *pxNewTCB )
 		configASSERT( pxPreviousWakeTime );
 		configASSERT( ( xTimeIncrement > 0U ) );
 		configASSERT( uxSchedulerSuspended == 0 );
+
+		// Silhouette: Add runtime check for pointer to unprivileged data
+		vVerifyUntrustedData(pxPreviousWakeTime, sizeof(TickType_t));
 
 		vTaskSuspendAll();
 		{
@@ -1553,6 +1567,8 @@ static void prvAddNewTaskToReadyList( TCB_t *pxNewTCB )
 			/* If null is passed in here then it is the priority of the calling
 			task that is being changed. */
 			pxTCB = prvGetTCBFromHandle( xTask );
+			// Silhouette: Add runtime check for pointer to TCB
+			configASSERT( xVerifyTCB(pxTCB) );
 
 			traceTASK_PRIORITY_SET( pxTCB, uxNewPriority );
 
@@ -1704,6 +1720,9 @@ static void prvAddNewTaskToReadyList( TCB_t *pxNewTCB )
 			being suspended. */
 			pxTCB = prvGetTCBFromHandle( xTaskToSuspend );
 
+			// Silhouette: Add runtime check for pointer to TCB
+			configASSERT( xVerifyTCB(pxTCB) );
+
 			traceTASK_SUSPEND( pxTCB );
 
 			/* Remove task from the ready/delayed list and place in the
@@ -1848,6 +1867,9 @@ static void prvAddNewTaskToReadyList( TCB_t *pxNewTCB )
 		/* It does not make sense to resume the calling task. */
 		configASSERT( xTaskToResume );
 
+		// Silhouette: Add runtime check for pointer to TCB
+		configASSERT( xVerifyTCB(pxTCB) );
+
 		/* The parameter cannot be NULL as it is impossible to resume the
 		currently executing task. */
 		if( ( pxTCB != pxCurrentTCB ) && ( pxTCB != NULL ) )
@@ -1902,6 +1924,9 @@ static void prvAddNewTaskToReadyList( TCB_t *pxNewTCB )
 	UBaseType_t uxSavedInterruptStatus;
 
 		configASSERT( xTaskToResume );
+
+		// Silhouette: Add runtime check for pointer to TCB
+		configASSERT( xVerifyTCB(pxTCB) );
 
 		/* RTOS ports that support interrupt nesting have the concept of a
 		maximum	system call (or maximum API call) interrupt priority.
@@ -3059,6 +3084,9 @@ void vTaskPlaceOnEventList( List_t * const pxEventList, const TickType_t xTicksT
 {
 	configASSERT( pxEventList );
 
+	// Silhouette: Add runtime check for pointer to unprivileged data
+	vVerifyUntrustedData(pxEventList,sizeof(List_t));
+
 	/* THIS FUNCTION MUST BE CALLED WITH EITHER INTERRUPTS DISABLED OR THE
 	SCHEDULER SUSPENDED AND THE QUEUE BEING ACCESSED LOCKED. */
 
@@ -3075,6 +3103,9 @@ void vTaskPlaceOnEventList( List_t * const pxEventList, const TickType_t xTicksT
 void vTaskPlaceOnUnorderedEventList( List_t * pxEventList, const TickType_t xItemValue, const TickType_t xTicksToWait )
 {
 	configASSERT( pxEventList );
+
+	// Silhouette: Add runtime check for pointer to unprivileged data
+	vVerifyUntrustedData(pxEventList,sizeof(List_t));
 
 	/* THIS FUNCTION MUST BE CALLED WITH THE SCHEDULER SUSPENDED.  It is used by
 	the event groups implementation. */
@@ -3101,7 +3132,8 @@ void vTaskPlaceOnUnorderedEventList( List_t * pxEventList, const TickType_t xIte
 	void vTaskPlaceOnEventListRestricted( List_t * const pxEventList, TickType_t xTicksToWait, const BaseType_t xWaitIndefinitely )
 	{
 		configASSERT( pxEventList );
-
+		// Silhouette: Add runtime check for pointer to unprivileged data
+		vVerifyUntrustedData(pxEventList,sizeof(List_t));
 		/* This function should not be called by application code hence the
 		'Restricted' in its name.  It is not part of the public API.  It is
 		designed for use by kernel code, and has special calling requirements -
@@ -3133,6 +3165,9 @@ BaseType_t xTaskRemoveFromEventList( const List_t * const pxEventList )
 {
 TCB_t *pxUnblockedTCB;
 BaseType_t xReturn;
+
+// Silhouette: Add runtime check for pointer to unprivileged data
+vVerifyUntrustedData(pxEventList,sizeof(List_t));
 
 	/* THIS FUNCTION MUST BE CALLED FROM A CRITICAL SECTION.  It can also be
 	called from a critical section within an ISR. */
@@ -3204,7 +3239,8 @@ TCB_t *pxUnblockedTCB;
 	/* THIS FUNCTION MUST BE CALLED WITH THE SCHEDULER SUSPENDED.  It is used by
 	the event flags implementation. */
 	configASSERT( uxSchedulerSuspended != pdFALSE );
-
+	// Silhouette: Add runtime check for pointer to unprivileged data
+	vVerifyUntrustedData(pxEventListItem,sizeof(ListItem_t));
 	/* Store the new item value in the event list. */
 	listSET_LIST_ITEM_VALUE( pxEventListItem, xItemValue | taskEVENT_LIST_ITEM_VALUE_IN_USE );
 
@@ -3352,6 +3388,8 @@ void vTaskMissedYield( void )
 		if( xTask != NULL )
 		{
 			pxTCB = xTask;
+			// Silhouette: Add runtime check for pointer to TCB
+			configASSERT( xVerifyTCB(pxTCB) );
 			pxTCB->uxTaskNumber = uxHandle;
 		}
 	}
@@ -3570,50 +3608,18 @@ static portTASK_FUNCTION( prvIdleTask, pvParameters )
 
 	void vTaskAllocateMPURegions( TaskHandle_t xTaskToModify, const MemoryRegion_t * const xRegions )
 	{
-	extern uint32_t __FLASH_segment_start__[];
-	extern uint32_t __FLASH_segment_end__[];
+
 	TCB_t *pxTCB;
-	TaskStatus_t *pxTaskStatusArray;
-	volatile UBaseType_t uxArraySize, x;
-	uint32_t ul;
 
 		/* If null is passed in here then we are modifying the MPU settings of
 		the calling task. */
 		pxTCB = prvGetTCBFromHandle( xTaskToModify );
+		// Silhouette: Add runtime check for pointer to TCB
+		configASSERT( xVerifyTCB(pxTCB) );
+		// Silhouette: Add runtime check for pointer to unprivileged data
+		vVerifyUntrustedData(xRegions,sizeof(xRegions) * portNUM_CONFIGURABLE_REGIONS);
 
-		/* Silhouette: Check if new regions are still safe */
-		/* Refer to https://www.freertos.org/uxTaskGetSystemState.html for
-		 * more details of uxTaskGetSystemState() function */
-		uxArraySize = uxCurrentNumberOfTasks;
-		pxTaskStatusArray = pvPortMalloc( uxArraySize * sizeof( TaskStatus_t ));
-
-		configASSERT( pxTaskStatusArray != NULL );
-		uxArraySize = uxTaskGetSystemState(pxTaskStatusArray, uxArraySize, NULL);
-
-		/* Check for overlaps between xRegions and other tasks' stack and shadow stack*/
-		for (ul = 0; ul < portNUM_CONFIGURABLE_REGIONS; ul++){
-			for (x = 0; x < uxArraySize; x++){
-				/* Skip the current task */
-				if (pxTaskStatusArray[x].xHandle == pxTCB){
-					continue;
-				} else {
-					/* TODO: Move the actual checking part to port.c */
-					uint8_t cond = (xRegions[ul].pvBaseAddress + xRegions[ul].ulLengthInBytes < pxTaskStatusArray[x].pxStackBase) ||
-							(xRegions[ul].pvBaseAddress > pxTaskStatusArray[x].pxStackBase + (2 * STACK_SIZE));
-					configASSERT( cond || !(xRegions[ul].ulParameters & portMPU_REGION_READ_WRITE) );
-				}
-			}
-			/* Check for overlaps between xRegions and kernel stack */
-			uint8_t cond = (xRegions[ul].pvBaseAddress + xRegions[ul].ulLengthInBytes < 0x2000CCCC) ||
-					(xRegions[ul].pvBaseAddress > 0x20018000);
-			configASSERT( cond || !(xRegions[ul].ulParameters & portMPU_REGION_READ_WRITE) );
-			/* Check for overlaps between xRegions and FLASH */
-			cond = (xRegions[ul].pvBaseAddress + xRegions[ul].ulLengthInBytes < ( uint32_t ) __FLASH_segment_start__) ||
-					(xRegions[ul].pvBaseAddress > ( uint32_t ) __FLASH_segment_end__);
-			configASSERT( cond || !(xRegions[ul].ulParameters & portMPU_REGION_READ_WRITE) );
-		}
-
-		vPortStoreTaskMPUSettings( &( pxTCB->xMPUSettings ), xRegions, NULL, 0 );
+		vPortStoreTaskMPUSettings( &( pxTCB->xMPUSettings ), xRegions, pxTCB->pxStack, 0 );
 	}
 
 #endif /* portUSING_MPU_WRAPPERS */
@@ -4034,6 +4040,8 @@ TCB_t *pxTCB;
 		needed as interrupts can no longer use mutexes? */
 		if( pxMutexHolder != NULL )
 		{
+			// Silhouette: Add runtime check for pointer to TCB
+			configASSERT( xVerifyTCB(pxMutexHolderTCB) );
 			/* If the holder of the mutex has a priority below the priority of
 			the task attempting to obtain the mutex then it will temporarily
 			inherit the priority of the task attempting to obtain the mutex. */
@@ -4118,6 +4126,8 @@ TCB_t *pxTCB;
 
 		if( pxMutexHolder != NULL )
 		{
+			// Silhouette: Add runtime check for pointer to TCB
+			configASSERT( xVerifyTCB(pxTCB) );
 			/* A task can only have an inherited priority if it holds the mutex.
 			If the mutex is held by a task then it cannot be given from an
 			interrupt, and if a mutex is given by the holding task then it must
@@ -4753,6 +4763,8 @@ TickType_t uxReturn;
 
 			if( pulNotificationValue != NULL )
 			{
+				// Silhouette: Add runtime check for pointer to unprivileged data
+				vVerifyUntrustedData(pulNotificationValue, sizeof(uint32_t));
 				/* Output the current notification value, which may or may not
 				have changed. */
 				*pulNotificationValue = pxCurrentTCB->ulNotifiedValue;
@@ -4796,10 +4808,15 @@ TickType_t uxReturn;
 		configASSERT( xTaskToNotify );
 		pxTCB = xTaskToNotify;
 
+		// Silhouette: Add runtime check for pointer to TCB
+		configASSERT( xVerifyTCB(pxTCB) );
+
 		taskENTER_CRITICAL();
 		{
 			if( pulPreviousNotificationValue != NULL )
 			{
+				// Silhouette: Add runtime check for pointer to unprivileged data
+				vVerifyUntrustedData(pulPreviousNotificationValue, sizeof(uint32_t));
 				*pulPreviousNotificationValue = pxTCB->ulNotifiedValue;
 			}
 
@@ -4930,10 +4947,15 @@ TickType_t uxReturn;
 
 		pxTCB = xTaskToNotify;
 
+		// Silhouette: Add runtime check for pointer to TCB
+		configASSERT( xVerifyTCB(pxTCB) );
+
 		uxSavedInterruptStatus = portSET_INTERRUPT_MASK_FROM_ISR();
 		{
 			if( pulPreviousNotificationValue != NULL )
 			{
+				// Silhouette: Add runtime check for pointer to unprivileged data
+				vVerifyUntrustedData(pulPreviousNotificationValue, sizeof(uint32_t));
 				*pulPreviousNotificationValue = pxTCB->ulNotifiedValue;
 			}
 
@@ -5058,6 +5080,9 @@ TickType_t uxReturn;
 
 		pxTCB = xTaskToNotify;
 
+		// Silhouette: Add runtime check for pointer to TCB
+		configASSERT( xVerifyTCB(pxTCB) );
+
 		uxSavedInterruptStatus = portSET_INTERRUPT_MASK_FROM_ISR();
 		{
 			ucOriginalNotifyState = pxTCB->ucNotifyState;
@@ -5094,6 +5119,8 @@ TickType_t uxReturn;
 					executing task so a yield is required. */
 					if( pxHigherPriorityTaskWoken != NULL )
 					{
+						// Silhouette: Add runtime check for pointer to unprivileged data
+						vVerifyUntrustedData(pxHigherPriorityTaskWoken, sizeof(BaseType_t));
 						*pxHigherPriorityTaskWoken = pdTRUE;
 					}
 
@@ -5125,6 +5152,8 @@ TickType_t uxReturn;
 		/* If null is passed in here then it is the calling task that is having
 		its notification state cleared. */
 		pxTCB = prvGetTCBFromHandle( xTask );
+		// Silhouette: Add runtime check for pointer to TCB
+		configASSERT( xVerifyTCB(pxTCB) );
 
 		taskENTER_CRITICAL();
 		{
@@ -5291,4 +5320,66 @@ when performing module tests). */
 void printMPUConfig( uint32_t regionNum ) PRIVILEGED_FUNCTION
 {
 	portGetMPUConfig(regionNum);
+}
+
+/*-----------------------------------------------------------*/
+static BaseType_t xVerifyTCB(const TCB_t* taskTCB)
+{
+	// Silhouette: Define kernel stack regions
+	extern uint32_t __privileged_data_start__[];
+	extern uint32_t __privileged_data_end__[];
+
+	struct xLIST * listParent;
+
+
+	// Check if the pointer is within privileged_data region
+	if ((uint32_t) taskTCB < ( uint32_t ) __privileged_data_start__ ||
+		(uint32_t) taskTCB >= ( uint32_t ) __privileged_data_end__ ){
+		return pdFAIL;
+	}
+
+	// Check if the pointed TCB's list item matches the TCB itself
+	if (taskTCB->xStateListItem.pvOwner != taskTCB){
+		return pdFAIL;
+	}
+
+	// Check if the TCB's list item is valid
+	if (taskTCB->xStateListItem.xListItemIntegrityValue1 != pdINTEGRITY_CHECK_VALUE ||
+		taskTCB->xStateListItem.xListItemIntegrityValue2 != pdINTEGRITY_CHECK_VALUE){
+		return pdFAIL;
+	}
+
+	// Check if the list item really points a TCB
+	listParent = taskTCB->xStateListItem.pvContainer;
+	if (listParent == &pxReadyTasksLists[taskTCB->uxBasePriority] ||
+		listParent == pxDelayedTaskList ||
+		listParent == pxOverflowDelayedTaskList ||
+		listParent == &xPendingReadyList ||
+		listParent == &xSuspendedTaskList){
+		return pdPASS;
+	}
+
+	return pdFAIL;
+}
+
+/*-----------------------------------------------------------*/
+static void vVerifyUntrustedData(void* dataUser, size_t size)
+{
+	// Define some 1-byte garbage data to write to dataUser
+	const char gar = 'Z';
+	// Backup data
+	void* dataTemp = pvPortMallocUser(size);
+	memcpy(dataTemp, dataUser, size);
+
+	// Try to write to the pointer to see if it triggers MemManage fault
+	unsigned i = 0;
+	for (i = 0; i < size; i++){
+		(( char * )dataUser)[i] = gar;
+	}
+
+	// Restore original data
+	memcpy(dataUser, dataTemp, size);
+
+	// Free temp pointer
+	vPortFreeUser(dataTemp);
 }
