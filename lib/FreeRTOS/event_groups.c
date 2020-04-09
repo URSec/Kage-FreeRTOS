@@ -84,7 +84,7 @@ typedef struct EventGroupDef_t
  * wait condition is met if any of the bits set in uxBitsToWait for are also set
  * in uxCurrentEventBits.
  */
-static BaseType_t prvTestWaitCondition( const EventBits_t uxCurrentEventBits, const EventBits_t uxBitsToWaitFor, const BaseType_t xWaitForAllBits ) PRIVILEGED_FUNCTION;
+static BaseType_t prvTestWaitCondition( const EventBits_t uxCurrentEventBits, const EventBits_t uxBitsToWaitFor, const BaseType_t xWaitForAllBits ) ;
 
 /*-----------------------------------------------------------*/
 
@@ -159,7 +159,7 @@ static BaseType_t prvTestWaitCondition( const EventBits_t uxCurrentEventBits, co
 		sizeof( TickType_t ), the TickType_t variables will be accessed in two
 		or more reads operations, and the alignment requirements is only that
 		of each individual read. */
-		pxEventBits = ( EventGroup_t * ) pvPortMalloc( sizeof( EventGroup_t ) ); /*lint !e9087 !e9079 see comment above. */
+		pxEventBits = ( EventGroup_t * ) pvPortMallocUser( sizeof( EventGroup_t ) ); /*lint !e9087 !e9079 see comment above. */
 
 		if( pxEventBits != NULL )
 		{
@@ -252,7 +252,7 @@ BaseType_t xTimeoutOccurred = pdFALSE;
 	{
 		if( xAlreadyYielded == pdFALSE )
 		{
-			portYIELD_WITHIN_API();
+			portYIELD();
 		}
 		else
 		{
@@ -400,7 +400,7 @@ BaseType_t xTimeoutOccurred = pdFALSE;
 	{
 		if( xAlreadyYielded == pdFALSE )
 		{
-			portYIELD_WITHIN_API();
+			portYIELD();
 		}
 		else
 		{
@@ -639,7 +639,7 @@ const List_t *pxTasksWaitingForBits = &( pxEventBits->xTasksWaitingForBits );
 			dynamically, so check before attempting to free the memory. */
 			if( pxEventBits->ucStaticallyAllocated == ( uint8_t ) pdFALSE )
 			{
-				vPortFree( pxEventBits );
+				vPortFreeUser( pxEventBits );
 			}
 			else
 			{

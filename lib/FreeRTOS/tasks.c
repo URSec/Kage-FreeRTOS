@@ -385,6 +385,11 @@ when the scheduler is unsuspended.  The pending ready list itself can only be
 accessed from a critical section. */
 PRIVILEGED_DATA static volatile UBaseType_t uxSchedulerSuspended	= ( UBaseType_t ) pdFALSE;
 
+/*
+ * Silhouette: Add a counter for xTaskCreateRestricted to record total number of tasks ever created
+ */
+PRIVILEGED_DATA static uint32_t uxTaskCreatedTotal = 0U;
+
 #if ( configGENERATE_RUN_TIME_STATS == 1 )
 
 	/* Do not move these variables to function scope as doing so prevents the
@@ -696,6 +701,12 @@ static void vVerifyUntrustedData(void* dataUser, size_t size);
 
 		configASSERT( pxTaskDefinition->puxStackBuffer );
 
+		// Silhouette: If application tries to create more task than
+		// planned, reject.
+		if (uxTaskCreatedTotal >= configTOTAL_TASKS){
+			return xReturn;
+		}
+
 		if( pxTaskDefinition->puxStackBuffer != NULL )
 		{
 			/* Allocate space for the TCB.  Where the memory comes from depends
@@ -727,6 +738,9 @@ static void vVerifyUntrustedData(void* dataUser, size_t size);
 
 				prvAddNewTaskToReadyList( pxNewTCB );
 				xReturn = pdPASS;
+
+				// Silhouette: increment task counter
+				uxTaskCreatedTotal++;
 			}
 		}
 
@@ -3061,6 +3075,9 @@ void vTaskSwitchContext( void )
 		optimised asm code. */
 		taskSELECT_HIGHEST_PRIORITY_TASK(); /*lint !e9079 void * is used as this macro is used with timers and co-routines too.  Alignment is known to be fine as the type of the pointer stored and retrieved is the same. */
 		traceTASK_SWITCHED_IN();
+
+		// Silhouette: Add runtime check for the TCB selected
+		configASSERT( xVerifyTCB(pxCurrentTCB) );
 
 		/* After the new task is switched in, update the global errno. */
 		#if( configUSE_POSIX_ERRNO == 1 )

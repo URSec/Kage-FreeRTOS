@@ -74,6 +74,9 @@
 #define configRECORD_STACK_HIGH_ADDRESS              1
 #define configUSE_LIST_DATA_INTEGRITY_CHECK_BYTES    1
 
+/* Silhouette: Add total number of tasks in this system, including kernel tasks */
+#define configTOTAL_TASKS                            5 // 2 test tasks + logging + idle + timer
+
 /* Co-routine definitions. */
 #define configUSE_CO_ROUTINES                        0
 #define configMAX_CO_ROUTINE_PRIORITIES              ( 2 )

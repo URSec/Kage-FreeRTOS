@@ -38,7 +38,7 @@ BaseType_t xCheckPrivilege(List_t* const pxList, ListItem_t* const pxItem);
  * PUBLIC LIST API documented in list.h
  *----------------------------------------------------------*/
 
-void vListInitialise( List_t * const pxList )
+void vListInitialiseUser( List_t * const pxList )
 {
 	/* The list structure contains a list item which is used to mark the
 	end of the list.  To initialise the list the list end is inserted
@@ -63,7 +63,7 @@ void vListInitialise( List_t * const pxList )
 }
 /*-----------------------------------------------------------*/
 
-void vListInitialiseItem( ListItem_t * const pxItem )
+void vListInitialiseItemUser( ListItem_t * const pxItem )
 {
 	/* Make sure the list item is not recorded as being on a list. */
 	pxItem->pxContainer = NULL;
@@ -75,7 +75,7 @@ void vListInitialiseItem( ListItem_t * const pxItem )
 }
 /*-----------------------------------------------------------*/
 
-void vListInsertEnd( List_t * const pxList, ListItem_t * const pxNewListItem )
+void vListInsertEndUser( List_t * const pxList, ListItem_t * const pxNewListItem )
 {
 ListItem_t * const pxIndex = pxList->pxIndex;
 
@@ -106,7 +106,7 @@ ListItem_t * const pxIndex = pxList->pxIndex;
 }
 /*-----------------------------------------------------------*/
 
-void vListInsert( List_t * const pxList, ListItem_t * const pxNewListItem )
+void vListInsertUser( List_t * const pxList, ListItem_t * const pxNewListItem )
 {
 ListItem_t *pxIterator;
 const TickType_t xValueOfInsertion = pxNewListItem->xItemValue;
@@ -175,7 +175,7 @@ const TickType_t xValueOfInsertion = pxNewListItem->xItemValue;
 }
 /*-----------------------------------------------------------*/
 
-UBaseType_t uxListRemove( ListItem_t * const pxItemToRemove )
+UBaseType_t uxListRemoveUser( ListItem_t * const pxItemToRemove )
 {
 /* The list item knows which list it is in.  Obtain the list from the list
 item. */
@@ -204,26 +204,4 @@ List_t * const pxList = pxItemToRemove->pxContainer;
 	( pxList->uxNumberOfItems )--;
 
 	return pxList->uxNumberOfItems;
-}
-/*-----------------------------------------------------------*/
-
-BaseType_t xCheckPrivilege(List_t* const pxList, ListItem_t* const pxItem)
-{
-	// Silhouette: Define kernel stack regions
-	extern uint32_t __privileged_data_start__[];
-	extern uint32_t __privileged_data_end__[];
-
-	/*
-	 * Check if the list is privileged but item isn't
-	 */
-	if ((uint32_t) pxList >= ( uint32_t ) __privileged_data_start__ &&
-		(uint32_t) pxList < ( uint32_t ) __privileged_data_end__ ){
-		if ((uint32_t) pxItem < ( uint32_t ) __privileged_data_start__ ||
-			(uint32_t) pxItem >= ( uint32_t ) __privileged_data_end__ ){
-			// List is in privileged_data but item isn't
-			return pdFAIL;
-		}
-	}
-
-	return pdPASS;
 }

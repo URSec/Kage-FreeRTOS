@@ -132,14 +132,14 @@ timer service task is allowed to access these lists.
 xActiveTimerList1 and xActiveTimerList2 could be at function scope but that
 breaks some kernel aware debuggers, and debuggers that reply on removing the
 static qualifier. */
-PRIVILEGED_DATA static List_t xActiveTimerList1;
-PRIVILEGED_DATA static List_t xActiveTimerList2;
-PRIVILEGED_DATA static List_t *pxCurrentTimerList;
-PRIVILEGED_DATA static List_t *pxOverflowTimerList;
+static List_t xActiveTimerList1;
+static List_t xActiveTimerList2;
+static List_t *pxCurrentTimerList;
+static List_t *pxOverflowTimerList;
 
 /* A queue that is used to send commands to the timer service task. */
-PRIVILEGED_DATA static QueueHandle_t xTimerQueue = NULL;
-PRIVILEGED_DATA static TaskHandle_t xTimerTaskHandle = NULL;
+static QueueHandle_t xTimerQueue = NULL;
+static TaskHandle_t xTimerTaskHandle = NULL;
 
 /*lint -restore */
 
@@ -166,7 +166,7 @@ static void prvCheckForValidListAndQueue( void ) PRIVILEGED_FUNCTION;
  * task.  Other tasks communicate with the timer service task using the
  * xTimerQueue queue.
  */
-static portTASK_FUNCTION_PROTO( prvTimerTask, pvParameters ) PRIVILEGED_FUNCTION;
+static portTASK_FUNCTION_PROTO( prvTimerTask, pvParameters );
 
 /*
  * Called by the timer service task to interpret and process a command it
@@ -314,7 +314,7 @@ BaseType_t xReturn = pdFAIL;
 	{
 	Timer_t *pxNewTimer;
 
-		pxNewTimer = ( Timer_t * ) pvPortMalloc( sizeof( Timer_t ) ); /*lint !e9087 !e9079 All values returned by pvPortMalloc() have at least the alignment required by the MCU's stack, and the first member of Timer_t is always a pointer to the timer's mame. */
+		pxNewTimer = ( Timer_t * ) pvPortMallocUser( sizeof( Timer_t ) ); /*lint !e9087 !e9079 All values returned by pvPortMalloc() have at least the alignment required by the MCU's stack, and the first member of Timer_t is always a pointer to the timer's mame. */
 
 		if( pxNewTimer != NULL )
 		{
@@ -629,7 +629,7 @@ BaseType_t xTimerListsWereSwitched;
 					block time to expire.  If a command arrived between the
 					critical section being exited and this yield then the yield
 					will not cause the task to block. */
-					portYIELD_WITHIN_API();
+					portYIELD();
 				}
 				else
 				{
@@ -674,7 +674,7 @@ TickType_t xNextExpireTime;
 static TickType_t prvSampleTimeNow( BaseType_t * const pxTimerListsWereSwitched )
 {
 TickType_t xTimeNow;
-PRIVILEGED_DATA static TickType_t xLastTime = ( TickType_t ) 0U; /*lint !e956 Variable is only accessible to one task. */
+static TickType_t xLastTime = ( TickType_t ) 0U; /*lint !e956 Variable is only accessible to one task. */
 
 	xTimeNow = xTaskGetTickCount();
 
@@ -713,7 +713,7 @@ BaseType_t xProcessTimerNow = pdFALSE;
 		}
 		else
 		{
-			vListInsert( pxOverflowTimerList, &( pxTimer->xTimerListItem ) );
+			vListInsertUser( pxOverflowTimerList, &( pxTimer->xTimerListItem ) );
 		}
 	}
 	else
@@ -727,7 +727,7 @@ BaseType_t xProcessTimerNow = pdFALSE;
 		}
 		else
 		{
-			vListInsert( pxCurrentTimerList, &( pxTimer->xTimerListItem ) );
+			vListInsertUser( pxCurrentTimerList, &( pxTimer->xTimerListItem ) );
 		}
 	}
 
@@ -856,7 +856,7 @@ TickType_t xTimeNow;
 						allocated. */
 						if( ( pxTimer->ucStatus & tmrSTATUS_IS_STATICALLY_ALLOCATED ) == ( uint8_t ) 0 )
 						{
-							vPortFree( pxTimer );
+							vPortFreeUser( pxTimer );
 						}
 						else
 						{
@@ -921,7 +921,7 @@ BaseType_t xResult;
 			{
 				listSET_LIST_ITEM_VALUE( &( pxTimer->xTimerListItem ), xReloadTime );
 				listSET_LIST_ITEM_OWNER( &( pxTimer->xTimerListItem ), pxTimer );
-				vListInsert( pxCurrentTimerList, &( pxTimer->xTimerListItem ) );
+				vListInsertUser( pxCurrentTimerList, &( pxTimer->xTimerListItem ) );
 			}
 			else
 			{
