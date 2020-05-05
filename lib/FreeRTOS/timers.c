@@ -395,7 +395,7 @@ static void prvInitialiseNewTimer(	const char * const pcTimerName,			/*lint !e97
 		pxNewTimer->xTimerPeriodInTicks = xTimerPeriodInTicks;
 		pxNewTimer->pvTimerID = pvTimerID;
 		pxNewTimer->pxCallbackFunction = pxCallbackFunction;
-		vListInitialiseItem( &( pxNewTimer->xTimerListItem ) );
+		vListInitialiseItemUser( &( pxNewTimer->xTimerListItem ) );
 		if( uxAutoReload != pdFALSE )
 		{
 			pxNewTimer->ucStatus |= tmrSTATUS_IS_AUTORELOAD;
@@ -513,7 +513,7 @@ Timer_t * const pxTimer = ( Timer_t * ) listGET_OWNER_OF_HEAD_ENTRY( pxCurrentTi
 
 	/* Remove the timer from the list of active timers.  A check has already
 	been performed to ensure the list is not empty. */
-	( void ) uxListRemove( &( pxTimer->xTimerListItem ) );
+	( void ) uxListRemoveUser( &( pxTimer->xTimerListItem ) );
 	traceTIMER_EXPIRED( pxTimer );
 
 	/* If the timer is an auto reload timer then calculate the next
@@ -777,7 +777,7 @@ TickType_t xTimeNow;
 			if( listIS_CONTAINED_WITHIN( NULL, &( pxTimer->xTimerListItem ) ) == pdFALSE ) /*lint !e961. The cast is only redundant when NULL is passed into the macro. */
 			{
 				/* The timer is in a list, remove it. */
-				( void ) uxListRemove( &( pxTimer->xTimerListItem ) );
+				( void ) uxListRemoveUser( &( pxTimer->xTimerListItem ) );
 			}
 			else
 			{
@@ -900,7 +900,7 @@ BaseType_t xResult;
 
 		/* Remove the timer from the list. */
 		pxTimer = ( Timer_t * ) listGET_OWNER_OF_HEAD_ENTRY( pxCurrentTimerList ); /*lint !e9087 !e9079 void * is used as this macro is used with tasks and co-routines too.  Alignment is known to be fine as the type of the pointer stored and retrieved is the same. */
-		( void ) uxListRemove( &( pxTimer->xTimerListItem ) );
+		( void ) uxListRemoveUser( &( pxTimer->xTimerListItem ) );
 		traceTIMER_EXPIRED( pxTimer );
 
 		/* Execute its callback, then send a command to restart the timer if
@@ -951,8 +951,8 @@ static void prvCheckForValidListAndQueue( void )
 	{
 		if( xTimerQueue == NULL )
 		{
-			vListInitialise( &xActiveTimerList1 );
-			vListInitialise( &xActiveTimerList2 );
+			vListInitialiseUser( &xActiveTimerList1 );
+			vListInitialiseUser( &xActiveTimerList2 );
 			pxCurrentTimerList = &xActiveTimerList1;
 			pxOverflowTimerList = &xActiveTimerList2;
 

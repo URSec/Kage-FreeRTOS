@@ -389,6 +389,12 @@ PRIVILEGED_DATA static volatile UBaseType_t uxSchedulerSuspended	= ( UBaseType_t
  * Silhouette: Add a counter for xTaskCreateRestricted to record total number of tasks ever created
  */
 PRIVILEGED_DATA static uint32_t uxTaskCreatedTotal = 0U;
+PRIVILEGED_DATA static TaskHandle_t xTaskTable[configTOTAL_TASKS];
+
+/*
+ * Silhouette: Move Event list item here from TCB
+ */
+static ListItem_t xTaskEventListItemTable[configTOTAL_TASKS];
 
 #if ( configGENERATE_RUN_TIME_STATS == 1 )
 
@@ -490,7 +496,7 @@ static void prvAddCurrentTaskToDelayedList( TickType_t xTicksToWait, const BaseT
  */
 #if ( configUSE_TRACE_FACILITY == 1 )
 
-	static UBaseType_t prvListTasksWithinSingleList( TaskStatus_t *pxTaskStatusArray, List_t *pxList, eTaskState eState ) PRIVILEGED_FUNCTION;
+	static UBaseType_t prvListTasksWithinSingleList( TaskStatus_t *pxTaskStatusArray, List_t *pxList, eTaskState eState );
 
 #endif
 
@@ -575,6 +581,17 @@ static BaseType_t xVerifyTCB( const TCB_t* taskTCB );
  * data
  */
 static void vVerifyUntrustedData(void* dataUser, size_t size);
+
+/*
+ * Silhouette: Copy data from privileged space to unprivileged space
+ * similar to FreeBSD's copyout().
+ */
+static void vCopyOut(const void *priv_addr, void *unpriv_addr, size_t size);
+
+/*
+ * Silhouette: Get a TaskHandle_t from its ID
+ */
+static TaskHandle_t pvGetTaskFromID(const TaskID_t id);
 
 /*
  * freertos_tasks_c_additions_init() should only be called if the user definable
@@ -740,6 +757,7 @@ static void vVerifyUntrustedData(void* dataUser, size_t size);
 				xReturn = pdPASS;
 
 				// Silhouette: increment task counter
+				(xTaskTable[uxTaskCreatedTotal]) = (TaskHandle_t) pxNewTCB;
 				uxTaskCreatedTotal++;
 			}
 		}
@@ -963,14 +981,17 @@ UBaseType_t x;
 
 	vListInitialiseItem( &( pxNewTCB->xStateListItem ) );
 	vListInitialiseItem( &( pxNewTCB->xEventListItem ) );
+	vListInitialiseItemUser( &( xTaskEventListItemTable[uxTaskCreatedTotal] ) );
 
 	/* Set the pxNewTCB as a link back from the ListItem_t.  This is so we can get
 	back to	the containing TCB from a generic item in a list. */
 	listSET_LIST_ITEM_OWNER( &( pxNewTCB->xStateListItem ), pxNewTCB );
 
 	/* Event lists are always in priority order. */
-	listSET_LIST_ITEM_VALUE( &( pxNewTCB->xEventListItem ), ( TickType_t ) configMAX_PRIORITIES - ( TickType_t ) uxPriority ); /*lint !e961 MISRA exception as the casts are only redundant for some ports. */
-	listSET_LIST_ITEM_OWNER( &( pxNewTCB->xEventListItem ), pxNewTCB );
+//	listSET_LIST_ITEM_VALUE( &( pxNewTCB->xEventListItem ), ( TickType_t ) configMAX_PRIORITIES - ( TickType_t ) uxPriority ); /*lint !e961 MISRA exception as the casts are only redundant for some ports. */
+//	listSET_LIST_ITEM_OWNER( &( pxNewTCB->xEventListItem ), pxNewTCB );
+	listSET_LIST_ITEM_VALUE( &( xTaskEventListItemTable[uxTaskCreatedTotal] ), ( TickType_t ) configMAX_PRIORITIES - ( TickType_t ) uxPriority ); /*lint !e961 MISRA exception as the casts are only redundant for some ports. */
+	listSET_LIST_ITEM_OWNER( &( xTaskEventListItemTable[uxTaskCreatedTotal] ), pxNewTCB );
 
 	#if ( portCRITICAL_NESTING_IN_TCB == 1 )
 	{
@@ -1183,13 +1204,15 @@ static void prvAddNewTaskToReadyList( TCB_t *pxNewTCB )
 	void vTaskDelete( TaskHandle_t xTaskToDelete )
 	{
 	TCB_t *pxTCB;
+	BaseType_t xTaskID;
 		taskENTER_CRITICAL();
 		{
 			/* If null is passed in here then it is the calling task that is
 			being deleted. */
 			pxTCB = prvGetTCBFromHandle( xTaskToDelete );
 			// Silhouette: Add runtime check for pointer to TCB
-			configASSERT( xVerifyTCB(pxTCB) );
+			xTaskID = xVerifyTCB(pxTCB);
+			configASSERT( xTaskID != -1 );
 			/* Remove task from the ready list. */
 			if( uxListRemove( &( pxTCB->xStateListItem ) ) == ( UBaseType_t ) 0 )
 			{
@@ -1201,9 +1224,14 @@ static void prvAddNewTaskToReadyList( TCB_t *pxNewTCB )
 			}
 
 			/* Is the task waiting on an event also? */
-			if( listLIST_ITEM_CONTAINER( &( pxTCB->xEventListItem ) ) != NULL )
+//			if( listLIST_ITEM_CONTAINER( &( pxTCB->xEventListItem ) ) != NULL )
+//			{
+//				( void ) uxListRemove( &( pxTCB->xEventListItem ) );
+//			}
+
+			if( listLIST_ITEM_CONTAINER( &( xTaskEventListItemTable[xTaskID] ) ) != NULL )
 			{
-				( void ) uxListRemove( &( pxTCB->xEventListItem ) );
+				( void ) uxListRemoveUser( &( xTaskEventListItemTable[xTaskID] ) );
 			}
 			else
 			{
@@ -1249,7 +1277,7 @@ static void prvAddNewTaskToReadyList( TCB_t *pxNewTCB )
 
 			traceTASK_DELETE( pxTCB );
 		}
-		taskEXIT_CRITICAL();
+//		taskEXIT_CRITICAL();
 
 		/* Force a reschedule if it is the currently running task that has just
 		been deleted. */
@@ -1265,6 +1293,7 @@ static void prvAddNewTaskToReadyList( TCB_t *pxNewTCB )
 				mtCOVERAGE_TEST_MARKER();
 			}
 		}
+		taskEXIT_CRITICAL();
 	}
 
 #endif /* INCLUDE_vTaskDelete */
@@ -1276,6 +1305,8 @@ static void prvAddNewTaskToReadyList( TCB_t *pxNewTCB )
 	{
 	TickType_t xTimeToWake;
 	BaseType_t xAlreadyYielded, xShouldDelay = pdFALSE;
+
+		taskENTER_CRITICAL(); // Added by Silhouette
 
 		configASSERT( pxPreviousWakeTime );
 		configASSERT( ( xTimeIncrement > 0U ) );
@@ -1352,6 +1383,7 @@ static void prvAddNewTaskToReadyList( TCB_t *pxNewTCB )
 		{
 			mtCOVERAGE_TEST_MARKER();
 		}
+		taskEXIT_CRITICAL(); // Silhouette
 	}
 
 #endif /* INCLUDE_vTaskDelayUntil */
@@ -1362,6 +1394,8 @@ static void prvAddNewTaskToReadyList( TCB_t *pxNewTCB )
 	void vTaskDelay( const TickType_t xTicksToDelay )
 	{
 	BaseType_t xAlreadyYielded = pdFALSE;
+
+		taskENTER_CRITICAL(); // Silhouette
 
 		/* A delay time of zero just forces a reschedule. */
 		if( xTicksToDelay > ( TickType_t ) 0U )
@@ -1397,6 +1431,8 @@ static void prvAddNewTaskToReadyList( TCB_t *pxNewTCB )
 		{
 			mtCOVERAGE_TEST_MARKER();
 		}
+
+		taskEXIT_CRITICAL(); // Silhouette
 	}
 
 #endif /* INCLUDE_vTaskDelay */
@@ -1409,8 +1445,11 @@ static void prvAddNewTaskToReadyList( TCB_t *pxNewTCB )
 	eTaskState eReturn;
 	List_t const * pxStateList, *pxDelayedList, *pxOverflowedDelayedList;
 	const TCB_t * const pxTCB = xTask;
+	BaseType_t xTaskID;
 
 		configASSERT( pxTCB );
+		// Silhouette: Get task ID
+		xTaskID = xVerifyTCB( pxTCB );
 
 		if( pxTCB == pxCurrentTCB )
 		{
@@ -1440,7 +1479,7 @@ static void prvAddNewTaskToReadyList( TCB_t *pxNewTCB )
 					/* The task being queried is referenced from the suspended
 					list.  Is it genuinely suspended or is it blocked
 					indefinitely? */
-					if( listLIST_ITEM_CONTAINER( &( pxTCB->xEventListItem ) ) == NULL )
+					if( listLIST_ITEM_CONTAINER( &( xTaskEventListItemTable[xTaskID] ) ) == NULL )
 					{
 						#if( configUSE_TASK_NOTIFICATIONS == 1 )
 						{
@@ -1562,7 +1601,9 @@ static void prvAddNewTaskToReadyList( TCB_t *pxNewTCB )
 	{
 	TCB_t *pxTCB;
 	UBaseType_t uxCurrentBasePriority, uxPriorityUsedOnEntry;
-	BaseType_t xYieldRequired = pdFALSE;
+	BaseType_t xYieldRequired = pdFALSE, xTaskID;
+
+		taskENTER_CRITICAL(); // Silhouette
 
 		configASSERT( ( uxNewPriority < configMAX_PRIORITIES ) );
 
@@ -1576,13 +1617,14 @@ static void prvAddNewTaskToReadyList( TCB_t *pxNewTCB )
 			mtCOVERAGE_TEST_MARKER();
 		}
 
-		taskENTER_CRITICAL();
+//		taskENTER_CRITICAL();
 		{
 			/* If null is passed in here then it is the priority of the calling
 			task that is being changed. */
 			pxTCB = prvGetTCBFromHandle( xTask );
 			// Silhouette: Add runtime check for pointer to TCB
-			configASSERT( xVerifyTCB(pxTCB) );
+			xTaskID = xVerifyTCB(pxTCB);
+			configASSERT( xTaskID != -1 );
 
 			traceTASK_PRIORITY_SET( pxTCB, uxNewPriority );
 
@@ -1666,9 +1708,9 @@ static void prvAddNewTaskToReadyList( TCB_t *pxNewTCB )
 
 				/* Only reset the event list item value if the value is not
 				being used for anything else. */
-				if( ( listGET_LIST_ITEM_VALUE( &( pxTCB->xEventListItem ) ) & taskEVENT_LIST_ITEM_VALUE_IN_USE ) == 0UL )
+				if( ( listGET_LIST_ITEM_VALUE( &( xTaskEventListItemTable[xTaskID] ) ) & taskEVENT_LIST_ITEM_VALUE_IN_USE ) == 0UL )
 				{
-					listSET_LIST_ITEM_VALUE( &( pxTCB->xEventListItem ), ( ( TickType_t ) configMAX_PRIORITIES - ( TickType_t ) uxNewPriority ) ); /*lint !e961 MISRA exception as the casts are only redundant for some ports. */
+					listSET_LIST_ITEM_VALUE( &( xTaskEventListItemTable[xTaskID] ), ( ( TickType_t ) configMAX_PRIORITIES - ( TickType_t ) uxNewPriority ) ); /*lint !e961 MISRA exception as the casts are only redundant for some ports. */
 				}
 				else
 				{
@@ -1727,6 +1769,7 @@ static void prvAddNewTaskToReadyList( TCB_t *pxNewTCB )
 	void vTaskSuspend( TaskHandle_t xTaskToSuspend )
 	{
 	TCB_t *pxTCB;
+	BaseType_t xTaskID;
 
 		taskENTER_CRITICAL();
 		{
@@ -1735,7 +1778,8 @@ static void prvAddNewTaskToReadyList( TCB_t *pxNewTCB )
 			pxTCB = prvGetTCBFromHandle( xTaskToSuspend );
 
 			// Silhouette: Add runtime check for pointer to TCB
-			configASSERT( xVerifyTCB(pxTCB) );
+			xTaskID = xVerifyTCB(pxTCB);
+			configASSERT( xTaskID != -1 );
 
 			traceTASK_SUSPEND( pxTCB );
 
@@ -1751,9 +1795,9 @@ static void prvAddNewTaskToReadyList( TCB_t *pxNewTCB )
 			}
 
 			/* Is the task waiting on an event also? */
-			if( listLIST_ITEM_CONTAINER( &( pxTCB->xEventListItem ) ) != NULL )
+			if( listLIST_ITEM_CONTAINER( &( xTaskEventListItemTable[xTaskID] ) ) != NULL )
 			{
-				( void ) uxListRemove( &( pxTCB->xEventListItem ) );
+				( void ) uxListRemoveUser( &( xTaskEventListItemTable[xTaskID] ) );
 			}
 			else
 			{
@@ -1773,17 +1817,17 @@ static void prvAddNewTaskToReadyList( TCB_t *pxNewTCB )
 			}
 			#endif
 		}
-		taskEXIT_CRITICAL();
+//		taskEXIT_CRITICAL();
 
 		if( xSchedulerRunning != pdFALSE )
 		{
 			/* Reset the next expected unblock time in case it referred to the
 			task that is now in the Suspended state. */
-			taskENTER_CRITICAL();
+//			taskENTER_CRITICAL();
 			{
 				prvResetNextTaskUnblockTime();
 			}
-			taskEXIT_CRITICAL();
+//			taskEXIT_CRITICAL();
 		}
 		else
 		{
@@ -1821,6 +1865,7 @@ static void prvAddNewTaskToReadyList( TCB_t *pxNewTCB )
 		{
 			mtCOVERAGE_TEST_MARKER();
 		}
+		taskEXIT_CRITICAL(); // Silhouette
 	}
 
 #endif /* INCLUDE_vTaskSuspend */
@@ -1830,8 +1875,11 @@ static void prvAddNewTaskToReadyList( TCB_t *pxNewTCB )
 
 	static BaseType_t prvTaskIsTaskSuspended( const TaskHandle_t xTask )
 	{
-	BaseType_t xReturn = pdFALSE;
+	BaseType_t xReturn = pdFALSE, xTaskID;
 	const TCB_t * const pxTCB = xTask;
+
+		// Silhouette: Get Task ID
+		xTaskID = xVerifyTCB(pxTCB);
 
 		/* Accesses xPendingReadyList so must be called from a critical
 		section. */
@@ -1843,11 +1891,12 @@ static void prvAddNewTaskToReadyList( TCB_t *pxNewTCB )
 		if( listIS_CONTAINED_WITHIN( &xSuspendedTaskList, &( pxTCB->xStateListItem ) ) != pdFALSE )
 		{
 			/* Has the task already been resumed from within an ISR? */
+			// Silhouette: xPendingReadyList still uses the event list item in TCB
 			if( listIS_CONTAINED_WITHIN( &xPendingReadyList, &( pxTCB->xEventListItem ) ) == pdFALSE )
 			{
 				/* Is it in the suspended list because it is in the	Suspended
 				state, or because is is blocked with no timeout? */
-				if( listIS_CONTAINED_WITHIN( NULL, &( pxTCB->xEventListItem ) ) != pdFALSE ) /*lint !e961.  The cast is only redundant when NULL is used. */
+				if( listIS_CONTAINED_WITHIN( NULL, &( xTaskEventListItemTable[xTaskID] ) ) != pdFALSE ) /*lint !e961.  The cast is only redundant when NULL is used. */
 				{
 					xReturn = pdTRUE;
 				}
@@ -1878,17 +1927,19 @@ static void prvAddNewTaskToReadyList( TCB_t *pxNewTCB )
 	{
 	TCB_t * const pxTCB = xTaskToResume;
 
+	taskENTER_CRITICAL(); // Silhouette
+
 		/* It does not make sense to resume the calling task. */
 		configASSERT( xTaskToResume );
 
 		// Silhouette: Add runtime check for pointer to TCB
-		configASSERT( xVerifyTCB(pxTCB) );
+		configASSERT( xVerifyTCB(pxTCB) != -1 );
 
 		/* The parameter cannot be NULL as it is impossible to resume the
 		currently executing task. */
 		if( ( pxTCB != pxCurrentTCB ) && ( pxTCB != NULL ) )
 		{
-			taskENTER_CRITICAL();
+//			taskENTER_CRITICAL();
 			{
 				if( prvTaskIsTaskSuspended( pxTCB ) != pdFALSE )
 				{
@@ -1917,12 +1968,13 @@ static void prvAddNewTaskToReadyList( TCB_t *pxNewTCB )
 					mtCOVERAGE_TEST_MARKER();
 				}
 			}
-			taskEXIT_CRITICAL();
+//			taskEXIT_CRITICAL();
 		}
 		else
 		{
 			mtCOVERAGE_TEST_MARKER();
 		}
+		taskEXIT_CRITICAL(); // Silhouette
 	}
 
 #endif /* INCLUDE_vTaskSuspend */
@@ -1940,7 +1992,7 @@ static void prvAddNewTaskToReadyList( TCB_t *pxNewTCB )
 		configASSERT( xTaskToResume );
 
 		// Silhouette: Add runtime check for pointer to TCB
-		configASSERT( xVerifyTCB(pxTCB) );
+		configASSERT( xVerifyTCB(pxTCB) != -1 );
 
 		/* RTOS ports that support interrupt nesting have the concept of a
 		maximum	system call (or maximum API call) interrupt priority.
@@ -2181,7 +2233,9 @@ void vTaskSuspendAll( void )
 	BaseType_t.  Please read Richard Barry's reply in the following link to a
 	post in the FreeRTOS support forum before reporting this as a bug! -
 	http://goo.gl/wu4acr */
+	taskENTER_CRITICAL(); // Silhouette: disable exception for secure API
 	++uxSchedulerSuspended;
+	taskEXIT_CRITICAL(); // Silhouette
 }
 /*----------------------------------------------------------*/
 
@@ -2251,8 +2305,8 @@ void vTaskSuspendAll( void )
 BaseType_t xTaskResumeAll( void )
 {
 TCB_t *pxTCB = NULL;
-BaseType_t xAlreadyYielded = pdFALSE;
-
+BaseType_t xAlreadyYielded = pdFALSE, xTaskID;
+	taskENTER_CRITICAL(); // Silhouette
 	/* If uxSchedulerSuspended is zero then this function does not match a
 	previous call to vTaskSuspendAll(). */
 	configASSERT( uxSchedulerSuspended );
@@ -2262,7 +2316,7 @@ BaseType_t xAlreadyYielded = pdFALSE;
 	removed task will have been added to the xPendingReadyList.  Once the
 	scheduler has been resumed it is safe to move all the pending ready
 	tasks from this list into their appropriate ready list. */
-	taskENTER_CRITICAL();
+//	taskENTER_CRITICAL();
 	{
 		--uxSchedulerSuspended;
 
@@ -2275,6 +2329,11 @@ BaseType_t xAlreadyYielded = pdFALSE;
 				while( listLIST_IS_EMPTY( &xPendingReadyList ) == pdFALSE )
 				{
 					pxTCB = listGET_OWNER_OF_HEAD_ENTRY( ( &xPendingReadyList ) ); /*lint !e9079 void * is used as this macro is used with timers and co-routines too.  Alignment is known to be fine as the type of the pointer stored and retrieved is the same. */
+					/*
+					 * Silhouette: Remove the task's userspace event list item as well
+					 */
+					xTaskID = xVerifyTCB(pxTCB);
+					( void ) uxListRemove( &( xTaskEventListItemTable[xTaskID] ) );
 					( void ) uxListRemove( &( pxTCB->xEventListItem ) );
 					( void ) uxListRemove( &( pxTCB->xStateListItem ) );
 					prvAddTaskToReadyList( pxTCB );
@@ -2743,7 +2802,7 @@ BaseType_t xTaskIncrementTick( void )
 {
 TCB_t * pxTCB;
 TickType_t xItemValue;
-BaseType_t xSwitchRequired = pdFALSE;
+BaseType_t xSwitchRequired = pdFALSE, xTaskID;
 
 	/* Called by the portable layer each time a tick interrupt occurs.
 	Increments the tick then checks to see if the new tick value will cause any
@@ -2822,6 +2881,15 @@ BaseType_t xSwitchRequired = pdFALSE;
 					else
 					{
 						mtCOVERAGE_TEST_MARKER();
+					}
+
+					/*
+					 * Silhouette: Remove the userspace event item as well
+					 */
+					xTaskID = xVerifyTCB(pxTCB);
+					if( listLIST_ITEM_CONTAINER( &( xTaskEventListItemTable[xTaskID] ) ) != NULL )
+					{
+						( void ) uxListRemoveUser( &( xTaskEventListItemTable[xTaskID] ) );
 					}
 
 					/* Place the unblocked task into the appropriate ready
@@ -3077,7 +3145,7 @@ void vTaskSwitchContext( void )
 		traceTASK_SWITCHED_IN();
 
 		// Silhouette: Add runtime check for the TCB selected
-		configASSERT( xVerifyTCB(pxCurrentTCB) );
+		configASSERT( xVerifyTCB(pxCurrentTCB) != -1 );
 
 		/* After the new task is switched in, update the global errno. */
 		#if( configUSE_POSIX_ERRNO == 1 )
@@ -3099,10 +3167,15 @@ void vTaskSwitchContext( void )
 
 void vTaskPlaceOnEventList( List_t * const pxEventList, const TickType_t xTicksToWait )
 {
+BaseType_t xTaskID;
+	taskENTER_CRITICAL(); // Silhouette
 	configASSERT( pxEventList );
 
 	// Silhouette: Add runtime check for pointer to unprivileged data
 	vVerifyUntrustedData(pxEventList,sizeof(List_t));
+
+	// Silhouette: Get Task ID of current task
+	xTaskID = xVerifyTCB(pxCurrentTCB);
 
 	/* THIS FUNCTION MUST BE CALLED WITH EITHER INTERRUPTS DISABLED OR THE
 	SCHEDULER SUSPENDED AND THE QUEUE BEING ACCESSED LOCKED. */
@@ -3111,18 +3184,24 @@ void vTaskPlaceOnEventList( List_t * const pxEventList, const TickType_t xTicksT
 	This is placed in the list in priority order so the highest priority task
 	is the first to be woken by the event.  The queue that contains the event
 	list is locked, preventing simultaneous access from interrupts. */
-	vListInsert( pxEventList, &( pxCurrentTCB->xEventListItem ) );
+	vListInsertUser( pxEventList, &( xTaskEventListItemTable[xTaskID] ) );
 
 	prvAddCurrentTaskToDelayedList( xTicksToWait, pdTRUE );
+	taskEXIT_CRITICAL(); // Silhouette
 }
 /*-----------------------------------------------------------*/
 
 void vTaskPlaceOnUnorderedEventList( List_t * pxEventList, const TickType_t xItemValue, const TickType_t xTicksToWait )
 {
+BaseType_t xTaskID;
+	taskENTER_CRITICAL(); // Silhouette
 	configASSERT( pxEventList );
 
 	// Silhouette: Add runtime check for pointer to unprivileged data
 	vVerifyUntrustedData(pxEventList,sizeof(List_t));
+
+	// Silhouette: Get Task ID of current task
+	xTaskID = xVerifyTCB(pxCurrentTCB);
 
 	/* THIS FUNCTION MUST BE CALLED WITH THE SCHEDULER SUSPENDED.  It is used by
 	the event groups implementation. */
@@ -3131,16 +3210,17 @@ void vTaskPlaceOnUnorderedEventList( List_t * pxEventList, const TickType_t xIte
 	/* Store the item value in the event list item.  It is safe to access the
 	event list item here as interrupts won't access the event list item of a
 	task that is not in the Blocked state. */
-	listSET_LIST_ITEM_VALUE( &( pxCurrentTCB->xEventListItem ), xItemValue | taskEVENT_LIST_ITEM_VALUE_IN_USE );
+	listSET_LIST_ITEM_VALUE( &( xTaskEventListItemTable[xTaskID] ), xItemValue | taskEVENT_LIST_ITEM_VALUE_IN_USE );
 
 	/* Place the event list item of the TCB at the end of the appropriate event
 	list.  It is safe to access the event list here because it is part of an
 	event group implementation - and interrupts don't access event groups
 	directly (instead they access them indirectly by pending function calls to
 	the task level). */
-	vListInsertEnd( pxEventList, &( pxCurrentTCB->xEventListItem ) );
+	vListInsertEndUser( pxEventList, &( xTaskEventListItemTable[xTaskID] ) );
 
 	prvAddCurrentTaskToDelayedList( xTicksToWait, pdTRUE );
+	taskEXIT_CRITICAL(); // Silhouette
 }
 /*-----------------------------------------------------------*/
 
@@ -3148,9 +3228,15 @@ void vTaskPlaceOnUnorderedEventList( List_t * pxEventList, const TickType_t xIte
 
 	void vTaskPlaceOnEventListRestricted( List_t * const pxEventList, TickType_t xTicksToWait, const BaseType_t xWaitIndefinitely )
 	{
+	BaseType_t xTaskID;
+		taskENTER_CRITICAL(); // Silhouette
 		configASSERT( pxEventList );
 		// Silhouette: Add runtime check for pointer to unprivileged data
 		vVerifyUntrustedData(pxEventList,sizeof(List_t));
+
+		// Silhouette: Get Task ID of current task
+		xTaskID = xVerifyTCB(pxCurrentTCB);
+
 		/* This function should not be called by application code hence the
 		'Restricted' in its name.  It is not part of the public API.  It is
 		designed for use by kernel code, and has special calling requirements -
@@ -3161,7 +3247,7 @@ void vTaskPlaceOnUnorderedEventList( List_t * pxEventList, const TickType_t xIte
 		In this case it is assume that this is the only task that is going to
 		be waiting on this event list, so the faster vListInsertEnd() function
 		can be used in place of vListInsert. */
-		vListInsertEnd( pxEventList, &( pxCurrentTCB->xEventListItem ) );
+		vListInsertEndUser( pxEventList, &( xTaskEventListItemTable[xTaskID] ) );
 
 		/* If the task should block indefinitely then set the block time to a
 		value that will be recognised as an indefinite delay inside the
@@ -3173,6 +3259,7 @@ void vTaskPlaceOnUnorderedEventList( List_t * pxEventList, const TickType_t xIte
 
 		traceTASK_DELAY_UNTIL( ( xTickCount + xTicksToWait ) );
 		prvAddCurrentTaskToDelayedList( xTicksToWait, xWaitIndefinitely );
+		taskEXIT_CRITICAL(); // Silhouette
 	}
 
 #endif /* configUSE_TIMERS */
@@ -3181,10 +3268,10 @@ void vTaskPlaceOnUnorderedEventList( List_t * pxEventList, const TickType_t xIte
 BaseType_t xTaskRemoveFromEventList( const List_t * const pxEventList )
 {
 TCB_t *pxUnblockedTCB;
-BaseType_t xReturn;
-
-// Silhouette: Add runtime check for pointer to unprivileged data
-vVerifyUntrustedData(pxEventList,sizeof(List_t));
+BaseType_t xReturn, xTaskID;
+	taskENTER_CRITICAL(); // Silhouette
+	// Silhouette: Add runtime check for pointer to unprivileged data
+	vVerifyUntrustedData(pxEventList,sizeof(List_t));
 
 	/* THIS FUNCTION MUST BE CALLED FROM A CRITICAL SECTION.  It can also be
 	called from a critical section within an ISR. */
@@ -3201,7 +3288,12 @@ vVerifyUntrustedData(pxEventList,sizeof(List_t));
 	pxEventList is not empty. */
 	pxUnblockedTCB = listGET_OWNER_OF_HEAD_ENTRY( pxEventList ); /*lint !e9079 void * is used as this macro is used with timers and co-routines too.  Alignment is known to be fine as the type of the pointer stored and retrieved is the same. */
 	configASSERT( pxUnblockedTCB );
-	( void ) uxListRemove( &( pxUnblockedTCB->xEventListItem ) );
+
+	// Silhouette: Add runtime check for pointer to TCB
+	xTaskID = xVerifyTCB(pxUnblockedTCB);
+	configASSERT( xTaskID != -1 );
+
+	( void ) uxListRemoveUser( &( xTaskEventListItemTable[xTaskID] ) );
 
 	if( uxSchedulerSuspended == ( UBaseType_t ) pdFALSE )
 	{
@@ -3244,7 +3336,7 @@ vVerifyUntrustedData(pxEventList,sizeof(List_t));
 	{
 		xReturn = pdFALSE;
 	}
-
+	taskEXIT_CRITICAL(); // Silhouette
 	return xReturn;
 }
 /*-----------------------------------------------------------*/
@@ -3252,12 +3344,13 @@ vVerifyUntrustedData(pxEventList,sizeof(List_t));
 void vTaskRemoveFromUnorderedEventList( ListItem_t * pxEventListItem, const TickType_t xItemValue )
 {
 TCB_t *pxUnblockedTCB;
-
+BaseType_t xTaskID;
+	taskENTER_CRITICAL(); // Silhouette
 	/* THIS FUNCTION MUST BE CALLED WITH THE SCHEDULER SUSPENDED.  It is used by
 	the event flags implementation. */
 	configASSERT( uxSchedulerSuspended != pdFALSE );
-	// Silhouette: Add runtime check for pointer to unprivileged data
-	vVerifyUntrustedData(pxEventListItem,sizeof(ListItem_t));
+	// Silhouette: Add runtime check to the TCB pointed by this list item
+	configASSERT( xVerifyTCB(listGET_LIST_ITEM_OWNER( pxEventListItem ) ) != -1 );
 	/* Store the new item value in the event list. */
 	listSET_LIST_ITEM_VALUE( pxEventListItem, xItemValue | taskEVENT_LIST_ITEM_VALUE_IN_USE );
 
@@ -3265,7 +3358,12 @@ TCB_t *pxUnblockedTCB;
 	event flags. */
 	pxUnblockedTCB = listGET_LIST_ITEM_OWNER( pxEventListItem ); /*lint !e9079 void * is used as this macro is used with timers and co-routines too.  Alignment is known to be fine as the type of the pointer stored and retrieved is the same. */
 	configASSERT( pxUnblockedTCB );
-	( void ) uxListRemove( pxEventListItem );
+
+	// Silhouette: Add runtime check for pointer to TCB
+	xTaskID = xVerifyTCB(pxUnblockedTCB);
+	configASSERT( xTaskID != -1 );
+
+	( void ) uxListRemoveUser( pxEventListItem );
 
 	/* Remove the task from the delayed list and add it to the ready list.  The
 	scheduler is suspended so interrupts will not be accessing the ready
@@ -3281,6 +3379,7 @@ TCB_t *pxUnblockedTCB;
 		occurs immediately that the scheduler is resumed (unsuspended). */
 		xYieldPending = pdTRUE;
 	}
+	taskEXIT_CRITICAL(); // Silhouette
 }
 /*-----------------------------------------------------------*/
 
@@ -3369,7 +3468,9 @@ BaseType_t xReturn;
 
 void vTaskMissedYield( void )
 {
+	taskENTER_CRITICAL(); // Silhouette
 	xYieldPending = pdTRUE;
+	taskEXIT_CRITICAL(); // Silhouette
 }
 /*-----------------------------------------------------------*/
 
@@ -3406,7 +3507,7 @@ void vTaskMissedYield( void )
 		{
 			pxTCB = xTask;
 			// Silhouette: Add runtime check for pointer to TCB
-			configASSERT( xVerifyTCB(pxTCB) );
+			configASSERT( xVerifyTCB(pxTCB) != -1 );
 			pxTCB->uxTaskNumber = uxHandle;
 		}
 	}
@@ -3627,16 +3728,17 @@ static portTASK_FUNCTION( prvIdleTask, pvParameters )
 	{
 
 	TCB_t *pxTCB;
-
+		taskENTER_CRITICAL(); // Silhouette
 		/* If null is passed in here then we are modifying the MPU settings of
 		the calling task. */
 		pxTCB = prvGetTCBFromHandle( xTaskToModify );
 		// Silhouette: Add runtime check for pointer to TCB
-		configASSERT( xVerifyTCB(pxTCB) );
+		configASSERT( xVerifyTCB(pxTCB) != -1 );
 		// Silhouette: Add runtime check for pointer to unprivileged data
 		vVerifyUntrustedData(xRegions,sizeof(xRegions) * portNUM_CONFIGURABLE_REGIONS);
 
 		vPortStoreTaskMPUSettings( &( pxTCB->xMPUSettings ), xRegions, pxTCB->pxStack, 0 );
+		taskEXIT_CRITICAL(); // Silhouette
 	}
 
 #endif /* portUSING_MPU_WRAPPERS */
@@ -3708,9 +3810,13 @@ static void prvCheckTasksWaitingTermination( void )
 	void vTaskGetInfo( TaskHandle_t xTask, TaskStatus_t *pxTaskStatus, BaseType_t xGetFreeStackSpace, eTaskState eState )
 	{
 	TCB_t *pxTCB;
+	BaseType_t xTaskID;
 
 		/* xTask is NULL then get the state of the calling task. */
 		pxTCB = prvGetTCBFromHandle( xTask );
+
+		// Silhouette: get task ID
+		xTaskID = xVerifyTCB(pxTCB);
 
 		pxTaskStatus->xHandle = ( TaskHandle_t ) pxTCB;
 		pxTaskStatus->pcTaskName = ( const char * ) &( pxTCB->pcTaskName [ 0 ] );
@@ -3760,7 +3866,8 @@ static void prvCheckTasksWaitingTermination( void )
 					{
 						vTaskSuspendAll();
 						{
-							if( listLIST_ITEM_CONTAINER( &( pxTCB->xEventListItem ) ) != NULL )
+							if( listLIST_ITEM_CONTAINER( &( pxTCB->xEventListItem ) ) != NULL ||
+								listLIST_ITEM_CONTAINER( &( xTaskEventListItemTable[xTaskID] ) ) != NULL )
 							{
 								pxTaskStatus->eCurrentState = eBlocked;
 							}
@@ -3929,6 +4036,15 @@ static void prvCheckTasksWaitingTermination( void )
 		want to allocate and clean RAM statically. */
 		portCLEAN_UP_TCB( pxTCB );
 
+		/* Silhouette: Remove the task from TCB list */
+		int i;
+		for (i = 0; i < uxTaskCreatedTotal; i++){
+			if (xTaskTable[i] == pxTCB){
+				xTaskTable[i] = NULL;
+				break;
+			}
+		}
+
 		/* Free up the memory allocated by the scheduler for the task.  It is up
 		to the task to free any memory allocated at the application level. */
 		#if ( configUSE_NEWLIB_REENTRANT == 1 )
@@ -4050,15 +4166,16 @@ TCB_t *pxTCB;
 	BaseType_t xTaskPriorityInherit( TaskHandle_t const pxMutexHolder )
 	{
 	TCB_t * const pxMutexHolderTCB = pxMutexHolder;
-	BaseType_t xReturn = pdFALSE;
-
+	BaseType_t xReturn = pdFALSE, xTaskID;
+		taskENTER_CRITICAL(); // Silhouette
 		/* If the mutex was given back by an interrupt while the queue was
 		locked then the mutex holder might now be NULL.  _RB_ Is this still
 		needed as interrupts can no longer use mutexes? */
 		if( pxMutexHolder != NULL )
 		{
 			// Silhouette: Add runtime check for pointer to TCB
-			configASSERT( xVerifyTCB(pxMutexHolderTCB) );
+			xTaskID = xVerifyTCB(pxMutexHolderTCB);
+			configASSERT( xTaskID != -1);
 			/* If the holder of the mutex has a priority below the priority of
 			the task attempting to obtain the mutex then it will temporarily
 			inherit the priority of the task attempting to obtain the mutex. */
@@ -4067,9 +4184,9 @@ TCB_t *pxTCB;
 				/* Adjust the mutex holder state to account for its new
 				priority.  Only reset the event list item value if the value is
 				not being used for anything else. */
-				if( ( listGET_LIST_ITEM_VALUE( &( pxMutexHolderTCB->xEventListItem ) ) & taskEVENT_LIST_ITEM_VALUE_IN_USE ) == 0UL )
+				if( ( listGET_LIST_ITEM_VALUE( &( xTaskEventListItemTable[xTaskID] ) ) & taskEVENT_LIST_ITEM_VALUE_IN_USE ) == 0UL )
 				{
-					listSET_LIST_ITEM_VALUE( &( pxMutexHolderTCB->xEventListItem ), ( TickType_t ) configMAX_PRIORITIES - ( TickType_t ) pxCurrentTCB->uxPriority ); /*lint !e961 MISRA exception as the casts are only redundant for some ports. */
+					listSET_LIST_ITEM_VALUE( &( xTaskEventListItemTable[xTaskID] ), ( TickType_t ) configMAX_PRIORITIES - ( TickType_t ) pxCurrentTCB->uxPriority ); /*lint !e961 MISRA exception as the casts are only redundant for some ports. */
 				}
 				else
 				{
@@ -4127,6 +4244,7 @@ TCB_t *pxTCB;
 		{
 			mtCOVERAGE_TEST_MARKER();
 		}
+		taskEXIT_CRITICAL(); // Silhouette
 
 		return xReturn;
 	}
@@ -4139,12 +4257,13 @@ TCB_t *pxTCB;
 	BaseType_t xTaskPriorityDisinherit( TaskHandle_t const pxMutexHolder )
 	{
 	TCB_t * const pxTCB = pxMutexHolder;
-	BaseType_t xReturn = pdFALSE;
-
+	BaseType_t xReturn = pdFALSE, xTaskID;
+		taskENTER_CRITICAL(); // Silhouette
 		if( pxMutexHolder != NULL )
 		{
 			// Silhouette: Add runtime check for pointer to TCB
-			configASSERT( xVerifyTCB(pxTCB) );
+			xTaskID = xVerifyTCB(pxTCB);
+			configASSERT( xTaskID != -1 );
 			/* A task can only have an inherited priority if it holds the mutex.
 			If the mutex is held by a task then it cannot be given from an
 			interrupt, and if a mutex is given by the holding task then it must
@@ -4182,7 +4301,7 @@ TCB_t *pxTCB;
 					/* Reset the event list item value.  It cannot be in use for
 					any other purpose if this task is running, and it must be
 					running to give back the mutex. */
-					listSET_LIST_ITEM_VALUE( &( pxTCB->xEventListItem ), ( TickType_t ) configMAX_PRIORITIES - ( TickType_t ) pxTCB->uxPriority ); /*lint !e961 MISRA exception as the casts are only redundant for some ports. */
+					listSET_LIST_ITEM_VALUE( &( xTaskEventListItemTable[xTaskID] ), ( TickType_t ) configMAX_PRIORITIES - ( TickType_t ) pxTCB->uxPriority ); /*lint !e961 MISRA exception as the casts are only redundant for some ports. */
 					prvAddTaskToReadyList( pxTCB );
 
 					/* Return true to indicate that a context switch is required.
@@ -4209,7 +4328,7 @@ TCB_t *pxTCB;
 		{
 			mtCOVERAGE_TEST_MARKER();
 		}
-
+		taskEXIT_CRITICAL(); // Silhouette
 		return xReturn;
 	}
 
@@ -4223,12 +4342,17 @@ TCB_t *pxTCB;
 	TCB_t * const pxTCB = pxMutexHolder;
 	UBaseType_t uxPriorityUsedOnEntry, uxPriorityToUse;
 	const UBaseType_t uxOnlyOneMutexHeld = ( UBaseType_t ) 1;
-
+	BaseType_t xTaskID;
+		taskENTER_CRITICAL(); // Silhouette
 		if( pxMutexHolder != NULL )
 		{
 			/* If pxMutexHolder is not NULL then the holder must hold at least
 			one mutex. */
 			configASSERT( pxTCB->uxMutexesHeld );
+
+			// Silhouette: Verify TCB
+			xTaskID = xVerifyTCB(pxTCB);
+			configASSERT( xTaskID != -1 );
 
 			/* Determine the priority to which the priority of the task that
 			holds the mutex should be set.  This will be the greater of the
@@ -4266,9 +4390,9 @@ TCB_t *pxTCB;
 
 					/* Only reset the event list item value if the value is not
 					being used for anything else. */
-					if( ( listGET_LIST_ITEM_VALUE( &( pxTCB->xEventListItem ) ) & taskEVENT_LIST_ITEM_VALUE_IN_USE ) == 0UL )
+					if( ( listGET_LIST_ITEM_VALUE( &( xTaskEventListItemTable[xTaskID] ) ) & taskEVENT_LIST_ITEM_VALUE_IN_USE ) == 0UL )
 					{
-						listSET_LIST_ITEM_VALUE( &( pxTCB->xEventListItem ), ( TickType_t ) configMAX_PRIORITIES - ( TickType_t ) uxPriorityToUse ); /*lint !e961 MISRA exception as the casts are only redundant for some ports. */
+						listSET_LIST_ITEM_VALUE( &( xTaskEventListItemTable[xTaskID] ), ( TickType_t ) configMAX_PRIORITIES - ( TickType_t ) uxPriorityToUse ); /*lint !e961 MISRA exception as the casts are only redundant for some ports. */
 					}
 					else
 					{
@@ -4313,6 +4437,7 @@ TCB_t *pxTCB;
 		{
 			mtCOVERAGE_TEST_MARKER();
 		}
+		taskEXIT_CRITICAL(); // Silhouette
 	}
 
 #endif /* configUSE_MUTEXES */
@@ -4637,11 +4762,11 @@ TickType_t uxTaskResetEventItemValue( void )
 {
 TickType_t uxReturn;
 
-	uxReturn = listGET_LIST_ITEM_VALUE( &( pxCurrentTCB->xEventListItem ) );
+	uxReturn = listGET_LIST_ITEM_VALUE( &( xTaskEventListItemTable[xVerifyTCB(pxCurrentTCB)] ) );
 
 	/* Reset the event list item to its normal value - so it can be used with
 	queues and semaphores. */
-	listSET_LIST_ITEM_VALUE( &( pxCurrentTCB->xEventListItem ), ( ( TickType_t ) configMAX_PRIORITIES - ( TickType_t ) pxCurrentTCB->uxPriority ) ); /*lint !e961 MISRA exception as the casts are only redundant for some ports. */
+	listSET_LIST_ITEM_VALUE( &( xTaskEventListItemTable[xVerifyTCB(pxCurrentTCB)] ), ( ( TickType_t ) configMAX_PRIORITIES - ( TickType_t ) pxCurrentTCB->uxPriority ) ); /*lint !e961 MISRA exception as the casts are only redundant for some ports. */
 
 	return uxReturn;
 }
@@ -4651,13 +4776,14 @@ TickType_t uxReturn;
 
 	TaskHandle_t pvTaskIncrementMutexHeldCount( void )
 	{
+		taskENTER_CRITICAL(); // Silhouette
 		/* If xSemaphoreCreateMutex() is called before any tasks have been created
 		then pxCurrentTCB will be NULL. */
 		if( pxCurrentTCB != NULL )
 		{
 			( pxCurrentTCB->uxMutexesHeld )++;
 		}
-
+		taskEXIT_CRITICAL(); // Silhouette
 		return pxCurrentTCB;
 	}
 
@@ -4671,7 +4797,7 @@ TickType_t uxReturn;
 	uint32_t ulReturn;
 
 		taskENTER_CRITICAL();
-		{
+//		{
 			/* Only block if the notification count is not already non-zero. */
 			if( pxCurrentTCB->ulNotifiedValue == 0UL )
 			{
@@ -4698,11 +4824,11 @@ TickType_t uxReturn;
 			{
 				mtCOVERAGE_TEST_MARKER();
 			}
-		}
-		taskEXIT_CRITICAL();
-
-		taskENTER_CRITICAL();
-		{
+//		}
+//		taskEXIT_CRITICAL();
+//
+//		taskENTER_CRITICAL();
+//		{
 			traceTASK_NOTIFY_TAKE();
 			ulReturn = pxCurrentTCB->ulNotifiedValue;
 
@@ -4723,7 +4849,7 @@ TickType_t uxReturn;
 			}
 
 			pxCurrentTCB->ucNotifyState = taskNOT_WAITING_NOTIFICATION;
-		}
+//		}
 		taskEXIT_CRITICAL();
 
 		return ulReturn;
@@ -4739,7 +4865,7 @@ TickType_t uxReturn;
 	BaseType_t xReturn;
 
 		taskENTER_CRITICAL();
-		{
+//		{
 			/* Only block if a notification is not already pending. */
 			if( pxCurrentTCB->ucNotifyState != taskNOTIFICATION_RECEIVED )
 			{
@@ -4771,11 +4897,11 @@ TickType_t uxReturn;
 			{
 				mtCOVERAGE_TEST_MARKER();
 			}
-		}
-		taskEXIT_CRITICAL();
-
-		taskENTER_CRITICAL();
-		{
+//		}
+//		taskEXIT_CRITICAL();
+//
+//		taskENTER_CRITICAL();
+//		{
 			traceTASK_NOTIFY_WAIT();
 
 			if( pulNotificationValue != NULL )
@@ -4805,7 +4931,7 @@ TickType_t uxReturn;
 			}
 
 			pxCurrentTCB->ucNotifyState = taskNOT_WAITING_NOTIFICATION;
-		}
+//		}
 		taskEXIT_CRITICAL();
 
 		return xReturn;
@@ -4819,16 +4945,17 @@ TickType_t uxReturn;
 	BaseType_t xTaskGenericNotify( TaskHandle_t xTaskToNotify, uint32_t ulValue, eNotifyAction eAction, uint32_t *pulPreviousNotificationValue )
 	{
 	TCB_t * pxTCB;
-	BaseType_t xReturn = pdPASS;
+	BaseType_t xReturn = pdPASS, xTaskID;
 	uint8_t ucOriginalNotifyState;
-
+		taskENTER_CRITICAL(); // Silhouette
 		configASSERT( xTaskToNotify );
 		pxTCB = xTaskToNotify;
 
 		// Silhouette: Add runtime check for pointer to TCB
-		configASSERT( xVerifyTCB(pxTCB) );
+		xTaskID = xVerifyTCB(pxTCB);
+		configASSERT( xTaskID != -1 );
 
-		taskENTER_CRITICAL();
+//		taskENTER_CRITICAL();
 		{
 			if( pulPreviousNotificationValue != NULL )
 			{
@@ -4892,6 +5019,7 @@ TickType_t uxReturn;
 
 				/* The task should not have been on an event list. */
 				configASSERT( listLIST_ITEM_CONTAINER( &( pxTCB->xEventListItem ) ) == NULL );
+				configASSERT( listLIST_ITEM_CONTAINER( &( xTaskEventListItemTable[xTaskID] ) ) == NULL );
 
 				#if( configUSE_TICKLESS_IDLE != 0 )
 				{
@@ -4939,7 +5067,7 @@ TickType_t uxReturn;
 	{
 	TCB_t * pxTCB;
 	uint8_t ucOriginalNotifyState;
-	BaseType_t xReturn = pdPASS;
+	BaseType_t xReturn = pdPASS, xTaskID;
 	UBaseType_t uxSavedInterruptStatus;
 
 		configASSERT( xTaskToNotify );
@@ -4965,7 +5093,8 @@ TickType_t uxReturn;
 		pxTCB = xTaskToNotify;
 
 		// Silhouette: Add runtime check for pointer to TCB
-		configASSERT( xVerifyTCB(pxTCB) );
+		xTaskID = xVerifyTCB(pxTCB);
+		configASSERT( xTaskID != -1 );
 
 		uxSavedInterruptStatus = portSET_INTERRUPT_MASK_FROM_ISR();
 		{
@@ -5026,6 +5155,7 @@ TickType_t uxReturn;
 			{
 				/* The task should not have been on an event list. */
 				configASSERT( listLIST_ITEM_CONTAINER( &( pxTCB->xEventListItem ) ) == NULL );
+				configASSERT( listLIST_ITEM_CONTAINER( &( xTaskEventListItemTable[xTaskID] ) ) == NULL );
 
 				if( uxSchedulerSuspended == ( UBaseType_t ) pdFALSE )
 				{
@@ -5074,6 +5204,7 @@ TickType_t uxReturn;
 	TCB_t * pxTCB;
 	uint8_t ucOriginalNotifyState;
 	UBaseType_t uxSavedInterruptStatus;
+	BaseType_t xTaskID;
 
 		configASSERT( xTaskToNotify );
 
@@ -5098,7 +5229,8 @@ TickType_t uxReturn;
 		pxTCB = xTaskToNotify;
 
 		// Silhouette: Add runtime check for pointer to TCB
-		configASSERT( xVerifyTCB(pxTCB) );
+		xTaskID = xVerifyTCB(pxTCB);
+		configASSERT( xTaskID != -1 );
 
 		uxSavedInterruptStatus = portSET_INTERRUPT_MASK_FROM_ISR();
 		{
@@ -5117,6 +5249,7 @@ TickType_t uxReturn;
 			{
 				/* The task should not have been on an event list. */
 				configASSERT( listLIST_ITEM_CONTAINER( &( pxTCB->xEventListItem ) ) == NULL );
+				configASSERT( listLIST_ITEM_CONTAINER( &( xTaskEventListItemTable[xTaskID] ) ) == NULL );
 
 				if( uxSchedulerSuspended == ( UBaseType_t ) pdFALSE )
 				{
@@ -5165,14 +5298,14 @@ TickType_t uxReturn;
 	{
 	TCB_t *pxTCB;
 	BaseType_t xReturn;
-
+		taskENTER_CRITICAL(); // Silhouette
 		/* If null is passed in here then it is the calling task that is having
 		its notification state cleared. */
 		pxTCB = prvGetTCBFromHandle( xTask );
 		// Silhouette: Add runtime check for pointer to TCB
-		configASSERT( xVerifyTCB(pxTCB) );
+		configASSERT( xVerifyTCB(pxTCB) != -1 );
 
-		taskENTER_CRITICAL();
+//		taskENTER_CRITICAL();
 		{
 			if( pxTCB->ucNotifyState == taskNOTIFICATION_RECEIVED )
 			{
@@ -5342,61 +5475,131 @@ void printMPUConfig( uint32_t regionNum ) PRIVILEGED_FUNCTION
 /*-----------------------------------------------------------*/
 static BaseType_t xVerifyTCB(const TCB_t* taskTCB)
 {
-	// Silhouette: Define kernel stack regions
-	extern uint32_t __privileged_data_start__[];
-	extern uint32_t __privileged_data_end__[];
-
-	struct xLIST * listParent;
-
-
-	// Check if the pointer is within privileged_data region
-	if ((uint32_t) taskTCB < ( uint32_t ) __privileged_data_start__ ||
-		(uint32_t) taskTCB >= ( uint32_t ) __privileged_data_end__ ){
-		return pdFAIL;
+	// Silhouette: Iterate through the TCB list to see if taskTCB is real
+	int i;
+	for(i = 0; i < uxTaskCreatedTotal; i++){
+		if (xTaskTable[i] == taskTCB){
+			return i;
+		}
 	}
-
-	// Check if the pointed TCB's list item matches the TCB itself
-	if (taskTCB->xStateListItem.pvOwner != taskTCB){
-		return pdFAIL;
-	}
-
-	// Check if the TCB's list item is valid
-	if (taskTCB->xStateListItem.xListItemIntegrityValue1 != pdINTEGRITY_CHECK_VALUE ||
-		taskTCB->xStateListItem.xListItemIntegrityValue2 != pdINTEGRITY_CHECK_VALUE){
-		return pdFAIL;
-	}
-
-	// Check if the list item really points a TCB
-	listParent = taskTCB->xStateListItem.pvContainer;
-	if (listParent == &pxReadyTasksLists[taskTCB->uxBasePriority] ||
-		listParent == pxDelayedTaskList ||
-		listParent == pxOverflowDelayedTaskList ||
-		listParent == &xPendingReadyList ||
-		listParent == &xSuspendedTaskList){
-		return pdPASS;
-	}
-
-	return pdFAIL;
+	return -1;
+//	// Silhouette: Define kernel stack regions
+//	extern uint32_t __privileged_data_start__[];
+//	extern uint32_t __privileged_data_end__[];
+//
+//	struct xLIST * listParent;
+//
+//
+//	// Check if the pointer is within privileged_data region
+//	if ((uint32_t) taskTCB < ( uint32_t ) __privileged_data_start__ ||
+//		(uint32_t) taskTCB >= ( uint32_t ) __privileged_data_end__ ){
+//		return pdFAIL;
+//	}
+//
+//	// Check if the pointed TCB's list item matches the TCB itself
+//	if (taskTCB->xStateListItem.pvOwner != taskTCB){
+//		return pdFAIL;
+//	}
+//
+//	// Check if the TCB's list item is valid
+//	if (taskTCB->xStateListItem.xListItemIntegrityValue1 != pdINTEGRITY_CHECK_VALUE ||
+//		taskTCB->xStateListItem.xListItemIntegrityValue2 != pdINTEGRITY_CHECK_VALUE){
+//		return pdFAIL;
+//	}
+//
+//	// Check if the list item really points a TCB
+//	listParent = taskTCB->xStateListItem.pvContainer;
+//	if (listParent == &pxReadyTasksLists[taskTCB->uxBasePriority] ||
+//		listParent == pxDelayedTaskList ||
+//		listParent == pxOverflowDelayedTaskList ||
+//		listParent == &xPendingReadyList ||
+//		listParent == &xSuspendedTaskList){
+//		return pdPASS;
+//	}
+//
+//	return pdFAIL;
 }
 
 /*-----------------------------------------------------------*/
 static void vVerifyUntrustedData(void* dataUser, size_t size)
 {
-	// Define some 1-byte garbage data to write to dataUser
-	const char gar = 'Z';
-	// Backup data
-	void* dataTemp = pvPortMallocUser(size);
-	memcpy(dataTemp, dataUser, size);
+	// Silhouette: Define kernel stack regions
+	extern uint32_t __FLASH_segment_start__[];
+	extern uint32_t __FLASH_segment_end__[];
+	extern uint32_t __SRAM_segment_start__[];
+	extern uint32_t __SRAM_segment_end__[];
+	extern uint32_t __privileged_data_start__[];
+	extern uint32_t __privileged_data_end__[];
+	extern uint32_t __data_region_start__[];
+	extern uint32_t __data_region_end__[];
+	extern uint32_t __task_stack_start__[];
+	extern uint32_t __task_stack_end__[];
+	extern uint32_t __kstack_start__[];
+	extern uint32_t __SS_segment_start__[];
+	extern uint32_t __SS_segment_end__[];
 
-	// Try to write to the pointer to see if it triggers MemManage fault
-	unsigned i = 0;
-	for (i = 0; i < size; i++){
-		(( char * )dataUser)[i] = gar;
+	// If the pointer is on current task's stack then it's safe
+	if ((uint32_t) (dataUser + size) >= (uint32_t) pxCurrentTCB->pxStack &&
+		(uint32_t) (dataUser) < (uint32_t) (pxCurrentTCB->pxStack + STACK_SIZE_IN_BYTES)){
+		return;
 	}
 
-	// Restore original data
-	memcpy(dataUser, dataTemp, size);
+	// Check if the pointer is within privileged_data region
+	if ((uint32_t) (dataUser + size) >= ( uint32_t ) __privileged_data_start__ &&
+		(uint32_t) (dataUser) < ( uint32_t ) __privileged_data_end__ ){
+		configASSERT( pdFAIL );
+	}
 
-	// Free temp pointer
-	vPortFreeUser(dataTemp);
+	// Check if the pointer is within task stack and shadow stack region
+	if ((uint32_t) (dataUser + size) >= ( uint32_t ) __task_stack_start__ &&
+		(uint32_t) (dataUser) < ( uint32_t ) __task_stack_end__ ){
+		configASSERT( pdFAIL );
+	}
+
+	// Check if the pointer is within task stack and shadow stack region
+	if ((uint32_t) (dataUser + size) >= ( uint32_t ) __SS_segment_start__ &&
+		(uint32_t) (dataUser) < ( uint32_t ) __SS_segment_end__ ){
+		configASSERT( pdFAIL );
+	}
+//	// Define some 1-byte garbage data to write to dataUser
+//	const char gar = 'Z';
+//	// Backup data
+//	void* dataTemp = pvPortMallocUser(size);
+//	memcpy(dataTemp, dataUser, size);
+//
+//	// Try to write to the pointer to see if it triggers MemManage fault
+//	unsigned i = 0;
+//	for (i = 0; i < size; i++){
+//		(( char * )dataUser)[i] = gar;
+//	}
+//
+//	// Restore original data
+//	memcpy(dataUser, dataTemp, size);
+//
+//	// Free temp pointer
+//	vPortFreeUser(dataTemp);
+}
+
+/*-----------------------------------------------------------*/
+static void vCopyOut(const void *priv_addr, void *unpriv_addr, size_t size)
+{
+	int i;
+	for (i = 0; i < size; i++){
+		// Cast both types because sizeof(uint8_t) is 1
+		*((uint8_t*) unpriv_addr + i) = *((uint8_t*) priv_addr);
+	}
+}
+
+/*-----------------------------------------------------------*/
+static TaskHandle_t pvGetTaskFromID(const TaskID_t id)
+{
+	TaskHandle_t pvReturn = NULL;
+
+	// Fault if id is larger than total number of tasks
+	configASSERT( id < uxTaskCreatedTotal );
+
+	if (id >= 0){
+		pvReturn = xTaskTable[id];
+	}
+	return pvReturn;
 }

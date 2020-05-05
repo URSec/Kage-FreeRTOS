@@ -69,6 +69,12 @@ extern "C" {
 struct tskTaskControlBlock; /* The old naming convention is used to prevent breaking kernel aware debuggers. */
 typedef struct tskTaskControlBlock* TaskHandle_t;
 
+
+/*
+ * Silhouette: Mask each task to an ID
+ */
+typedef int32_t TaskID_t;
+
 /*
  * Defines the prototype to which the application task hook function must
  * conform.
@@ -2310,7 +2316,7 @@ void vTaskSwitchContext( void ) PRIVILEGED_FUNCTION __attribute__((used));
  * THESE FUNCTIONS MUST NOT BE USED FROM APPLICATION CODE.  THEY ARE USED BY
  * THE EVENT BITS MODULE.
  */
-TickType_t uxTaskResetEventItemValue( void ) PRIVILEGED_FUNCTION;
+TickType_t uxTaskResetEventItemValue( void );
 
 /*
  * Return the handle of the calling task.

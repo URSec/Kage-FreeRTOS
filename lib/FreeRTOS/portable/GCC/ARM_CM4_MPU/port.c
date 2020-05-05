@@ -555,6 +555,9 @@ void xPortPendSVHandler( void )
 
 	__asm volatile
 	(
+		"	msr basepri, r0						\n" /* Silhouette: Make entire handler non-interruptible */
+		"	dsb									\n"
+		"	isb									\n"
 		"	mrs r0, psp							\n"
 		"	isb									\n"
 		"										\n"
@@ -573,9 +576,9 @@ void xPortPendSVHandler( void )
 		"										\n"
 		"	stmdb sp!, {r0, r3}					\n"
 		"	mov r0, %0							\n"
-		"	msr basepri, r0						\n"
-		"	dsb									\n"
-		"	isb									\n"
+//		"	msr basepri, r0						\n"
+//		"	dsb									\n"
+//		"	isb									\n"
 		"	bl vTaskSwitchContext				\n"
 		"	mov r0, #0							\n"
 		"	msr basepri, r0						\n"
