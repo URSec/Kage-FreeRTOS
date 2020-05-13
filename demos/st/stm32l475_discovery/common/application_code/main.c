@@ -210,8 +210,8 @@ void vApplicationDaemonTaskStartupHook( void )
 //        configASSERT( xWifiStatus == eWiFiSuccess );
 //    }
 
-//	start_microbenchmark();
-	start_beebsbenchmark();
+	start_microbenchmark();
+//	start_beebsbenchmark();
 }
 /*-----------------------------------------------------------*/
 
