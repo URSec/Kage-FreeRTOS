@@ -346,12 +346,15 @@ uint8_t ucSVCNumber;
 // Silhouette: Helper function to spill processor states
 static inline void prvSpillContext( uint32_t *sp )
 {
+	UBaseType_t uxSavedInterruptStatus;
+	uxSavedInterruptStatus = portSET_INTERRUPT_MASK_FROM_ISR();
 	// spill 8 stack frames: r0, r1, r2, r3, r12, r14, return addr, xPSR
 	int index;
 	for (index = 0; index < 8; index++)
 	{
 		sp[index + STACK_SIZE] = sp[index];
 	}
+	portCLEAR_INTERRUPT_MASK_FROM_ISR( uxSavedInterruptStatus );
 }
 
 /*-----------------------------------------------------------*/
@@ -361,10 +364,13 @@ static inline void prvRestoreContext( uint32_t *sp )
 {
 	// restore 8 stack frames: r0, r1, r2, r3, r12, r14, return addr, xPSR
 	int index;
+	UBaseType_t uxSavedInterruptStatus;
+	uxSavedInterruptStatus = portSET_INTERRUPT_MASK_FROM_ISR();
 	for (index = 0; index < 8; index++)
 	{
 		sp[index] = sp[index + STACK_SIZE];
 	}
+	portCLEAR_INTERRUPT_MASK_FROM_ISR( uxSavedInterruptStatus );
 }
 
 /*-----------------------------------------------------------*/

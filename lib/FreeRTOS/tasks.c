@@ -1306,8 +1306,6 @@ static void prvAddNewTaskToReadyList( TCB_t *pxNewTCB )
 	TickType_t xTimeToWake;
 	BaseType_t xAlreadyYielded, xShouldDelay = pdFALSE;
 
-		taskENTER_CRITICAL(); // Added by Silhouette
-
 		configASSERT( pxPreviousWakeTime );
 		configASSERT( ( xTimeIncrement > 0U ) );
 		configASSERT( uxSchedulerSuspended == 0 );
@@ -1383,7 +1381,6 @@ static void prvAddNewTaskToReadyList( TCB_t *pxNewTCB )
 		{
 			mtCOVERAGE_TEST_MARKER();
 		}
-		taskEXIT_CRITICAL(); // Silhouette
 	}
 
 #endif /* INCLUDE_vTaskDelayUntil */
@@ -1394,8 +1391,6 @@ static void prvAddNewTaskToReadyList( TCB_t *pxNewTCB )
 	void vTaskDelay( const TickType_t xTicksToDelay )
 	{
 	BaseType_t xAlreadyYielded = pdFALSE;
-
-		taskENTER_CRITICAL(); // Silhouette
 
 		/* A delay time of zero just forces a reschedule. */
 		if( xTicksToDelay > ( TickType_t ) 0U )
@@ -1431,8 +1426,6 @@ static void prvAddNewTaskToReadyList( TCB_t *pxNewTCB )
 		{
 			mtCOVERAGE_TEST_MARKER();
 		}
-
-		taskEXIT_CRITICAL(); // Silhouette
 	}
 
 #endif /* INCLUDE_vTaskDelay */
@@ -1603,8 +1596,6 @@ static void prvAddNewTaskToReadyList( TCB_t *pxNewTCB )
 	UBaseType_t uxCurrentBasePriority, uxPriorityUsedOnEntry;
 	BaseType_t xYieldRequired = pdFALSE, xTaskID;
 
-		taskENTER_CRITICAL(); // Silhouette
-
 		configASSERT( ( uxNewPriority < configMAX_PRIORITIES ) );
 
 		/* Ensure the new priority is valid. */
@@ -1617,7 +1608,7 @@ static void prvAddNewTaskToReadyList( TCB_t *pxNewTCB )
 			mtCOVERAGE_TEST_MARKER();
 		}
 
-//		taskENTER_CRITICAL();
+		taskENTER_CRITICAL();
 		{
 			/* If null is passed in here then it is the priority of the calling
 			task that is being changed. */
@@ -1817,17 +1808,17 @@ static void prvAddNewTaskToReadyList( TCB_t *pxNewTCB )
 			}
 			#endif
 		}
-//		taskEXIT_CRITICAL();
+		taskEXIT_CRITICAL();
 
 		if( xSchedulerRunning != pdFALSE )
 		{
 			/* Reset the next expected unblock time in case it referred to the
 			task that is now in the Suspended state. */
-//			taskENTER_CRITICAL();
+			taskENTER_CRITICAL();
 			{
 				prvResetNextTaskUnblockTime();
 			}
-//			taskEXIT_CRITICAL();
+			taskEXIT_CRITICAL();
 		}
 		else
 		{
@@ -1865,7 +1856,6 @@ static void prvAddNewTaskToReadyList( TCB_t *pxNewTCB )
 		{
 			mtCOVERAGE_TEST_MARKER();
 		}
-		taskEXIT_CRITICAL(); // Silhouette
 	}
 
 #endif /* INCLUDE_vTaskSuspend */
@@ -1927,8 +1917,6 @@ static void prvAddNewTaskToReadyList( TCB_t *pxNewTCB )
 	{
 	TCB_t * const pxTCB = xTaskToResume;
 
-	taskENTER_CRITICAL(); // Silhouette
-
 		/* It does not make sense to resume the calling task. */
 		configASSERT( xTaskToResume );
 
@@ -1939,7 +1927,7 @@ static void prvAddNewTaskToReadyList( TCB_t *pxNewTCB )
 		currently executing task. */
 		if( ( pxTCB != pxCurrentTCB ) && ( pxTCB != NULL ) )
 		{
-//			taskENTER_CRITICAL();
+			taskENTER_CRITICAL();
 			{
 				if( prvTaskIsTaskSuspended( pxTCB ) != pdFALSE )
 				{
@@ -1968,13 +1956,12 @@ static void prvAddNewTaskToReadyList( TCB_t *pxNewTCB )
 					mtCOVERAGE_TEST_MARKER();
 				}
 			}
-//			taskEXIT_CRITICAL();
+			taskEXIT_CRITICAL();
 		}
 		else
 		{
 			mtCOVERAGE_TEST_MARKER();
 		}
-		taskEXIT_CRITICAL(); // Silhouette
 	}
 
 #endif /* INCLUDE_vTaskSuspend */
@@ -2233,9 +2220,7 @@ void vTaskSuspendAll( void )
 	BaseType_t.  Please read Richard Barry's reply in the following link to a
 	post in the FreeRTOS support forum before reporting this as a bug! -
 	http://goo.gl/wu4acr */
-	taskENTER_CRITICAL(); // Silhouette: disable exception for secure API
 	++uxSchedulerSuspended;
-	taskEXIT_CRITICAL(); // Silhouette
 }
 /*----------------------------------------------------------*/
 
@@ -2306,7 +2291,6 @@ BaseType_t xTaskResumeAll( void )
 {
 TCB_t *pxTCB = NULL;
 BaseType_t xAlreadyYielded = pdFALSE, xTaskID;
-	taskENTER_CRITICAL(); // Silhouette
 	/* If uxSchedulerSuspended is zero then this function does not match a
 	previous call to vTaskSuspendAll(). */
 	configASSERT( uxSchedulerSuspended );
@@ -2316,7 +2300,7 @@ BaseType_t xAlreadyYielded = pdFALSE, xTaskID;
 	removed task will have been added to the xPendingReadyList.  Once the
 	scheduler has been resumed it is safe to move all the pending ready
 	tasks from this list into their appropriate ready list. */
-//	taskENTER_CRITICAL();
+	taskENTER_CRITICAL();
 	{
 		--uxSchedulerSuspended;
 
@@ -3168,7 +3152,6 @@ void vTaskSwitchContext( void )
 void vTaskPlaceOnEventList( List_t * const pxEventList, const TickType_t xTicksToWait )
 {
 BaseType_t xTaskID;
-	taskENTER_CRITICAL(); // Silhouette
 	configASSERT( pxEventList );
 
 	// Silhouette: Add runtime check for pointer to unprivileged data
@@ -3187,14 +3170,12 @@ BaseType_t xTaskID;
 	vListInsertUser( pxEventList, &( xTaskEventListItemTable[xTaskID] ) );
 
 	prvAddCurrentTaskToDelayedList( xTicksToWait, pdTRUE );
-	taskEXIT_CRITICAL(); // Silhouette
 }
 /*-----------------------------------------------------------*/
 
 void vTaskPlaceOnUnorderedEventList( List_t * pxEventList, const TickType_t xItemValue, const TickType_t xTicksToWait )
 {
 BaseType_t xTaskID;
-	taskENTER_CRITICAL(); // Silhouette
 	configASSERT( pxEventList );
 
 	// Silhouette: Add runtime check for pointer to unprivileged data
@@ -3220,7 +3201,6 @@ BaseType_t xTaskID;
 	vListInsertEndUser( pxEventList, &( xTaskEventListItemTable[xTaskID] ) );
 
 	prvAddCurrentTaskToDelayedList( xTicksToWait, pdTRUE );
-	taskEXIT_CRITICAL(); // Silhouette
 }
 /*-----------------------------------------------------------*/
 
@@ -3229,7 +3209,6 @@ BaseType_t xTaskID;
 	void vTaskPlaceOnEventListRestricted( List_t * const pxEventList, TickType_t xTicksToWait, const BaseType_t xWaitIndefinitely )
 	{
 	BaseType_t xTaskID;
-		taskENTER_CRITICAL(); // Silhouette
 		configASSERT( pxEventList );
 		// Silhouette: Add runtime check for pointer to unprivileged data
 		vVerifyUntrustedData(pxEventList,sizeof(List_t));
@@ -3259,7 +3238,6 @@ BaseType_t xTaskID;
 
 		traceTASK_DELAY_UNTIL( ( xTickCount + xTicksToWait ) );
 		prvAddCurrentTaskToDelayedList( xTicksToWait, xWaitIndefinitely );
-		taskEXIT_CRITICAL(); // Silhouette
 	}
 
 #endif /* configUSE_TIMERS */
@@ -3269,7 +3247,6 @@ BaseType_t xTaskRemoveFromEventList( const List_t * const pxEventList )
 {
 TCB_t *pxUnblockedTCB;
 BaseType_t xReturn, xTaskID;
-	taskENTER_CRITICAL(); // Silhouette
 	// Silhouette: Add runtime check for pointer to unprivileged data
 	vVerifyUntrustedData(pxEventList,sizeof(List_t));
 
@@ -3336,7 +3313,6 @@ BaseType_t xReturn, xTaskID;
 	{
 		xReturn = pdFALSE;
 	}
-	taskEXIT_CRITICAL(); // Silhouette
 	return xReturn;
 }
 /*-----------------------------------------------------------*/
@@ -3345,7 +3321,6 @@ void vTaskRemoveFromUnorderedEventList( ListItem_t * pxEventListItem, const Tick
 {
 TCB_t *pxUnblockedTCB;
 BaseType_t xTaskID;
-	taskENTER_CRITICAL(); // Silhouette
 	/* THIS FUNCTION MUST BE CALLED WITH THE SCHEDULER SUSPENDED.  It is used by
 	the event flags implementation. */
 	configASSERT( uxSchedulerSuspended != pdFALSE );
@@ -3379,7 +3354,6 @@ BaseType_t xTaskID;
 		occurs immediately that the scheduler is resumed (unsuspended). */
 		xYieldPending = pdTRUE;
 	}
-	taskEXIT_CRITICAL(); // Silhouette
 }
 /*-----------------------------------------------------------*/
 
@@ -3468,9 +3442,7 @@ BaseType_t xReturn;
 
 void vTaskMissedYield( void )
 {
-	taskENTER_CRITICAL(); // Silhouette
 	xYieldPending = pdTRUE;
-	taskEXIT_CRITICAL(); // Silhouette
 }
 /*-----------------------------------------------------------*/
 
@@ -3728,7 +3700,6 @@ static portTASK_FUNCTION( prvIdleTask, pvParameters )
 	{
 
 	TCB_t *pxTCB;
-		taskENTER_CRITICAL(); // Silhouette
 		/* If null is passed in here then we are modifying the MPU settings of
 		the calling task. */
 		pxTCB = prvGetTCBFromHandle( xTaskToModify );
@@ -3738,7 +3709,6 @@ static portTASK_FUNCTION( prvIdleTask, pvParameters )
 		vVerifyUntrustedData(xRegions,sizeof(xRegions) * portNUM_CONFIGURABLE_REGIONS);
 
 		vPortStoreTaskMPUSettings( &( pxTCB->xMPUSettings ), xRegions, pxTCB->pxStack, 0 );
-		taskEXIT_CRITICAL(); // Silhouette
 	}
 
 #endif /* portUSING_MPU_WRAPPERS */
@@ -4167,7 +4137,6 @@ TCB_t *pxTCB;
 	{
 	TCB_t * const pxMutexHolderTCB = pxMutexHolder;
 	BaseType_t xReturn = pdFALSE, xTaskID;
-		taskENTER_CRITICAL(); // Silhouette
 		/* If the mutex was given back by an interrupt while the queue was
 		locked then the mutex holder might now be NULL.  _RB_ Is this still
 		needed as interrupts can no longer use mutexes? */
@@ -4244,7 +4213,6 @@ TCB_t *pxTCB;
 		{
 			mtCOVERAGE_TEST_MARKER();
 		}
-		taskEXIT_CRITICAL(); // Silhouette
 
 		return xReturn;
 	}
@@ -4258,7 +4226,6 @@ TCB_t *pxTCB;
 	{
 	TCB_t * const pxTCB = pxMutexHolder;
 	BaseType_t xReturn = pdFALSE, xTaskID;
-		taskENTER_CRITICAL(); // Silhouette
 		if( pxMutexHolder != NULL )
 		{
 			// Silhouette: Add runtime check for pointer to TCB
@@ -4328,7 +4295,6 @@ TCB_t *pxTCB;
 		{
 			mtCOVERAGE_TEST_MARKER();
 		}
-		taskEXIT_CRITICAL(); // Silhouette
 		return xReturn;
 	}
 
@@ -4343,7 +4309,6 @@ TCB_t *pxTCB;
 	UBaseType_t uxPriorityUsedOnEntry, uxPriorityToUse;
 	const UBaseType_t uxOnlyOneMutexHeld = ( UBaseType_t ) 1;
 	BaseType_t xTaskID;
-		taskENTER_CRITICAL(); // Silhouette
 		if( pxMutexHolder != NULL )
 		{
 			/* If pxMutexHolder is not NULL then the holder must hold at least
@@ -4437,7 +4402,6 @@ TCB_t *pxTCB;
 		{
 			mtCOVERAGE_TEST_MARKER();
 		}
-		taskEXIT_CRITICAL(); // Silhouette
 	}
 
 #endif /* configUSE_MUTEXES */
@@ -4776,14 +4740,12 @@ TickType_t uxReturn;
 
 	TaskHandle_t pvTaskIncrementMutexHeldCount( void )
 	{
-		taskENTER_CRITICAL(); // Silhouette
 		/* If xSemaphoreCreateMutex() is called before any tasks have been created
 		then pxCurrentTCB will be NULL. */
 		if( pxCurrentTCB != NULL )
 		{
 			( pxCurrentTCB->uxMutexesHeld )++;
 		}
-		taskEXIT_CRITICAL(); // Silhouette
 		return pxCurrentTCB;
 	}
 
@@ -4947,7 +4909,6 @@ TickType_t uxReturn;
 	TCB_t * pxTCB;
 	BaseType_t xReturn = pdPASS, xTaskID;
 	uint8_t ucOriginalNotifyState;
-		taskENTER_CRITICAL(); // Silhouette
 		configASSERT( xTaskToNotify );
 		pxTCB = xTaskToNotify;
 
@@ -4955,7 +4916,7 @@ TickType_t uxReturn;
 		xTaskID = xVerifyTCB(pxTCB);
 		configASSERT( xTaskID != -1 );
 
-//		taskENTER_CRITICAL();
+		taskENTER_CRITICAL();
 		{
 			if( pulPreviousNotificationValue != NULL )
 			{
@@ -5298,14 +5259,13 @@ TickType_t uxReturn;
 	{
 	TCB_t *pxTCB;
 	BaseType_t xReturn;
-		taskENTER_CRITICAL(); // Silhouette
 		/* If null is passed in here then it is the calling task that is having
 		its notification state cleared. */
 		pxTCB = prvGetTCBFromHandle( xTask );
 		// Silhouette: Add runtime check for pointer to TCB
 		configASSERT( xVerifyTCB(pxTCB) != -1 );
 
-//		taskENTER_CRITICAL();
+		taskENTER_CRITICAL();
 		{
 			if( pxTCB->ucNotifyState == taskNOTIFICATION_RECEIVED )
 			{
