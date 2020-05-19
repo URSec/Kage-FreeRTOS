@@ -79,8 +79,8 @@ void vListInsertEnd( List_t * const pxList, ListItem_t * const pxNewListItem )
 {
 ListItem_t * const pxIndex = pxList->pxIndex;
 
-	// Silhouette: Add runtime check for list and item
-	configASSERT( xCheckPrivilege(pxList, pxNewListItem) );
+//	// Silhouette: Add runtime check for list and item
+//	configASSERT( xCheckPrivilege(pxList, pxNewListItem) );
 	/* Only effective when configASSERT() is also defined, these tests may catch
 	the list data structures being overwritten in memory.  They will not catch
 	data errors caused by incorrect configuration or use of FreeRTOS. */
@@ -111,8 +111,8 @@ void vListInsert( List_t * const pxList, ListItem_t * const pxNewListItem )
 ListItem_t *pxIterator;
 const TickType_t xValueOfInsertion = pxNewListItem->xItemValue;
 
-	// Silhouette: Add runtime check for list and item
-	configASSERT( xCheckPrivilege(pxList, pxNewListItem) );
+//	// Silhouette: Add runtime check for list and item
+//	configASSERT( xCheckPrivilege(pxList, pxNewListItem) );
 	/* Only effective when configASSERT() is also defined, these tests may catch
 	the list data structures being overwritten in memory.  They will not catch
 	data errors caused by incorrect configuration or use of FreeRTOS. */
@@ -181,8 +181,8 @@ UBaseType_t uxListRemove( ListItem_t * const pxItemToRemove )
 item. */
 List_t * const pxList = pxItemToRemove->pxContainer;
 
-	// Silhouette: Add runtime check for list and item
-	configASSERT( xCheckPrivilege(pxList, pxItemToRemove) );
+//	// Silhouette: Add runtime check for list and item
+//	configASSERT( xCheckPrivilege(pxList, pxItemToRemove) );
 
 	pxItemToRemove->pxNext->pxPrevious = pxItemToRemove->pxPrevious;
 	pxItemToRemove->pxPrevious->pxNext = pxItemToRemove->pxNext;

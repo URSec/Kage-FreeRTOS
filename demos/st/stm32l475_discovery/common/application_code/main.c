@@ -151,7 +151,7 @@ int main( void )
      * including the WiFi initialization, is performed in the RTOS daemon task
      * startup hook. */
 //    start_microbenchmark();
-    configPRINTF( ( "Test\r\n" ) );
+//    configPRINTF( ( "Test\r\n" ) );
     vTaskStartScheduler();
 
     return 0;

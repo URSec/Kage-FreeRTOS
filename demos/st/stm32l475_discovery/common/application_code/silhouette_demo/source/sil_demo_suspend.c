@@ -58,7 +58,7 @@ void start_microbenchmark()
 
 	xTimer = xTimerCreate("Micro Timer", // Timer name
 						  100, 			 // Timer period in ticks
-						  pdTRUE,		 // Auto reload?
+						  pdFALSE,		 // Auto reload?
 						  (void *)0,	 // Timer ID
 						  vCallback		 // Callback function
 						  );
