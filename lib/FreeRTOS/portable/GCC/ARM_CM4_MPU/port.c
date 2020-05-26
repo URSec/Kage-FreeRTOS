@@ -157,7 +157,7 @@ static void prvRestoreContextOfFirstTask( void ) __attribute__(( naked )) PRIVIL
  * C portion of the SVC handler.  The SVC handler is split between an asm entry
  * and a C wrapper for simplicity of coding and maintenance.
  */
-static void prvSVCHandler( uint32_t *pulRegisters, uint32_t mspUsed ) __attribute__(( noinline )) PRIVILEGED_FUNCTION;
+static void prvSVCHandler( uint32_t *pulRegisters ) __attribute__(( noinline )) PRIVILEGED_FUNCTION;
 
 /*
  * Silhouette: Spill processor states to psp shadow stack
@@ -273,35 +273,22 @@ void vPortSVCHandler( void )
 	(
 		#ifndef USE_PROCESS_STACK	/* Code should not be required if a main() is using the process stack. */
 			"	tst lr, #4						\n"
-			"	ittee eq						\n"
+			"	ite eq						\n"
 			"	mrseq r0, msp					\n"
-			"	moveq r1, #1					\n"
 			"	mrsne r0, psp					\n"
-			"	movne r1, #0					\n"
 		#else
 			"	mrs r0, psp						\n"
-			"	moveq r1, #0					\n"
 		#endif
 			"	b %0							\n"
-			::"i"(prvSVCHandler):"r0", "r1", "memory"
+			::"i"(prvSVCHandler):"r0", "memory"
 	);
 }
 /*-----------------------------------------------------------*/
 
-static void prvSVCHandler(	uint32_t *pulParam, uint32_t mspUsed )
+static void prvSVCHandler(	uint32_t *pulParam )
 {
 uint8_t ucSVCNumber;
-	// Silhouette: Always spill regs since kernel stack is unprivileged
-#ifdef EXCEPTION_MICRO_BENCHMARK
-uint32_t cycles;
-extern uint32_t ulCycleSpill;
-extern uint32_t ulCycleRestore;
-	KIN1_ResetCycleCounter(); /* reset cycle counter */
-#endif
-	prvSpillContext(pulParam);
-#ifdef EXCEPTION_MICRO_BENCHMARK
-	ulCycleSpill = KIN1_GetCycleCounter();
-#endif
+
 	ucSVCNumber = ( ( uint8_t * ) pulParam[ portOFFSET_TO_PC + STACK_SIZE ] )[ -2 ]; // Silhouette; now use shadow stack
 //	// Silhouette: if PSP is used, spill processor states to shadow stack
 //	if (mspUsed == 0)
@@ -319,19 +306,10 @@ extern uint32_t ulCycleRestore;
 	switch( ucSVCNumber )
 	{
 		case portSVC_START_SCHEDULER	:	portNVIC_SYSPRI1_REG |= portNVIC_SVC_PRI;
-
-//											if (mspUsed == 0)
-//											{
-//												prvRestoreContext(pulParam);
-//											}
-											// Silhouette: restore processor states from shadow stack
-											prvRestoreContext(pulParam);
 											prvRestoreContextOfFirstTask();
 											break;
 
 		case portSVC_YIELD				:	portNVIC_INT_CTRL_REG = portNVIC_PENDSVSET_BIT;
-											// Silhouette: restore processor states from shadow stack
-											prvRestoreContext(pulParam);
 											/* Barriers are normally not required
 											but do ensure the code is completely
 											within the specified behaviour for the
@@ -350,23 +328,9 @@ extern uint32_t ulCycleRestore;
 											);
 											break;
 
-#ifdef EXCEPTION_MICRO_BENCHMARK
-		case portSVC_PRINT_CYCLE		:
-											KIN1_ResetCycleCounter(); /* reset cycle counter */
-											// Silhouette: restore processor states from shadow stack
-											prvRestoreContext(pulParam);
-											ulCycleRestore = KIN1_GetCycleCounter();
-											break;
-#endif
-
 		default							:	/* Unknown SVC call. */
 											break;
 	}
-//	// Silhouette: if PSP is used, restore processor states from shadow stack
-//	if (mspUsed == 0)
-//	{
-		prvRestoreContext(pulParam);
-//	}
 }
 /*-----------------------------------------------------------*/
 void vPortKageDummyHandler( void )
@@ -514,38 +478,6 @@ void vPortKageDummyHandler( void )
 static void prvKageDummyHandler( void )
 {
 
-}
-
-/*-----------------------------------------------------------*/
-
-// Silhouette: Helper function to spill processor states
-static inline void prvSpillContext( uint32_t *sp )
-{
-	UBaseType_t uxSavedInterruptStatus;
-	uxSavedInterruptStatus = portSET_INTERRUPT_MASK_FROM_ISR();
-	// spill 8 stack frames: r0, r1, r2, r3, r12, r14, return addr, xPSR
-	int index;
-	for (index = 0; index < 8; index++)
-	{
-		sp[index + STACK_SIZE] = sp[index];
-	}
-	portCLEAR_INTERRUPT_MASK_FROM_ISR( uxSavedInterruptStatus );
-}
-
-/*-----------------------------------------------------------*/
-
-// Silhouette: Helper function to restore processor states
-static inline void prvRestoreContext( uint32_t *sp )
-{
-	// restore 8 stack frames: r0, r1, r2, r3, r12, r14, return addr, xPSR
-	int index;
-	UBaseType_t uxSavedInterruptStatus;
-	uxSavedInterruptStatus = portSET_INTERRUPT_MASK_FROM_ISR();
-	for (index = 0; index < 8; index++)
-	{
-		sp[index] = sp[index + STACK_SIZE];
-	}
-	portCLEAR_INTERRUPT_MASK_FROM_ISR( uxSavedInterruptStatus );
 }
 
 /*-----------------------------------------------------------*/
@@ -865,27 +797,6 @@ void xPortSysTickHandler( void )
 {
 uint32_t ulDummy;
 
-#ifndef USE_PROCESS_STACK
-	uint32_t *sp, mspUsed = 1;
-
-	__asm volatile
-	(
-		"	tst lr, #4							\n"
-		"	itt ne								\n" /* Silhouette: add an argument indicating which stack is used*/
-		"	mrsne %0, psp						\n"
-		"	movne %1, #0						\n"
-		:"=r"(sp), "=r"(mspUsed)
-	);
-
-	// Silhouette: Spill regs to shadow stack
-	prvSpillContext(sp);
-
-//	if (!mspUsed)
-//	{
-//		prvSpillContext(sp);
-//	}
-#endif
-
 	ulDummy = portSET_INTERRUPT_MASK_FROM_ISR();
 	{
 		/* Increment the RTOS tick. */
@@ -896,15 +807,6 @@ uint32_t ulDummy;
 		}
 	}
 	portCLEAR_INTERRUPT_MASK_FROM_ISR( ulDummy );
-
-#ifndef USE_PROCESS_STACK
-	// Silhouette: restore processor states from shadow stack
-	prvRestoreContext(sp);
-//	if (!mspUsed)
-//	{
-//		prvRestoreContext(sp);
-//	}
-#endif
 }
 /*-----------------------------------------------------------*/
 
