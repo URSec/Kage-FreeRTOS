@@ -2417,6 +2417,14 @@ TaskHandle_t pvTaskIncrementMutexHeldCount( void ) PRIVILEGED_FUNCTION;
  */
 void vTaskInternalSetTimeOutState( TimeOut_t * const pxTimeOut );
 
+// Silhouette: For micro benchmarks only
+#ifdef SECURE_API_MICRO_BENCHMARK
+void vMeasureCycles( void * dummyData, size_t dataSize ) PRIVILEGED_FUNCTION;
+#endif
+
+#ifdef EXCEPTION_NEW_MICRO_BENCHMARK
+void vMeasureException( void ) PRIVILEGED_FUNCTION;
+#endif
 
 #ifdef __cplusplus
 }

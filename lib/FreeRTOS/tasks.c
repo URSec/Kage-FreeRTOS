@@ -40,6 +40,10 @@ task.h is included from an application file. */
 #include "timers.h"
 #include "stack_macros.h"
 
+#ifdef MICRO_BENCHMARK // Silhouette benchmark
+#include "cycle_counter.h"
+#endif
+
 /* Lint e9021, e961 and e750 are suppressed as a MISRA exception justified
 because the MPU ports require MPU_WRAPPERS_INCLUDED_FROM_API_FILE to be defined
 for the header files above, but not in this file, in order to generate the
@@ -403,6 +407,11 @@ static ListItem_t xTaskEventListItemTable[configTOTAL_TASKS];
 	PRIVILEGED_DATA static uint32_t ulTaskSwitchedInTime = 0UL;	/*< Holds the value of a timer/counter the last time a task was switched in. */
 	PRIVILEGED_DATA static uint32_t ulTotalRunTime = 0UL;		/*< Holds the total amount of execution time as defined by the run time counter clock. */
 
+#endif
+
+#ifdef MICRO_BENCHMARK // Silhouette: Microbenchmark global variables
+	PRIVILEGED_DATA uint32_t ulCycleSpill;
+	PRIVILEGED_DATA uint32_t ulCycleRestore;
 #endif
 
 /*lint -restore */
@@ -1981,6 +1990,9 @@ static void prvAddNewTaskToReadyList( TCB_t *pxNewTCB )
 		// Silhouette: Add runtime check for pointer to TCB
 		configASSERT( xVerifyTCB(pxTCB) != -1 );
 
+		// Silhouette: Add runtime check for ISR priority
+		configASSERT( ulPortGetBASEPRI() == configMAX_SYSCALL_INTERRUPT_PRIORITY );
+
 		/* RTOS ports that support interrupt nesting have the concept of a
 		maximum	system call (or maximum API call) interrupt priority.
 		Interrupts that are	above the maximum system call priority are keep
@@ -2046,6 +2058,11 @@ static void prvAddNewTaskToReadyList( TCB_t *pxNewTCB )
 void vTaskStartScheduler( void )
 {
 BaseType_t xReturn;
+
+#ifdef MICRO_BENCHMARK // Silhouette: Benchmarks
+    KIN1_InitCycleCounter(); /* enable DWT hardware */
+	KIN1_EnableCycleCounter(); /* start counting */
+#endif
 
 	/* Add the idle task at the lowest priority. */
 	#if( configSUPPORT_STATIC_ALLOCATION == 1 )
@@ -3501,7 +3518,7 @@ static portTASK_FUNCTION( prvIdleTask, pvParameters )
 {
 	/* Stop warnings. */
 	( void ) pvParameters;
-	configPRINT_STRING( "idle called\r\n" );
+//	configPRINT_STRING( "idle called\r\n" );
 
 	/** THIS IS THE RTOS IDLE TASK - WHICH IS CREATED AUTOMATICALLY WHEN THE
 	SCHEDULER IS STARTED. **/
@@ -5055,6 +5072,9 @@ TickType_t uxReturn;
 
 		// Silhouette: Add runtime check for pointer to TCB
 		xTaskID = xVerifyTCB(pxTCB);
+		// Silhouette: Add runtime check for ISR priority
+		configASSERT( ulPortGetBASEPRI() == configMAX_SYSCALL_INTERRUPT_PRIORITY );
+
 		configASSERT( xTaskID != -1 );
 
 		uxSavedInterruptStatus = portSET_INTERRUPT_MASK_FROM_ISR();
@@ -5191,6 +5211,8 @@ TickType_t uxReturn;
 
 		// Silhouette: Add runtime check for pointer to TCB
 		xTaskID = xVerifyTCB(pxTCB);
+		// Silhouette: Add runtime check for ISR priority
+		configASSERT( ulPortGetBASEPRI() == configMAX_SYSCALL_INTERRUPT_PRIORITY );
 		configASSERT( xTaskID != -1 );
 
 		uxSavedInterruptStatus = portSET_INTERRUPT_MASK_FROM_ISR();
@@ -5563,3 +5585,32 @@ static TaskHandle_t pvGetTaskFromID(const TaskID_t id)
 	}
 	return pvReturn;
 }
+
+#ifdef SECURE_API_MICRO_BENCHMARK
+/*-----------------------------------------------------------*/
+void vMeasureCycles(void* dummyData, size_t dataSize)
+{
+uint32_t cycles;
+	KIN1_ResetCycleCounter(); /* reset cycle counter */
+	configASSERT(xVerifyTCB(pxCurrentTCB));
+	cycles = KIN1_GetCycleCounter();
+	configPRINTF( ( "xVerifyTCB: %u\r\n", cycles ) );
+
+	KIN1_ResetCycleCounter(); /* reset cycle counter */
+	vVerifyUntrustedData(dummyData, dataSize);
+	cycles = KIN1_GetCycleCounter();
+	configPRINTF( ( "xVerifyUntrustedData: %u\r\n", cycles ) );
+}
+
+#endif
+
+#ifdef EXCEPTION_NEW_MICRO_BENCHMARK
+/*-----------------------------------------------------------*/
+void vMeasureException( void ){
+uint32_t cycles;
+	KIN1_ResetCycleCounter();
+	vPortKageDummyHandler();
+	cycles = KIN1_GetCycleCounter();
+	configPRINTF( ( "Dummy Exception: %u\r\n", cycles ) );
+}
+#endif

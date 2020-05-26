@@ -37,6 +37,9 @@
 /* Scheduler includes. */
 #include "FreeRTOS.h"
 #include "task.h"
+#ifdef MICRO_BENCHMARK
+	#include "cycle_counter.h" // Silhouette: Cycle counter from McuOnEclipse project
+#endif
 
 #ifndef __VFP_FP__
 	#error This port can only be used when the project options are configured to enable hardware floating point support.
@@ -138,6 +141,12 @@ void vPortSetupTimerInterrupt( void ) PRIVILEGED_FUNCTION;
 void xPortPendSVHandler( void ) __attribute__ (( naked )) PRIVILEGED_FUNCTION;
 void xPortSysTickHandler( void )  __attribute__ ((optimize("3"))) PRIVILEGED_FUNCTION;
 void vPortSVCHandler( void ) __attribute__ (( naked )) PRIVILEGED_FUNCTION;
+
+/*
+ * Silhouette dummy exception handler for evaluation
+ */
+void vPortKageDummyHandler( void ) __attribute__ (( naked )) PRIVILEGED_FUNCTION;
+static void prvKageDummyHandler( void ) __attribute__(( noinline )); // C function to call by the asm code
 
 /*
  * Starts the scheduler by restoring the context of the first task to run.
@@ -283,7 +292,16 @@ static void prvSVCHandler(	uint32_t *pulParam, uint32_t mspUsed )
 {
 uint8_t ucSVCNumber;
 	// Silhouette: Always spill regs since kernel stack is unprivileged
+#ifdef EXCEPTION_MICRO_BENCHMARK
+uint32_t cycles;
+extern uint32_t ulCycleSpill;
+extern uint32_t ulCycleRestore;
+	KIN1_ResetCycleCounter(); /* reset cycle counter */
+#endif
 	prvSpillContext(pulParam);
+#ifdef EXCEPTION_MICRO_BENCHMARK
+	ulCycleSpill = KIN1_GetCycleCounter();
+#endif
 	ucSVCNumber = ( ( uint8_t * ) pulParam[ portOFFSET_TO_PC + STACK_SIZE ] )[ -2 ]; // Silhouette; now use shadow stack
 //	// Silhouette: if PSP is used, spill processor states to shadow stack
 //	if (mspUsed == 0)
@@ -332,6 +350,15 @@ uint8_t ucSVCNumber;
 											);
 											break;
 
+#ifdef EXCEPTION_MICRO_BENCHMARK
+		case portSVC_PRINT_CYCLE		:
+											KIN1_ResetCycleCounter(); /* reset cycle counter */
+											// Silhouette: restore processor states from shadow stack
+											prvRestoreContext(pulParam);
+											ulCycleRestore = KIN1_GetCycleCounter();
+											break;
+#endif
+
 		default							:	/* Unknown SVC call. */
 											break;
 	}
@@ -341,6 +368,154 @@ uint8_t ucSVCNumber;
 		prvRestoreContext(pulParam);
 //	}
 }
+/*-----------------------------------------------------------*/
+void vPortKageDummyHandler( void )
+{
+	/* Assumes psp was in use. */
+	__asm volatile
+	(
+			// r0: stack pointer that contains processor state
+			// r1: original basepri value
+			// r2: shadow stack of r0
+			// r3: temp register to hold values
+
+			// Set priority to highest to disable interrupt preemption
+			"	mrs r1, basepri					\n"
+			"	mov r0, %1						\n"
+			"	msr basepri, r0					\n"
+			"	isb								\n"
+			"	dsb								\n"
+		#ifndef USE_PROCESS_STACK	/* Code should not be required if a main() is using the process stack. */
+			"	tst lr, #4						\n"
+			"	ite eq							\n"
+			"	mrseq r0, msp					\n"
+			"	mrsne r0, psp					\n"
+		#else
+			"	mrs r0, psp						\n"
+		#endif
+			"	isb								\n"
+			// Copy hardware-saved processor state to r0 + offset
+			"	add r2, r0, " STACK_SIZE_INLINE(STACK_SIZE_IN_BYTES_STATIC)  "		\n"
+			"	ldr r3, [r0]					\n" // r0
+			"	str r3, [r2]					\n"
+			"	ldr r3, [r0, #4]				\n" // r1
+			"	str r3, [r2, #4]				\n"
+			"	ldr r3, [r0, #8]				\n" // r2
+			"	str r3, [r2, #8]				\n"
+			"	ldr r3, [r0, #12]				\n" // r3
+			"	str r3, [r2, #12]				\n"
+			"	ldr r3, [r0, #16]				\n" // r12
+			"	str r3, [r2, #16]				\n"
+			"	ldr r3, [r0, #20]				\n" // lr
+			"	str r3, [r2, #20]				\n"
+			"	ldr r3, [r0, #24]				\n" // return addr
+			"	str r3, [r2, #24]				\n"
+			"	ldr r3, [r0, #28]				\n" // xpsr
+			"	str r3, [r2, #28]				\n"
+			"	add r2, r2, #32					\n"
+			"	add r3, r0, #32					\n"
+			"	tst r14, #0x10					\n" /* Is the task using the FPU context?  If so, spill low vfp registers. */
+			"	itttt eq						\n"
+			"	vldmeq r3, {s0-s15}				\n" // s0-s15
+			"	vstmeq r2, {s0-s15}				\n"
+			"	ldreq r3, [r3, #64]				\n" // fpscr
+			"	streq r3, [r2, #64]				\n"
+			// Spill other processor state to kernel shadow stack
+			"	add sp, sp, " STACK_SIZE_INLINE(STACK_SIZE_IN_BYTES_STATIC)  "		\n" // point sp to shadow stack
+			"									\n"
+			"	tst r14, #0x10					\n" /* Is the task using the FPU context?  If so, push high vfp registers. */
+			"	it eq							\n"
+			"	vstmdbeq sp!, {s16-s31}			\n"
+			"									\n"
+			"	mrs r3, control					\n"
+			"	stmdb sp!, {r0, r3-r11, r14}	\n" /* Save the remaining registers and current r0. */
+			"	sub sp, sp, " STACK_SIZE_INLINE(STACK_SIZE_IN_BYTES_STATIC) "		\n" // restore sp
+			// Disable unprivileged access to task stack
+			// (Currently assuming that task stack is always the 8th region)
+			"	ldr r0, =0xe000ed98				\n"
+			"	mov r2, #7						\n"
+			"	str r2, [r0]					\n"
+			"	ldr r0, =0xe000eda0				\n"
+			"	ldr r2, [r0]					\n"
+			"	bic r2, #1						\n"
+			"	str r2, [r0]					\n"
+			// Reset basepri
+			"	msr basepri, r1					\n"
+			"	isb								\n"
+			"	dsb								\n"
+			// Clear r0-r3 before calling C function
+			"	mov r0, #0						\n"
+			"	mov r1, #0						\n"
+			"	mov r2, #0						\n"
+			"	mov r3, #0						\n"
+			// Call the C handler function
+			"	bl %0							\n"
+			// Set priority to highest to disable interrupt preemption
+			"	mrs r1, basepri					\n"
+			"	mov r0, %1						\n"
+			"	msr basepri, r0					\n"
+			"	isb								\n"
+			"	dsb								\n"
+			// Enable unprivileged access to task stack
+			"	ldr r0, =0xe000ed98				\n"
+			"	mov r2, #7						\n"
+			"	str r2, [r0]					\n"
+			"	ldr r0, =0xe000eda0				\n"
+			"	ldr r2, [r0]					\n"
+			"	orr r2, #1						\n"
+			"	str r2, [r0]					\n"
+			// Restore other processor state from kernel shadow stack
+			"	add sp, sp, " STACK_SIZE_INLINE(STACK_SIZE_IN_BYTES_STATIC) "		\n" // point sp to shadow stack
+			"	ldmia sp!, {r0, r3-r11, r14}		\n" /* Pop r0 and the registers that are not automatically saved on exception entry. */
+			"	msr control, r3					\n"
+			"									\n"
+			"	tst r14, #0x10					\n" /* Is the task using the FPU context?  If so, pop the high vfp registers too. */
+			"	it eq							\n"
+			"	vldmiaeq sp!, {s16-s31}			\n"
+			"	sub sp, sp, " STACK_SIZE_INLINE(STACK_SIZE_IN_BYTES_STATIC) "		\n" // restore sp
+			"									\n"
+			// Restore hardware-saved processor state from r0 + offset
+			"	add r2, r0, " STACK_SIZE_INLINE(STACK_SIZE_IN_BYTES_STATIC)  "		\n"
+			"	ldr r3, [r2]					\n" // r0
+			"	str r3, [r0]					\n"
+			"	ldr r3, [r2, #4]				\n" // r1
+			"	str r3, [r0, #4]				\n"
+			"	ldr r3, [r2, #8]				\n" // r2
+			"	str r3, [r0, #8]				\n"
+			"	ldr r3, [r2, #12]				\n" // r3
+			"	str r3, [r0, #12]				\n"
+			"	ldr r3, [r2, #16]				\n" // r12
+			"	str r3, [r0, #16]				\n"
+			"	ldr r3, [r2, #20]				\n" // lr
+			"	str r3, [r0, #20]				\n"
+			"	ldr r3, [r2, #24]				\n" // return addr
+			"	str r3, [r0, #24]				\n"
+			"	ldr r3, [r2, #28]				\n" // xpsr
+			"	str r3, [r0, #28]				\n"
+			"	add r2, r2, #32					\n"
+			"	add r3, r0, #32					\n"
+			"	tst r14, #0x10					\n" /* Is the task using the FPU context?  If so, spill low vfp registers. */
+			"	itttt eq						\n"
+			"	vldmeq r2, {s0-s15}				\n" // s0-s15
+			"	vstmeq r3, {s0-s15}				\n"
+			"	ldreq r2, [r2, #64]				\n" // fpscr
+			"	streq r2, [r3, #64]				\n"
+			// Reset basepri
+			"	msr basepri, r1					\n"
+			"	isb								\n"
+			"	dsb								\n"
+			// Exception return
+			"	bx r14							\n"
+			::"i"(prvKageDummyHandler), "i"(configMAX_SYSCALL_INTERRUPT_PRIORITY): "memory"
+	);
+}
+/*-----------------------------------------------------------*/
+
+static void prvKageDummyHandler( void )
+{
+
+}
+
 /*-----------------------------------------------------------*/
 
 // Silhouette: Helper function to spill processor states
@@ -564,6 +739,40 @@ void xPortPendSVHandler( void )
 		"	mrs r0, psp							\n"
 		"	isb									\n"
 		"										\n"
+#ifdef CONTEXT_SWITCH_MICRO_BENCHMARK
+		/* Silhouette: Reset cycle counter */
+		"	movw r2, #4100						\n"
+		"	movt r2, #57344						\n"
+		"	mov r3, #0							\n"
+		"	str r3, [r2]						\n"
+#endif
+		/* Silhouette: Spill regs that are automatically saved on exception entry to shadow stack */
+		"	add r2, r0, " STACK_SIZE_INLINE(STACK_SIZE_IN_BYTES_STATIC)  "		\n"
+		"	ldr r3, [r0]						\n" // r0
+		"	str r3, [r2]						\n"
+		"	ldr r3, [r0, #4]					\n" // r1
+		"	str r3, [r2, #4]					\n"
+		"	ldr r3, [r0, #8]					\n" // r2
+		"	str r3, [r2, #8]					\n"
+		"	ldr r3, [r0, #12]					\n" // r3
+		"	str r3, [r2, #12]					\n"
+		"	ldr r3, [r0, #16]					\n" // r12
+		"	str r3, [r2, #16]					\n"
+		"	ldr r3, [r0, #20]					\n" // lr
+		"	str r3, [r2, #20]					\n"
+		"	ldr r3, [r0, #24]					\n" // return addr
+		"	str r3, [r2, #24]					\n"
+		"	ldr r3, [r0, #28]					\n" // xpsr
+		"	str r3, [r2, #28]					\n"
+		"	add r2, r2, #32						\n"
+		"	add r3, r0, #32						\n"
+		"	tst r14, #0x10						\n" /* Is the task using the FPU context?  If so, spill low vfp registers. */
+		"	itttt eq							\n"
+		"	vldmeq r3, {s0-s15}					\n" // s0-s15
+		"	vstmeq r2, {s0-s15}					\n"
+		"	ldreq r3, [r3, #64]					\n" // fpscr
+		"	streq r3, [r2, #64]					\n"
+		"										\n"
 		"	add r0, r0, " STACK_SIZE_INLINE(STACK_SIZE_IN_BYTES_STATIC)  "		\n" /* Silhouette: switch to shadow stack to backup processor states */
 		"	ldr	r3, pxCurrentTCBConst			\n" /* Get the location of the current TCB. */
 		"	ldr	r2, [r3]						\n"
@@ -602,11 +811,51 @@ void xPortPendSVHandler( void )
 		"	vldmiaeq r0!, {s16-s31}				\n"
 		"	sub r0, r0, " STACK_SIZE_INLINE(STACK_SIZE_IN_BYTES_STATIC) "		\n" /* Silhouette: switch back to regular stack */
 		"										\n"
+		/* Silhouette: Restore regs that are automatically loaded on exception return */
+		"	stmdb sp!, {r2, r3}					\n"
+		"	add r2, r0, " STACK_SIZE_INLINE(STACK_SIZE_IN_BYTES_STATIC)  "		\n"
+		"	ldr r3, [r2]						\n" // r0
+		"	str r3, [r0]						\n"
+		"	ldr r3, [r2, #4]					\n" // r1
+		"	str r3, [r0, #4]					\n"
+		"	ldr r3, [r2, #8]					\n" // r2
+		"	str r3, [r0, #8]					\n"
+		"	ldr r3, [r2, #12]					\n" // r3
+		"	str r3, [r0, #12]					\n"
+		"	ldr r3, [r2, #16]					\n" // r12
+		"	str r3, [r0, #16]					\n"
+		"	ldr r3, [r2, #20]					\n" // lr
+		"	str r3, [r0, #20]					\n"
+		"	ldr r3, [r2, #24]					\n" // return addr
+		"	str r3, [r0, #24]					\n"
+		"	ldr r3, [r2, #28]					\n" // xpsr
+		"	str r3, [r0, #28]					\n"
+		"	add r2, r2, #32						\n"
+		"	add r3, r0, #32						\n"
+		"	tst r14, #0x10						\n" /* Is the task using the FPU context?  If so, spill low vfp registers. */
+		"	itttt eq							\n"
+		"	vldmeq r2, {s0-s15}					\n" // s0-s15
+		"	vstmeq r3, {s0-s15}					\n"
+		"	ldreq r2, [r2, #64]					\n" // fpscr
+		"	streq r2, [r3, #64]					\n"
+		"	ldmia sp!, {r2, r3}					\n"
+#ifdef CONTEXT_SWITCH_MICRO_BENCHMARK
+		/* Silhouette: Read cycle counter */
+		"	stmdb sp!, {r1, r2, r3}				\n"
+		"	movw r2, #4100						\n"
+		"	movt r2, #57344						\n"
+		"	ldr r1, [r2]						\n"
+		"	ldr r3, ulCycleAfter				\n"
+		"	str r1, [r3]						\n"
+		"	ldmia sp!, {r1, r2, r3}				\n"
+#endif
+		"										\n"
 		"	msr psp, r0							\n"
 		"	bx r14								\n"
 		"										\n"
 		"	.align 4							\n"
 		"pxCurrentTCBConst: .word pxCurrentTCB	\n"
+		"ulCycleAfter:	    .word ulCycleRestore\n"
 		::"i"(configMAX_SYSCALL_INTERRUPT_PRIORITY)
 	);
 }
@@ -853,6 +1102,9 @@ extern uint32_t __SS_segment_start__[];
 extern uint32_t __SS_segment_end__[];
 int32_t lIndex;
 uint32_t ul;
+#ifdef SECURE_API_MICRO_BENCHMARK
+extern uint32_t ulCycleSpill;
+#endif
 
 	if( xRegions == NULL )
 	{
@@ -913,6 +1165,9 @@ uint32_t ul;
 	}
 	else
 	{
+#ifdef SECURE_API_MICRO_BENCHMARK
+		KIN1_ResetCycleCounter();
+#endif
 		/* Runtime check for new MPU configurations */
 		for (ul = 0; ul < portNUM_CONFIGURABLE_REGIONS; ul++){
 			/* Check for overlaps between xRegions and FLASH */
@@ -939,6 +1194,9 @@ uint32_t ul;
 					(( uint32_t )xRegions[ul].pvBaseAddress >= ( uint32_t ) __SS_segment_end__);
 			configASSERT( cond || !(xRegions[ul].ulParameters & portMPU_REGION_READ_WRITE) );
 		}
+#ifdef SECURE_API_MICRO_BENCHMARK
+		ulCycleSpill = KIN1_GetCycleCounter();
+#endif
 		/* This function is called automatically when the task is created - in
 		which case the stack region parameters will be valid.  At all other
 		times the stack parameters will not be valid and it is assumed that the

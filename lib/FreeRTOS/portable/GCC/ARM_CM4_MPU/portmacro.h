@@ -129,6 +129,9 @@ typedef struct MPU_SETTINGS
 #define portSVC_START_SCHEDULER				0
 #define portSVC_YIELD						1
 #define portSVC_RAISE_PRIVILEGE				2
+#ifdef EXCEPTION_MICRO_BENCHMARK
+#define portSVC_PRINT_CYCLE					3 // Silhouette: Microbenchmark
+#endif
 
 /* Scheduler utilities. */
 
@@ -305,6 +308,19 @@ portFORCE_INLINE static void vPortSetBASEPRI( uint32_t ulNewMaskValue )
 	);
 }
 /*-----------------------------------------------------------*/
+/*
+ * Silhouette: Get current BASEPRI value to perform runtime check
+ */
+
+portFORCE_INLINE static uint32_t ulPortGetBASEPRI( void )
+{
+uint32_t ulBASEPRI;
+	__asm volatile
+	(
+		"	mrs %0, basepri	" :"=r" (ulBASEPRI):: "memory"
+	);
+	return ulBASEPRI;
+}
 
 
 #ifdef __cplusplus
