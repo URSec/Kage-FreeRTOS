@@ -208,7 +208,7 @@ extern void vPortResetPrivilege( BaseType_t xRunningPrivileged );
 /* Each task maintains its own interrupt status in the critical nesting
 variable.  Note this is not saved as part of the task context as context
 switches can only occur when uxCriticalNesting is zero. */
-static UBaseType_t uxCriticalNesting = 0xaaaaaaaa;
+PRIVILEGED_DATA static UBaseType_t uxCriticalNesting = 0xaaaaaaaa;
 
 /*
  * Used by the portASSERT_IF_INTERRUPT_PRIORITY_INVALID() macro to ensure
@@ -216,8 +216,8 @@ static UBaseType_t uxCriticalNesting = 0xaaaaaaaa;
  * a priority above configMAX_SYSCALL_INTERRUPT_PRIORITY.
  */
 #if ( configASSERT_DEFINED == 1 )
-	 static uint8_t ucMaxSysCallPriority = 0;
-	 static uint32_t ulMaxPRIGROUPValue = 0;
+	 PRIVILEGED_DATA static uint8_t ucMaxSysCallPriority = 0;
+	 PRIVILEGED_DATA static uint32_t ulMaxPRIGROUPValue = 0;
 	 static const volatile uint8_t * const pcInterruptPriorityRegisters = ( const volatile uint8_t * const ) portNVIC_IP_REGISTERS_OFFSET_16;
 #endif /* configASSERT_DEFINED */
 
@@ -288,8 +288,12 @@ void vPortSVCHandler( void )
 static void prvSVCHandler(	uint32_t *pulParam )
 {
 uint8_t ucSVCNumber;
+#ifdef EXCEPTION_MICRO_BENCHMARK
+uint32_t uxSavedInterruptStatus;
+extern uint32_t ulCycleSpill;
+#endif
 
-	ucSVCNumber = ( ( uint8_t * ) pulParam[ portOFFSET_TO_PC + STACK_SIZE ] )[ -2 ]; // Silhouette; now use shadow stack
+	ucSVCNumber = ( ( uint8_t * ) pulParam[ portOFFSET_TO_PC ] )[ -2 ]; // Silhouette; now use shadow stack
 //	// Silhouette: if PSP is used, spill processor states to shadow stack
 //	if (mspUsed == 0)
 //	{
@@ -327,6 +331,14 @@ uint8_t ucSVCNumber;
 												::: "r1", "memory"
 											);
 											break;
+#ifdef EXCEPTION_MICRO_BENCHMARK
+		case portSVC_PRINT_CYCLE		:	uxSavedInterruptStatus = portSET_INTERRUPT_MASK_FROM_ISR();
+											KIN1_ResetCycleCounter();
+											configASSERT( ulPortGetBASEPRI() == configMAX_SYSCALL_INTERRUPT_PRIORITY );
+											ulCycleSpill = KIN1_GetCycleCounter();
+											portCLEAR_INTERRUPT_MASK_FROM_ISR( uxSavedInterruptStatus );
+											break;
+#endif
 
 		default							:	/* Unknown SVC call. */
 											break;

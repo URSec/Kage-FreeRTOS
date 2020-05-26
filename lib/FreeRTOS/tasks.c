@@ -5612,5 +5612,6 @@ uint32_t cycles;
 	vPortKageDummyHandler();
 	cycles = KIN1_GetCycleCounter();
 	configPRINTF( ( "Dummy Exception: %u\r\n", cycles ) );
+
 }
 #endif
