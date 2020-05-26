@@ -46,6 +46,6 @@ BaseType_t xLoggingTaskInitialize( uint16_t usStackSize,
  * be performed inline.
  */
 void vLoggingPrintf( const char * pcFormat,
-                     ... ) PRIVILEGED_FUNCTION; // Silhouette: Changed printf to privileged since kernel also calls it
+                     ... ) ; // Silhouette: Changed printf to privileged since kernel also calls it
 
 #endif /* AWS_LOGGING_TASK_H */
