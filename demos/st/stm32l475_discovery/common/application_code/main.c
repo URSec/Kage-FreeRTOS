@@ -210,8 +210,23 @@ void vApplicationDaemonTaskStartupHook( void )
 //        configASSERT( xWifiStatus == eWiFiSuccess );
 //    }
 
-	start_microbenchmark();
+//	start_microbenchmark();
 //	start_beebsbenchmark();
+configPRINTF( ( "System clock: %uHz\r\n", configCPU_CLOCK_HZ ) );
+#ifdef MICRO_BENCHMARK
+extern uint32_t ulCycleSpill;
+extern uint32_t ulCycleRestore;
+#ifdef EXCEPTION_MICRO_BENCHMARK
+	__asm volatile ( "	SVC	%0	\n" :: "i" (portSVC_PRINT_CYCLE) : "memory" ); // Call special SVC ID in SVC handler to measure exception sill and restore cycles
+	configPRINTF( ( "Spill: %u Restore: %u \r\n", ulCycleSpill, ulCycleRestore ) );
+#endif
+#ifdef SECURE_API_MICRO_BENCHMARK
+	configPRINTF( ( "MPU checks: %u cycles\r\n", ulCycleSpill ) );
+#endif
+#ifdef EXCEPTION_NEW_MICRO_BENCHMARK
+	vMeasureException();
+#endif
+#endif
 }
 /*-----------------------------------------------------------*/
 

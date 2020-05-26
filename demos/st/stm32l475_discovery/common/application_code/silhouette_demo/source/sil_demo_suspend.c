@@ -16,15 +16,15 @@ static StackType_t demoStackBufferT[STACK_SIZE * 2] TASK_STACK;
 static TaskHandle_t highMicroTask;
 static TimerHandle_t xTimer;
 
+static float dummyFloat;
+
 void start_microbenchmark()
 {
 	BaseType_t xReturn = pdFAIL;
 
 	/* Structs for logging task
 	 * */
-	/// This is a dynamic task definition
 
-//	static StackType_t logStackBuffer[STACK_SIZE * 2] __attribute__ ((aligned (STACK_SIZE * 2)));
 	// Create an TaskParameters_t structure that defines the task to be created.
 	TaskParameters_t microTaskParameters =
 	{
@@ -39,8 +39,6 @@ void start_microbenchmark()
 		// xRegions - Allocate up to three separate memory regions for access by
 		// the task, with appropriate access permissions.
 		{
-			// {Base address,	Length,	Parameters}
-//			{ &logStackBuffer[STACK_SIZE],	STACK_SIZE_IN_BYTES, portMPU_REGION_PRIVILEGED_READ_WRITE }, // shadow stack.
 			{ &demoStackBuffer[0],	STACK_SIZE_IN_BYTES, portMPU_REGION_READ_WRITE }, // the other two region left unused.
 			{ 0,0,0 },
 			{ 0,0,0 }
@@ -90,7 +88,9 @@ void start_microbenchmark()
 static void silHighMicroTask( void * pvParameters )
 {
 	configPRINTF( ( "Started Microbenchmark High Priority Task \r\n" ) );
+	dummyFloat = 1.2;
 	for(;;){
+		dummyFloat = dummyFloat * dummyFloat;
 		vTaskSuspend(NULL);
 //		configPRINTF( ( "Resumed\r\n" ) );
 	}
@@ -98,14 +98,25 @@ static void silHighMicroTask( void * pvParameters )
 
 static void silLowMicroTask( void * pvParameters )
 {
+#ifdef CONTEXT_SWITCH_MICRO_BENCHMARK
+	extern uint32_t ulCycleRestore;
+#endif
 	configPRINTF( ( "Started Microbenchmark Low Priority Task \r\n" ) );
 	int iterations = 1000000;
+#ifdef SECURE_API_MICRO_BENCHMARK
+	uint32_t *dummyData = (uint32_t *) pvPortMallocUser(sizeof(uint32_t));
+	vMeasureCycles(dummyData, sizeof(uint32_t));
+#endif
 	int i = 0;
-	for (i = 0; i < iterations; i++)
+	for (i = 0; i < iterations*600; i++)
 	{
-		portYIELD();
+//		portYIELD();
+		dummyFloat = dummyFloat + 1;
 	}
-	configPRINTF( ( "Finished %d yields\r\n", iterations ) );
+//	configPRINTF( ( "Finished %d yields\r\n", iterations ) );
+#ifdef CONTEXT_SWITCH_MICRO_BENCHMARK
+	configPRINTF( ( "Context Switch cycle: %u cycles, dummy float: %f\r\n", ulCycleRestore, dummyFloat ) );
+#endif
 	for(;;){
 
 	}
