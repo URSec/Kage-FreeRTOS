@@ -35,7 +35,7 @@ static QueueHandle_t demoQueue;
 static StreamBufferHandle_t demoBuffer;
 #endif
 
-static float dummyFloat;
+// static float dummyFloat;
 
 #ifdef UNPRIV_API_BENCHMARK
 void start_microbenchmark() PRIVILEGED_FUNCTION
@@ -147,9 +147,9 @@ static void silHighMicroTask( void * pvParameters )
 #endif
 	configPRINTF( ( "Started Microbenchmark High Priority Task \r\n" ) );
 	vTaskSuspend(NULL);
-	dummyFloat = 1.2;
+	// dummyFloat = 1.2;
 	for(;;){
-		dummyFloat = dummyFloat * dummyFloat;
+		// dummyFloat = dummyFloat * dummyFloat;
 		vTaskSuspend(NULL);
 	}
 }
@@ -169,11 +169,11 @@ static void silLowMicroTask( void * pvParameters )
 //	configPRINTF( ( "Sent buffer: result: %u\r\n", result ) );
 #endif
 	configPRINTF( ( "Started Microbenchmark Low Priority Task \r\n" ) );
-	int iterations = 1000000;
 #ifdef SECURE_API_MICRO_BENCHMARK
 	uint32_t *dummyData = (uint32_t *) pvPortMallocUser(sizeof(uint32_t));
 	vMeasureCycles(dummyData, sizeof(uint32_t));
 #endif
+//	int iterations = 1000000;
 //	int i = 0;
 //	for (i = 0; i < iterations*600; i++)
 //	{
