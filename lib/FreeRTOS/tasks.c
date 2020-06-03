@@ -4776,7 +4776,7 @@ TickType_t uxReturn;
 	uint32_t ulReturn;
 
 		taskENTER_CRITICAL();
-//		{
+		{
 			/* Only block if the notification count is not already non-zero. */
 			if( pxCurrentTCB->ulNotifiedValue == 0UL )
 			{
@@ -4803,11 +4803,11 @@ TickType_t uxReturn;
 			{
 				mtCOVERAGE_TEST_MARKER();
 			}
-//		}
-//		taskEXIT_CRITICAL();
-//
-//		taskENTER_CRITICAL();
-//		{
+		}
+		taskEXIT_CRITICAL();
+
+		taskENTER_CRITICAL();
+		{
 			traceTASK_NOTIFY_TAKE();
 			ulReturn = pxCurrentTCB->ulNotifiedValue;
 
@@ -4828,7 +4828,7 @@ TickType_t uxReturn;
 			}
 
 			pxCurrentTCB->ucNotifyState = taskNOT_WAITING_NOTIFICATION;
-//		}
+		}
 		taskEXIT_CRITICAL();
 
 		return ulReturn;
@@ -4844,7 +4844,7 @@ TickType_t uxReturn;
 	BaseType_t xReturn;
 
 		taskENTER_CRITICAL();
-//		{
+		{
 			/* Only block if a notification is not already pending. */
 			if( pxCurrentTCB->ucNotifyState != taskNOTIFICATION_RECEIVED )
 			{
@@ -4876,11 +4876,11 @@ TickType_t uxReturn;
 			{
 				mtCOVERAGE_TEST_MARKER();
 			}
-//		}
-//		taskEXIT_CRITICAL();
-//
-//		taskENTER_CRITICAL();
-//		{
+		}
+		taskEXIT_CRITICAL();
+
+		taskENTER_CRITICAL();
+		{
 			traceTASK_NOTIFY_WAIT();
 
 			if( pulNotificationValue != NULL )
@@ -4910,7 +4910,7 @@ TickType_t uxReturn;
 			}
 
 			pxCurrentTCB->ucNotifyState = taskNOT_WAITING_NOTIFICATION;
-//		}
+		}
 		taskEXIT_CRITICAL();
 
 		return xReturn;
