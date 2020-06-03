@@ -77,10 +77,13 @@
 /* Silhouette: Add total number of tasks in this system, including kernel tasks */
 #define configTOTAL_TASKS                            5 // 2 test tasks + logging + idle + timer
 #define MICRO_BENCHMARK
-//#define EXCEPTION_MICRO_BENCHMARK
-#define EXCEPTION_NEW_MICRO_BENCHMARK
+#define EXCEPTION_MICRO_BENCHMARK
+//#define EXCEPTION_NEW_MICRO_BENCHMARK
 //#define SECURE_API_MICRO_BENCHMARK
 //#define CONTEXT_SWITCH_MICRO_BENCHMARK
+//#define UNPRIV_API_BENCHMARK // queue or stream benchmarks
+//#define QUEUE_BENCHMARK
+//#define STREAM_BUFFER_BENCHMARK
 
 /* Co-routine definitions. */
 #define configUSE_CO_ROUTINES                        0

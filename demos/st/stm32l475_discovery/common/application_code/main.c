@@ -210,7 +210,7 @@ void vApplicationDaemonTaskStartupHook( void )
 //        configASSERT( xWifiStatus == eWiFiSuccess );
 //    }
 
-//	start_microbenchmark();
+	start_microbenchmark();
 //	start_beebsbenchmark();
 configPRINTF( ( "System clock: %uHz\r\n", configCPU_CLOCK_HZ ) );
 #ifdef MICRO_BENCHMARK
