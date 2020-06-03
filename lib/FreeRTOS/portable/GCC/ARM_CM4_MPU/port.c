@@ -799,7 +799,9 @@ void xPortPendSVHandler( void )
 		"										\n"
 		"	.align 4							\n"
 		"pxCurrentTCBConst: .word pxCurrentTCB	\n"
+#ifdef CONTEXT_SWITCH_MICRO_BENCHMARK
 		"ulCycleAfter:	    .word ulCycleRestore\n"
+#endif
 		::"i"(configMAX_SYSCALL_INTERRUPT_PRIORITY)
 	);
 }
