@@ -514,7 +514,7 @@ CK_DEFINE_FUNCTION( CK_RV, C_OpenSession )( CK_SLOT_ID xSlotID,
      */
     if( CKR_OK == xResult )
     {
-        pxSessionObj = ( P11SessionPtr_t ) pvPortMalloc( sizeof( P11Session_t ) ); /*lint !e9087 Allow casting void* to other types. */
+        pxSessionObj = ( P11SessionPtr_t ) pvPortMallocUser( sizeof( P11Session_t ) ); /*lint !e9087 Allow casting void* to other types. */
 
         if( NULL == pxSessionObj )
         {
@@ -571,7 +571,7 @@ CK_DEFINE_FUNCTION( CK_RV, C_OpenSession )( CK_SLOT_ID xSlotID,
 
     if( ( NULL != pxSessionObj ) && ( CKR_OK != xResult ) )
     {
-        vPortFree( pxSessionObj );
+        vPortFreeUser( pxSessionObj );
     }
 
     return xResult;
@@ -617,7 +617,7 @@ CK_DEFINE_FUNCTION( CK_RV, C_CloseSession )( CK_SESSION_HANDLE xSession )
             mbedtls_sha256_free( &pxSession->xSHA256Context );
         }
 
-        vPortFree( pxSession );
+        vPortFreeUser( pxSession );
     }
     else
     {
@@ -695,7 +695,7 @@ CK_DEFINE_FUNCTION( CK_RV, C_CreateObject )( CK_SESSION_HANDLE xSession,
                 }
 
                 /* Verify that the given certificate can be parsed. */
-                pvContext = pvPortMalloc( sizeof( mbedtls_x509_crt ) );
+                pvContext = pvPortMallocUser( sizeof( mbedtls_x509_crt ) );
 
                 if( NULL != pvContext )
                 {
@@ -704,7 +704,7 @@ CK_DEFINE_FUNCTION( CK_RV, C_CreateObject )( CK_SESSION_HANDLE xSession,
                                                                   pxCertificateTemplate->xValue.pValue,
                                                                   pxCertificateTemplate->xValue.ulValueLen );
                     mbedtls_x509_crt_free( ( mbedtls_x509_crt * ) pvContext );
-                    vPortFree( pvContext );
+                    vPortFreeUser( pvContext );
                 }
                 else
                 {
@@ -752,7 +752,7 @@ CK_DEFINE_FUNCTION( CK_RV, C_CreateObject )( CK_SESSION_HANDLE xSession,
                 }
 
                 /* Verify that the given key can be parsed. */
-                pvContext = pvPortMalloc( sizeof( mbedtls_pk_context ) );
+                pvContext = pvPortMallocUser( sizeof( mbedtls_pk_context ) );
 
                 if( NULL != pvContext )
                 {
@@ -774,7 +774,7 @@ CK_DEFINE_FUNCTION( CK_RV, C_CreateObject )( CK_SESSION_HANDLE xSession,
                     }
 
                     mbedtls_pk_free( ( mbedtls_pk_context * ) pvContext );
-                    vPortFree( pvContext );
+                    vPortFreeUser( pvContext );
                 }
                 else
                 {
@@ -984,7 +984,7 @@ CK_DEFINE_FUNCTION( CK_RV, C_FindObjectsInit )( CK_SESSION_HANDLE xSession,
             /* Make sure the reported buffer length is not super huge. */
             if( pxTemplate->ulValueLen < UCHAR_MAX )
             {
-                pxSession->xFindObjectLabel = pvPortMalloc( pxTemplate->ulValueLen );
+                pxSession->xFindObjectLabel = pvPortMallocUser( pxTemplate->ulValueLen );
 
                 if( pxSession->xFindObjectLabel != NULL )
                 {
@@ -1098,7 +1098,7 @@ CK_DEFINE_FUNCTION( CK_RV, C_FindObjectsFinal )( CK_SESSION_HANDLE xSession )
 
         pxSession->xFindObjectInit = CK_FALSE;
         pxSession->xFindObjectComplete = CK_FALSE;
-        vPortFree( pxSession->xFindObjectLabel );
+        vPortFreeUser( pxSession->xFindObjectLabel );
         pxSession->xFindObjectLabelLength = 0;
     }
 
@@ -1500,7 +1500,7 @@ CK_DEFINE_FUNCTION( CK_RV, C_GenerateKeyPair )( CK_SESSION_HANDLE xSession,
     PKCS11_GenerateKeyPublicTemplatePtr_t pxPublicTemplate = ( PKCS11_GenerateKeyPublicTemplatePtr_t ) pxPublicKeyTemplate;
 
     CK_RV xResult = CKR_OK;
-    uint8_t * pucDerFile = pvPortMalloc( pkcs11KEY_GEN_MAX_DER_SIZE );
+    uint8_t * pucDerFile = pvPortMallocUser( pkcs11KEY_GEN_MAX_DER_SIZE );
 
     if( pucDerFile == NULL )
     {
@@ -1564,7 +1564,7 @@ CK_DEFINE_FUNCTION( CK_RV, C_GenerateKeyPair )( CK_SESSION_HANDLE xSession,
     /* Clean up. */
     if( NULL != pucDerFile )
     {
-        vPortFree( pucDerFile );
+        vPortFreeUser( pucDerFile );
     }
 
     mbedtls_pk_free( &xCtx );

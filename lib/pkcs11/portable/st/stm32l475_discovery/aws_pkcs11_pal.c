@@ -212,7 +212,7 @@ P11KeyConfig_t P11KeyConfig __attribute__( ( section( "UNINIT_FIXED_LOC" ) ) );
             if( xReturn == 0 )
             {
                 /* Allocate memory for the PEM contents (excluding header, footer, newlines). */
-                pemBodyBuffer = pvPortMalloc( *pPemLength );
+                pemBodyBuffer = pvPortMallocUser( *pPemLength );
 
                 if( pemBodyBuffer == NULL )
                 {
@@ -244,7 +244,7 @@ P11KeyConfig_t P11KeyConfig __attribute__( ( section( "UNINIT_FIXED_LOC" ) ) );
 
                 /* Allocate space for the full PEM certificate, including header, footer, and newlines.
                  * This space must be freed by the application. */
-                *ppcPemBuffer = pvPortMalloc( xTotalPemLength );
+                *ppcPemBuffer = pvPortMallocUser( xTotalPemLength );
 
                 if( *ppcPemBuffer == NULL )
                 {
@@ -277,7 +277,7 @@ P11KeyConfig_t P11KeyConfig __attribute__( ( section( "UNINIT_FIXED_LOC" ) ) );
 
             if( pemBodyBuffer != NULL )
             {
-                vPortFree( pemBodyBuffer );
+                vPortFreeUser( pemBodyBuffer );
             }
 
             /* Copy the footer. */
@@ -363,7 +363,7 @@ CK_OBJECT_HANDLE PKCS11_PAL_SaveObject( CK_ATTRIBUTE_PTR pxLabel,
                         xHandle = eInvalidHandle;
                     }
                 }
-                vPortFree( pemBuffer );
+                vPortFreeUser( pemBuffer );
             #endif /* USE_OFFLOAD_SSL */
         }
 
@@ -408,7 +408,7 @@ CK_OBJECT_HANDLE PKCS11_PAL_SaveObject( CK_ATTRIBUTE_PTR pxLabel,
                         xHandle = eInvalidHandle;
                     }
                 }
-                vPortFree( pemBuffer );
+                vPortFreeUser( pemBuffer );
             #endif /* USE_OFFLOAD_SSL */
         }
 

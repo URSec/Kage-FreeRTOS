@@ -162,7 +162,7 @@ BaseType_t CRYPTO_SignatureVerificationStart( void ** ppvContext,
     /*
      * Allocate the context
      */
-    if( NULL == ( pxCtx = ( SignatureVerificationStatePtr_t ) pvPortMalloc(
+    if( NULL == ( pxCtx = ( SignatureVerificationStatePtr_t ) pvPortMallocUser(
                       sizeof( *pxCtx ) ) ) ) /*lint !e9087 Allow casting void* to other types. */
     {
         xResult = pdFALSE;
@@ -277,7 +277,7 @@ BaseType_t CRYPTO_SignatureVerificationFinal( void * pvContext,
         /*
          * Clean-up
          */
-        vPortFree( pxCtx );
+        vPortFreeUser( pxCtx );
     }
 
     return xResult;

@@ -932,13 +932,13 @@ int32_t SOCKETS_Close( Socket_t xSocket )
         /* Free the space allocated for pcDestination. */
         if( pxSecureSocket->pcDestination != NULL )
         {
-            vPortFree( pxSecureSocket->pcDestination );
+            vPortFreeUser( pxSecureSocket->pcDestination );
         }
 
         /* Free the space allocated for pcServerCertificate. */
         if( pxSecureSocket->pcServerCertificate != NULL )
         {
-            vPortFree( pxSecureSocket->pcServerCertificate );
+            vPortFreeUser( pxSecureSocket->pcServerCertificate );
         }
 
         #ifndef USE_OFFLOAD_SSL
@@ -1015,7 +1015,7 @@ int32_t SOCKETS_SetSockOpt( Socket_t xSocket,
                 {
                     /* Non-NULL destination string indicates that SNI extension should
                      * be used during TLS negotiation. */
-                    pxSecureSocket->pcDestination = ( char * ) pvPortMalloc( 1U + xOptionLength );
+                    pxSecureSocket->pcDestination = ( char * ) pvPortMallocUser( 1U + xOptionLength );
 
                     if( pxSecureSocket->pcDestination == NULL )
                     {
@@ -1041,7 +1041,7 @@ int32_t SOCKETS_SetSockOpt( Socket_t xSocket,
                 {
                     /* Non-NULL server certificate field indicates that the default trust
                      * list should not be used. */
-                    pxSecureSocket->pcServerCertificate = ( char * ) pvPortMalloc( xOptionLength );
+                    pxSecureSocket->pcServerCertificate = ( char * ) pvPortMallocUser( xOptionLength );
 
                     if( pxSecureSocket->pcServerCertificate == NULL )
                     {

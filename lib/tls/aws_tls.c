@@ -460,7 +460,7 @@ static int prvInitializeClientCredential( TLSContext_t * pxCtx )
     if( 0 == xResult )
     {
         /* Create a buffer for the certificate. */
-        pxCertificate = ( CK_BYTE_PTR ) pvPortMalloc( xTemplate.ulValueLen ); /*lint !e9079 Allow casting void* to other types. */
+        pxCertificate = ( CK_BYTE_PTR ) pvPortMallocUser( xTemplate.ulValueLen ); /*lint !e9079 Allow casting void* to other types. */
 
         if( NULL == pxCertificate )
         {
@@ -512,7 +512,7 @@ static int prvInitializeClientCredential( TLSContext_t * pxCtx )
 
     if( NULL != pxCertificate )
     {
-        vPortFree( pxCertificate );
+        vPortFreeUser( pxCertificate );
     }
 
     if( CKR_OK != xResult )
@@ -535,7 +535,7 @@ BaseType_t TLS_Init( void ** ppvContext,
     CK_C_GetFunctionList xCkGetFunctionList = NULL;
 
     /* Allocate an internal context. */
-    pxCtx = ( TLSContext_t * ) pvPortMalloc( sizeof( TLSContext_t ) ); /*lint !e9087 !e9079 Allow casting void* to other types. */
+    pxCtx = ( TLSContext_t * ) pvPortMallocUser( sizeof( TLSContext_t ) ); /*lint !e9087 !e9079 Allow casting void* to other types. */
 
     if( NULL != pxCtx )
     {
@@ -868,6 +868,6 @@ void TLS_Cleanup( void * pvContext )
         }
 
         /* Free memory. */
-        vPortFree( pxCtx );
+        vPortFreeUser( pxCtx );
     }
 }

@@ -248,7 +248,7 @@ CK_RV xProvisionCertificate( CK_SESSION_HANDLE xSession,
     {
         /* Convert the certificate to DER format if it was in PEM. */
         /* The DER key should be about 3/4 the size of the PEM key, so mallocing the PEM key size is sufficient. */
-        pucDerObject = pvPortMalloc( xCertificateTemplate.xValue.ulValueLen );
+        pucDerObject = pvPortMallocUser( xCertificateTemplate.xValue.ulValueLen );
         lConversionReturn = 0;
         xDerLen = xCertificateTemplate.xValue.ulValueLen;
 
@@ -293,7 +293,7 @@ CK_RV xProvisionCertificate( CK_SESSION_HANDLE xSession,
 
         if( pucDerObject != NULL )
         {
-            vPortFree( pucDerObject );
+            vPortFreeUser( pucDerObject );
         }
     }
 
@@ -344,7 +344,7 @@ CK_RV xProvisionDevice( CK_SESSION_HANDLE xSession,
     {
         /* Convert the private to DER format if it was in PEM. */
         /* The DER key should be about 3/4 the size of the PEM key, so mallocing the PEM key size is sufficient. */
-        pucDerObject = pvPortMalloc( xPrivateKeyTemplate.xValue.ulValueLen );
+        pucDerObject = pvPortMallocUser( xPrivateKeyTemplate.xValue.ulValueLen );
         lConversionReturn = 0;
         xDerLen = xPrivateKeyTemplate.xValue.ulValueLen;
 
@@ -384,7 +384,7 @@ CK_RV xProvisionDevice( CK_SESSION_HANDLE xSession,
 
         if( pucDerObject != NULL )
         {
-            vPortFree( pucDerObject );
+            vPortFreeUser( pucDerObject );
         }
     }
 

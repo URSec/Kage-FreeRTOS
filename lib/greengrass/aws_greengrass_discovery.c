@@ -252,7 +252,7 @@ BaseType_t GGD_JSONRequestStart( Socket_t * pxSocket )
         /* Build the HTTP GET request string that is specific to this host. */
         ulHttpGetLength = 1 + strlen( ggdCLOUD_DISCOVERY_ADDRESS ) +
                           strlen( clientcredentialIOT_THING_NAME );
-        pcHttpGetRequest = pvPortMalloc( ulHttpGetLength );
+        pcHttpGetRequest = pvPortMallocUser( ulHttpGetLength );
 
         if( NULL == pcHttpGetRequest )
         {
@@ -294,7 +294,7 @@ BaseType_t GGD_JSONRequestStart( Socket_t * pxSocket )
 
     if( NULL != pcHttpGetRequest )
     {
-        vPortFree( pcHttpGetRequest );
+        vPortFreeUser( pcHttpGetRequest );
     }
 
     return xStatus;
