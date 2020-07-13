@@ -526,7 +526,7 @@ CK_DEFINE_FUNCTION( CK_RV, C_OpenSession )( CK_SLOT_ID xSlotID,
          */
         if( CKR_OK == xResult )
         {
-            memset( pxSessionObj, 0, sizeof( P11Session_t ) );
+            memsetUser( pxSessionObj, 0, sizeof( P11Session_t ) );
         }
 
         pxSessionObj->xSignMutex = xSemaphoreCreateMutex();
@@ -878,7 +878,7 @@ CK_DEFINE_FUNCTION( CK_RV, C_GetAttributeValue )( CK_SESSION_HANDLE xSession,
                         }
                         else
                         {
-                            memcpy( pxTemplate[ iAttrib ].pValue, pxObjectValue, ulLength );
+                            memcpyUser( pxTemplate[ iAttrib ].pValue, pxObjectValue, ulLength );
                         }
                     }
 
@@ -929,7 +929,7 @@ CK_DEFINE_FUNCTION( CK_RV, C_GetAttributeValue )( CK_SESSION_HANDLE xSession,
                                     break;
                             }
 
-                            memcpy( pxTemplate[ iAttrib ].pValue, &xPkcsKeyType, sizeof( CK_KEY_TYPE ) );
+                            memcpyUser( pxTemplate[ iAttrib ].pValue, &xPkcsKeyType, sizeof( CK_KEY_TYPE ) );
                         }
 
                         /* Free the mbedTLS structure used to parse the key. */
@@ -988,7 +988,7 @@ CK_DEFINE_FUNCTION( CK_RV, C_FindObjectsInit )( CK_SESSION_HANDLE xSession,
 
                 if( pxSession->xFindObjectLabel != NULL )
                 {
-                    memcpy( pxSession->xFindObjectLabel,
+                    memcpyUser( pxSession->xFindObjectLabel,
                             pxTemplate->pValue,
                             pxTemplate->ulValueLen );
                     pxSession->xFindObjectLabelLength = ( uint8_t ) pxTemplate->ulValueLen;

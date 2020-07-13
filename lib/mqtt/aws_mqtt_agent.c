@@ -817,7 +817,7 @@ static MQTTNotificationData_t * prvStoreNotificationData( MQTTBrokerConnection_t
             /* We found one unused buffer - copy the notification data
              * and return. */
             pxNotificationData = &( pxConnection->xWaitingTasks[ x ] );
-            memcpy( pxNotificationData, &( pxEventData->xNotificationData ), sizeof( MQTTNotificationData_t ) );
+            memcpyUser( pxNotificationData, &( pxEventData->xNotificationData ), sizeof( MQTTNotificationData_t ) );
             break;
         }
     }
@@ -1068,7 +1068,7 @@ static void prvMQTTClientSocketWakeupCallback( Socket_t pxSocket )
     {
         /* The eMQTTServiceSocket event is not handled directly, it is only used
          * to unblock the MQTT task, so only the xEventType needs to be set. */
-        memset( &xEventData, 0x00, sizeof( MQTTEventData_t ) );
+        memsetUser( &xEventData, 0x00, sizeof( MQTTEventData_t ) );
         xEventData.xEventType = eMQTTServiceSocket;
         mqttconfigDEBUG_LOG( ( "Socket sending wakeup to MQTT task.\r\n" ) );
         ( void ) xQueueSendToBack( xCommandQueue, &xEventData, xTicksToWait );
@@ -1861,7 +1861,7 @@ BaseType_t MQTT_AGENT_Init( void )
     if( xCommandQueue == NULL )
     {
         /* Ensure the connection structures start in a consistent state. */
-        memset( xMQTTConnections, 0x00, sizeof( xMQTTConnections ) );
+        memsetUser( xMQTTConnections, 0x00, sizeof( xMQTTConnections ) );
 
         for( x = 0; x < ( UBaseType_t ) mqttconfigMAX_BROKERS; x++ )
         {

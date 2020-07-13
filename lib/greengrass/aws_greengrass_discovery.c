@@ -316,7 +316,7 @@ BaseType_t GGD_JSONRequestGetSize( Socket_t * pxSocket,
     /****** Parse the header until the begining of the content length string is found. *****/
     configASSERT( pxSocket != NULL );
     configASSERT( pulJSONFileSize != NULL );
-    memset( cBuffer, 0, sizeof( cBuffer ) );
+    memsetUser( cBuffer, 0, sizeof( cBuffer ) );
 
     do
     {

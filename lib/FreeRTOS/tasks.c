@@ -42,6 +42,7 @@ task.h is included from an application file. */
 
 #ifdef MICRO_BENCHMARK // Silhouette benchmark
 #include "cycle_counter.h"
+#include "stm32l4xx_ll_system.h"
 #endif
 
 /* Lint e9021, e961 and e750 are suppressed as a MISRA exception justified
@@ -399,6 +400,11 @@ PRIVILEGED_DATA static TaskHandle_t xTaskTable[configTOTAL_TASKS];
  * Silhouette: Move Event list item here from TCB
  */
 static ListItem_t xTaskEventListItemTable[configTOTAL_TASKS];
+
+/*
+ * Silhouette: current number of nested untrusted handler
+ */
+PRIVILEGED_DATA uint32_t uxNestedUntrustedException = 0U;
 
 #if ( configGENERATE_RUN_TIME_STATS == 1 )
 
@@ -2063,6 +2069,10 @@ BaseType_t xReturn;
     KIN1_InitCycleCounter(); /* enable DWT hardware */
 	KIN1_EnableCycleCounter(); /* start counting */
 #endif
+#ifdef DISABLE_CACHE
+	LL_FLASH_DisableInstCache();
+    LL_FLASH_DisableDataCache();
+#endif
 
 	/* Add the idle task at the lowest priority. */
 	#if( configSUPPORT_STATIC_ALLOCATION == 1 )
@@ -3145,8 +3155,8 @@ void vTaskSwitchContext( void )
 		taskSELECT_HIGHEST_PRIORITY_TASK(); /*lint !e9079 void * is used as this macro is used with timers and co-routines too.  Alignment is known to be fine as the type of the pointer stored and retrieved is the same. */
 		traceTASK_SWITCHED_IN();
 
-		// Silhouette: Add runtime check for the TCB selected
-		configASSERT( xVerifyTCB(pxCurrentTCB) != -1 );
+//		// Silhouette: Add runtime check for the TCB selected
+//		configASSERT( xVerifyTCB(pxCurrentTCB) != -1 );
 
 		/* After the new task is switched in, update the global errno. */
 		#if( configUSE_POSIX_ERRNO == 1 )
@@ -4843,6 +4853,9 @@ TickType_t uxReturn;
 	{
 	BaseType_t xReturn;
 
+		// Silhouette: Add runtime check for pointer to unprivileged data
+		vVerifyUntrustedData(pulNotificationValue,sizeof(uint32_t));
+
 		taskENTER_CRITICAL();
 		{
 			/* Only block if a notification is not already pending. */
@@ -5608,9 +5621,13 @@ uint32_t cycles;
 /*-----------------------------------------------------------*/
 void vMeasureException( void ){
 uint32_t cycles;
+	// Backup r0-r3
+//	__asm volatile ("push {r0-r3}" ::: "r0", "r1", "r2", "r3", "memory");
 	KIN1_ResetCycleCounter();
 	vPortKageDummyHandler();
 	cycles = KIN1_GetCycleCounter();
+	// Restore r0-r3
+//	__asm volatile ("pop {r0-r3}" ::: "r0", "r1", "r2", "r3", "memory");
 	configPRINTF( ( "Dummy Exception: %u\r\n", cycles ) );
 
 }

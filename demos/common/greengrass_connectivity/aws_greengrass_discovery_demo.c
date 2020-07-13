@@ -187,7 +187,7 @@ static void prvDiscoverGreenGrassCore( void * pvParameters )
     /* Create MQTT Client. */
     if( MQTT_AGENT_Create( &( xMQTTClientHandle ) ) == eMQTTAgentSuccess )
     {
-        memset( &xHostAddressData, 0, sizeof( xHostAddressData ) );
+        memsetUser( &xHostAddressData, 0, sizeof( xHostAddressData ) );
 
         /* Demonstrate automated connection. */
         configPRINTF( ( "Attempting automated selection of Greengrass device\r\n" ) );

@@ -242,7 +242,7 @@ static BaseType_t prvDeltaCallback( void * pvUserData,
     ( void ) pcThingName;
 
     jsmn_init( &xJSMNParser );
-    memset( &xShadowQueueData, 0x00, sizeof( ShadowQueueData_t ) );
+    memsetUser( &xShadowQueueData, 0x00, sizeof( ShadowQueueData_t ) );
 
     lNbTokens = ( int32_t ) jsmn_parse( &xJSMNParser,
                                         pcDeltaDocument,
@@ -339,7 +339,7 @@ static ShadowReturnCode_t prvShadowClientCreateConnect( void )
 
     if( xReturn == eShadowSuccess )
     {
-        memset( &xConnectParams, 0x00, sizeof( xConnectParams ) );
+        memsetUser( &xConnectParams, 0x00, sizeof( xConnectParams ) );
         xConnectParams.pcURL = clientcredentialMQTT_BROKER_ENDPOINT;
         xConnectParams.usPort = clientcredentialMQTT_BROKER_PORT;
 
@@ -380,7 +380,7 @@ static void prvChangeDesiredTask( void * pvParameters )
 
     /* Initialize parameters. */
     pxShadowTaskParam = ( ShadowTaskParam_t * ) pvParameters; /*lint !e9087 Safe cast from context. */
-    memset( &xShadowQueueData, 0x00, sizeof( ShadowQueueData_t ) );
+    memsetUser( &xShadowQueueData, 0x00, sizeof( ShadowQueueData_t ) );
     xShadowQueueData.xTaskToNotify = pxShadowTaskParam->xTaskHandle;
 
     /* Add the initial state to the update queue, wait for the update to complete. */

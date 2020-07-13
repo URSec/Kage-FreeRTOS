@@ -329,7 +329,7 @@ static BaseType_t prvUint32PublishSubscribe( MQTTAgentConnectParams_t * pxConnec
     xTickCount = xTaskGetTickCount();
     configPRINTF( ( "%s initiated connection to broker at time %u ticks.\r\n", __FUNCTION__, xTickCount ) );
 
-    strncpy( ( char * ) pxUserData->cTopic, ( char * ) pcTaskGetName( NULL ), subpubCHAR_TASK_NAME_MAX_SIZE );
+    strncpyUser( ( char * ) pxUserData->cTopic, ( char * ) pcTaskGetName( NULL ), subpubCHAR_TASK_NAME_MAX_SIZE );
     strncat( ( char * ) pxUserData->cTopic, ( char * ) subpubUINT_TOPIC_PATH, sizeof( subpubSTRING_TOPIC_PATH ) );
 
     if( MQTT_AGENT_Connect( xMQTTClientHandle, pxConnectParams, xMaxCommandTime ) == eMQTTAgentSuccess )
@@ -456,7 +456,7 @@ static BaseType_t prvStringPublishSubscribe( MQTTAgentConnectParams_t * pxConnec
     MQTTAgentUnsubscribeParams_t xUnsubscribeParams;
     BaseType_t xResult = pdPASS;
 
-    strncpy( ( char * ) pxUserData->cTopic, ( char * ) pcTaskGetName( NULL ), subpubCHAR_TASK_NAME_MAX_SIZE );
+    strncpyUser( ( char * ) pxUserData->cTopic, ( char * ) pcTaskGetName( NULL ), subpubCHAR_TASK_NAME_MAX_SIZE );
     strncat( ( char * ) pxUserData->cTopic, ( char * ) subpubSTRING_TOPIC_PATH, sizeof( subpubSTRING_TOPIC_PATH ) );
 
     if( MQTT_AGENT_Connect( xMQTTClientHandle, pxConnectParams, xMaxCommandTime ) == eMQTTAgentSuccess )

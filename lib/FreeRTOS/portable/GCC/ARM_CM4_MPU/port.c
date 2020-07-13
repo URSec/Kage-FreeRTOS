@@ -355,6 +355,16 @@ void vPortKageDummyHandler( void )
 			// r2: shadow stack of r0
 			// r3: temp register to hold values
 
+#ifdef EXCEPTION_NEW_MICRO_BENCHMARK
+			// Setup dummy lr
+			"	push {lr}						\n"
+			"	ldr r14, =0xfffffffd			\n"
+			/* Silhouette: Reset cycle counter */
+			"	movw r2, #4100					\n"
+			"	movt r2, #57344					\n"
+			"	mov r3, #0						\n"
+			"	str r3, [r2]					\n"
+#endif
 			// Set priority to highest to disable interrupt preemption
 			"	mrs r1, basepri					\n"
 			"	mov r0, %1						\n"
@@ -370,6 +380,12 @@ void vPortKageDummyHandler( void )
 			"	mrs r0, psp						\n"
 		#endif
 			"	isb								\n"
+			// Increment the nested untrusted exception counter
+			// r2 and r3 temporarily used here to hold counter
+			"	ldr r2, numNested				\n"
+			"	ldr r3, [r2]					\n"
+			"	add r3, r3, #1					\n"
+			"	str r3, [r2]					\n"
 			// Copy hardware-saved processor state to r0 + offset
 			"	add r2, r0, " STACK_SIZE_INLINE(STACK_SIZE_IN_BYTES_STATIC)  "		\n"
 			"	ldr r3, [r0]					\n" // r0
@@ -406,8 +422,17 @@ void vPortKageDummyHandler( void )
 			"	mrs r3, control					\n"
 			"	stmdb sp!, {r0, r3-r11, r14}	\n" /* Save the remaining registers and current r0. */
 			"	sub sp, sp, " STACK_SIZE_INLINE(STACK_SIZE_IN_BYTES_STATIC) "		\n" // restore sp
-			// Disable unprivileged access to task stack
-			// (Currently assuming that task stack is always the 8th region)
+			// Set task stacks and shadow stacks to privileged Read-only
+			// (Currently assuming that task stacks is always the 5th region)
+			"	ldr r0, =0xe000ed98				\n"
+			"	mov r2, #4						\n"
+			"	str r2, [r0]					\n"
+			"	ldr r0, =0xe000eda0				\n"
+			"	ldr r2, [r0]					\n"
+			"	orr r2, #67108864				\n" // 0x04000000, privileged read-only bit in AP bits
+			"	str r2, [r0]					\n"
+			// Disable the MPU region of foreground task stack
+			// (Currently assuming that it is always the 8th region)
 			"	ldr r0, =0xe000ed98				\n"
 			"	mov r2, #7						\n"
 			"	str r2, [r0]					\n"
@@ -432,7 +457,27 @@ void vPortKageDummyHandler( void )
 			"	msr basepri, r0					\n"
 			"	isb								\n"
 			"	dsb								\n"
-			// Enable unprivileged access to task stack
+			// Decrement the nested untrusted exception counter
+			// r0 and r2 temporarily used here to hold counter
+			"	ldr r0, numNested				\n"
+			"	ldr r2, [r0]					\n"
+			"	sub r2, r2, #1					\n"
+			"	str r2, [r0]					\n"
+			// If the exception is nested, don't
+			// restore MPU
+			"	teq r2, #0						\n"
+			"	it ne							\n"
+			"	bne skip_mpu_res				\n"
+			// Set task stacks and shadow stacks back to privileged RW
+			// (Currently assuming that task stacks is always the 5th region)
+			"	ldr r0, =0xe000ed98				\n"
+			"	mov r2, #4						\n"
+			"	str r2, [r0]					\n"
+			"	ldr r0, =0xe000eda0				\n"
+			"	ldr r2, [r0]					\n"
+			"	bic r2, #67108864				\n" // 0x04000000, privileged read-only bit in AP bits
+			"	str r2, [r0]					\n"
+			// Enable the region of foreground task stack
 			"	ldr r0, =0xe000ed98				\n"
 			"	mov r2, #7						\n"
 			"	str r2, [r0]					\n"
@@ -441,6 +486,7 @@ void vPortKageDummyHandler( void )
 			"	orr r2, #1						\n"
 			"	str r2, [r0]					\n"
 			// Restore other processor state from kernel shadow stack
+			"	skip_mpu_res:					\n"
 			"	add sp, sp, " STACK_SIZE_INLINE(STACK_SIZE_IN_BYTES_STATIC) "		\n" // point sp to shadow stack
 			"	ldmia sp!, {r0, r3-r11, r14}		\n" /* Pop r0 and the registers that are not automatically saved on exception entry. */
 			"	msr control, r3					\n"
@@ -480,9 +526,14 @@ void vPortKageDummyHandler( void )
 			"	msr basepri, r1					\n"
 			"	isb								\n"
 			"	dsb								\n"
+#ifdef EXCEPTION_NEW_MICRO_BENCHMARK
+			"	pop {lr}						\n"
+#endif
 			// Exception return
 			"	bx r14							\n"
-			::"i"(prvKageDummyHandler), "i"(configMAX_SYSCALL_INTERRUPT_PRIORITY): "memory"
+			// Reference of the nested handler counter
+			"	numNested:  .word uxNestedUntrustedException\n"
+			::"i"(prvKageDummyHandler), "i"(configMAX_SYSCALL_INTERRUPT_PRIORITY): "r0", "r1", "r2", "r3", "memory"
 	);
 }
 /*-----------------------------------------------------------*/

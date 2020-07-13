@@ -147,10 +147,10 @@ static void silHighMicroTask( void * pvParameters )
 #endif
 	configPRINTF( ( "Started Microbenchmark High Priority Task \r\n" ) );
 	vTaskSuspend(NULL);
-	// dummyFloat = 1.2;
+//	 dummyFloat = 1.2;
 	for(;;){
-		// dummyFloat = dummyFloat * dummyFloat;
-		vTaskSuspend(NULL);
+//		 dummyFloat = dummyFloat * dummyFloat;
+//		vTaskSuspend(NULL);
 	}
 }
 

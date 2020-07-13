@@ -85,7 +85,8 @@
 		if( ( pulStack[ 0 ] != ulCheckValue ) ||														\
 			( pulStack[ 1 ] != ulCheckValue ) ||														\
 			( pulStack[ 2 ] != ulCheckValue ) ||														\
-			( pulStack[ 3 ] != ulCheckValue ) )															\
+			( pulStack[ 3 ] != ulCheckValue ) ||														\
+			( ( uint32_t * ) pxCurrentTCB->pxTopOfStack < pulStack))									\
 		{																								\
 			vApplicationStackOverflowHook( ( TaskHandle_t ) pxCurrentTCB, pxCurrentTCB->pcTaskName );	\
 		}																								\

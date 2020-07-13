@@ -414,7 +414,7 @@ static int prvInitializeClientCredential( TLSContext_t * pxCtx )
 
     if( xResult == CKR_OK )
     {
-        memcpy( &pxCtx->xMbedPkInfo, mbedtls_pk_info_from_type( xKeyAlgo ), sizeof( mbedtls_pk_info_t ) );
+        memcpyUser( &pxCtx->xMbedPkInfo, mbedtls_pk_info_from_type( xKeyAlgo ), sizeof( mbedtls_pk_info_t ) );
 
         pxCtx->xMbedPkInfo.sign_func = prvPrivateKeySigningCallback;
         pxCtx->xMbedPkCtx.pk_info = &pxCtx->xMbedPkInfo;
@@ -539,7 +539,7 @@ BaseType_t TLS_Init( void ** ppvContext,
 
     if( NULL != pxCtx )
     {
-        memset( pxCtx, 0, sizeof( TLSContext_t ) );
+        memsetUser( pxCtx, 0, sizeof( TLSContext_t ) );
         *ppvContext = pxCtx;
 
         /* Initialize the context. */
