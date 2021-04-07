@@ -51,6 +51,7 @@
 
 /* Kage Demo includes */
 #include "sil_demo.h"
+#include "cycle_counter.h"
 
 /* WiFi driver includes. */
 #include "es_wifi.h"
@@ -79,7 +80,7 @@ const AppVersion32_t xAppFirmwareVersion =
 #define mainREQUIRED_WIFI_FIRMWARE_INVENTEK_VERSION     ( 5 )
 /*-----------------------------------------------------------*/
 
-void vApplicationDaemonTaskStartupHook( void );
+void vApplicationDaemonTaskStartupHook( void ) PRIVILEGED_FUNCTION;
 
 /* Defined in es_wifi_io.c. */
 extern void SPI_WIFI_ISR(void);
@@ -210,7 +211,17 @@ void vApplicationDaemonTaskStartupHook( void )
 //        configASSERT( xWifiStatus == eWiFiSuccess );
 //    }
 
-	start_microbenchmark();
+//	start_microbenchmark();
+int temp = 0;
+int t1, t2;
+KIN1_InitCycleCounter(); /* enable DWT hardware */
+KIN1_EnableCycleCounter(); /* start counting */
+KIN1_ResetCycleCounter();
+t1 = KIN1_GetCycleCounter();
+//t--;
+temp = 100/t1;
+t2 = KIN1_GetCycleCounter();
+configPRINTF( ( "DIV_BY_0 Trap: %d %d cycles; temp = %d\r\n", t1, t2, temp ) );
 //	start_beebsbenchmark();
 configPRINTF( ( "System clock: %uHz\r\n", configCPU_CLOCK_HZ ) );
 #ifdef MICRO_BENCHMARK
@@ -648,22 +659,260 @@ void prvGetRegistersFromStack( uint32_t * pulFaultStackAddress ) __attribute__((
     }
 }
 /*-----------------------------------------------------------*/
+void prvKageUsageHandler( void )
+//void HardFault_Handler( void )
+{
+	/* As the microbenchmark triggers a divide-by-0 fault,
+	 * we need to clear the status bit to clear the fault.
+	 */
+	__asm volatile
+	(
+		"ldr r0, =0xe000ed14			\n"
+		"ldr r2, [r0]					\n"
+		"bic r2, #16						\n"
+		"str r2, [r0]					\n"
+//		"ldr r0, =0xe000ed28			\n"
+//		"ldr r2, =0x02000000			\n" // div-by-0 bit in UFSR
+//		"str r2, [r0]					\n"
+	);
+}
 
 /* The fault handler implementation calls a function called
  * prvGetRegistersFromStack(). */
 void HardFault_Handler( void )
 {
-    __asm volatile
-    (
-        " tst lr, #4                                                \n"
-        " ite eq                                                    \n"
-        " mrseq r0, msp                                             \n"
-        " mrsne r0, psp                                             \n"
-        " ldr r1, [r0, #24]                                         \n"
-        " ldr r2, handler2_address_const                            \n"
-        " bx r2                                                     \n"
-        " handler2_address_const: .word prvGetRegistersFromStack    \n"
-    );
+//    __asm volatile
+//    (
+//        " tst lr, #4                                                \n"
+//        " ite eq                                                    \n"
+//        " mrseq r0, msp                                             \n"
+//        " mrsne r0, psp                                             \n"
+//        " ldr r1, [r0, #24]                                         \n"
+//        " ldr r2, handler2_address_const                            \n"
+//        " bx r2                                                     \n"
+//        " handler2_address_const: .word prvGetRegistersFromStack    \n"
+//    );
+		/* Assumes psp was in use. */
+			__asm volatile
+			(
+					// r0: stack pointer that contains processor state
+					// r1: original basepri value
+					// r2: shadow stack of r0
+					// r3: temp register to hold values
+
+					// Set priority to highest to disable interrupt preemption
+					"	mrs r1, basepri					\n"
+					"	mov r0, %1						\n"
+					"	msr basepri, r0					\n"
+					"	isb								\n"
+					"	dsb								\n"
+				#ifndef USE_PROCESS_STACK	/* Code should not be required if a main() is using the process stack. */
+					"	tst lr, #4						\n"
+					"	ite eq							\n"
+					"	mrseq r0, msp					\n"
+					"	mrsne r0, psp					\n"
+				#else
+					"	mrs r0, psp						\n"
+				#endif
+					"	isb								\n"
+					// Increment the nested untrusted exception counter
+					// r2 and r3 temporarily used here to hold counter
+					"	ldr r2, numNested				\n"
+					"	ldr r3, [r2]					\n"
+					"	add r3, r3, #1					\n"
+					"	str r3, [r2]					\n"
+#ifndef KAGE_INVERT
+					// Copy hardware-saved processor state to r0 + offset
+					"	add r2, r0, #4096		\n"
+					"	ldr r3, [r0]					\n" // r0
+					"	str r3, [r2]					\n"
+					"	ldr r3, [r0, #4]				\n" // r1
+					"	str r3, [r2, #4]				\n"
+					"	ldr r3, [r0, #8]				\n" // r2
+					"	str r3, [r2, #8]				\n"
+					"	ldr r3, [r0, #12]				\n" // r3
+					"	str r3, [r2, #12]				\n"
+					"	ldr r3, [r0, #16]				\n" // r12
+					"	str r3, [r2, #16]				\n"
+					"	ldr r3, [r0, #20]				\n" // lr
+					"	str r3, [r2, #20]				\n"
+					"	ldr r3, [r0, #24]				\n" // return addr
+					"	str r3, [r2, #24]				\n"
+					"	ldr r3, [r0, #28]				\n" // xpsr
+					"	str r3, [r2, #28]				\n"
+					"	add r2, r2, #32					\n"
+					"	add r3, r0, #32					\n"
+					"	tst r14, #0x10					\n" /* Is the task using the FPU context?  If so, spill low vfp registers. */
+					"	itttt eq						\n"
+					"	vldmeq r3, {s0-s15}				\n" // s0-s15
+					"	vstmeq r2, {s0-s15}				\n"
+					"	ldreq r3, [r3, #64]				\n" // fpscr
+					"	streq r3, [r2, #64]				\n"
+#endif
+#ifdef STRD_EXPERIMENT
+					// Copy hardware-saved processor state to r0 + offset
+					"	add r2, r0, #4096		\n"
+					"	ldrd r3, r12, [r0]				\n" // r0, r1
+					"	strd r3, r12, [r2]				\n"
+					"	ldrd r3, r12, [r0, #8]			\n" // r2, r3
+					"	strd r3, r12, [r2, #8]			\n"
+					"	ldrd r3, r12, [r0, #16]			\n" // r12, lr
+					"	strd r3, r12, [r2, #16]			\n"
+					"	ldrd r3, r12, [r0, #24]			\n" // return addr
+					"	strd r3, r12, [r2, #24]			\n"
+					"	add r2, r2, #32					\n"
+					"	add r3, r0, #32					\n"
+					"	tst r14, #0x10					\n" /* Is the task using the FPU context?  If so, spill low vfp registers. */
+					"	itttt eq						\n"
+					"	vldmeq r3, {s0-s15}				\n" // s0-s15
+					"	vstmeq r2, {s0-s15}				\n"
+					"	ldreq r3, [r3, #64]				\n" // fpscr
+					"	streq r3, [r2, #64]				\n"
+#endif
+//					"	push {r14}\n"
+					// Spill other processor state to kernel shadow stack
+					"	add sp, sp, #4096		\n" // point sp to shadow stack
+					"									\n"
+					"	tst r14, #0x10					\n" /* Is the task using the FPU context?  If so, push high vfp registers. */
+					"	it eq							\n"
+					"	vstmdbeq sp!, {s16-s31}			\n"
+					"									\n"
+					"	mrs r3, control					\n"
+					"	stmdb sp!, {r0, r3-r11, r14}	\n" /* Save the remaining registers and current r0. */
+					"	sub sp, sp, #4096		\n" // restore sp
+					// Set task stacks and shadow stacks to privileged Read-only
+					// (Currently assuming that task stacks is always the 5th region)
+					"	ldr r0, =0xe000ed98				\n"
+					"	mov r2, #4						\n"
+					"	str r2, [r0]					\n"
+					"	ldr r0, =0xe000eda0				\n"
+					"	ldr r2, [r0]					\n"
+					"	orr r2, #67108864				\n" // 0x04000000, privileged read-only bit in AP bits
+					"	str r2, [r0]					\n"
+					// Disable the MPU region of foreground task stack
+					// (Currently assuming that it is always the 8th region)
+					"	ldr r0, =0xe000ed98				\n"
+					"	mov r2, #7						\n"
+					"	str r2, [r0]					\n"
+					"	ldr r0, =0xe000eda0				\n"
+					"	ldr r2, [r0]					\n"
+					"	bic r2, #1						\n"
+					"	str r2, [r0]					\n"
+					// Reset basepri
+					"	msr basepri, r1					\n"
+					"	isb								\n"
+					"	dsb								\n"
+					// Clear r0-r3 before calling C function
+					"	mov r0, #0						\n"
+					"	mov r1, #0						\n"
+					"	mov r2, #0						\n"
+					"	mov r3, #0						\n"
+					// Call the C handler function
+					"	bl %0							\n"
+					// Set priority to highest to disable interrupt preemption
+					"	mrs r1, basepri					\n"
+					"	mov r0, %1						\n"
+					"	msr basepri, r0					\n"
+					"	isb								\n"
+					"	dsb								\n"
+					// Decrement the nested untrusted exception counter
+					// r0 and r2 temporarily used here to hold counter
+					"	ldr r0, numNested				\n"
+					"	ldr r2, [r0]					\n"
+					"	sub r2, r2, #1					\n"
+					"	str r2, [r0]					\n"
+					// If the exception is nested, don't
+					// restore MPU
+					"	teq r2, #0						\n"
+					"	it ne							\n"
+					"	bne skip_mpu_res				\n"
+					// Set task stacks and shadow stacks back to privileged RW
+					// (Currently assuming that task stacks is always the 5th region)
+					"	ldr r0, =0xe000ed98				\n"
+					"	mov r2, #4						\n"
+					"	str r2, [r0]					\n"
+					"	ldr r0, =0xe000eda0				\n"
+					"	ldr r2, [r0]					\n"
+					"	bic r2, #67108864				\n" // 0x04000000, privileged read-only bit in AP bits
+					"	str r2, [r0]					\n"
+					// Enable the region of foreground task stack
+					"	ldr r0, =0xe000ed98				\n"
+					"	mov r2, #7						\n"
+					"	str r2, [r0]					\n"
+					"	ldr r0, =0xe000eda0				\n"
+					"	ldr r2, [r0]					\n"
+					"	orr r2, #1						\n"
+					"	str r2, [r0]					\n"
+					// Restore other processor state from kernel shadow stack
+					"	skip_mpu_res:					\n"
+//					"	pop {r14}\n"
+					"	add sp, sp, #4096		\n" // point sp to shadow stack
+					"	ldmia sp!, {r0, r3-r11, r14}		\n" /* Pop r0 and the registers that are not automatically saved on exception entry. */
+					"	msr control, r3					\n"
+					"									\n"
+					"	tst r14, #0x10					\n" /* Is the task using the FPU context?  If so, pop the high vfp registers too. */
+					"	it eq							\n"
+					"	vldmiaeq sp!, {s16-s31}			\n"
+					"	sub sp, sp, #4096		\n" // restore sp
+					"									\n"
+#ifndef KAGE_INVERT
+					// Restore hardware-saved processor state from r0 + offset
+					"	add r2, r0, #4096		\n"
+					"	ldr r3, [r2]					\n" // r0
+					"	str r3, [r0]					\n"
+					"	ldr r3, [r2, #4]				\n" // r1
+					"	str r3, [r0, #4]				\n"
+					"	ldr r3, [r2, #8]				\n" // r2
+					"	str r3, [r0, #8]				\n"
+					"	ldr r3, [r2, #12]				\n" // r3
+					"	str r3, [r0, #12]				\n"
+					"	ldr r3, [r2, #16]				\n" // r12
+					"	str r3, [r0, #16]				\n"
+					"	ldr r3, [r2, #20]				\n" // lr
+					"	str r3, [r0, #20]				\n"
+					"	ldr r3, [r2, #24]				\n" // return addr
+					"	str r3, [r0, #24]				\n"
+					"	ldr r3, [r2, #28]				\n" // xpsr
+					"	str r3, [r0, #28]				\n"
+					"	add r2, r2, #32					\n"
+					"	add r3, r0, #32					\n"
+					"	tst r14, #0x10					\n" /* Is the task using the FPU context?  If so, spill low vfp registers. */
+					"	itttt eq						\n"
+					"	vldmeq r2, {s0-s15}				\n" // s0-s15
+					"	vstmeq r3, {s0-s15}				\n"
+					"	ldreq r2, [r2, #64]				\n" // fpscr
+					"	streq r2, [r3, #64]				\n"
+#endif
+#ifdef STRD_EXPERIMENT
+					// Copy hardware-saved processor state to r0 + offset
+					"	add r2, r0, #4096		\n"
+					"	ldrd r3, r12, [r2]				\n" // r0, r1
+					"	strd r3, r12, [r0]				\n"
+					"	ldrd r3, r12, [r2, #8]			\n" // r2, r3
+					"	strd r3, r12, [r0, #8]			\n"
+					"	ldrd r3, r12, [r2, #16]			\n" // r12, lr
+					"	strd r3, r12, [r0, #16]			\n"
+					"	ldrd r3, r12, [r2, #24]			\n" // return addr
+					"	strd r3, r12, [r0, #24]			\n"
+					"	add r2, r2, #32					\n"
+					"	add r3, r0, #32					\n"
+					"	tst r14, #0x10					\n" /* Is the task using the FPU context?  If so, spill low vfp registers. */
+					"	itttt eq						\n"
+					"	vldmeq r2, {s0-s15}				\n" // s0-s15
+					"	vstmeq r3, {s0-s15}				\n"
+					"	ldreq r2, [r2, #64]				\n" // fpscr
+					"	streq r2, [r3, #64]				\n"
+#endif
+					// Reset basepri
+					"	msr basepri, r1					\n"
+					"	isb								\n"
+					"	dsb								\n"
+					// Exception return
+					"	bx r14							\n"
+					// Reference of the nested handler counter
+					"	numNested:  .word uxNestedUntrustedException\n"
+					::"i"(prvKageUsageHandler), "i"(configMAX_SYSCALL_INTERRUPT_PRIORITY): "r0", "r1", "r2", "r3", "memory"
+			);
 }
 /*-----------------------------------------------------------*/
 

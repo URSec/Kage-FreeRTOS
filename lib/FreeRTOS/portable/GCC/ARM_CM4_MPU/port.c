@@ -66,6 +66,11 @@
 #define portNVIC_SYS_CTRL_STATE_REG				( * ( ( volatile uint32_t * ) 0xe000ed24 ) )
 #define portNVIC_MEM_FAULT_ENABLE				( 1UL << 16UL )
 
+/* Silhouette Kage: Add constant to access CCR to enable
+divide by 0 fault. */
+#define portCCR_DIV_ZERO_ENABLE					( 0x10UL )
+#define portCCR_REG								( * ( ( volatile uint32_t * ) 0xe000ed14 ) )
+
 /* Constants required to access and manipulate the MPU. */
 #define portMPU_TYPE_REG						( * ( ( volatile uint32_t * ) 0xe000ed90 ) )
 // Silhouette: Add region number for debug purposes
@@ -651,6 +656,10 @@ BaseType_t xPortStartScheduler( void )
 	lower priorities are masked). */
 	portNVIC_SYSPRI2_REG |= portNVIC_PENDSV_PRI;
 	portNVIC_SYSPRI2_REG |= portNVIC_SYSTICK_PRI;
+#ifdef MICRO_BENCHMARK
+	/* Silhouette Kage: If running microbenchmarks, enable divide by 0 trap*/
+	portCCR_REG |= portCCR_DIV_ZERO_ENABLE;
+#endif
 
 	/* Configure the regions in the MPU that are common to all tasks. */
 	prvSetupMPU();
@@ -741,6 +750,8 @@ void xPortPendSVHandler( void )
 		"	mov r3, #0							\n"
 		"	str r3, [r2]						\n"
 #endif
+
+#ifndef KAGE_INVERT
 		/* Silhouette: Spill regs that are automatically saved on exception entry to shadow stack */
 		"	add r2, r0, " STACK_SIZE_INLINE(STACK_SIZE_IN_BYTES_STATIC)  "		\n"
 		"	ldr r3, [r0]						\n" // r0
@@ -768,6 +779,7 @@ void xPortPendSVHandler( void )
 		"	ldreq r3, [r3, #64]					\n" // fpscr
 		"	streq r3, [r2, #64]					\n"
 		"										\n"
+#endif
 		"	add r0, r0, " STACK_SIZE_INLINE(STACK_SIZE_IN_BYTES_STATIC)  "		\n" /* Silhouette: switch to shadow stack to backup processor states */
 		"	ldr	r3, pxCurrentTCBConst			\n" /* Get the location of the current TCB. */
 		"	ldr	r2, [r3]						\n"
@@ -806,6 +818,7 @@ void xPortPendSVHandler( void )
 		"	vldmiaeq r0!, {s16-s31}				\n"
 		"	sub r0, r0, " STACK_SIZE_INLINE(STACK_SIZE_IN_BYTES_STATIC) "		\n" /* Silhouette: switch back to regular stack */
 		"										\n"
+#ifndef KAGE_INVERT
 		/* Silhouette: Restore regs that are automatically loaded on exception return */
 		"	stmdb sp!, {r2, r3}					\n"
 		"	add r2, r0, " STACK_SIZE_INLINE(STACK_SIZE_IN_BYTES_STATIC)  "		\n"
@@ -834,6 +847,7 @@ void xPortPendSVHandler( void )
 		"	ldreq r2, [r2, #64]					\n" // fpscr
 		"	streq r2, [r3, #64]					\n"
 		"	ldmia sp!, {r2, r3}					\n"
+#endif
 #ifdef CONTEXT_SWITCH_MICRO_BENCHMARK
 		/* Silhouette: Read cycle counter */
 		"	stmdb sp!, {r1, r2, r3}				\n"
