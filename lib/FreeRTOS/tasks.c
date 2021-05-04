@@ -555,7 +555,7 @@ static void prvAddCurrentTaskToDelayedList( TickType_t xTicksToWait, const BaseT
  * Set xNextTaskUnblockTime to the time at which the next Blocked state task
  * will exit the Blocked state.
  */
-static void prvResetNextTaskUnblockTime( void );
+static void prvResetNextTaskUnblockTime( void ) PRIVILEGED_FUNCTION;
 
 #if ( ( configUSE_TRACE_FACILITY == 1 ) && ( configUSE_STATS_FORMATTING_FUNCTIONS > 0 ) )
 
@@ -907,7 +907,7 @@ UBaseType_t x;
 	{
 		/* Fill the stack with a known value to assist debugging. */
 		/* Silhouette: Fill twice the size of the regular stack*/
-		( void ) memset( pxNewTCB->pxStack, ( int ) tskSTACK_FILL_BYTE, ( size_t )  ulStackDepth * sizeof( StackType_t ) );
+		( void ) memset( pxNewTCB->pxStack, ( int ) tskSTACK_FILL_BYTE, ( size_t )  ulStackDepth * sizeof( StackType_t ) * 2 );
 	}
 	#endif /* tskSET_NEW_STACKS_TO_KNOWN_VALUE */
 
@@ -5319,7 +5319,16 @@ TickType_t uxReturn;
 
 #endif /* configUSE_TASK_NOTIFICATIONS */
 /*-----------------------------------------------------------*/
+void vTaskAssert( BaseType_t cond )
+{
+	if (!cond)
+	{
+		taskDISABLE_INTERRUPTS();
+		for( ; ; ) {; }
+	}
+}
 
+/*-----------------------------------------------------------*/
 #if( ( configGENERATE_RUN_TIME_STATS == 1 ) && ( INCLUDE_xTaskGetIdleTaskHandle == 1 ) )
 	TickType_t xTaskGetIdleRunTimeCounter( void )
 	{

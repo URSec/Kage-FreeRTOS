@@ -194,7 +194,7 @@ BaseType_t xIsPrivileged( void ) __attribute__ (( naked ));
  *  Bit[0] = 0 --> The processor is running privileged
  *  Bit[0] = 1 --> The processor is running unprivileged.
  */
-void vResetPrivilege( void ) __attribute__ (( naked ));
+void vResetPrivilege( void ) __attribute__ (( naked )) PRIVILEGED_FUNCTION;
 
 /**
  * @brief Calls the port specific code to raise the privilege.
@@ -237,34 +237,34 @@ StackType_t *pxPortInitialiseStack( StackType_t *pxTopOfStack, TaskFunction_t px
 	interrupt. */
 	pxTopOfStack--; /* Offset added to account for the way the MCU uses the stack on entry/exit of interrupts. */
 	*pxTopOfStack = portINITIAL_XPSR;	/* xPSR */
-	pxTopOfStack[STACK_SIZE] = portINITIAL_XPSR; /* Silhouette: Spill to shadow stack */
+	pxTopOfStack[STACK_SIZE_OFFSET] = portINITIAL_XPSR; /* Silhouette: Spill to shadow stack */
 	pxTopOfStack--;
 	*pxTopOfStack = ( ( StackType_t ) pxCode ) & portSTART_ADDRESS_MASK;	/* PC */
-	pxTopOfStack[STACK_SIZE] = ( ( StackType_t ) pxCode ) & portSTART_ADDRESS_MASK; /* Silhouette: Spill to shadow stack */
+	pxTopOfStack[STACK_SIZE_OFFSET] = ( ( StackType_t ) pxCode ) & portSTART_ADDRESS_MASK; /* Silhouette: Spill to shadow stack */
 	pxTopOfStack--;
 	*pxTopOfStack = 0;	/* LR */
-	pxTopOfStack[STACK_SIZE] = 0; /* Silhouette: spill to shadow stack */
+	pxTopOfStack[STACK_SIZE_OFFSET] = 0; /* Silhouette: spill to shadow stack */
 	pxTopOfStack -= 5;	/* R12, R3, R2 and R1. */
 	*pxTopOfStack = ( StackType_t ) pvParameters;	/* R0 */
-	pxTopOfStack[STACK_SIZE] = ( StackType_t )pvParameters; /* Silhouette: spill to shadow stack */
+	pxTopOfStack[STACK_SIZE_OFFSET] = ( StackType_t )pvParameters; /* Silhouette: spill to shadow stack */
 
 	/* A save method is being used that requires each task to maintain its
 	own exec return value. */
 	pxTopOfStack--;
 	*pxTopOfStack = portINITIAL_EXC_RETURN;
-	pxTopOfStack[STACK_SIZE] = portINITIAL_EXC_RETURN; /* Silhouette: spill to shadow stack */
+	pxTopOfStack[STACK_SIZE_OFFSET] = portINITIAL_EXC_RETURN; /* Silhouette: spill to shadow stack */
 
 	pxTopOfStack -= 9;	/* R11, R10, R9, R8, R7, R6, R5 and R4. */
 
 	if( xRunPrivileged == pdTRUE )
 	{
 		*pxTopOfStack = portINITIAL_CONTROL_IF_PRIVILEGED;
-		pxTopOfStack[STACK_SIZE] = portINITIAL_CONTROL_IF_PRIVILEGED; /* Silhouette: spill to shadow stack */
+		pxTopOfStack[STACK_SIZE_OFFSET] = portINITIAL_CONTROL_IF_PRIVILEGED; /* Silhouette: spill to shadow stack */
 	}
 	else
 	{
 		*pxTopOfStack = portINITIAL_CONTROL_IF_UNPRIVILEGED;
-		pxTopOfStack[STACK_SIZE] = portINITIAL_CONTROL_IF_UNPRIVILEGED; /* Silhouette: spill to shadow stack */
+		pxTopOfStack[STACK_SIZE_OFFSET] = portINITIAL_CONTROL_IF_UNPRIVILEGED; /* Silhouette: spill to shadow stack */
 	}
 
 	return pxTopOfStack;
@@ -733,6 +733,61 @@ BaseType_t xRunningPrivileged = xPortRaisePrivilege();
 	vPortResetPrivilege( xRunningPrivileged );
 }
 /*-----------------------------------------------------------*/
+//void xPortPendSVHandler( void )
+//{
+//	/* This is a naked function. */
+//
+//	__asm volatile
+//	(
+//	"	mrs r0, psp							\n"
+//	"	isb									\n"
+//	"										\n"
+//	"	ldr	r3, pxCurrentTCBConst			\n" /* Get the location of the current TCB. */
+//	"	ldr	r2, [r3]						\n"
+//	"										\n"
+//	"	tst r14, #0x10						\n" /* Is the task using the FPU context?  If so, push high vfp registers. */
+//	"	it eq								\n"
+//	"	vstmdbeq r0!, {s16-s31}				\n"
+//	"										\n"
+//	"	stmdb r0!, {r4-r11, r14}			\n" /* Save the core registers. */
+//	"	str r0, [r2]						\n" /* Save the new top of stack into the first member of the TCB. */
+//	"										\n"
+//	"	stmdb sp!, {r0, r3}					\n"
+//	"	mov r0, %0 							\n"
+//	"	msr basepri, r0						\n"
+//	"	dsb									\n"
+//	"	isb									\n"
+//	"	bl vTaskSwitchContext				\n"
+//	"	mov r0, #0							\n"
+//	"	msr basepri, r0						\n"
+//	"	ldmia sp!, {r0, r3}					\n"
+//	"										\n"
+//	"	ldr r1, [r3]						\n" /* The first item in pxCurrentTCB is the task top of stack. */
+//	"	ldr r0, [r1]						\n"
+//	"										\n"
+//	"	ldmia r0!, {r4-r11, r14}			\n" /* Pop the core registers. */
+//	"										\n"
+//	"	tst r14, #0x10						\n" /* Is the task using the FPU context?  If so, pop the high vfp registers too. */
+//	"	it eq								\n"
+//	"	vldmiaeq r0!, {s16-s31}				\n"
+//	"										\n"
+//	"	msr psp, r0							\n"
+//	"	isb									\n"
+//	"										\n"
+//	#ifdef WORKAROUND_PMU_CM001 /* XMC4000 specific errata workaround. */
+//		#if WORKAROUND_PMU_CM001 == 1
+//	"			push { r14 }				\n"
+//	"			pop { pc }					\n"
+//		#endif
+//	#endif
+//	"										\n"
+//	"	bx r14								\n"
+//	"										\n"
+//	"	.align 4							\n"
+//	"pxCurrentTCBConst: .word pxCurrentTCB	\n"
+//	::"i"(configMAX_SYSCALL_INTERRUPT_PRIORITY)
+//	);
+//}
 
 void xPortPendSVHandler( void )
 {
