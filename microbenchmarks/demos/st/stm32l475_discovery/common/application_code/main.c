@@ -219,8 +219,7 @@ void vApplicationDaemonTaskStartupHook( void )
 	KIN1_EnableCycleCounter(); /* start counting */
 	KIN1_ResetCycleCounter();
 	t1 = KIN1_GetCycleCounter();
-	//t--;
-	temp = 100/t1;
+	asm volatile ("udiv %0, %1, %2" : "=r"(temp) : "0"(100), "r"(0));
 	t2 = KIN1_GetCycleCounter();
 	configPRINTF( ( "DIV_BY_0 Trap: %d %d cycles; temp = %d\r\n", t1, t2, temp ) );
 #endif
