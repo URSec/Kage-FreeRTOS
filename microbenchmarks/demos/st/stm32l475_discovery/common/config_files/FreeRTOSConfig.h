@@ -77,8 +77,8 @@
 /* Silhouette: Add total number of tasks in this system, including kernel tasks */
 #define configTOTAL_TASKS                            5 // 2 test tasks + logging + idle + timer
 #define MICRO_BENCHMARK
-#define KAGE_INVERT
-#define STRD_EXPERIMENT
+//#define KAGE_INVERT
+//#define STRD_EXPERIMENT
 //#define EXCEPTION_MICRO_BENCHMARK
 //#define EXCEPTION_NEW_MICRO_BENCHMARK
 //#define SECURE_API_MICRO_BENCHMARK

@@ -5626,7 +5626,9 @@ uint32_t cycles;
 
 #endif
 
-#ifdef EXCEPTION_NEW_MICRO_BENCHMARK
+#if 0
+// NOTE: The "exception dispatcher emulator" is replaced by
+// the real div_by_0 exception
 /*-----------------------------------------------------------*/
 void vMeasureException( void ){
 uint32_t cycles;
