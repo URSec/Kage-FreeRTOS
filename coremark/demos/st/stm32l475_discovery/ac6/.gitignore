@@ -4,3 +4,7 @@
 # Ignore build results
 /baseline-coremark/
 /kage-coremark/
+
+# Ignore run configurations except one
+*.cfg
+!STM32L475VG.cfg

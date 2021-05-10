@@ -13,3 +13,7 @@
 /kage-queue/
 /kage-secure-api/
 /kage-stream-buffer/
+
+# Ignore run configurations except one
+*.cfg
+!STM32L475VG.cfg
