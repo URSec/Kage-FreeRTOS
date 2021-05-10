@@ -1,2 +1,15 @@
-Debug
+# Ignore IDE-generated files
 .settings
+
+# Ignore build results
+/baseline-microbenchmarks/
+/baseline-context-switch/
+/baseline-exception-dispatcher/
+/baseline-queue/
+/baseline-secure-api/
+/baseline-stream-buffer/
+/kage-context-switch/
+/kage-exception-dispatcher/
+/kage-queue/
+/kage-secure-api/
+/kage-stream-buffer/

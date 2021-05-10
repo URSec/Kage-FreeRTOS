@@ -2,3 +2,7 @@
 *.unc*
 doc/html/*
 /build*/
+
+# Ignore IDE-generated files
+/.metadata/
+/RemoteSystemsTempFiles/
