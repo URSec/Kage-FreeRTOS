@@ -330,7 +330,7 @@ def gen_core_settings_config(conf, program):
             xml += '                  <listOptionValue builtIn="false" value="&quot;' + include + '&quot;"/>\n'
     xml += '                </option>\n'
     # Add other C flags
-    xml += '                <option id="fr.ac6.managedbuild.gnu.c.compiler.option.misc.other.' + program_id + '" name="Other flags" superClass="fr.ac6.managedbuild.gnu.c.compiler.option.misc.other" useByScannerDiscovery="false" value="--target=arm-none-eabi'
+    xml += '                <option id="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other.' + program_id + '" name="Other flags" superClass="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other" useByScannerDiscovery="false" value="--target=arm-none-eabi'
     for library in libraries:
         if 'cflags' in libraries[library]:
             for cflag in libraries[library]['cflags']:

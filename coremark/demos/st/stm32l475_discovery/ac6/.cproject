@@ -69,7 +69,7 @@
                   <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/common_demos/include}&quot;"/>
                   <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code}&quot;"/>
                 </option>
-                <option id="fr.ac6.managedbuild.gnu.c.compiler.option.misc.other.baseline-coremark" name="Other flags" superClass="fr.ac6.managedbuild.gnu.c.compiler.option.misc.other" useByScannerDiscovery="false" value="--target=arm-none-eabi" valueType="string"/>
+                <option id="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other.baseline-coremark" name="Other flags" superClass="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other" useByScannerDiscovery="false" value="--target=arm-none-eabi" valueType="string"/>
                 <option id="gnu.c.compiler.option.optimization.flags.baseline-coremark" name="Other optimization flags" superClass="gnu.c.compiler.option.optimization.flags" useByScannerDiscovery="false" value="-fomit-frame-pointer" valueType="string"/>
                 <option id="gnu.c.compiler.option.dialect.std.baseline-coremark" name="Language standard" superClass="gnu.c.compiler.option.dialect.std" useByScannerDiscovery="false" value="gnu.c.compiler.dialect.default" valueType="enumerated"/>
                 <option id="gnu.c.compiler.option.misc.verbose.baseline-coremark" name="Verbose (-v)" superClass="gnu.c.compiler.option.misc.verbose" useByScannerDiscovery="false" value="false" valueType="boolean"/>
@@ -219,7 +219,7 @@
                   <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/common_demos/include}&quot;"/>
                   <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code}&quot;"/>
                 </option>
-                <option id="fr.ac6.managedbuild.gnu.c.compiler.option.misc.other.kage-coremark" name="Other flags" superClass="fr.ac6.managedbuild.gnu.c.compiler.option.misc.other" useByScannerDiscovery="false" value="--target=arm-none-eabi -mllvm -enable-arm-silhouette-shadowstack -mllvm -enable-arm-silhouette-cfi -mllvm -enable-arm-silhouette-str2strt" valueType="string"/>
+                <option id="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other.kage-coremark" name="Other flags" superClass="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other" useByScannerDiscovery="false" value="--target=arm-none-eabi -mllvm -enable-arm-silhouette-shadowstack -mllvm -enable-arm-silhouette-cfi -mllvm -enable-arm-silhouette-str2strt" valueType="string"/>
                 <option id="gnu.c.compiler.option.optimization.flags.kage-coremark" name="Other optimization flags" superClass="gnu.c.compiler.option.optimization.flags" useByScannerDiscovery="false" value="-fomit-frame-pointer" valueType="string"/>
                 <option id="gnu.c.compiler.option.dialect.std.kage-coremark" name="Language standard" superClass="gnu.c.compiler.option.dialect.std" useByScannerDiscovery="false" value="gnu.c.compiler.dialect.default" valueType="enumerated"/>
                 <option id="gnu.c.compiler.option.misc.verbose.kage-coremark" name="Verbose (-v)" superClass="gnu.c.compiler.option.misc.verbose" useByScannerDiscovery="false" value="false" valueType="boolean"/>
