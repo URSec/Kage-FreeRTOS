@@ -31,7 +31,7 @@
                 <option id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.ffunction.baseline-context-switch" name="Place the function in their own section (-ffunction-sections)" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.ffunction" useByScannerDiscovery="false" value="true" valueType="boolean"/>
                 <option id="fr.ac6.managedbuild.gnu.c.compiler.option.optimization.level.baseline-context-switch" name="Optimization Level" superClass="fr.ac6.managedbuild.gnu.c.compiler.option.optimization.level" useByScannerDiscovery="false" value="fr.ac6.managedbuild.gnu.c.optimization.level.most" valueType="enumerated"/>
                 <option defaultValue="gnu.c.debugging.level.none" id="gnu.c.compiler.option.debugging.level.baseline-context-switch" name="Debug Level" superClass="gnu.c.compiler.option.debugging.level" useByScannerDiscovery="false" valueType="enumerated"/>
-                <option id="gnu.c.compiler.option.preprocessor.def.symbols.baseline-context-switch" name="Defined symbols (-D)" superClass="gnu.c.compiler.option.preprocessor.def.symbols" useByScannerDiscovery="true" valueType="definedSymbols">
+                <option id="gnu.c.compiler.option.preprocessor.def.symbols.baseline-context-switch" name="Defined symbols (-D)" superClass="gnu.c.compiler.option.preprocessor.def.symbols" useByScannerDiscovery="false" valueType="definedSymbols">
                   <listOptionValue builtIn="false" value="USE_HAL_DRIVER"/>
                   <listOptionValue builtIn="false" value="STM32L475xx"/>
                   <listOptionValue builtIn="false" value="MQTTCLIENT_PLATFORM_HEADER=MQTTCMSIS.hENABLE_IOT_INFO"/>
@@ -180,7 +180,7 @@
                 <option id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.ffunction.baseline-exception-dispatcher" name="Place the function in their own section (-ffunction-sections)" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.ffunction" useByScannerDiscovery="false" value="true" valueType="boolean"/>
                 <option id="fr.ac6.managedbuild.gnu.c.compiler.option.optimization.level.baseline-exception-dispatcher" name="Optimization Level" superClass="fr.ac6.managedbuild.gnu.c.compiler.option.optimization.level" useByScannerDiscovery="false" value="fr.ac6.managedbuild.gnu.c.optimization.level.most" valueType="enumerated"/>
                 <option defaultValue="gnu.c.debugging.level.none" id="gnu.c.compiler.option.debugging.level.baseline-exception-dispatcher" name="Debug Level" superClass="gnu.c.compiler.option.debugging.level" useByScannerDiscovery="false" valueType="enumerated"/>
-                <option id="gnu.c.compiler.option.preprocessor.def.symbols.baseline-exception-dispatcher" name="Defined symbols (-D)" superClass="gnu.c.compiler.option.preprocessor.def.symbols" useByScannerDiscovery="true" valueType="definedSymbols">
+                <option id="gnu.c.compiler.option.preprocessor.def.symbols.baseline-exception-dispatcher" name="Defined symbols (-D)" superClass="gnu.c.compiler.option.preprocessor.def.symbols" useByScannerDiscovery="false" valueType="definedSymbols">
                   <listOptionValue builtIn="false" value="USE_HAL_DRIVER"/>
                   <listOptionValue builtIn="false" value="STM32L475xx"/>
                   <listOptionValue builtIn="false" value="MQTTCLIENT_PLATFORM_HEADER=MQTTCMSIS.hENABLE_IOT_INFO"/>
@@ -329,7 +329,7 @@
                 <option id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.ffunction.baseline-queue" name="Place the function in their own section (-ffunction-sections)" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.ffunction" useByScannerDiscovery="false" value="true" valueType="boolean"/>
                 <option id="fr.ac6.managedbuild.gnu.c.compiler.option.optimization.level.baseline-queue" name="Optimization Level" superClass="fr.ac6.managedbuild.gnu.c.compiler.option.optimization.level" useByScannerDiscovery="false" value="fr.ac6.managedbuild.gnu.c.optimization.level.most" valueType="enumerated"/>
                 <option defaultValue="gnu.c.debugging.level.none" id="gnu.c.compiler.option.debugging.level.baseline-queue" name="Debug Level" superClass="gnu.c.compiler.option.debugging.level" useByScannerDiscovery="false" valueType="enumerated"/>
-                <option id="gnu.c.compiler.option.preprocessor.def.symbols.baseline-queue" name="Defined symbols (-D)" superClass="gnu.c.compiler.option.preprocessor.def.symbols" useByScannerDiscovery="true" valueType="definedSymbols">
+                <option id="gnu.c.compiler.option.preprocessor.def.symbols.baseline-queue" name="Defined symbols (-D)" superClass="gnu.c.compiler.option.preprocessor.def.symbols" useByScannerDiscovery="false" valueType="definedSymbols">
                   <listOptionValue builtIn="false" value="USE_HAL_DRIVER"/>
                   <listOptionValue builtIn="false" value="STM32L475xx"/>
                   <listOptionValue builtIn="false" value="MQTTCLIENT_PLATFORM_HEADER=MQTTCMSIS.hENABLE_IOT_INFO"/>
@@ -479,7 +479,7 @@
                 <option id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.ffunction.baseline-secure-api" name="Place the function in their own section (-ffunction-sections)" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.ffunction" useByScannerDiscovery="false" value="true" valueType="boolean"/>
                 <option id="fr.ac6.managedbuild.gnu.c.compiler.option.optimization.level.baseline-secure-api" name="Optimization Level" superClass="fr.ac6.managedbuild.gnu.c.compiler.option.optimization.level" useByScannerDiscovery="false" value="fr.ac6.managedbuild.gnu.c.optimization.level.most" valueType="enumerated"/>
                 <option defaultValue="gnu.c.debugging.level.none" id="gnu.c.compiler.option.debugging.level.baseline-secure-api" name="Debug Level" superClass="gnu.c.compiler.option.debugging.level" useByScannerDiscovery="false" valueType="enumerated"/>
-                <option id="gnu.c.compiler.option.preprocessor.def.symbols.baseline-secure-api" name="Defined symbols (-D)" superClass="gnu.c.compiler.option.preprocessor.def.symbols" useByScannerDiscovery="true" valueType="definedSymbols">
+                <option id="gnu.c.compiler.option.preprocessor.def.symbols.baseline-secure-api" name="Defined symbols (-D)" superClass="gnu.c.compiler.option.preprocessor.def.symbols" useByScannerDiscovery="false" valueType="definedSymbols">
                   <listOptionValue builtIn="false" value="USE_HAL_DRIVER"/>
                   <listOptionValue builtIn="false" value="STM32L475xx"/>
                   <listOptionValue builtIn="false" value="MQTTCLIENT_PLATFORM_HEADER=MQTTCMSIS.hENABLE_IOT_INFO"/>
@@ -628,7 +628,7 @@
                 <option id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.ffunction.baseline-stream-buffer" name="Place the function in their own section (-ffunction-sections)" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.ffunction" useByScannerDiscovery="false" value="true" valueType="boolean"/>
                 <option id="fr.ac6.managedbuild.gnu.c.compiler.option.optimization.level.baseline-stream-buffer" name="Optimization Level" superClass="fr.ac6.managedbuild.gnu.c.compiler.option.optimization.level" useByScannerDiscovery="false" value="fr.ac6.managedbuild.gnu.c.optimization.level.most" valueType="enumerated"/>
                 <option defaultValue="gnu.c.debugging.level.none" id="gnu.c.compiler.option.debugging.level.baseline-stream-buffer" name="Debug Level" superClass="gnu.c.compiler.option.debugging.level" useByScannerDiscovery="false" valueType="enumerated"/>
-                <option id="gnu.c.compiler.option.preprocessor.def.symbols.baseline-stream-buffer" name="Defined symbols (-D)" superClass="gnu.c.compiler.option.preprocessor.def.symbols" useByScannerDiscovery="true" valueType="definedSymbols">
+                <option id="gnu.c.compiler.option.preprocessor.def.symbols.baseline-stream-buffer" name="Defined symbols (-D)" superClass="gnu.c.compiler.option.preprocessor.def.symbols" useByScannerDiscovery="false" valueType="definedSymbols">
                   <listOptionValue builtIn="false" value="USE_HAL_DRIVER"/>
                   <listOptionValue builtIn="false" value="STM32L475xx"/>
                   <listOptionValue builtIn="false" value="MQTTCLIENT_PLATFORM_HEADER=MQTTCMSIS.hENABLE_IOT_INFO"/>
@@ -778,7 +778,7 @@
                 <option id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.ffunction.kage-context-switch" name="Place the function in their own section (-ffunction-sections)" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.ffunction" useByScannerDiscovery="false" value="true" valueType="boolean"/>
                 <option id="fr.ac6.managedbuild.gnu.c.compiler.option.optimization.level.kage-context-switch" name="Optimization Level" superClass="fr.ac6.managedbuild.gnu.c.compiler.option.optimization.level" useByScannerDiscovery="false" value="fr.ac6.managedbuild.gnu.c.optimization.level.most" valueType="enumerated"/>
                 <option defaultValue="gnu.c.debugging.level.none" id="gnu.c.compiler.option.debugging.level.kage-context-switch" name="Debug Level" superClass="gnu.c.compiler.option.debugging.level" useByScannerDiscovery="false" valueType="enumerated"/>
-                <option id="gnu.c.compiler.option.preprocessor.def.symbols.kage-context-switch" name="Defined symbols (-D)" superClass="gnu.c.compiler.option.preprocessor.def.symbols" useByScannerDiscovery="true" valueType="definedSymbols">
+                <option id="gnu.c.compiler.option.preprocessor.def.symbols.kage-context-switch" name="Defined symbols (-D)" superClass="gnu.c.compiler.option.preprocessor.def.symbols" useByScannerDiscovery="false" valueType="definedSymbols">
                   <listOptionValue builtIn="false" value="USE_HAL_DRIVER"/>
                   <listOptionValue builtIn="false" value="STM32L475xx"/>
                   <listOptionValue builtIn="false" value="MQTTCLIENT_PLATFORM_HEADER=MQTTCMSIS.hENABLE_IOT_INFO"/>
@@ -927,7 +927,7 @@
                 <option id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.ffunction.kage-exception-dispatcher" name="Place the function in their own section (-ffunction-sections)" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.ffunction" useByScannerDiscovery="false" value="true" valueType="boolean"/>
                 <option id="fr.ac6.managedbuild.gnu.c.compiler.option.optimization.level.kage-exception-dispatcher" name="Optimization Level" superClass="fr.ac6.managedbuild.gnu.c.compiler.option.optimization.level" useByScannerDiscovery="false" value="fr.ac6.managedbuild.gnu.c.optimization.level.most" valueType="enumerated"/>
                 <option defaultValue="gnu.c.debugging.level.none" id="gnu.c.compiler.option.debugging.level.kage-exception-dispatcher" name="Debug Level" superClass="gnu.c.compiler.option.debugging.level" useByScannerDiscovery="false" valueType="enumerated"/>
-                <option id="gnu.c.compiler.option.preprocessor.def.symbols.kage-exception-dispatcher" name="Defined symbols (-D)" superClass="gnu.c.compiler.option.preprocessor.def.symbols" useByScannerDiscovery="true" valueType="definedSymbols">
+                <option id="gnu.c.compiler.option.preprocessor.def.symbols.kage-exception-dispatcher" name="Defined symbols (-D)" superClass="gnu.c.compiler.option.preprocessor.def.symbols" useByScannerDiscovery="false" valueType="definedSymbols">
                   <listOptionValue builtIn="false" value="USE_HAL_DRIVER"/>
                   <listOptionValue builtIn="false" value="STM32L475xx"/>
                   <listOptionValue builtIn="false" value="MQTTCLIENT_PLATFORM_HEADER=MQTTCMSIS.hENABLE_IOT_INFO"/>
@@ -1076,7 +1076,7 @@
                 <option id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.ffunction.kage-queue" name="Place the function in their own section (-ffunction-sections)" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.ffunction" useByScannerDiscovery="false" value="true" valueType="boolean"/>
                 <option id="fr.ac6.managedbuild.gnu.c.compiler.option.optimization.level.kage-queue" name="Optimization Level" superClass="fr.ac6.managedbuild.gnu.c.compiler.option.optimization.level" useByScannerDiscovery="false" value="fr.ac6.managedbuild.gnu.c.optimization.level.most" valueType="enumerated"/>
                 <option defaultValue="gnu.c.debugging.level.none" id="gnu.c.compiler.option.debugging.level.kage-queue" name="Debug Level" superClass="gnu.c.compiler.option.debugging.level" useByScannerDiscovery="false" valueType="enumerated"/>
-                <option id="gnu.c.compiler.option.preprocessor.def.symbols.kage-queue" name="Defined symbols (-D)" superClass="gnu.c.compiler.option.preprocessor.def.symbols" useByScannerDiscovery="true" valueType="definedSymbols">
+                <option id="gnu.c.compiler.option.preprocessor.def.symbols.kage-queue" name="Defined symbols (-D)" superClass="gnu.c.compiler.option.preprocessor.def.symbols" useByScannerDiscovery="false" valueType="definedSymbols">
                   <listOptionValue builtIn="false" value="USE_HAL_DRIVER"/>
                   <listOptionValue builtIn="false" value="STM32L475xx"/>
                   <listOptionValue builtIn="false" value="MQTTCLIENT_PLATFORM_HEADER=MQTTCMSIS.hENABLE_IOT_INFO"/>
@@ -1226,7 +1226,7 @@
                 <option id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.ffunction.kage-secure-api" name="Place the function in their own section (-ffunction-sections)" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.ffunction" useByScannerDiscovery="false" value="true" valueType="boolean"/>
                 <option id="fr.ac6.managedbuild.gnu.c.compiler.option.optimization.level.kage-secure-api" name="Optimization Level" superClass="fr.ac6.managedbuild.gnu.c.compiler.option.optimization.level" useByScannerDiscovery="false" value="fr.ac6.managedbuild.gnu.c.optimization.level.most" valueType="enumerated"/>
                 <option defaultValue="gnu.c.debugging.level.none" id="gnu.c.compiler.option.debugging.level.kage-secure-api" name="Debug Level" superClass="gnu.c.compiler.option.debugging.level" useByScannerDiscovery="false" valueType="enumerated"/>
-                <option id="gnu.c.compiler.option.preprocessor.def.symbols.kage-secure-api" name="Defined symbols (-D)" superClass="gnu.c.compiler.option.preprocessor.def.symbols" useByScannerDiscovery="true" valueType="definedSymbols">
+                <option id="gnu.c.compiler.option.preprocessor.def.symbols.kage-secure-api" name="Defined symbols (-D)" superClass="gnu.c.compiler.option.preprocessor.def.symbols" useByScannerDiscovery="false" valueType="definedSymbols">
                   <listOptionValue builtIn="false" value="USE_HAL_DRIVER"/>
                   <listOptionValue builtIn="false" value="STM32L475xx"/>
                   <listOptionValue builtIn="false" value="MQTTCLIENT_PLATFORM_HEADER=MQTTCMSIS.hENABLE_IOT_INFO"/>
@@ -1375,7 +1375,7 @@
                 <option id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.ffunction.kage-stream-buffer" name="Place the function in their own section (-ffunction-sections)" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.ffunction" useByScannerDiscovery="false" value="true" valueType="boolean"/>
                 <option id="fr.ac6.managedbuild.gnu.c.compiler.option.optimization.level.kage-stream-buffer" name="Optimization Level" superClass="fr.ac6.managedbuild.gnu.c.compiler.option.optimization.level" useByScannerDiscovery="false" value="fr.ac6.managedbuild.gnu.c.optimization.level.most" valueType="enumerated"/>
                 <option defaultValue="gnu.c.debugging.level.none" id="gnu.c.compiler.option.debugging.level.kage-stream-buffer" name="Debug Level" superClass="gnu.c.compiler.option.debugging.level" useByScannerDiscovery="false" valueType="enumerated"/>
-                <option id="gnu.c.compiler.option.preprocessor.def.symbols.kage-stream-buffer" name="Defined symbols (-D)" superClass="gnu.c.compiler.option.preprocessor.def.symbols" useByScannerDiscovery="true" valueType="definedSymbols">
+                <option id="gnu.c.compiler.option.preprocessor.def.symbols.kage-stream-buffer" name="Defined symbols (-D)" superClass="gnu.c.compiler.option.preprocessor.def.symbols" useByScannerDiscovery="false" valueType="definedSymbols">
                   <listOptionValue builtIn="false" value="USE_HAL_DRIVER"/>
                   <listOptionValue builtIn="false" value="STM32L475xx"/>
                   <listOptionValue builtIn="false" value="MQTTCLIENT_PLATFORM_HEADER=MQTTCMSIS.hENABLE_IOT_INFO"/>
