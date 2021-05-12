@@ -146,6 +146,22 @@
               </tool>
             </toolChain>
           </folderInfo>
+          <folderInfo id="fr.ac6.managedbuild.config.gnu.cross.exe.release.baseline-coremark.hal" name="/" resourcePath="lib/third_party/mcu_vendor/st/stm32l475_discovery">
+            <toolChain id="fr.ac6.managedbuild.toolchain.gnu.cross.exe.release.baseline-coremark.hal" name="Ac6 STM32 MCU GCC" superClass="fr.ac6.managedbuild.toolchain.gnu.cross.exe.release.baseline-coremark" unusedChildren="">
+              <tool id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.baseline-coremark.hal" name="MCU GCC Compiler" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.baseline-coremark">
+                <option id="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other.baseline-coremark.hal" superClass="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other" value="--target=arm-none-eabi -mllvm -enable-arm-kage-privilege-promotion" valueType="string"/>
+              </tool>
+              <tool id="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.baseline-coremark.hal" name="MCU GCC Assembler" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.kage-coremark"/>
+            </toolChain>
+          </folderInfo>
+          <folderInfo id="fr.ac6.managedbuild.config.gnu.cross.exe.release.baseline-coremark.hal-2" name="/" resourcePath="application_code/st_code">
+            <toolChain id="fr.ac6.managedbuild.toolchain.gnu.cross.exe.release.baseline-coremark.hal-2" name="Ac6 STM32 MCU GCC" superClass="fr.ac6.managedbuild.toolchain.gnu.cross.exe.release.baseline-coremark" unusedChildren="">
+              <tool id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.baseline-coremark.hal-2" name="MCU GCC Compiler" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.baseline-coremark">
+                <option id="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other.baseline-coremark.hal-2" superClass="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other" value="--target=arm-none-eabi -mllvm -enable-arm-kage-privilege-promotion" valueType="string"/>
+              </tool>
+              <tool id="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.baseline-coremark.hal-2" name="MCU GCC Assembler" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.kage-coremark"/>
+            </toolChain>
+          </folderInfo>
           <sourceEntries>
           </sourceEntries>
         </configuration>
@@ -294,6 +310,22 @@
                 <inputType id="cdt.managedbuild.tool.gnu.assembler.input.kage-coremark" superClass="cdt.managedbuild.tool.gnu.assembler.input"/>
                 <inputType id="fr.ac6.managedbuild.tool.gnu.cross.assembler.input.kage-coremark" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.input"/>
               </tool>
+            </toolChain>
+          </folderInfo>
+          <folderInfo id="fr.ac6.managedbuild.config.gnu.cross.exe.release.kage-coremark.hal" name="/" resourcePath="lib/third_party/mcu_vendor/st/stm32l475_discovery">
+            <toolChain id="fr.ac6.managedbuild.toolchain.gnu.cross.exe.release.kage-coremark.hal" name="Ac6 STM32 MCU GCC" superClass="fr.ac6.managedbuild.toolchain.gnu.cross.exe.release.kage-coremark" unusedChildren="">
+              <tool id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.kage-coremark.hal" name="MCU GCC Compiler" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.kage-coremark">
+                <option id="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other.kage-coremark.hal" superClass="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other" value="--target=arm-none-eabi -mllvm -enable-arm-kage-privilege-promotion" valueType="string"/>
+              </tool>
+              <tool id="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.kage-coremark.hal" name="MCU GCC Assembler" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.kage-coremark"/>
+            </toolChain>
+          </folderInfo>
+          <folderInfo id="fr.ac6.managedbuild.config.gnu.cross.exe.release.kage-coremark.hal-2" name="/" resourcePath="application_code/st_code">
+            <toolChain id="fr.ac6.managedbuild.toolchain.gnu.cross.exe.release.kage-coremark.hal-2" name="Ac6 STM32 MCU GCC" superClass="fr.ac6.managedbuild.toolchain.gnu.cross.exe.release.kage-coremark" unusedChildren="">
+              <tool id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.kage-coremark.hal-2" name="MCU GCC Compiler" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.kage-coremark">
+                <option id="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other.kage-coremark.hal-2" superClass="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other" value="--target=arm-none-eabi -mllvm -enable-arm-kage-privilege-promotion" valueType="string"/>
+              </tool>
+              <tool id="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.kage-coremark.hal-2" name="MCU GCC Assembler" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.kage-coremark"/>
             </toolChain>
           </folderInfo>
           <sourceEntries>
