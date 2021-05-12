@@ -151,7 +151,7 @@
               <tool id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.baseline-coremark.hal" name="MCU GCC Compiler" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.baseline-coremark">
                 <option id="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other.baseline-coremark.hal" superClass="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other" value="--target=arm-none-eabi -mllvm -enable-arm-kage-privilege-promotion" valueType="string"/>
               </tool>
-              <tool id="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.baseline-coremark.hal" name="MCU GCC Assembler" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.kage-coremark"/>
+              <tool id="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.baseline-coremark.hal" name="MCU GCC Assembler" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.baseline-coremark"/>
             </toolChain>
           </folderInfo>
           <folderInfo id="fr.ac6.managedbuild.config.gnu.cross.exe.release.baseline-coremark.hal-2" name="/" resourcePath="application_code/st_code">
@@ -159,7 +159,7 @@
               <tool id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.baseline-coremark.hal-2" name="MCU GCC Compiler" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.baseline-coremark">
                 <option id="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other.baseline-coremark.hal-2" superClass="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other" value="--target=arm-none-eabi -mllvm -enable-arm-kage-privilege-promotion" valueType="string"/>
               </tool>
-              <tool id="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.baseline-coremark.hal-2" name="MCU GCC Assembler" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.kage-coremark"/>
+              <tool id="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.baseline-coremark.hal-2" name="MCU GCC Assembler" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.baseline-coremark"/>
             </toolChain>
           </folderInfo>
           <sourceEntries>

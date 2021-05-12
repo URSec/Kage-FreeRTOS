@@ -150,7 +150,7 @@
               <tool id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.baseline-context-switch.hal" name="MCU GCC Compiler" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.baseline-context-switch">
                 <option id="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other.baseline-context-switch.hal" superClass="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other" value="--target=arm-none-eabi -mllvm -enable-arm-kage-privilege-promotion" valueType="string"/>
               </tool>
-              <tool id="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.baseline-context-switch.hal" name="MCU GCC Assembler" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.kage-coremark"/>
+              <tool id="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.baseline-context-switch.hal" name="MCU GCC Assembler" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.baseline-context-switch"/>
             </toolChain>
           </folderInfo>
           <folderInfo id="fr.ac6.managedbuild.config.gnu.cross.exe.release.baseline-context-switch.hal-2" name="/" resourcePath="application_code/st_code">
@@ -158,7 +158,7 @@
               <tool id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.baseline-context-switch.hal-2" name="MCU GCC Compiler" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.baseline-context-switch">
                 <option id="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other.baseline-context-switch.hal-2" superClass="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other" value="--target=arm-none-eabi -mllvm -enable-arm-kage-privilege-promotion" valueType="string"/>
               </tool>
-              <tool id="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.baseline-context-switch.hal-2" name="MCU GCC Assembler" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.kage-coremark"/>
+              <tool id="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.baseline-context-switch.hal-2" name="MCU GCC Assembler" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.baseline-context-switch"/>
             </toolChain>
           </folderInfo>
           <sourceEntries>
@@ -315,7 +315,7 @@
               <tool id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.baseline-exception-dispatcher.hal" name="MCU GCC Compiler" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.baseline-exception-dispatcher">
                 <option id="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other.baseline-exception-dispatcher.hal" superClass="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other" value="--target=arm-none-eabi -mllvm -enable-arm-kage-privilege-promotion" valueType="string"/>
               </tool>
-              <tool id="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.baseline-exception-dispatcher.hal" name="MCU GCC Assembler" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.kage-coremark"/>
+              <tool id="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.baseline-exception-dispatcher.hal" name="MCU GCC Assembler" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.baseline-exception-dispatcher"/>
             </toolChain>
           </folderInfo>
           <folderInfo id="fr.ac6.managedbuild.config.gnu.cross.exe.release.baseline-exception-dispatcher.hal-2" name="/" resourcePath="application_code/st_code">
@@ -323,7 +323,7 @@
               <tool id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.baseline-exception-dispatcher.hal-2" name="MCU GCC Compiler" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.baseline-exception-dispatcher">
                 <option id="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other.baseline-exception-dispatcher.hal-2" superClass="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other" value="--target=arm-none-eabi -mllvm -enable-arm-kage-privilege-promotion" valueType="string"/>
               </tool>
-              <tool id="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.baseline-exception-dispatcher.hal-2" name="MCU GCC Assembler" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.kage-coremark"/>
+              <tool id="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.baseline-exception-dispatcher.hal-2" name="MCU GCC Assembler" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.baseline-exception-dispatcher"/>
             </toolChain>
           </folderInfo>
           <sourceEntries>
@@ -481,7 +481,7 @@
               <tool id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.baseline-queue.hal" name="MCU GCC Compiler" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.baseline-queue">
                 <option id="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other.baseline-queue.hal" superClass="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other" value="--target=arm-none-eabi -mllvm -enable-arm-kage-privilege-promotion" valueType="string"/>
               </tool>
-              <tool id="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.baseline-queue.hal" name="MCU GCC Assembler" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.kage-coremark"/>
+              <tool id="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.baseline-queue.hal" name="MCU GCC Assembler" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.baseline-queue"/>
             </toolChain>
           </folderInfo>
           <folderInfo id="fr.ac6.managedbuild.config.gnu.cross.exe.release.baseline-queue.hal-2" name="/" resourcePath="application_code/st_code">
@@ -489,7 +489,7 @@
               <tool id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.baseline-queue.hal-2" name="MCU GCC Compiler" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.baseline-queue">
                 <option id="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other.baseline-queue.hal-2" superClass="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other" value="--target=arm-none-eabi -mllvm -enable-arm-kage-privilege-promotion" valueType="string"/>
               </tool>
-              <tool id="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.baseline-queue.hal-2" name="MCU GCC Assembler" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.kage-coremark"/>
+              <tool id="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.baseline-queue.hal-2" name="MCU GCC Assembler" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.baseline-queue"/>
             </toolChain>
           </folderInfo>
           <sourceEntries>
@@ -646,7 +646,7 @@
               <tool id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.baseline-secure-api.hal" name="MCU GCC Compiler" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.baseline-secure-api">
                 <option id="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other.baseline-secure-api.hal" superClass="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other" value="--target=arm-none-eabi -mllvm -enable-arm-kage-privilege-promotion" valueType="string"/>
               </tool>
-              <tool id="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.baseline-secure-api.hal" name="MCU GCC Assembler" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.kage-coremark"/>
+              <tool id="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.baseline-secure-api.hal" name="MCU GCC Assembler" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.baseline-secure-api"/>
             </toolChain>
           </folderInfo>
           <folderInfo id="fr.ac6.managedbuild.config.gnu.cross.exe.release.baseline-secure-api.hal-2" name="/" resourcePath="application_code/st_code">
@@ -654,7 +654,7 @@
               <tool id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.baseline-secure-api.hal-2" name="MCU GCC Compiler" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.baseline-secure-api">
                 <option id="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other.baseline-secure-api.hal-2" superClass="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other" value="--target=arm-none-eabi -mllvm -enable-arm-kage-privilege-promotion" valueType="string"/>
               </tool>
-              <tool id="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.baseline-secure-api.hal-2" name="MCU GCC Assembler" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.kage-coremark"/>
+              <tool id="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.baseline-secure-api.hal-2" name="MCU GCC Assembler" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.baseline-secure-api"/>
             </toolChain>
           </folderInfo>
           <sourceEntries>
@@ -812,7 +812,7 @@
               <tool id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.baseline-stream-buffer.hal" name="MCU GCC Compiler" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.baseline-stream-buffer">
                 <option id="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other.baseline-stream-buffer.hal" superClass="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other" value="--target=arm-none-eabi -mllvm -enable-arm-kage-privilege-promotion" valueType="string"/>
               </tool>
-              <tool id="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.baseline-stream-buffer.hal" name="MCU GCC Assembler" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.kage-coremark"/>
+              <tool id="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.baseline-stream-buffer.hal" name="MCU GCC Assembler" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.baseline-stream-buffer"/>
             </toolChain>
           </folderInfo>
           <folderInfo id="fr.ac6.managedbuild.config.gnu.cross.exe.release.baseline-stream-buffer.hal-2" name="/" resourcePath="application_code/st_code">
@@ -820,7 +820,7 @@
               <tool id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.baseline-stream-buffer.hal-2" name="MCU GCC Compiler" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.baseline-stream-buffer">
                 <option id="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other.baseline-stream-buffer.hal-2" superClass="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other" value="--target=arm-none-eabi -mllvm -enable-arm-kage-privilege-promotion" valueType="string"/>
               </tool>
-              <tool id="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.baseline-stream-buffer.hal-2" name="MCU GCC Assembler" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.kage-coremark"/>
+              <tool id="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.baseline-stream-buffer.hal-2" name="MCU GCC Assembler" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.baseline-stream-buffer"/>
             </toolChain>
           </folderInfo>
           <sourceEntries>
@@ -977,7 +977,7 @@
               <tool id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.kage-context-switch.hal" name="MCU GCC Compiler" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.kage-context-switch">
                 <option id="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other.kage-context-switch.hal" superClass="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other" value="--target=arm-none-eabi -mllvm -enable-arm-kage-privilege-promotion" valueType="string"/>
               </tool>
-              <tool id="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.kage-context-switch.hal" name="MCU GCC Assembler" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.kage-coremark"/>
+              <tool id="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.kage-context-switch.hal" name="MCU GCC Assembler" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.kage-context-switch"/>
             </toolChain>
           </folderInfo>
           <folderInfo id="fr.ac6.managedbuild.config.gnu.cross.exe.release.kage-context-switch.hal-2" name="/" resourcePath="application_code/st_code">
@@ -985,7 +985,7 @@
               <tool id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.kage-context-switch.hal-2" name="MCU GCC Compiler" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.kage-context-switch">
                 <option id="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other.kage-context-switch.hal-2" superClass="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other" value="--target=arm-none-eabi -mllvm -enable-arm-kage-privilege-promotion" valueType="string"/>
               </tool>
-              <tool id="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.kage-context-switch.hal-2" name="MCU GCC Assembler" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.kage-coremark"/>
+              <tool id="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.kage-context-switch.hal-2" name="MCU GCC Assembler" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.kage-context-switch"/>
             </toolChain>
           </folderInfo>
           <sourceEntries>
@@ -1142,7 +1142,7 @@
               <tool id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.kage-exception-dispatcher.hal" name="MCU GCC Compiler" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.kage-exception-dispatcher">
                 <option id="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other.kage-exception-dispatcher.hal" superClass="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other" value="--target=arm-none-eabi -mllvm -enable-arm-kage-privilege-promotion" valueType="string"/>
               </tool>
-              <tool id="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.kage-exception-dispatcher.hal" name="MCU GCC Assembler" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.kage-coremark"/>
+              <tool id="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.kage-exception-dispatcher.hal" name="MCU GCC Assembler" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.kage-exception-dispatcher"/>
             </toolChain>
           </folderInfo>
           <folderInfo id="fr.ac6.managedbuild.config.gnu.cross.exe.release.kage-exception-dispatcher.hal-2" name="/" resourcePath="application_code/st_code">
@@ -1150,7 +1150,7 @@
               <tool id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.kage-exception-dispatcher.hal-2" name="MCU GCC Compiler" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.kage-exception-dispatcher">
                 <option id="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other.kage-exception-dispatcher.hal-2" superClass="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other" value="--target=arm-none-eabi -mllvm -enable-arm-kage-privilege-promotion" valueType="string"/>
               </tool>
-              <tool id="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.kage-exception-dispatcher.hal-2" name="MCU GCC Assembler" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.kage-coremark"/>
+              <tool id="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.kage-exception-dispatcher.hal-2" name="MCU GCC Assembler" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.kage-exception-dispatcher"/>
             </toolChain>
           </folderInfo>
           <sourceEntries>
@@ -1308,7 +1308,7 @@
               <tool id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.kage-queue.hal" name="MCU GCC Compiler" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.kage-queue">
                 <option id="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other.kage-queue.hal" superClass="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other" value="--target=arm-none-eabi -mllvm -enable-arm-kage-privilege-promotion" valueType="string"/>
               </tool>
-              <tool id="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.kage-queue.hal" name="MCU GCC Assembler" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.kage-coremark"/>
+              <tool id="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.kage-queue.hal" name="MCU GCC Assembler" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.kage-queue"/>
             </toolChain>
           </folderInfo>
           <folderInfo id="fr.ac6.managedbuild.config.gnu.cross.exe.release.kage-queue.hal-2" name="/" resourcePath="application_code/st_code">
@@ -1316,7 +1316,7 @@
               <tool id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.kage-queue.hal-2" name="MCU GCC Compiler" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.kage-queue">
                 <option id="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other.kage-queue.hal-2" superClass="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other" value="--target=arm-none-eabi -mllvm -enable-arm-kage-privilege-promotion" valueType="string"/>
               </tool>
-              <tool id="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.kage-queue.hal-2" name="MCU GCC Assembler" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.kage-coremark"/>
+              <tool id="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.kage-queue.hal-2" name="MCU GCC Assembler" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.kage-queue"/>
             </toolChain>
           </folderInfo>
           <sourceEntries>
@@ -1473,7 +1473,7 @@
               <tool id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.kage-secure-api.hal" name="MCU GCC Compiler" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.kage-secure-api">
                 <option id="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other.kage-secure-api.hal" superClass="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other" value="--target=arm-none-eabi -mllvm -enable-arm-kage-privilege-promotion" valueType="string"/>
               </tool>
-              <tool id="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.kage-secure-api.hal" name="MCU GCC Assembler" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.kage-coremark"/>
+              <tool id="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.kage-secure-api.hal" name="MCU GCC Assembler" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.kage-secure-api"/>
             </toolChain>
           </folderInfo>
           <folderInfo id="fr.ac6.managedbuild.config.gnu.cross.exe.release.kage-secure-api.hal-2" name="/" resourcePath="application_code/st_code">
@@ -1481,7 +1481,7 @@
               <tool id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.kage-secure-api.hal-2" name="MCU GCC Compiler" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.kage-secure-api">
                 <option id="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other.kage-secure-api.hal-2" superClass="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other" value="--target=arm-none-eabi -mllvm -enable-arm-kage-privilege-promotion" valueType="string"/>
               </tool>
-              <tool id="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.kage-secure-api.hal-2" name="MCU GCC Assembler" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.kage-coremark"/>
+              <tool id="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.kage-secure-api.hal-2" name="MCU GCC Assembler" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.kage-secure-api"/>
             </toolChain>
           </folderInfo>
           <sourceEntries>
@@ -1639,7 +1639,7 @@
               <tool id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.kage-stream-buffer.hal" name="MCU GCC Compiler" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.kage-stream-buffer">
                 <option id="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other.kage-stream-buffer.hal" superClass="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other" value="--target=arm-none-eabi -mllvm -enable-arm-kage-privilege-promotion" valueType="string"/>
               </tool>
-              <tool id="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.kage-stream-buffer.hal" name="MCU GCC Assembler" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.kage-coremark"/>
+              <tool id="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.kage-stream-buffer.hal" name="MCU GCC Assembler" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.kage-stream-buffer"/>
             </toolChain>
           </folderInfo>
           <folderInfo id="fr.ac6.managedbuild.config.gnu.cross.exe.release.kage-stream-buffer.hal-2" name="/" resourcePath="application_code/st_code">
@@ -1647,7 +1647,7 @@
               <tool id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.kage-stream-buffer.hal-2" name="MCU GCC Compiler" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.kage-stream-buffer">
                 <option id="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other.kage-stream-buffer.hal-2" superClass="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other" value="--target=arm-none-eabi -mllvm -enable-arm-kage-privilege-promotion" valueType="string"/>
               </tool>
-              <tool id="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.kage-stream-buffer.hal-2" name="MCU GCC Assembler" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.kage-coremark"/>
+              <tool id="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.kage-stream-buffer.hal-2" name="MCU GCC Assembler" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.kage-stream-buffer"/>
             </toolChain>
           </folderInfo>
           <sourceEntries>
