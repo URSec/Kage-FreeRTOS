@@ -896,7 +896,7 @@
                   <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/common_demos/include}&quot;"/>
                   <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code}&quot;"/>
                 </option>
-                <option id="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other.kage-context-switch" name="Other flags" superClass="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other" useByScannerDiscovery="false" value="--target=arm-none-eabi -mllvm -enable-arm-silhouette-shadowstack -mllvm -enable-arm-silhouette-cfi -mllvm -enable-arm-silhouette-str2strt" valueType="string"/>
+                <option id="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other.kage-context-switch" name="Other flags" superClass="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other" useByScannerDiscovery="false" value="--target=arm-none-eabi -mexecute-only -mllvm -enable-arm-silhouette-shadowstack -mllvm -enable-arm-silhouette-cfi -mllvm -enable-arm-silhouette-str2strt" valueType="string"/>
                 <option id="gnu.c.compiler.option.optimization.flags.kage-context-switch" name="Other optimization flags" superClass="gnu.c.compiler.option.optimization.flags" useByScannerDiscovery="false" value="-fomit-frame-pointer" valueType="string"/>
                 <option id="gnu.c.compiler.option.dialect.std.kage-context-switch" name="Language standard" superClass="gnu.c.compiler.option.dialect.std" useByScannerDiscovery="false" value="gnu.c.compiler.dialect.default" valueType="enumerated"/>
                 <option id="gnu.c.compiler.option.misc.verbose.kage-context-switch" name="Verbose (-v)" superClass="gnu.c.compiler.option.misc.verbose" useByScannerDiscovery="false" value="false" valueType="boolean"/>
@@ -975,7 +975,7 @@
           <folderInfo id="fr.ac6.managedbuild.config.gnu.cross.exe.release.kage-context-switch.hal" name="/" resourcePath="lib/third_party/mcu_vendor/st/stm32l475_discovery">
             <toolChain id="fr.ac6.managedbuild.toolchain.gnu.cross.exe.release.kage-context-switch.hal" name="Ac6 STM32 MCU GCC" superClass="fr.ac6.managedbuild.toolchain.gnu.cross.exe.release.kage-context-switch" unusedChildren="">
               <tool id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.kage-context-switch.hal" name="MCU GCC Compiler" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.kage-context-switch">
-                <option id="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other.kage-context-switch.hal" superClass="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other" value="--target=arm-none-eabi -mllvm -enable-arm-kage-privilege-promotion" valueType="string"/>
+                <option id="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other.kage-context-switch.hal" superClass="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other" value="--target=arm-none-eabi -mllvm -enable-arm-kage-privilege-promotion -mexecute-only" valueType="string"/>
               </tool>
               <tool id="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.kage-context-switch.hal" name="MCU GCC Assembler" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.kage-context-switch"/>
             </toolChain>
@@ -983,7 +983,7 @@
           <folderInfo id="fr.ac6.managedbuild.config.gnu.cross.exe.release.kage-context-switch.hal-2" name="/" resourcePath="application_code/st_code">
             <toolChain id="fr.ac6.managedbuild.toolchain.gnu.cross.exe.release.kage-context-switch.hal-2" name="Ac6 STM32 MCU GCC" superClass="fr.ac6.managedbuild.toolchain.gnu.cross.exe.release.kage-context-switch" unusedChildren="">
               <tool id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.kage-context-switch.hal-2" name="MCU GCC Compiler" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.kage-context-switch">
-                <option id="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other.kage-context-switch.hal-2" superClass="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other" value="--target=arm-none-eabi -mllvm -enable-arm-kage-privilege-promotion" valueType="string"/>
+                <option id="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other.kage-context-switch.hal-2" superClass="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other" value="--target=arm-none-eabi -mllvm -enable-arm-kage-privilege-promotion -mexecute-only" valueType="string"/>
               </tool>
               <tool id="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.kage-context-switch.hal-2" name="MCU GCC Assembler" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.kage-context-switch"/>
             </toolChain>
@@ -1061,7 +1061,7 @@
                   <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/common_demos/include}&quot;"/>
                   <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code}&quot;"/>
                 </option>
-                <option id="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other.kage-exception-dispatcher" name="Other flags" superClass="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other" useByScannerDiscovery="false" value="--target=arm-none-eabi -mllvm -enable-arm-silhouette-shadowstack -mllvm -enable-arm-silhouette-cfi -mllvm -enable-arm-silhouette-str2strt" valueType="string"/>
+                <option id="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other.kage-exception-dispatcher" name="Other flags" superClass="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other" useByScannerDiscovery="false" value="--target=arm-none-eabi -mexecute-only -mllvm -enable-arm-silhouette-shadowstack -mllvm -enable-arm-silhouette-cfi -mllvm -enable-arm-silhouette-str2strt" valueType="string"/>
                 <option id="gnu.c.compiler.option.optimization.flags.kage-exception-dispatcher" name="Other optimization flags" superClass="gnu.c.compiler.option.optimization.flags" useByScannerDiscovery="false" value="-fomit-frame-pointer" valueType="string"/>
                 <option id="gnu.c.compiler.option.dialect.std.kage-exception-dispatcher" name="Language standard" superClass="gnu.c.compiler.option.dialect.std" useByScannerDiscovery="false" value="gnu.c.compiler.dialect.default" valueType="enumerated"/>
                 <option id="gnu.c.compiler.option.misc.verbose.kage-exception-dispatcher" name="Verbose (-v)" superClass="gnu.c.compiler.option.misc.verbose" useByScannerDiscovery="false" value="false" valueType="boolean"/>
@@ -1140,7 +1140,7 @@
           <folderInfo id="fr.ac6.managedbuild.config.gnu.cross.exe.release.kage-exception-dispatcher.hal" name="/" resourcePath="lib/third_party/mcu_vendor/st/stm32l475_discovery">
             <toolChain id="fr.ac6.managedbuild.toolchain.gnu.cross.exe.release.kage-exception-dispatcher.hal" name="Ac6 STM32 MCU GCC" superClass="fr.ac6.managedbuild.toolchain.gnu.cross.exe.release.kage-exception-dispatcher" unusedChildren="">
               <tool id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.kage-exception-dispatcher.hal" name="MCU GCC Compiler" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.kage-exception-dispatcher">
-                <option id="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other.kage-exception-dispatcher.hal" superClass="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other" value="--target=arm-none-eabi -mllvm -enable-arm-kage-privilege-promotion" valueType="string"/>
+                <option id="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other.kage-exception-dispatcher.hal" superClass="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other" value="--target=arm-none-eabi -mllvm -enable-arm-kage-privilege-promotion -mexecute-only" valueType="string"/>
               </tool>
               <tool id="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.kage-exception-dispatcher.hal" name="MCU GCC Assembler" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.kage-exception-dispatcher"/>
             </toolChain>
@@ -1148,7 +1148,7 @@
           <folderInfo id="fr.ac6.managedbuild.config.gnu.cross.exe.release.kage-exception-dispatcher.hal-2" name="/" resourcePath="application_code/st_code">
             <toolChain id="fr.ac6.managedbuild.toolchain.gnu.cross.exe.release.kage-exception-dispatcher.hal-2" name="Ac6 STM32 MCU GCC" superClass="fr.ac6.managedbuild.toolchain.gnu.cross.exe.release.kage-exception-dispatcher" unusedChildren="">
               <tool id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.kage-exception-dispatcher.hal-2" name="MCU GCC Compiler" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.kage-exception-dispatcher">
-                <option id="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other.kage-exception-dispatcher.hal-2" superClass="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other" value="--target=arm-none-eabi -mllvm -enable-arm-kage-privilege-promotion" valueType="string"/>
+                <option id="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other.kage-exception-dispatcher.hal-2" superClass="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other" value="--target=arm-none-eabi -mllvm -enable-arm-kage-privilege-promotion -mexecute-only" valueType="string"/>
               </tool>
               <tool id="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.kage-exception-dispatcher.hal-2" name="MCU GCC Assembler" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.kage-exception-dispatcher"/>
             </toolChain>
@@ -1227,7 +1227,7 @@
                   <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/common_demos/include}&quot;"/>
                   <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code}&quot;"/>
                 </option>
-                <option id="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other.kage-queue" name="Other flags" superClass="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other" useByScannerDiscovery="false" value="--target=arm-none-eabi -mllvm -enable-arm-silhouette-shadowstack -mllvm -enable-arm-silhouette-cfi -mllvm -enable-arm-silhouette-str2strt" valueType="string"/>
+                <option id="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other.kage-queue" name="Other flags" superClass="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other" useByScannerDiscovery="false" value="--target=arm-none-eabi -mexecute-only -mllvm -enable-arm-silhouette-shadowstack -mllvm -enable-arm-silhouette-cfi -mllvm -enable-arm-silhouette-str2strt" valueType="string"/>
                 <option id="gnu.c.compiler.option.optimization.flags.kage-queue" name="Other optimization flags" superClass="gnu.c.compiler.option.optimization.flags" useByScannerDiscovery="false" value="-fomit-frame-pointer" valueType="string"/>
                 <option id="gnu.c.compiler.option.dialect.std.kage-queue" name="Language standard" superClass="gnu.c.compiler.option.dialect.std" useByScannerDiscovery="false" value="gnu.c.compiler.dialect.default" valueType="enumerated"/>
                 <option id="gnu.c.compiler.option.misc.verbose.kage-queue" name="Verbose (-v)" superClass="gnu.c.compiler.option.misc.verbose" useByScannerDiscovery="false" value="false" valueType="boolean"/>
@@ -1306,7 +1306,7 @@
           <folderInfo id="fr.ac6.managedbuild.config.gnu.cross.exe.release.kage-queue.hal" name="/" resourcePath="lib/third_party/mcu_vendor/st/stm32l475_discovery">
             <toolChain id="fr.ac6.managedbuild.toolchain.gnu.cross.exe.release.kage-queue.hal" name="Ac6 STM32 MCU GCC" superClass="fr.ac6.managedbuild.toolchain.gnu.cross.exe.release.kage-queue" unusedChildren="">
               <tool id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.kage-queue.hal" name="MCU GCC Compiler" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.kage-queue">
-                <option id="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other.kage-queue.hal" superClass="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other" value="--target=arm-none-eabi -mllvm -enable-arm-kage-privilege-promotion" valueType="string"/>
+                <option id="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other.kage-queue.hal" superClass="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other" value="--target=arm-none-eabi -mllvm -enable-arm-kage-privilege-promotion -mexecute-only" valueType="string"/>
               </tool>
               <tool id="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.kage-queue.hal" name="MCU GCC Assembler" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.kage-queue"/>
             </toolChain>
@@ -1314,7 +1314,7 @@
           <folderInfo id="fr.ac6.managedbuild.config.gnu.cross.exe.release.kage-queue.hal-2" name="/" resourcePath="application_code/st_code">
             <toolChain id="fr.ac6.managedbuild.toolchain.gnu.cross.exe.release.kage-queue.hal-2" name="Ac6 STM32 MCU GCC" superClass="fr.ac6.managedbuild.toolchain.gnu.cross.exe.release.kage-queue" unusedChildren="">
               <tool id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.kage-queue.hal-2" name="MCU GCC Compiler" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.kage-queue">
-                <option id="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other.kage-queue.hal-2" superClass="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other" value="--target=arm-none-eabi -mllvm -enable-arm-kage-privilege-promotion" valueType="string"/>
+                <option id="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other.kage-queue.hal-2" superClass="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other" value="--target=arm-none-eabi -mllvm -enable-arm-kage-privilege-promotion -mexecute-only" valueType="string"/>
               </tool>
               <tool id="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.kage-queue.hal-2" name="MCU GCC Assembler" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.kage-queue"/>
             </toolChain>
@@ -1392,7 +1392,7 @@
                   <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/common_demos/include}&quot;"/>
                   <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code}&quot;"/>
                 </option>
-                <option id="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other.kage-secure-api" name="Other flags" superClass="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other" useByScannerDiscovery="false" value="--target=arm-none-eabi -mllvm -enable-arm-silhouette-shadowstack -mllvm -enable-arm-silhouette-cfi -mllvm -enable-arm-silhouette-str2strt" valueType="string"/>
+                <option id="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other.kage-secure-api" name="Other flags" superClass="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other" useByScannerDiscovery="false" value="--target=arm-none-eabi -mexecute-only -mllvm -enable-arm-silhouette-shadowstack -mllvm -enable-arm-silhouette-cfi -mllvm -enable-arm-silhouette-str2strt" valueType="string"/>
                 <option id="gnu.c.compiler.option.optimization.flags.kage-secure-api" name="Other optimization flags" superClass="gnu.c.compiler.option.optimization.flags" useByScannerDiscovery="false" value="-fomit-frame-pointer" valueType="string"/>
                 <option id="gnu.c.compiler.option.dialect.std.kage-secure-api" name="Language standard" superClass="gnu.c.compiler.option.dialect.std" useByScannerDiscovery="false" value="gnu.c.compiler.dialect.default" valueType="enumerated"/>
                 <option id="gnu.c.compiler.option.misc.verbose.kage-secure-api" name="Verbose (-v)" superClass="gnu.c.compiler.option.misc.verbose" useByScannerDiscovery="false" value="false" valueType="boolean"/>
@@ -1471,7 +1471,7 @@
           <folderInfo id="fr.ac6.managedbuild.config.gnu.cross.exe.release.kage-secure-api.hal" name="/" resourcePath="lib/third_party/mcu_vendor/st/stm32l475_discovery">
             <toolChain id="fr.ac6.managedbuild.toolchain.gnu.cross.exe.release.kage-secure-api.hal" name="Ac6 STM32 MCU GCC" superClass="fr.ac6.managedbuild.toolchain.gnu.cross.exe.release.kage-secure-api" unusedChildren="">
               <tool id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.kage-secure-api.hal" name="MCU GCC Compiler" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.kage-secure-api">
-                <option id="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other.kage-secure-api.hal" superClass="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other" value="--target=arm-none-eabi -mllvm -enable-arm-kage-privilege-promotion" valueType="string"/>
+                <option id="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other.kage-secure-api.hal" superClass="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other" value="--target=arm-none-eabi -mllvm -enable-arm-kage-privilege-promotion -mexecute-only" valueType="string"/>
               </tool>
               <tool id="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.kage-secure-api.hal" name="MCU GCC Assembler" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.kage-secure-api"/>
             </toolChain>
@@ -1479,7 +1479,7 @@
           <folderInfo id="fr.ac6.managedbuild.config.gnu.cross.exe.release.kage-secure-api.hal-2" name="/" resourcePath="application_code/st_code">
             <toolChain id="fr.ac6.managedbuild.toolchain.gnu.cross.exe.release.kage-secure-api.hal-2" name="Ac6 STM32 MCU GCC" superClass="fr.ac6.managedbuild.toolchain.gnu.cross.exe.release.kage-secure-api" unusedChildren="">
               <tool id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.kage-secure-api.hal-2" name="MCU GCC Compiler" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.kage-secure-api">
-                <option id="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other.kage-secure-api.hal-2" superClass="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other" value="--target=arm-none-eabi -mllvm -enable-arm-kage-privilege-promotion" valueType="string"/>
+                <option id="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other.kage-secure-api.hal-2" superClass="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other" value="--target=arm-none-eabi -mllvm -enable-arm-kage-privilege-promotion -mexecute-only" valueType="string"/>
               </tool>
               <tool id="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.kage-secure-api.hal-2" name="MCU GCC Assembler" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.kage-secure-api"/>
             </toolChain>
@@ -1558,7 +1558,7 @@
                   <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/common_demos/include}&quot;"/>
                   <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code}&quot;"/>
                 </option>
-                <option id="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other.kage-stream-buffer" name="Other flags" superClass="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other" useByScannerDiscovery="false" value="--target=arm-none-eabi -mllvm -enable-arm-silhouette-shadowstack -mllvm -enable-arm-silhouette-cfi -mllvm -enable-arm-silhouette-str2strt" valueType="string"/>
+                <option id="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other.kage-stream-buffer" name="Other flags" superClass="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other" useByScannerDiscovery="false" value="--target=arm-none-eabi -mexecute-only -mllvm -enable-arm-silhouette-shadowstack -mllvm -enable-arm-silhouette-cfi -mllvm -enable-arm-silhouette-str2strt" valueType="string"/>
                 <option id="gnu.c.compiler.option.optimization.flags.kage-stream-buffer" name="Other optimization flags" superClass="gnu.c.compiler.option.optimization.flags" useByScannerDiscovery="false" value="-fomit-frame-pointer" valueType="string"/>
                 <option id="gnu.c.compiler.option.dialect.std.kage-stream-buffer" name="Language standard" superClass="gnu.c.compiler.option.dialect.std" useByScannerDiscovery="false" value="gnu.c.compiler.dialect.default" valueType="enumerated"/>
                 <option id="gnu.c.compiler.option.misc.verbose.kage-stream-buffer" name="Verbose (-v)" superClass="gnu.c.compiler.option.misc.verbose" useByScannerDiscovery="false" value="false" valueType="boolean"/>
@@ -1637,7 +1637,7 @@
           <folderInfo id="fr.ac6.managedbuild.config.gnu.cross.exe.release.kage-stream-buffer.hal" name="/" resourcePath="lib/third_party/mcu_vendor/st/stm32l475_discovery">
             <toolChain id="fr.ac6.managedbuild.toolchain.gnu.cross.exe.release.kage-stream-buffer.hal" name="Ac6 STM32 MCU GCC" superClass="fr.ac6.managedbuild.toolchain.gnu.cross.exe.release.kage-stream-buffer" unusedChildren="">
               <tool id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.kage-stream-buffer.hal" name="MCU GCC Compiler" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.kage-stream-buffer">
-                <option id="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other.kage-stream-buffer.hal" superClass="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other" value="--target=arm-none-eabi -mllvm -enable-arm-kage-privilege-promotion" valueType="string"/>
+                <option id="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other.kage-stream-buffer.hal" superClass="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other" value="--target=arm-none-eabi -mllvm -enable-arm-kage-privilege-promotion -mexecute-only" valueType="string"/>
               </tool>
               <tool id="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.kage-stream-buffer.hal" name="MCU GCC Assembler" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.kage-stream-buffer"/>
             </toolChain>
@@ -1645,7 +1645,7 @@
           <folderInfo id="fr.ac6.managedbuild.config.gnu.cross.exe.release.kage-stream-buffer.hal-2" name="/" resourcePath="application_code/st_code">
             <toolChain id="fr.ac6.managedbuild.toolchain.gnu.cross.exe.release.kage-stream-buffer.hal-2" name="Ac6 STM32 MCU GCC" superClass="fr.ac6.managedbuild.toolchain.gnu.cross.exe.release.kage-stream-buffer" unusedChildren="">
               <tool id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.kage-stream-buffer.hal-2" name="MCU GCC Compiler" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.kage-stream-buffer">
-                <option id="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other.kage-stream-buffer.hal-2" superClass="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other" value="--target=arm-none-eabi -mllvm -enable-arm-kage-privilege-promotion" valueType="string"/>
+                <option id="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other.kage-stream-buffer.hal-2" superClass="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other" value="--target=arm-none-eabi -mllvm -enable-arm-kage-privilege-promotion -mexecute-only" valueType="string"/>
               </tool>
               <tool id="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.kage-stream-buffer.hal-2" name="MCU GCC Assembler" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.kage-stream-buffer"/>
             </toolChain>

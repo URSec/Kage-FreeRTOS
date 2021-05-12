@@ -235,7 +235,7 @@
                   <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/common_demos/include}&quot;"/>
                   <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code}&quot;"/>
                 </option>
-                <option id="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other.kage-coremark" name="Other flags" superClass="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other" useByScannerDiscovery="false" value="--target=arm-none-eabi -mllvm -enable-arm-silhouette-shadowstack -mllvm -enable-arm-silhouette-cfi -mllvm -enable-arm-silhouette-str2strt" valueType="string"/>
+                <option id="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other.kage-coremark" name="Other flags" superClass="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other" useByScannerDiscovery="false" value="--target=arm-none-eabi -mexecute-only -mllvm -enable-arm-silhouette-shadowstack -mllvm -enable-arm-silhouette-cfi -mllvm -enable-arm-silhouette-str2strt" valueType="string"/>
                 <option id="gnu.c.compiler.option.optimization.flags.kage-coremark" name="Other optimization flags" superClass="gnu.c.compiler.option.optimization.flags" useByScannerDiscovery="false" value="-fomit-frame-pointer" valueType="string"/>
                 <option id="gnu.c.compiler.option.dialect.std.kage-coremark" name="Language standard" superClass="gnu.c.compiler.option.dialect.std" useByScannerDiscovery="false" value="gnu.c.compiler.dialect.default" valueType="enumerated"/>
                 <option id="gnu.c.compiler.option.misc.verbose.kage-coremark" name="Verbose (-v)" superClass="gnu.c.compiler.option.misc.verbose" useByScannerDiscovery="false" value="false" valueType="boolean"/>
@@ -315,7 +315,7 @@
           <folderInfo id="fr.ac6.managedbuild.config.gnu.cross.exe.release.kage-coremark.hal" name="/" resourcePath="lib/third_party/mcu_vendor/st/stm32l475_discovery">
             <toolChain id="fr.ac6.managedbuild.toolchain.gnu.cross.exe.release.kage-coremark.hal" name="Ac6 STM32 MCU GCC" superClass="fr.ac6.managedbuild.toolchain.gnu.cross.exe.release.kage-coremark" unusedChildren="">
               <tool id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.kage-coremark.hal" name="MCU GCC Compiler" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.kage-coremark">
-                <option id="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other.kage-coremark.hal" superClass="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other" value="--target=arm-none-eabi -mllvm -enable-arm-kage-privilege-promotion" valueType="string"/>
+                <option id="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other.kage-coremark.hal" superClass="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other" value="--target=arm-none-eabi -mllvm -enable-arm-kage-privilege-promotion -mexecute-only" valueType="string"/>
               </tool>
               <tool id="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.kage-coremark.hal" name="MCU GCC Assembler" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.kage-coremark"/>
             </toolChain>
@@ -323,7 +323,7 @@
           <folderInfo id="fr.ac6.managedbuild.config.gnu.cross.exe.release.kage-coremark.hal-2" name="/" resourcePath="application_code/st_code">
             <toolChain id="fr.ac6.managedbuild.toolchain.gnu.cross.exe.release.kage-coremark.hal-2" name="Ac6 STM32 MCU GCC" superClass="fr.ac6.managedbuild.toolchain.gnu.cross.exe.release.kage-coremark" unusedChildren="">
               <tool id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.kage-coremark.hal-2" name="MCU GCC Compiler" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.kage-coremark">
-                <option id="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other.kage-coremark.hal-2" superClass="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other" value="--target=arm-none-eabi -mllvm -enable-arm-kage-privilege-promotion" valueType="string"/>
+                <option id="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other.kage-coremark.hal-2" superClass="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other" value="--target=arm-none-eabi -mllvm -enable-arm-kage-privilege-promotion -mexecute-only" valueType="string"/>
               </tool>
               <tool id="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.kage-coremark.hal-2" name="MCU GCC Assembler" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.kage-coremark"/>
             </toolChain>

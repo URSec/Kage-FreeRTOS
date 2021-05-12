@@ -206,6 +206,7 @@ configurations = {
     },
     'kage': {
         'cflags': [
+            '-mexecute-only',
             '-mllvm -enable-arm-silhouette-shadowstack',
             '-mllvm -enable-arm-silhouette-cfi',
             '-mllvm -enable-arm-silhouette-str2strt',
@@ -501,7 +502,11 @@ def gen_core_settings_config(conf, program):
     xml += '          <folderInfo id="fr.ac6.managedbuild.config.gnu.cross.exe.release.' + program_id + '.hal" name="/" resourcePath="lib/third_party/mcu_vendor/st/stm32l475_discovery">\n'
     xml += '            <toolChain id="fr.ac6.managedbuild.toolchain.gnu.cross.exe.release.' + program_id + '.hal" name="Ac6 STM32 MCU GCC" superClass="fr.ac6.managedbuild.toolchain.gnu.cross.exe.release.' + program_id + '" unusedChildren="">\n'
     xml += '              <tool id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.' + program_id + '.hal" name="MCU GCC Compiler" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.' + program_id + '">\n'
-    xml += '                <option id="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other.' + program_id + '.hal" superClass="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other" value="--target=arm-none-eabi -mllvm -enable-arm-kage-privilege-promotion" valueType="string"/>\n'
+    xml += '                <option id="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other.' + program_id + '.hal" superClass="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other" value="--target=arm-none-eabi -mllvm -enable-arm-kage-privilege-promotion'
+    if 'cflags' in configurations[conf]:
+        if '-mexecute-only' in configurations[conf]['cflags']:
+            xml += ' -mexecute-only'
+    xml += '" valueType="string"/>\n'
     xml += '              </tool>\n'
     xml += '              <tool id="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.' + program_id + '.hal" name="MCU GCC Assembler" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.' + program_id + '"/>\n'
     xml += '            </toolChain>\n'
@@ -509,7 +514,11 @@ def gen_core_settings_config(conf, program):
     xml += '          <folderInfo id="fr.ac6.managedbuild.config.gnu.cross.exe.release.' + program_id + '.hal-2" name="/" resourcePath="application_code/st_code">\n'
     xml += '            <toolChain id="fr.ac6.managedbuild.toolchain.gnu.cross.exe.release.' + program_id + '.hal-2" name="Ac6 STM32 MCU GCC" superClass="fr.ac6.managedbuild.toolchain.gnu.cross.exe.release.' + program_id + '" unusedChildren="">\n'
     xml += '              <tool id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.' + program_id + '.hal-2" name="MCU GCC Compiler" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.' + program_id + '">\n'
-    xml += '                <option id="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other.' + program_id + '.hal-2" superClass="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other" value="--target=arm-none-eabi -mllvm -enable-arm-kage-privilege-promotion" valueType="string"/>\n'
+    xml += '                <option id="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other.' + program_id + '.hal-2" superClass="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other" value="--target=arm-none-eabi -mllvm -enable-arm-kage-privilege-promotion'
+    if 'cflags' in configurations[conf]:
+        if '-mexecute-only' in configurations[conf]['cflags']:
+            xml += ' -mexecute-only'
+    xml += '" valueType="string"/>\n'
     xml += '              </tool>\n'
     xml += '              <tool id="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.' + program_id + '.hal-2" name="MCU GCC Assembler" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.' + program_id + '"/>\n'
     xml += '            </toolChain>\n'
