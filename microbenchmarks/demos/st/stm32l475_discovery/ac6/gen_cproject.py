@@ -202,8 +202,6 @@ programs = {
 # Dict of configurations.
 #
 configurations = {
-    'baseline': {
-    },
     'kage': {
         'cflags': [
             '-mexecute-only',
