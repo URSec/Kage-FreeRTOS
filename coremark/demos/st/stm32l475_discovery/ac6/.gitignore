@@ -2,7 +2,6 @@
 .settings
 
 # Ignore build results
-/baseline-coremark/
 /kage-coremark/
 
 # Ignore run configurations except one
