@@ -99,7 +99,7 @@ volatile ee_s32 seed5_volatile = 0;
 #define NSECS_PER_SEC              1000 // STM's HAL_GetTick() function returns milliseconds
 #define EE_TIMER_TICKER_RATE       1000
 #define CORETIMETYPE               uint32_t
-#define GETMYTIME(_t)              (*_t = HAL_GetTick())
+#define GETMYTIME(_t)              (*_t = xTaskGetTickCount())
 #define MYTIMEDIFF(fin, ini)       ((fin) - (ini))
 #define TIMER_RES_DIVIDER          1
 #define SAMPLE_TIME_IMPLEMENTATION 1
