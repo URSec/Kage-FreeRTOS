@@ -473,7 +473,7 @@ static void prvInitialiseTaskLists( void ) PRIVILEGED_FUNCTION;
  * void prvIdleTask( void *pvParameters );
  *
  */
-static portTASK_FUNCTION_PROTO( prvIdleTask, pvParameters );
+static portTASK_FUNCTION_PROTO( prvIdleTask, pvParameters ) PRIVILEGED_FUNCTION;
 
 /*
  * Utility to free all memory allocated by the scheduler to hold a TCB,
@@ -2111,9 +2111,8 @@ BaseType_t xReturn;
 			// the task, with appropriate access permissions.
 			{
 				// {Base address,	Length,	Parameters}
-//					{ &pxTimerTaskStackBuffer[STACK_SIZE],	STACK_SIZE_IN_BYTES, portMPU_REGION_PRIVILEGED_READ_WRITE }, // shadow stack.
-				{ &pxIdleTaskStackBuffer[0],	STACK_SIZE_IN_BYTES , portMPU_REGION_READ_WRITE }, // the other two region left unused.
-//					{ 0,0,0 },
+//				{ &pxIdleTaskStackBuffer[0],	STACK_SIZE_IN_BYTES , portMPU_REGION_READ_WRITE }, // the other two region left unused.
+					{ 0,0,0 },
 				{ 0,0,0 },
 				{ 0,0,0 }
 			}
