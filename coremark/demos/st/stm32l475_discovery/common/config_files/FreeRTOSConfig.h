@@ -139,13 +139,10 @@
 
 /* Normal assert() semantics without relying on the provision of an assert.h
  * header file. */
-//#define configASSERT( x )                                        \
-//    if( ( x ) == 0 ) { taskDISABLE_INTERRUPTS(); for( ; ; ) {; } \
-//    }
-/*
- * Kage Silhouette: Use special assert secure API instead
- */
-#define configASSERT( x ) vTaskAssert( x )
+#define configASSERT( x )                                        \
+    if( ( x ) == 0 ) { taskDISABLE_INTERRUPTS(); for( ; ; ) {; } \
+    }
+
 
 /* Logging task definitions. */
 extern void vMainUARTPrintString( char * pcString );

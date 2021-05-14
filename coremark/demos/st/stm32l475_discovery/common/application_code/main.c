@@ -83,7 +83,7 @@ const AppVersion32_t xAppFirmwareVersion =
 #define mainREQUIRED_WIFI_FIRMWARE_INVENTEK_VERSION     ( 5 )
 /*-----------------------------------------------------------*/
 
-void vApplicationDaemonTaskStartupHook( void ) PRIVILEGED_FUNCTION;
+void vApplicationDaemonTaskStartupHook( void );
 
 /* Defined in es_wifi_io.c. */
 extern void SPI_WIFI_ISR(void);
@@ -104,9 +104,9 @@ RNG_HandleTypeDef xHrng;
 static UART_HandleTypeDef xConsoleUart;
 
 /* Private function prototypes -----------------------------------------------*/
-static void SystemClock_Config( void );
-static void Console_UART_Init( void );
-static void RTC_Init( void );
+static void SystemClock_Config( void ) PRIVILEGED_FUNCTION;
+static void Console_UART_Init( void ) PRIVILEGED_FUNCTION;
+static void RTC_Init( void ) PRIVILEGED_FUNCTION;
 static void prvWifiConnect( void );
 
 /**
@@ -122,7 +122,7 @@ static void prvMiscInitialization( void ) PRIVILEGED_FUNCTION;
  * Heap_5 is being used because the RAM is not contiguous, therefore the heap
  * needs to be initialized.  See http://www.freertos.org/a00111.html
  */
-static void prvInitializeHeap( void );
+static void prvInitializeHeap( void ) PRIVILEGED_FUNCTION;
 
 #ifdef USE_OFFLOAD_SSL
 
@@ -140,7 +140,7 @@ static void prvInitializeHeap( void );
 /**
  * @brief Application runtime entry point.
  */
-int main( void )
+int main( void ) PRIVILEGED_FUNCTION
 {
     /* Perform any hardware initialization that does not require the RTOS to be
      * running.  */
