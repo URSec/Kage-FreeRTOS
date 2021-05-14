@@ -293,8 +293,8 @@ Queue_t * const pxQueue = xQueue;
 		else
 		{
 			/* Ensure the event queues start in the correct state. */
-			vListInitialise( &( pxQueue->xTasksWaitingToSend ) );
-			vListInitialise( &( pxQueue->xTasksWaitingToReceive ) );
+			vListInitialiseUser( &( pxQueue->xTasksWaitingToSend ) );
+			vListInitialiseUser( &( pxQueue->xTasksWaitingToReceive ) );
 		}
 	}
 	taskEXIT_CRITICAL();
