@@ -1,2 +1,9 @@
-Debug
+# Ignore IDE-generated files
 .settings
+
+# Ignore build results
+/baseline-coremark/
+
+# Ignore run configurations except one
+*.cfg
+!STM32L475VG.cfg

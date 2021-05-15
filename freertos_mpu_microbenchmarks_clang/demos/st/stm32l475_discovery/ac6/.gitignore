@@ -1,2 +1,12 @@
-Debug
+# Ignore IDE-generated files
 .settings
+
+# Ignore build results
+/mpu-context-switch/
+/mpu-exception-dispatcher/
+/mpu-queue/
+/mpu-stream-buffer/
+
+# Ignore run configurations except one
+*.cfg
+!STM32L475VG.cfg

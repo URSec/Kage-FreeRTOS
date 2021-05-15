@@ -1,2 +1,12 @@
-Debug
+# Ignore IDE-generated files
 .settings
+
+# Ignore build results
+/baseline-context-switch/
+/baseline-exception-dispatcher/
+/baseline-queue/
+/baseline-stream-buffer/
+
+# Ignore run configurations except one
+*.cfg
+!STM32L475VG.cfg
