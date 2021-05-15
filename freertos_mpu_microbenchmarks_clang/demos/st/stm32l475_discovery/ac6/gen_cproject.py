@@ -92,7 +92,7 @@ middlewares = {
     },
     'FreeRTOS': {
         'defines': [
-            'MQTTCLIENT_PLATFORM_HEADER=MQTTCMSIS.h'
+            'MQTTCLIENT_PLATFORM_HEADER=MQTTCMSIS.h',
             'ENABLE_IOT_INFO',
             'ENABLE_IOT_ERROR',
             'SENSOR',

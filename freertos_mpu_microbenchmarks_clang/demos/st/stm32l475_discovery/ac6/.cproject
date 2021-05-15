@@ -34,7 +34,8 @@
                 <option id="gnu.c.compiler.option.preprocessor.def.symbols.mpu-context-switch" name="Defined symbols (-D)" superClass="gnu.c.compiler.option.preprocessor.def.symbols" useByScannerDiscovery="false" valueType="definedSymbols">
                   <listOptionValue builtIn="false" value="USE_HAL_DRIVER"/>
                   <listOptionValue builtIn="false" value="STM32L475xx"/>
-                  <listOptionValue builtIn="false" value="MQTTCLIENT_PLATFORM_HEADER=MQTTCMSIS.hENABLE_IOT_INFO"/>
+                  <listOptionValue builtIn="false" value="MQTTCLIENT_PLATFORM_HEADER=MQTTCMSIS.h"/>
+                  <listOptionValue builtIn="false" value="ENABLE_IOT_INFO"/>
                   <listOptionValue builtIn="false" value="ENABLE_IOT_ERROR"/>
                   <listOptionValue builtIn="false" value="SENSOR"/>
                   <listOptionValue builtIn="false" value="RFU"/>
@@ -181,7 +182,8 @@
                 <option id="gnu.c.compiler.option.preprocessor.def.symbols.mpu-exception-dispatcher" name="Defined symbols (-D)" superClass="gnu.c.compiler.option.preprocessor.def.symbols" useByScannerDiscovery="false" valueType="definedSymbols">
                   <listOptionValue builtIn="false" value="USE_HAL_DRIVER"/>
                   <listOptionValue builtIn="false" value="STM32L475xx"/>
-                  <listOptionValue builtIn="false" value="MQTTCLIENT_PLATFORM_HEADER=MQTTCMSIS.hENABLE_IOT_INFO"/>
+                  <listOptionValue builtIn="false" value="MQTTCLIENT_PLATFORM_HEADER=MQTTCMSIS.h"/>
+                  <listOptionValue builtIn="false" value="ENABLE_IOT_INFO"/>
                   <listOptionValue builtIn="false" value="ENABLE_IOT_ERROR"/>
                   <listOptionValue builtIn="false" value="SENSOR"/>
                   <listOptionValue builtIn="false" value="RFU"/>
@@ -328,7 +330,8 @@
                 <option id="gnu.c.compiler.option.preprocessor.def.symbols.mpu-queue" name="Defined symbols (-D)" superClass="gnu.c.compiler.option.preprocessor.def.symbols" useByScannerDiscovery="false" valueType="definedSymbols">
                   <listOptionValue builtIn="false" value="USE_HAL_DRIVER"/>
                   <listOptionValue builtIn="false" value="STM32L475xx"/>
-                  <listOptionValue builtIn="false" value="MQTTCLIENT_PLATFORM_HEADER=MQTTCMSIS.hENABLE_IOT_INFO"/>
+                  <listOptionValue builtIn="false" value="MQTTCLIENT_PLATFORM_HEADER=MQTTCMSIS.h"/>
+                  <listOptionValue builtIn="false" value="ENABLE_IOT_INFO"/>
                   <listOptionValue builtIn="false" value="ENABLE_IOT_ERROR"/>
                   <listOptionValue builtIn="false" value="SENSOR"/>
                   <listOptionValue builtIn="false" value="RFU"/>
@@ -476,7 +479,8 @@
                 <option id="gnu.c.compiler.option.preprocessor.def.symbols.mpu-stream-buffer" name="Defined symbols (-D)" superClass="gnu.c.compiler.option.preprocessor.def.symbols" useByScannerDiscovery="false" valueType="definedSymbols">
                   <listOptionValue builtIn="false" value="USE_HAL_DRIVER"/>
                   <listOptionValue builtIn="false" value="STM32L475xx"/>
-                  <listOptionValue builtIn="false" value="MQTTCLIENT_PLATFORM_HEADER=MQTTCMSIS.hENABLE_IOT_INFO"/>
+                  <listOptionValue builtIn="false" value="MQTTCLIENT_PLATFORM_HEADER=MQTTCMSIS.h"/>
+                  <listOptionValue builtIn="false" value="ENABLE_IOT_INFO"/>
                   <listOptionValue builtIn="false" value="ENABLE_IOT_ERROR"/>
                   <listOptionValue builtIn="false" value="SENSOR"/>
                   <listOptionValue builtIn="false" value="RFU"/>
