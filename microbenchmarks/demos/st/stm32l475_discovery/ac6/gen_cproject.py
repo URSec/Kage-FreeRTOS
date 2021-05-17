@@ -159,7 +159,6 @@ programs = {
     },
     'queue': {
         'defines': [
-            'UNPRIV_API_BENCHMARK',
             'QUEUE_BENCHMARK',
         ],
         'includes': [
@@ -172,7 +171,6 @@ programs = {
     },
     'stream-buffer': {
         'defines': [
-            'UNPRIV_API_BENCHMARK',
             'STREAM_BUFFER_BENCHMARK',
         ],
         'includes': [

@@ -372,7 +372,6 @@
                   <listOptionValue builtIn="false" value="SENSOR"/>
                   <listOptionValue builtIn="false" value="RFU"/>
                   <listOptionValue builtIn="false" value="USE_OFFLOAD_SSL"/>
-                  <listOptionValue builtIn="false" value="UNPRIV_API_BENCHMARK"/>
                   <listOptionValue builtIn="false" value="QUEUE_BENCHMARK"/>
                 </option>
                 <option id="gnu.c.compiler.option.include.paths.kage-queue" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
@@ -705,7 +704,6 @@
                   <listOptionValue builtIn="false" value="SENSOR"/>
                   <listOptionValue builtIn="false" value="RFU"/>
                   <listOptionValue builtIn="false" value="USE_OFFLOAD_SSL"/>
-                  <listOptionValue builtIn="false" value="UNPRIV_API_BENCHMARK"/>
                   <listOptionValue builtIn="false" value="STREAM_BUFFER_BENCHMARK"/>
                 </option>
                 <option id="gnu.c.compiler.option.include.paths.kage-stream-buffer" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
