@@ -539,7 +539,7 @@ static void RTC_Init( void )
 /**
  * @brief  This function is executed in case of error occurrence.
  */
-void Error_Handler( void )
+void Error_Handler( void ) PRIVILEGED_FUNCTION
 {
     while( 1 )
     {
