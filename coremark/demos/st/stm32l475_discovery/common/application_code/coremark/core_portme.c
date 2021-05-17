@@ -457,6 +457,10 @@ core_start_parallel(core_results *res)
     if (!result)
     	ee_printf("Failed to initialize task %i\n", current_task);
     current_task++;
+    if (current_task == default_num_contexts)
+    {
+    	vTaskFinishInit();
+    }
     return result;
 #endif
 }
