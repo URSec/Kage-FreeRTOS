@@ -13,19 +13,19 @@
     /*!< Trace enable bit in DEMCR register */
 
 #define KIN1_InitCycleCounter() \
-  KIN1_DEMCR |= KIN1_TRCENA_BIT
+  asm volatile ("str	%1, %0;" :: "m" (KIN1_DEMCR), "r" (KIN1_DEMCR | KIN1_TRCENA_BIT))
   /*!< TRCENA: Enable trace and debug block DEMCR (Debug Exception and Monitor Control Register */
 
 #define KIN1_ResetCycleCounter() \
-  KIN1_DWT_CYCCNT = 0
+  asm volatile ("str	%1, %0;" :: "m" (KIN1_DWT_CYCCNT), "r" (0))
   /*!< Reset cycle counter */
 
 #define KIN1_EnableCycleCounter() \
-  KIN1_DWT_CONTROL |= KIN1_DWT_CYCCNTENA_BIT
+  asm volatile ("str	%1, %0;" :: "m" (KIN1_DWT_CONTROL), "r" (KIN1_DWT_CONTROL | KIN1_DWT_CYCCNTENA_BIT))
   /*!< Enable cycle counter */
 
 #define KIN1_DisableCycleCounter() \
-  KIN1_DWT_CONTROL &= ~KIN1_DWT_CYCCNTENA_BIT
+  asm volatile ("str	%1, %0;" :: "m" (KIN1_DWT_CONTROL), "r" (KIN1_DWT_CONTROL & ~KIN1_DWT_CYCCNTENA_BIT))
   /*!< Disable cycle counter */
 
 #define KIN1_GetCycleCounter() \
