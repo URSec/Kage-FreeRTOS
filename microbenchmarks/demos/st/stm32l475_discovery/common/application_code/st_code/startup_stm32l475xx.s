@@ -74,7 +74,7 @@ defined in linker script */
  * @retval : None
 */
 
-    .section	.text.Reset_Handler
+    .section	privileged_functions,"ax",%progbits
 	.weak	Reset_Handler
 	.type	Reset_Handler, %function
 Reset_Handler:
@@ -128,7 +128,7 @@ LoopForever:
  * @param  None
  * @retval : None
 */
-    .section	.text.Default_Handler,"ax",%progbits
+    .section	privileged_functions,"ax",%progbits
 Default_Handler:
 Infinite_Loop:
 	b	Infinite_Loop
