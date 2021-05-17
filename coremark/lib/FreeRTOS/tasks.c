@@ -5607,6 +5607,12 @@ static TaskHandle_t pvGetTaskFromID(const TaskID_t id)
 	return pvReturn;
 }
 
+/*-----------------------------------------------------------*/
+void vTaskFinishInit( void )
+{
+	uxTaskCreatedTotal = configTOTAL_TASKS;
+}
+
 #ifdef SECURE_API_MICRO_BENCHMARK
 /*-----------------------------------------------------------*/
 void vMeasureCycles(void* dummyData, size_t dataSize)

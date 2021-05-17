@@ -2422,6 +2422,11 @@ void vTaskInternalSetTimeOutState( TimeOut_t * const pxTimeOut );
  */
 void vTaskAssert( BaseType_t cond ) PRIVILEGED_FUNCTION;
 
+/*
+ * Kage Silhouette: Add Secure API to declare the end of initialization
+ */
+void vTaskFinishInit( void ) PRIVILEGED_FUNCTION;
+
 // Silhouette: For micro benchmarks only
 #ifdef SECURE_API_MICRO_BENCHMARK
 void vMeasureCycles( void * dummyData, size_t dataSize ) PRIVILEGED_FUNCTION;
