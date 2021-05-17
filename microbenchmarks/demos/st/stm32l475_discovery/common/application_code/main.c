@@ -240,6 +240,7 @@ extern uint32_t ulCycleRestore;
 	vMeasureException();
 #endif
 #endif
+	vTaskFinishInit();
 }
 /*-----------------------------------------------------------*/
 
