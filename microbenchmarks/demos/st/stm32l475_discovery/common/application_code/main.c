@@ -1072,7 +1072,7 @@ void HAL_GPIO_EXTI_Callback( uint16_t GPIO_Pin )
  *
  * @note Inventek module is configured to use SPI3.
  */
-void SPI3_IRQHandler( void )
+void SPI3_IRQHandler( void ) PRIVILEGED_FUNCTION
 {
     HAL_SPI_IRQHandler( &( hspi ) );
 }
