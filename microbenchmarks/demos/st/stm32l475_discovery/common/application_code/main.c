@@ -662,7 +662,7 @@ void prvGetRegistersFromStack( uint32_t * pulFaultStackAddress ) __attribute__((
     }
 }
 /*-----------------------------------------------------------*/
-void prvKageUsageHandler( void )
+void prvKageUsageHandler( void ) PRIVILEGED_FUNCTION
 //void HardFault_Handler( void )
 {
 	/* As the microbenchmark triggers a divide-by-0 fault,
@@ -682,7 +682,7 @@ void prvKageUsageHandler( void )
 
 /* The fault handler implementation calls a function called
  * prvGetRegistersFromStack(). */
-void HardFault_Handler( void )
+void HardFault_Handler( void ) PRIVILEGED_FUNCTION
 {
 //    __asm volatile
 //    (
@@ -921,7 +921,7 @@ void HardFault_Handler( void )
 
 /* The fault handler implementation calls a function called
  * prvGetRegistersFromStack(). */
-void MemManage_Handler( void )
+void MemManage_Handler( void ) PRIVILEGED_FUNCTION
 {
     __asm volatile
     (

@@ -633,7 +633,7 @@ void prvKageUsageHandler( void )
 
 /* The fault handler implementation calls a function called
  * prvGetRegistersFromStack(). */
-void HardFault_Handler( void ) __attribute__((used))
+void HardFault_Handler( void ) __attribute__((used)) PRIVILEGED_FUNCTION
 {
 	while (1) {
 
@@ -889,7 +889,7 @@ void HardFault_Handler_kage( void )
 
 /* The fault handler implementation calls a function called
  * prvGetRegistersFromStack(). */
-void MemManage_Handler( void )
+void MemManage_Handler( void ) PRIVILEGED_FUNCTION
 {
     __asm volatile
     (
