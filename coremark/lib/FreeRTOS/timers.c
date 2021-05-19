@@ -565,6 +565,7 @@ BaseType_t xListWasEmpty;
 		application includes initialisation code that would benefit from
 		executing after the scheduler has been started. */
 		vApplicationDaemonTaskStartupHook();
+		vTaskFinishInit();
 	}
 	#endif /* configUSE_DAEMON_TASK_STARTUP_HOOK */
 
