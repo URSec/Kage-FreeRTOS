@@ -2429,7 +2429,7 @@ void vTaskFinishInit( void ) PRIVILEGED_FUNCTION;
 
 // Silhouette: For micro benchmarks only
 #ifdef SECURE_API_MICRO_BENCHMARK
-void vMeasureCycles( void * dummyData, size_t dataSize ) PRIVILEGED_FUNCTION;
+void vMeasureCycles( void * dummyData, size_t dataSize );
 #endif
 
 #ifdef EXCEPTION_NEW_MICRO_BENCHMARK
