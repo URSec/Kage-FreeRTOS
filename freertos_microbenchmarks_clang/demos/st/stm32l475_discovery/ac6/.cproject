@@ -70,7 +70,7 @@
                   <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code}&quot;"/>
                 </option>
                 <option id="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other.baseline-context-switch" name="Other flags" superClass="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other" useByScannerDiscovery="false" value="--target=arm-none-eabi" valueType="string"/>
-                <option id="gnu.c.compiler.option.optimization.flags.baseline-context-switch" name="Other optimization flags" superClass="gnu.c.compiler.option.optimization.flags" useByScannerDiscovery="false" value="-fomit-frame-pointer" valueType="string"/>
+                <option id="gnu.c.compiler.option.optimization.flags.baseline-context-switch" name="Other optimization flags" superClass="gnu.c.compiler.option.optimization.flags" useByScannerDiscovery="false" value="-ffreestanding -fomit-frame-pointer" valueType="string"/>
                 <option id="gnu.c.compiler.option.dialect.std.baseline-context-switch" name="Language standard" superClass="gnu.c.compiler.option.dialect.std" useByScannerDiscovery="false" value="gnu.c.compiler.dialect.default" valueType="enumerated"/>
                 <option id="gnu.c.compiler.option.misc.verbose.baseline-context-switch" name="Verbose (-v)" superClass="gnu.c.compiler.option.misc.verbose" useByScannerDiscovery="false" value="false" valueType="boolean"/>
                 <option id="gnu.c.compiler.option.include.files.baseline-context-switch" name="Include files (-include)" superClass="gnu.c.compiler.option.include.files" useByScannerDiscovery="false"/>
@@ -218,7 +218,7 @@
                   <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code}&quot;"/>
                 </option>
                 <option id="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other.baseline-exception-dispatcher" name="Other flags" superClass="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other" useByScannerDiscovery="false" value="--target=arm-none-eabi" valueType="string"/>
-                <option id="gnu.c.compiler.option.optimization.flags.baseline-exception-dispatcher" name="Other optimization flags" superClass="gnu.c.compiler.option.optimization.flags" useByScannerDiscovery="false" value="-fomit-frame-pointer" valueType="string"/>
+                <option id="gnu.c.compiler.option.optimization.flags.baseline-exception-dispatcher" name="Other optimization flags" superClass="gnu.c.compiler.option.optimization.flags" useByScannerDiscovery="false" value="-ffreestanding -fomit-frame-pointer" valueType="string"/>
                 <option id="gnu.c.compiler.option.dialect.std.baseline-exception-dispatcher" name="Language standard" superClass="gnu.c.compiler.option.dialect.std" useByScannerDiscovery="false" value="gnu.c.compiler.dialect.default" valueType="enumerated"/>
                 <option id="gnu.c.compiler.option.misc.verbose.baseline-exception-dispatcher" name="Verbose (-v)" superClass="gnu.c.compiler.option.misc.verbose" useByScannerDiscovery="false" value="false" valueType="boolean"/>
                 <option id="gnu.c.compiler.option.include.files.baseline-exception-dispatcher" name="Include files (-include)" superClass="gnu.c.compiler.option.include.files" useByScannerDiscovery="false"/>
@@ -367,7 +367,7 @@
                   <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code}&quot;"/>
                 </option>
                 <option id="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other.baseline-queue" name="Other flags" superClass="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other" useByScannerDiscovery="false" value="--target=arm-none-eabi" valueType="string"/>
-                <option id="gnu.c.compiler.option.optimization.flags.baseline-queue" name="Other optimization flags" superClass="gnu.c.compiler.option.optimization.flags" useByScannerDiscovery="false" value="-fomit-frame-pointer" valueType="string"/>
+                <option id="gnu.c.compiler.option.optimization.flags.baseline-queue" name="Other optimization flags" superClass="gnu.c.compiler.option.optimization.flags" useByScannerDiscovery="false" value="-ffreestanding -fomit-frame-pointer" valueType="string"/>
                 <option id="gnu.c.compiler.option.dialect.std.baseline-queue" name="Language standard" superClass="gnu.c.compiler.option.dialect.std" useByScannerDiscovery="false" value="gnu.c.compiler.dialect.default" valueType="enumerated"/>
                 <option id="gnu.c.compiler.option.misc.verbose.baseline-queue" name="Verbose (-v)" superClass="gnu.c.compiler.option.misc.verbose" useByScannerDiscovery="false" value="false" valueType="boolean"/>
                 <option id="gnu.c.compiler.option.include.files.baseline-queue" name="Include files (-include)" superClass="gnu.c.compiler.option.include.files" useByScannerDiscovery="false"/>
@@ -516,7 +516,7 @@
                   <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code}&quot;"/>
                 </option>
                 <option id="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other.baseline-stream-buffer" name="Other flags" superClass="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other" useByScannerDiscovery="false" value="--target=arm-none-eabi" valueType="string"/>
-                <option id="gnu.c.compiler.option.optimization.flags.baseline-stream-buffer" name="Other optimization flags" superClass="gnu.c.compiler.option.optimization.flags" useByScannerDiscovery="false" value="-fomit-frame-pointer" valueType="string"/>
+                <option id="gnu.c.compiler.option.optimization.flags.baseline-stream-buffer" name="Other optimization flags" superClass="gnu.c.compiler.option.optimization.flags" useByScannerDiscovery="false" value="-ffreestanding -fomit-frame-pointer" valueType="string"/>
                 <option id="gnu.c.compiler.option.dialect.std.baseline-stream-buffer" name="Language standard" superClass="gnu.c.compiler.option.dialect.std" useByScannerDiscovery="false" value="gnu.c.compiler.dialect.default" valueType="enumerated"/>
                 <option id="gnu.c.compiler.option.misc.verbose.baseline-stream-buffer" name="Verbose (-v)" superClass="gnu.c.compiler.option.misc.verbose" useByScannerDiscovery="false" value="false" valueType="boolean"/>
                 <option id="gnu.c.compiler.option.include.files.baseline-stream-buffer" name="Include files (-include)" superClass="gnu.c.compiler.option.include.files" useByScannerDiscovery="false"/>
