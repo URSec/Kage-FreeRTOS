@@ -1127,6 +1127,7 @@ extern uint32_t __FLASH_segment_start__[];
 extern uint32_t __FLASH_segment_end__[];
 extern uint32_t __SRAM_segment_start__[];
 extern uint32_t __SRAM_segment_end__[];
+extern uint32_t __SRAM2_segment_end__[];
 extern uint32_t __privileged_data_start__[];
 extern uint32_t __privileged_data_end__[];
 extern uint32_t __data_region_start__[];
@@ -1156,7 +1157,7 @@ extern uint32_t ulCycleSpill;
 				( portMPU_REGION_CACHEABLE_BUFFERABLE ) |
 				( portMPU_REGION_ENABLE );
 
-		/* Define the region that allows access to data. */
+		/* Define the region that allows access to data and user_heap_stack. */
 		xMPUSettings->xRegion[ 1 ].ulRegionBaseAddress =
 				( ( uint32_t ) __data_region_start__ ) |
 				( portMPU_REGION_VALID ) |
@@ -1164,7 +1165,7 @@ extern uint32_t ulCycleSpill;
 
 		xMPUSettings->xRegion[ 1 ].ulRegionAttribute =
 				( portMPU_REGION_READ_WRITE | portMPU_REGION_EXECUTE_NEVER ) | /* Read and write. */
-				( prvGetMPURegionSizeSetting( ( uint32_t ) __data_region_end__ - ( uint32_t ) __data_region_start__ ) ) |
+				( prvGetMPURegionSizeSetting( ( uint32_t ) __SRAM2_segment_end__ - ( uint32_t ) __data_region_start__ ) ) |
 				( portMPU_REGION_CACHEABLE_BUFFERABLE ) |
 				( portMPU_REGION_ENABLE );
 

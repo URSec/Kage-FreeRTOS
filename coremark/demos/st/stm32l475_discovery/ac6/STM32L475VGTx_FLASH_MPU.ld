@@ -283,7 +283,7 @@ __privileged_functions_start__ = ORIGIN( FLASH );
 __privileged_functions_end__ = __privileged_functions_start__ + _Privileged_Functions_Region_Size;
 __SRAM_segment_start__ = ORIGIN( RAM2 );
 __TSTACK_segment_start__ = ORIGIN( RAM );
-/* __SRAM_segment_end__ = __SRAM_segment_start__ + LENGTH( RAM2 ); */
+__SRAM2_segment_end__ = __SRAM_segment_start__ + LENGTH( RAM2 ); 
 __SRAM_segment_end__ = ORIGIN( RAM ) + LENGTH( RAM ); /* regard RAM as a single region, with a hole in it. */
 
 _Privileged_Data_Region_Size = __privileged_data_end__ - __privileged_data_start__;
