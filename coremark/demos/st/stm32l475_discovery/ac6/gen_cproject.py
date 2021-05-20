@@ -16,6 +16,11 @@ root = '${workspace_loc}/..'
 clang_path = root + '/build/llvm/bin/clang'
 
 #
+# Path to the newlib install directory.
+#
+newlib_path = root + '/build/newlib-cygwin/install'
+
+#
 # Path to the directory of this project.
 #
 project_dir = os.path.abspath(os.path.dirname(sys.argv[0]))
@@ -32,14 +37,10 @@ project_name = 'coremark'
 libraries = {
     'c': {
         'includes': [
-            '${openstm32_compiler_path}/../arm-none-eabi/include',
+            newlib_path + '/arm-none-eabi/include',
         ],
         'library_paths': [
-            '${openstm32_compiler_path}/../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard',
-            '${openstm32_compiler_path}/../arm-none-eabi/lib',
-        ],
-        'objects': [
-            '${openstm32_compiler_path}/../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/crt0.o',
+            newlib_path + '/arm-none-eabi/lib',
         ],
     },
     'gcc': {
@@ -47,12 +48,6 @@ libraries = {
             '${openstm32_compiler_path}/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard',
             '${openstm32_compiler_path}/../lib/gcc/arm-none-eabi/7.3.1',
             '${openstm32_compiler_path}/../lib/gcc',
-        ],
-        'objects': [
-            '${openstm32_compiler_path}/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/crti.o',
-            '${openstm32_compiler_path}/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/crtbegin.o',
-            '${openstm32_compiler_path}/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/crtend.o',
-            '${openstm32_compiler_path}/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/crtn.o',
         ],
     },
 }
