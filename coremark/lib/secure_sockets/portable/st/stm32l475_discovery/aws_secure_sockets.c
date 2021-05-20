@@ -668,7 +668,7 @@ int32_t SOCKETS_Connect( Socket_t xSocket,
                 xWiFiConnection.Number = ( uint8_t ) ulSocketNumber;
                 xWiFiConnection.Type = pxSecureSocket->xSocketType;
                 xWiFiConnection.RemotePort = SOCKETS_ntohs( pxAddress->usPort ); /* WiFi Module expects the port number in host byte order. */
-                memcpyUser( &( xWiFiConnection.RemoteIP ),
+                memcpy( &( xWiFiConnection.RemoteIP ),
                         &( pxAddress->ulAddress ),
                         sizeof( xWiFiConnection.RemoteIP ) );
                 xWiFiConnection.LocalPort = 0;
@@ -1023,7 +1023,7 @@ int32_t SOCKETS_SetSockOpt( Socket_t xSocket,
                     }
                     else
                     {
-                        memcpyUser( pxSecureSocket->pcDestination, pvOptionValue, xOptionLength );
+                        memcpy( pxSecureSocket->pcDestination, pvOptionValue, xOptionLength );
                         pxSecureSocket->pcDestination[ xOptionLength ] = '\0';
                     }
                 }
@@ -1049,7 +1049,7 @@ int32_t SOCKETS_SetSockOpt( Socket_t xSocket,
                     }
                     else
                     {
-                        memcpyUser( pxSecureSocket->pcServerCertificate, pvOptionValue, xOptionLength );
+                        memcpy( pxSecureSocket->pcServerCertificate, pvOptionValue, xOptionLength );
                         pxSecureSocket->ulServerCertificateLength = xOptionLength;
                     }
                 }

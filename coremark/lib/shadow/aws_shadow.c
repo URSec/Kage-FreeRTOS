@@ -1324,7 +1324,7 @@ static ShadowReturnCode_t prvShadowOperation( ShadowOperationCallParams_t * pxPa
         }
 
         pxShadowClient->xOperationResult = eShadowSuccess;
-        memsetUser( pxShadowClient->ucTopicBuffer, 0, shadowTOPIC_BUFFER_LENGTH );
+        memset( pxShadowClient->ucTopicBuffer, 0, shadowTOPIC_BUFFER_LENGTH );
         configASSERT( xSemaphoreGive( pxShadowClient->xOperationMutex )
                       == pdPASS );
     }
@@ -1523,7 +1523,7 @@ ShadowReturnCode_t SHADOW_ClientDelete( ShadowClientHandle_t xShadowClientHandle
     if( xReturn == eShadowSuccess )
     {
         taskENTER_CRITICAL();
-        memsetUser( pxShadowClient, 0, sizeof( ShadowClient_t ) );
+        memset( pxShadowClient, 0, sizeof( ShadowClient_t ) );
         taskEXIT_CRITICAL();
     }
 
@@ -1697,7 +1697,7 @@ ShadowReturnCode_t SHADOW_RegisterCallbacks( ShadowClientHandle_t xShadowClientH
     {
         taskENTER_CRITICAL();
         {
-            memsetUser( pxCallbackCatalogEntry,
+            memset( pxCallbackCatalogEntry,
                     0,
                     sizeof( CallbackCatalogEntry_t ) );
         }

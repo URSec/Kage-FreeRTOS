@@ -434,7 +434,7 @@ core_start_parallel(core_results *res)
     return xTaskCreate(benchTask, "BenchTask", 1024, res_for_task,
         (configMAX_PRIORITIES - 3 | portPRIVILEGE_BIT), &(res->port.task));
 #else
-    memcpyUser(res_for_task, res, sizeof(core_results));
+    memcpy(res_for_task, res, sizeof(core_results));
 //    ee_printf("creating task1\r\n");
     ee_printf("creating task2\r\n");
     TaskParameters_t benchTaskParameters =

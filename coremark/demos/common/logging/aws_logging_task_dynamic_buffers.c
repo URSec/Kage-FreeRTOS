@@ -288,7 +288,7 @@ void vLoggingPrint( const char * pcMessage )
 
     if( pcPrintString != NULL )
     {
-        strncpyUser( pcPrintString, pcMessage, xLength );
+        strncpy( pcPrintString, pcMessage, xLength );
 
         /* Send the string to the logging task for IO. */
         if( xQueueSend( xQueue, &pcPrintString, loggingDONT_BLOCK ) != pdPASS )

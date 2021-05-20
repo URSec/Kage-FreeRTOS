@@ -322,7 +322,7 @@
  */
 #define mqttCOPY_BYTES( srcBuffer, srcIndex, dstBuffer, dstIndex, byteCount )                            \
     {                                                                                                    \
-        memcpyUser( &( ( dstBuffer )[ ( dstIndex ) ] ), &( ( srcBuffer )[ ( srcIndex ) ] ), ( byteCount ) ); \
+        memcpy( &( ( dstBuffer )[ ( dstIndex ) ] ), &( ( srcBuffer )[ ( srcIndex ) ] ), ( byteCount ) ); \
         ( srcIndex ) = ( uint32_t ) ( srcIndex ) + ( uint32_t ) ( byteCount );                           \
         ( dstIndex ) = ( uint32_t ) ( dstIndex ) + ( uint32_t ) ( byteCount );                           \
     }
@@ -887,7 +887,7 @@ static void prvReturnBuffer( MQTTContext_t * pxMQTTContext,
     if( xBuffer != NULL )
     {
         /* Clear the payload memory. */
-        memsetUser( mqttbufferGET_DATA( xBuffer ), 0x00, mqttbufferGET_EFFECTIVE_BUFFER_LENGTH( xBuffer ) );
+        memset( mqttbufferGET_DATA( xBuffer ), 0x00, mqttbufferGET_EFFECTIVE_BUFFER_LENGTH( xBuffer ) );
 
         /* If the buffer is part of Tx list, remove it. */
         mqttbufferLIST_REMOVE( xBuffer );
@@ -1900,7 +1900,7 @@ static uint8_t * prvWriteString( uint8_t * pucDestination,
         pucDestination++;
         *pucDestination = ( uint8_t ) usStringLength;
         pucDestination++;
-        memcpyUser( pucDestination, pucString, usStringLength );
+        memcpy( pucDestination, pucString, usStringLength );
     }
     else
     {
@@ -2084,7 +2084,7 @@ static uint8_t prvDecodeRemainingLength( const uint8_t * const pucEncodedRemaini
                             pxMQTTContext->xSubscriptionManager.xSubscriptions[ x ].xInUse = eMQTTTrue;
 
                             /* Store the subscription. */
-                            memcpyUser( pxMQTTContext->xSubscriptionManager.xSubscriptions[ x ].ucTopicFilter,
+                            memcpy( pxMQTTContext->xSubscriptionManager.xSubscriptions[ x ].ucTopicFilter,
                                     pucTopic,
                                     usTopicLength );
                             pxMQTTContext->xSubscriptionManager.xSubscriptions[ x ].usTopicFilterLength = usTopicLength;
@@ -2622,7 +2622,7 @@ MQTTReturnCode_t MQTT_Connect( MQTTContext_t * pxMQTTContext,
                 mqttbufferLIST_ADD( &( pxMQTTContext->xTxBufferListHead ), xBuffer );
 
                 /* To help debugging only. */
-                memsetUser( mqttbufferGET_DATA( xBuffer ), 0x00, mqttbufferGET_EFFECTIVE_BUFFER_LENGTH( xBuffer ) );
+                memset( mqttbufferGET_DATA( xBuffer ), 0x00, mqttbufferGET_EFFECTIVE_BUFFER_LENGTH( xBuffer ) );
 
                 /* Record time-stamp and store timeout. */
                 mqttbufferGET_PACKET_RECORDED_TICK_COUNT( xBuffer ) = prvGetCurrentTickCount( pxMQTTContext );
@@ -2642,7 +2642,7 @@ MQTTReturnCode_t MQTT_Connect( MQTTContext_t * pxMQTTContext,
 
                 /* Write default variable header. */
                 pucNextByte = &( mqttbufferGET_DATA( xBuffer )[ mqttADJUST_OFFSET( mqttVARIABLE_LENGTH_HEADER_START_OFFSET, ucRemainingLengthFieldBytes ) ] );
-                memcpyUser( pucNextByte, ucDefaultConnectVariableHeader, sizeof( ucDefaultConnectVariableHeader ) );
+                memcpy( pucNextByte, ucDefaultConnectVariableHeader, sizeof( ucDefaultConnectVariableHeader ) );
 
                 /* Update the user name flag. */
                 if( pxConnectParams->usUserNameLength > ( uint16_t ) 0 )
@@ -2829,7 +2829,7 @@ MQTTReturnCode_t MQTT_Subscribe( MQTTContext_t * pxMQTTContext,
                     mqttbufferLIST_ADD( &( pxMQTTContext->xTxBufferListHead ), xBuffer );
 
                     /* To help debugging only. */
-                    memsetUser( mqttbufferGET_DATA( xBuffer ), 0x00, mqttbufferGET_EFFECTIVE_BUFFER_LENGTH( xBuffer ) );
+                    memset( mqttbufferGET_DATA( xBuffer ), 0x00, mqttbufferGET_EFFECTIVE_BUFFER_LENGTH( xBuffer ) );
 
                     /* Record time-stamp and store timeout. */
                     mqttbufferGET_PACKET_RECORDED_TICK_COUNT( xBuffer ) = prvGetCurrentTickCount( pxMQTTContext );
@@ -2966,7 +2966,7 @@ MQTTReturnCode_t MQTT_Unsubscribe( MQTTContext_t * pxMQTTContext,
                 mqttbufferLIST_ADD( &( pxMQTTContext->xTxBufferListHead ), xBuffer );
 
                 /* To help debugging only. */
-                memsetUser( mqttbufferGET_DATA( xBuffer ), 0x00, mqttbufferGET_EFFECTIVE_BUFFER_LENGTH( xBuffer ) );
+                memset( mqttbufferGET_DATA( xBuffer ), 0x00, mqttbufferGET_EFFECTIVE_BUFFER_LENGTH( xBuffer ) );
 
                 /* Record time-stamp and store timeout. */
                 mqttbufferGET_PACKET_RECORDED_TICK_COUNT( xBuffer ) = prvGetCurrentTickCount( pxMQTTContext );
@@ -3089,7 +3089,7 @@ MQTTReturnCode_t MQTT_Publish( MQTTContext_t * pxMQTTContext,
                 mqttbufferLIST_ADD( &( pxMQTTContext->xTxBufferListHead ), xBuffer );
 
                 /* To help debugging only. */
-                memsetUser( mqttbufferGET_DATA( xBuffer ), 0x00, mqttbufferGET_EFFECTIVE_BUFFER_LENGTH( xBuffer ) );
+                memset( mqttbufferGET_DATA( xBuffer ), 0x00, mqttbufferGET_EFFECTIVE_BUFFER_LENGTH( xBuffer ) );
 
                 /* Record time-stamp and store timeout. */
                 mqttbufferGET_PACKET_RECORDED_TICK_COUNT( xBuffer ) = prvGetCurrentTickCount( pxMQTTContext );
@@ -3129,7 +3129,7 @@ MQTTReturnCode_t MQTT_Publish( MQTTContext_t * pxMQTTContext,
                 }
 
                 /* Write the payload into the message. */
-                memcpyUser( pucNextByte, pxPublishParams->pvData, ( size_t ) pxPublishParams->ulDataLength );
+                memcpy( pucNextByte, pxPublishParams->pvData, ( size_t ) pxPublishParams->ulDataLength );
 
                 /* Store the packet identifier in TxBuffer also for matching
                  * ACK later. */
@@ -3272,7 +3272,7 @@ MQTTReturnCode_t MQTT_ParseReceivedData( MQTTContext_t * pxMQTTContext,
                     if( pxMQTTContext->xRxBuffer != NULL )
                     {
                         /* Copy the fixed header in the Rx buffer. */
-                        memcpyUser( mqttbufferGET_DATA( pxMQTTContext->xRxBuffer ), pxMQTTContext->ucRxFixedHeaderBuffer, pxMQTTContext->ulRxMessageReceivedLength );
+                        memcpy( mqttbufferGET_DATA( pxMQTTContext->xRxBuffer ), pxMQTTContext->ucRxFixedHeaderBuffer, pxMQTTContext->ulRxMessageReceivedLength );
                         mqttbufferGET_DATA_LENGTH( pxMQTTContext->xRxBuffer ) = pxMQTTContext->ulRxMessageReceivedLength;
 
                         pxMQTTContext->xRxMessageState.xRxNextByte = eMQTTRxNextByteMessage;

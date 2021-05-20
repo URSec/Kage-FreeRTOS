@@ -170,7 +170,7 @@ WIFIReturnCode_t WIFI_On( void )
         static StaticSemaphore_t xSemaphoreBuffer;
 
         /* Start with all the zero. */
-        memsetUser( &( xWiFiModule ), 0, sizeof( xWiFiModule ) );
+        memset( &( xWiFiModule ), 0, sizeof( xWiFiModule ) );
 
         /* Create the semaphore used to serialize Wi-Fi module operations. */
         xWiFiModule.xSemaphoreHandle = xSemaphoreCreateMutexStatic( &( xSemaphoreBuffer ) );
@@ -429,7 +429,7 @@ WIFIReturnCode_t WIFI_GetIP( uint8_t * pucIPAddr )
     {
         if( xWiFiModule.xWifiObject.NetSettings.IsConnected )
         {
-            memcpyUser( pucIPAddr, xWiFiModule.xWifiObject.NetSettings.IP_Addr, 4 );
+            memcpy( pucIPAddr, xWiFiModule.xWifiObject.NetSettings.IP_Addr, 4 );
             xRetVal = eWiFiSuccess;
         }
 
@@ -523,13 +523,13 @@ WIFIReturnCode_t WIFI_Scan( WIFIScanResult_t * pxBuffer,
             {
                 pxBuffer[ x ].xSecurity = prvConvertSecurityFromSTToAbstracted( xESWifiAPs.AP[ x ].Security );
 
-                strncpyUser( ( char * ) pxBuffer[ x ].cSSID,
+                strncpy( ( char * ) pxBuffer[ x ].cSSID,
                          ( char * ) xESWifiAPs.AP[ x ].SSID,
                          wificonfigMAX_SSID_LEN );
 
                 pxBuffer[ x ].cRSSI = xESWifiAPs.AP[ x ].RSSI;
 
-                memcpyUser( pxBuffer[ x ].ucBSSID,
+                memcpy( pxBuffer[ x ].ucBSSID,
                 		xESWifiAPs.AP[ x ].MAC,
                         wificonfigMAX_BSSID_LEN );
             }
@@ -576,7 +576,7 @@ WIFIReturnCode_t WIFI_ConfigureAP( const WIFINetworkParams_t * const pxNetworkPa
     configASSERT( pxNetworkParams != NULL );
     configASSERT( pxNetworkParams->pcSSID != NULL );
 
-    strncpyUser( ( char * ) xApConfig.SSID,
+    strncpy( ( char * ) xApConfig.SSID,
              ( char * ) pxNetworkParams->pcSSID,
              ES_WIFI_MAX_SSID_NAME_SIZE );
 
@@ -584,7 +584,7 @@ WIFIReturnCode_t WIFI_ConfigureAP( const WIFINetworkParams_t * const pxNetworkPa
     {
         configASSERT( pxNetworkParams->pcPassword != NULL );
 
-        strncpyUser( ( char * ) xApConfig.Pass,
+        strncpy( ( char * ) xApConfig.Pass,
                  ( char * ) pxNetworkParams->pcPassword,
                  ES_WIFI_MAX_PSWD_NAME_SIZE );
     }

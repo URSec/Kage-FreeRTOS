@@ -253,7 +253,7 @@ static void prvPublishNextMessage( BaseType_t xMessageNumber )
     ( void ) snprintf( cDataBuffer, echoMAX_DATA_LENGTH, "Hello World %d", ( int ) xMessageNumber );
 
     /* Setup the publish parameters. */
-    memsetUser( &( xPublishParameters ), 0x00, sizeof( xPublishParameters ) );
+    memset( &( xPublishParameters ), 0x00, sizeof( xPublishParameters ) );
     xPublishParameters.pucTopic = echoTOPIC_NAME;
     xPublishParameters.pvData = cDataBuffer;
     xPublishParameters.usTopicLength = ( uint16_t ) strlen( ( const char * ) echoTOPIC_NAME );
@@ -303,7 +303,7 @@ static void prvMessageEchoingTask( void * pvParameters )
     {
         /* Each message received on the message buffer has "ACK" appended to it
          * before being published on the same topic.  Wait for the next message. */
-        memsetUser( cDataBuffer, 0x00, sizeof( cDataBuffer ) );
+        memset( cDataBuffer, 0x00, sizeof( cDataBuffer ) );
         xBytesReceived = xMessageBufferReceive( xEchoMessageBuffer,
                                                 cDataBuffer,
                                                 sizeof( cDataBuffer ),
@@ -402,8 +402,8 @@ static MQTTBool_t prvMQTTCallback( void * pvUserData,
         /* Set the buffer to zero and copy the data into the buffer to ensure
          * there is a NULL terminator and the buffer can be accessed as a
          * string. */
-        memsetUser( cBuffer, 0x00, sizeof( cBuffer ) );
-        memcpyUser( cBuffer, pxPublishParameters->pvData, ( size_t ) ulBytesToCopy );
+        memset( cBuffer, 0x00, sizeof( cBuffer ) );
+        memcpy( cBuffer, pxPublishParameters->pvData, ( size_t ) ulBytesToCopy );
 
         /* Only echo the message back if it has not already been echoed.  If the
          * data has already been echoed then it will already contain the echoACK_STRING

@@ -45,6 +45,9 @@ task.h is included from an application file. */
 #include "stm32l4xx_ll_system.h"
 #endif
 
+/* Kage Silhouette: Include privileged memset */
+#include "newlib_priv.h"
+
 /* Lint e9021, e961 and e750 are suppressed as a MISRA exception justified
 because the MPU ports require MPU_WRAPPERS_INCLUDED_FROM_API_FILE to be defined
 for the header files above, but not in this file, in order to generate the
@@ -907,7 +910,7 @@ UBaseType_t x;
 	{
 		/* Fill the stack with a known value to assist debugging. */
 		/* Silhouette: Fill twice the size of the regular stack*/
-		( void ) memset( pxNewTCB->pxStack, ( int ) tskSTACK_FILL_BYTE, ( size_t )  ulStackDepth * sizeof( StackType_t ) * 2 );
+		( void ) memsetPriv( pxNewTCB->pxStack, ( int ) tskSTACK_FILL_BYTE, ( size_t )  ulStackDepth * sizeof( StackType_t ) * 2 );
 	}
 	#endif /* tskSET_NEW_STACKS_TO_KNOWN_VALUE */
 

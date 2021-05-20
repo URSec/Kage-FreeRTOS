@@ -40,9 +40,6 @@
 #include <stdarg.h>
 #include <string.h>
 
-/* Kage Silhouette includes. */
-#include "vsnprintf_user.h"
-
 /* Sanity check all the definitions required by this file are set. */
 #ifndef configPRINT_STRING
     #error configPRINT_STRING( x ) must be defined in FreeRTOSConfig.h to use this logging file.  Set configPRINT_STRING( x ) to a function that outputs a string, where X is the string.  For example, #define configPRINT_STRING( x ) MyUARTWriteString( X )
@@ -225,7 +222,7 @@ void vLoggingPrintf( const char * pcFormat,
                         pcTaskName = pcNoTask;
                     }
 
-                    xLength = snprintfUser( pcPrintString, configLOGGING_MAX_MESSAGE_LENGTH, "%lu %lu [%s] ",
+                    xLength = snprintf( pcPrintString, configLOGGING_MAX_MESSAGE_LENGTH, "%lu %lu [%s] ",
                                         xMessageNumber++,
                                         ( unsigned long ) xTaskGetTickCount(),
                                         pcTaskName );
@@ -237,7 +234,7 @@ void vLoggingPrintf( const char * pcFormat,
             #endif /* if ( configLOGGING_INCLUDE_TIME_AND_TASK_NAME == 1 ) */
         }
 
-        xLength2 = vsnprintfUser( pcPrintString + xLength, configLOGGING_MAX_MESSAGE_LENGTH - xLength, pcFormat, args );
+        xLength2 = vsnprintf( pcPrintString + xLength, configLOGGING_MAX_MESSAGE_LENGTH - xLength, pcFormat, args );
 
         if( xLength2 < 0 )
         {
@@ -291,7 +288,7 @@ void vLoggingPrint( const char * pcMessage )
 
     if( pcPrintString != NULL )
     {
-        strncpyUser( pcPrintString, pcMessage, xLength );
+        strncpy( pcPrintString, pcMessage, xLength );
 
         /* Send the string to the logging task for IO. */
         if( xQueueSend( xQueue, &pcPrintString, loggingDONT_BLOCK ) != pdPASS )

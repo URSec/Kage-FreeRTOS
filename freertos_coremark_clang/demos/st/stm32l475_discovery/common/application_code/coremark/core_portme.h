@@ -344,7 +344,3 @@ void portable_fini(core_portable *p);
 #endif /* SEED_METHOD==SEED_VOLATILE */
 
 #endif /* CORE_PORTME_H */
-
-#if USE_FREERTOS_TASK_MPU
-#include "newlib_user.h"
-#endif

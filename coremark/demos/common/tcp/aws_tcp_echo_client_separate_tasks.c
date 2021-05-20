@@ -180,7 +180,7 @@ static void prvEchoClientTxTask( void * pvParameters )
 
         /* Write a whole ipconfigTCP_MSS block of the character into the Tx
          * buffer. */
-        memsetUser( ( void * ) &( cTransmittedString[ ipconfigTCP_MSS * ulTxCount ] ), lCharacter, ipconfigTCP_MSS );
+        memset( ( void * ) &( cTransmittedString[ ipconfigTCP_MSS * ulTxCount ] ), lCharacter, ipconfigTCP_MSS );
     }
 
     for( ; ; )
@@ -341,11 +341,11 @@ static void prvEchoClientRxTask( void * pvParameters )
         for( ; ; )
         {
             /* Clear down the Rx buffer. */
-            memsetUser( ( void * ) cReceivedString, 0x00, ipconfigTCP_MSS );
+            memset( ( void * ) cReceivedString, 0x00, ipconfigTCP_MSS );
 
             /* Fill the buffer that contains the expected string with the next
              * expected value. */
-            memsetUser( ( void * ) cExpectedString, ( int32_t ) '0' + lExpectedCharacter, ipconfigTCP_MSS );
+            memset( ( void * ) cExpectedString, ( int32_t ) '0' + lExpectedCharacter, ipconfigTCP_MSS );
             lExpectedCharacter++;
 
             if( lExpectedCharacter >= echoLARGE_BUFFER_SIZE_MULTIPLIER )

@@ -275,7 +275,7 @@ static void prvEchoClientTask( void * pvParameters )
 
                 /* Clear the buffer into which the echoed string will be
                  * placed. */
-                memsetUser( ( void * ) pcReceivedString, 0x00, echoBUFFER_SIZES );
+                memset( ( void * ) pcReceivedString, 0x00, echoBUFFER_SIZES );
                 xReceivedBytes = 0;
 
                 /* Receive data echoed back to the socket. */

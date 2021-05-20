@@ -96,7 +96,7 @@ void vOTAUpdateDemoTask( void * pvParameters )
         for( ; ; )
         {
             configPRINTF( ( "Connecting to broker...\r\n" ) );
-            memsetUser( &xConnectParams, 0, sizeof( xConnectParams ) );
+            memset( &xConnectParams, 0, sizeof( xConnectParams ) );
             xConnectParams.pucClientId = ( const uint8_t * ) ( clientcredentialIOT_THING_NAME );
             xConnectParams.usClientIdLength = sizeof( clientcredentialIOT_THING_NAME ) - 1; /* Length doesn't include trailing 0. */
             xConnectParams.pcURL = clientcredentialMQTT_BROKER_ENDPOINT;

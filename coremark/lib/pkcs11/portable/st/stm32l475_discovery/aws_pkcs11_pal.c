@@ -256,7 +256,7 @@ P11KeyConfig_t P11KeyConfig __attribute__( ( section( "UNINIT_FIXED_LOC" ) ) );
             {
                 /* Copy the header. */
                 pFinalBufferPlaceholder = ( uint8_t * ) *ppcPemBuffer;
-                memcpyUser( pFinalBufferPlaceholder, pcHeader, strlen( pcHeader ) );
+                memcpy( pFinalBufferPlaceholder, pcHeader, strlen( pcHeader ) );
                 pFinalBufferPlaceholder += strlen( pcHeader );
 
                 /* Copy the Base64 encoded contents into the final buffer 64 bytes at a time, adding newlines */
@@ -264,7 +264,7 @@ P11KeyConfig_t P11KeyConfig __attribute__( ( section( "UNINIT_FIXED_LOC" ) ) );
                 {
                     ulBytesRemaining = *pPemLength - ulLengthOfContentsCopiedSoFar;
                     ulBytesInLine = ( ulBytesRemaining > NUM_CHAR_PER_PEM_LINE ) ? NUM_CHAR_PER_PEM_LINE : ulBytesRemaining;
-                    memcpyUser( pFinalBufferPlaceholder,
+                    memcpy( pFinalBufferPlaceholder,
                             pemBodyBuffer + ulLengthOfContentsCopiedSoFar,
                             ulBytesInLine );
                     pFinalBufferPlaceholder += ulBytesInLine;
@@ -281,7 +281,7 @@ P11KeyConfig_t P11KeyConfig __attribute__( ( section( "UNINIT_FIXED_LOC" ) ) );
             }
 
             /* Copy the footer. */
-            memcpyUser( pFinalBufferPlaceholder, pcFooter, strlen( pcFooter ) );
+            memcpy( pFinalBufferPlaceholder, pcFooter, strlen( pcFooter ) );
 
             /* Update the total length of the PEM object returned by the function. */
             *pPemLength = xTotalPemLength;

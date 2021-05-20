@@ -65,7 +65,7 @@ static void * prvCalloc( size_t xNmemb,
 
     if( NULL != pvNew )
     {
-        memsetUser( pvNew, 0, xNmemb * xSize );
+        memset( pvNew, 0, xNmemb * xSize );
     }
 
     return pvNew;
@@ -88,7 +88,7 @@ static BaseType_t prvVerifySignature( char * pcSignerCertificate,
     mbedtls_md_type_t xMbedHashAlg = MBEDTLS_MD_SHA256;
 
 
-    memsetUser( &xCertCtx, 0, sizeof( mbedtls_x509_crt ) );
+    memset( &xCertCtx, 0, sizeof( mbedtls_x509_crt ) );
 
     /*
      * Map the hash algorithm
