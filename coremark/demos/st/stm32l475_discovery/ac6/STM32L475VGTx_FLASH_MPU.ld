@@ -101,7 +101,7 @@ SECTIONS
 
     . = ALIGN(8);
     _etext = .;        /* define a global symbols at end of code */
-  } >FLASH
+  } >FLASH =0x00BF00BF
 
   /* Constant data goes into FLASH */
   .rodata :

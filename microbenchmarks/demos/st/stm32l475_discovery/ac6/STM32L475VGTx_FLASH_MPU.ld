@@ -66,7 +66,7 @@ SECTIONS
     . = ALIGN(8);
     KEEP(*(.isr_vector)) /* Startup code  */
     . = ALIGN(8);
-  } >FLASH 
+  } >FLASH =0x00BF00BF
   
   /* Privileged section at the start of the flash - vectors must be first
 	whatever. */
