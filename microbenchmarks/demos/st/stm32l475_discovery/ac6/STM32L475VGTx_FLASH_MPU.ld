@@ -66,7 +66,7 @@ SECTIONS
     . = ALIGN(8);
     KEEP(*(.isr_vector)) /* Startup code  */
     . = ALIGN(8);
-  } >FLASH =0x00BF00BF
+  } >FLASH
   
   /* Privileged section at the start of the flash - vectors must be first
 	whatever. */
@@ -101,7 +101,7 @@ SECTIONS
 
     . = ALIGN(8);
     _etext = .;        /* define a global symbols at end of code */
-  } >FLASH
+  } >FLASH =0x00BF00BF
 
   /* Constant data goes into FLASH */
   .rodata :
