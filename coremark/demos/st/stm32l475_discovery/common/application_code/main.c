@@ -101,7 +101,7 @@ RTC_HandleTypeDef xHrtc;
 RNG_HandleTypeDef xHrng;
 
 /* Private variables ---------------------------------------------------------*/
-static UART_HandleTypeDef xConsoleUart;
+static UART_HandleTypeDef xConsoleUart PRIVILEGED_DATA;
 
 /* Private function prototypes -----------------------------------------------*/
 static void SystemClock_Config( void ) PRIVILEGED_FUNCTION;
@@ -310,7 +310,7 @@ void vApplicationGetTimerTaskMemory( StaticTask_t ** ppxTimerTaskTCBBuffer,
  * @param ch    character to be printed
  */
 void vSTM32L475putc( void * pv,
-                     char ch )
+                     char ch ) PRIVILEGED_FUNCTION
 {
     while( HAL_OK != HAL_UART_Transmit( &xConsoleUart, ( uint8_t * ) &ch, 1, 30000 ) )
     {
@@ -561,7 +561,7 @@ void vOutputChar( const char cChar,
 }
 /*-----------------------------------------------------------*/
 
-void vMainUARTPrintString( char * pcString )
+void vMainUARTPrintString( char * pcString ) PRIVILEGED_FUNCTION
 {
     const uint32_t ulTimeout = 3000UL;
 
