@@ -66,7 +66,7 @@ SECTIONS
     . = ALIGN(8);
     KEEP(*(.isr_vector)) /* Startup code  */
     . = ALIGN(8);
-  } >FLASH
+  } >FLASH =0x00BF00BF
   
   /* Privileged section at the start of the flash - vectors must be first
 	whatever. */
@@ -74,14 +74,14 @@ SECTIONS
   {
   	KEEP(*(.isr_vector))
   	*(privileged_functions)
-  } > FLASH
+  } > FLASH =0x00BF00BF
   
   freertos_system_calls :
   {
   	. = ALIGN(8);
   	*(freertos_system_calls)
   	. = ALIGN(8);
-  } >FLASH
+  } >FLASH =0x00BF00BF
   
 
   /* The program code and other data goes into FLASH */
