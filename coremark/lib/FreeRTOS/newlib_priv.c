@@ -1,10 +1,10 @@
 /*
  * newlib_priv.c
  *
- * Unprivileged newlib library
+ * Privileged newlib library
  * Imported from newlib 3.3.0
  *
- *  Created on: Jun 9, 2020
+ * Created on: Jun 9, 2020
  */
 #include <string.h>
 

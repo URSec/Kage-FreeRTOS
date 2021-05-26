@@ -567,7 +567,7 @@ void vMainUARTPrintString( char * pcString ) PRIVILEGED_FUNCTION
 
     HAL_UART_Transmit( &xConsoleUart,
                        ( uint8_t * ) pcString,
-                       strlen( pcString ),
+                       strlenPriv( pcString ),
                        ulTimeout );
 }
 /*-----------------------------------------------------------*/
