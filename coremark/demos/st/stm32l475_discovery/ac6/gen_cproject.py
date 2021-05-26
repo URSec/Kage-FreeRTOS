@@ -21,6 +21,11 @@ clang_path = root + '/build/llvm/bin/clang'
 newlib_path = root + '/build/newlib-cygwin/install'
 
 #
+# Path to the compiler-rt install directory.
+#
+compiler_rt_path = root + '/build/compiler-rt/install'
+
+#
 # Path to the directory of this project.
 #
 project_dir = os.path.abspath(os.path.dirname(sys.argv[0]))
@@ -43,11 +48,9 @@ libraries = {
             newlib_path + '/arm-none-eabi/lib',
         ],
     },
-    'gcc': {
+    'clang_rt.builtins-armhf': {
         'library_paths': [
-            '${openstm32_compiler_path}/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard',
-            '${openstm32_compiler_path}/../lib/gcc/arm-none-eabi/7.3.1',
-            '${openstm32_compiler_path}/../lib/gcc',
+            compiler_rt_path + '/lib/baremetal',
         ],
     },
 }

@@ -86,14 +86,12 @@
                 <option id="fr.ac6.managedbuild.tool.gnu.cross.c.linker.script.kage-coremark" name="Linker Script (-T)" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.linker.script" useByScannerDiscovery="false" value="${ProjDirPath}/STM32L475VGTx_FLASH_MPU.ld" valueType="string"/>
                 <option id="gnu.c.link.option.libs.kage-coremark" name="Libraries (-l)" superClass="gnu.c.link.option.libs" useByScannerDiscovery="false" valueType="libs">
                   <listOptionValue builtIn="false" value="c"/>
-                  <listOptionValue builtIn="false" value="gcc"/>
+                  <listOptionValue builtIn="false" value="clang_rt.builtins-armhf"/>
                 </option>
                 <option id="gnu.c.link.option.ldflags.kage-coremark" name="Linker flags" superClass="gnu.c.link.option.ldflags" useByScannerDiscovery="false" value="--target=arm-none-eabi -fuse-ld=lld" valueType="string"/>
                 <option id="gnu.c.link.option.paths.kage-coremark" name="Library search path (-L)" superClass="gnu.c.link.option.paths" useByScannerDiscovery="false" valueType="libPaths">
                   <listOptionValue builtIn="false" value="&quot;${workspace_loc}/../build/newlib-cygwin/install/arm-none-eabi/lib&quot;"/>
-                  <listOptionValue builtIn="false" value="&quot;${openstm32_compiler_path}/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard&quot;"/>
-                  <listOptionValue builtIn="false" value="&quot;${openstm32_compiler_path}/../lib/gcc/arm-none-eabi/7.3.1&quot;"/>
-                  <listOptionValue builtIn="false" value="&quot;${openstm32_compiler_path}/../lib/gcc&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc}/../build/compiler-rt/install/lib/baremetal&quot;"/>
                 </option>
                 <option id="gnu.c.link.option.userobjs.kage-coremark" name="Other objects" superClass="gnu.c.link.option.userobjs" useByScannerDiscovery="false" valueType="userObjs">
                 </option>
