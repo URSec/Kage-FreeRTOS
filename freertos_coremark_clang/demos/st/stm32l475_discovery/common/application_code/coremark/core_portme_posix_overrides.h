@@ -36,7 +36,7 @@ Original Author: Shay Gal-on
 
 #include "FreeRTOS.h"
 
-#define ITERATIONS 1000
+#define ITERATIONS 2000
 
 /* None by default */
 
