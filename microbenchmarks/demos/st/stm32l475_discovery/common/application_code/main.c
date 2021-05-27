@@ -210,7 +210,6 @@ void vApplicationDaemonTaskStartupHook( void )
 //        /* Stop here if we fail to initialize WiFi. */
 //        configASSERT( xWifiStatus == eWiFiSuccess );
 //    }
-
 	start_microbenchmark();
 #ifdef EXCEPTION_NEW_MICRO_BENCHMARK
 	int temp = 0;
@@ -224,7 +223,7 @@ void vApplicationDaemonTaskStartupHook( void )
 	configPRINTF( ( "DIV_BY_0 Trap: %d %d cycles; temp = %d\r\n", t1, t2, temp ) );
 #endif
 //	start_beebsbenchmark();
-	configPRINTF( ( "System clock: %uHz\r\n", configCPU_CLOCK_HZ ) );
+//	configPRINTF( ( "System clock: %uHz\r\n", configCPU_CLOCK_HZ ) );
 #ifdef MICRO_BENCHMARK
 extern uint32_t ulCycleSpill;
 extern uint32_t ulCycleRestore;
@@ -621,7 +620,7 @@ void vMainUARTPrintString( char * pcString ) PRIVILEGED_FUNCTION
 }
 /*-----------------------------------------------------------*/
 
-void prvGetRegistersFromStack( uint32_t * pulFaultStackAddress ) __attribute__((used))
+void prvGetRegistersFromStack( uint32_t * pulFaultStackAddress ) __attribute__((used)) PRIVILEGED_FUNCTION
 {
 /* These are volatile to try and prevent the compiler/linker optimising them
  * away as the variables never actually get used.  If the debugger won't show the
@@ -793,9 +792,9 @@ void HardFault_Handler( void ) PRIVILEGED_FUNCTION
 					"	orr r2, #67108864				\n" // 0x04000000, privileged read-only bit in AP bits
 					"	str r2, [r0]					\n"
 					// Disable the MPU region of foreground task stack
-					// (Currently assuming that it is always the 8th region)
+					// (Currently assuming that it is always the 7th region)
 					"	ldr r0, =0xe000ed98				\n"
-					"	mov r2, #7						\n"
+					"	mov r2, #6						\n"
 					"	str r2, [r0]					\n"
 					"	ldr r0, =0xe000eda0				\n"
 					"	ldr r2, [r0]					\n"
@@ -840,7 +839,7 @@ void HardFault_Handler( void ) PRIVILEGED_FUNCTION
 					"	str r2, [r0]					\n"
 					// Enable the region of foreground task stack
 					"	ldr r0, =0xe000ed98				\n"
-					"	mov r2, #7						\n"
+					"	mov r2, #6						\n"
 					"	str r2, [r0]					\n"
 					"	ldr r0, =0xe000eda0				\n"
 					"	ldr r2, [r0]					\n"

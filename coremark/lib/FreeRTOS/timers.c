@@ -258,10 +258,8 @@ BaseType_t xReturn = pdFAIL;
 				// the task, with appropriate access permissions.
 				{
 					// {Base address,	Length,	Parameters}
-//					{ &pxTimerTaskStackBuffer[STACK_SIZE],	STACK_SIZE_IN_BYTES, portMPU_REGION_PRIVILEGED_READ_WRITE }, // shadow stack.
-					{ &pxTimerTaskStackBuffer[0],	STACK_SIZE_IN_BYTES , portMPU_REGION_READ_WRITE }, // the other two region left unused.
+//					{ &pxTimerTaskStackBuffer[0],	STACK_SIZE_IN_BYTES , portMPU_REGION_READ_WRITE }, // the other two region left unused.
 //					{ 0,0,0 },
-					{ 0,0,0 },
 					{ 0,0,0 }
 				}
 			};

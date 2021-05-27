@@ -2115,8 +2115,8 @@ BaseType_t xReturn;
 			{
 				// {Base address,	Length,	Parameters}
 //				{ &pxIdleTaskStackBuffer[0],	STACK_SIZE_IN_BYTES , portMPU_REGION_READ_WRITE }, // the other two region left unused.
-					{ 0,0,0 },
-				{ 0,0,0 },
+//					{ 0,0,0 },
+//				{ 0,0,0 },
 				{ 0,0,0 }
 			}
 		};

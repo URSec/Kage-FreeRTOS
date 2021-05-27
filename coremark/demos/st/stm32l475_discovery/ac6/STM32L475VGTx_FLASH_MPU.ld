@@ -106,7 +106,7 @@ SECTIONS
   /* Constant data goes into FLASH */
   .rodata :
   {
-    . = ALIGN(8);
+    . = ALIGN(0x20000);
     *(.rodata)         /* .rodata sections (constants, strings, etc.) */
     *(.rodata*)        /* .rodata* sections (constants, strings, etc.) */
     . = ALIGN(8);
@@ -173,14 +173,14 @@ SECTIONS
   /* Initialized data sections goes into RAM, load LMA copy after code */
   .data : 
   {
-    . = ALIGN(4096);
+    . = ALIGN(8);
     /* _sdata = .;*/   /* sdata is defined in privileged_data section now */
     __data_region_start__ = .;
     *(.data)           /* .data sections */
     *(.data*)          /* .data* sections */
     /* *(.freertos_heap2)*/
     __data_region_end__ = .;
-    . = ALIGN(4096);
+    . = ALIGN(8);
     _edata = .;        /* define a global symbol at data end */
   } >RAM2 AT> FLASH 
   /* >FLASH AT>FLASH */
@@ -192,6 +192,18 @@ SECTIONS
   	*(.freertos_heap2);
   	. = ALIGN(4);
   } > RAM2 AT>FLASH
+
+  /* User_heap_stack section, used to check that there is enough RAM left */
+  ._user_heap_stack :
+  {
+    . = ALIGN(8);
+    PROVIDE ( end = . );
+    PROVIDE ( _end = . );
+    . = . + _Min_Heap_Size;
+    . = . + _Min_Stack_Size;
+    . = ALIGN(8);
+  } >RAM2
+  /* >RAM2 */
 
   
 	/* Silhouette: Put user stacks in the beginning of RAM
@@ -214,9 +226,26 @@ SECTIONS
   	*/
 
   	/* . = . + 24576; /* Silhouette: Align with MPU for two tasks */ */
-  	
-  	. = . + 16384; /* Silhouette: Align with MPU */ 
   } > RAM
+  
+  /* Uninitialized data section */
+  . = ALIGN(4);
+  .bss :
+  {
+  	. = ALIGN(16384);
+    /* This is used by the startup in order to initialize the .bss secion */
+    _sbss = .;         /* define a global symbol at bss start */
+    __bss_start__ = _sbss;
+    *(.bss)
+    *(.bss*)
+    *(COMMON)
+
+    /* *(.freertos_heap2)*/
+    
+    . = ALIGN(4096);
+    _ebss = .;         /* define a global symbol at bss end */
+    __bss_end__ = _ebss;
+  } >RAM
   
   kernel_stack :
   {
@@ -227,36 +256,6 @@ SECTIONS
   	. = . + _Stack_Size;
   	__kernel_ss_end__ = .;
   } > RAM
-  
-    /* Uninitialized data section */
-  . = ALIGN(4);
-  .bss :
-  {
-    /* This is used by the startup in order to initialize the .bss secion */
-    _sbss = .;         /* define a global symbol at bss start */
-    __bss_start__ = _sbss;
-    *(.bss)
-    *(.bss*)
-    *(COMMON)
-
-    /* *(.freertos_heap2)*/
-    
-    . = ALIGN(4);
-    _ebss = .;         /* define a global symbol at bss end */
-    __bss_end__ = _ebss;
-  } >RAM
-
-  /* User_heap_stack section, used to check that there is enough RAM left */
-  ._user_heap_stack :
-  {
-    . = ALIGN(8);
-    PROVIDE ( end = . );
-    PROVIDE ( _end = . );
-    . = . + _Min_Heap_Size;
-    . = . + _Min_Stack_Size;
-    . = ALIGN(8);
-  } >RAM2
-  /* >RAM2 */
 
   
 
@@ -289,8 +288,8 @@ __SRAM_segment_end__ = ORIGIN( RAM ) + LENGTH( RAM ); /* regard RAM as a single 
 _Privileged_Data_Region_Size = __privileged_data_end__ - __privileged_data_start__;
 
 /* Silhouette: Define variables for kernel stack */
-__kstack_end__ = __kernel_stack_start__;
-__kstack_start__ = __kernel_stack_end__;
+__kstack_end__ = __kernel_stack_end__;
+__kstack_start__ = __kernel_stack_start__;
 
 /* Silhouette: Define kernel shadow stack */
 __SS_segment_start__ = __kernel_stack_end__;

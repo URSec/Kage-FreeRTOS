@@ -863,8 +863,8 @@ void xPortPendSVHandler( void )
 		"	add r0, r0, " STACK_SIZE_INLINE(STACK_SIZE_IN_BYTES_STATIC) "		\n" /* Silhouette: switch to shadow stack to restore processor states */
 		"	add r1, r1, #4						\n" /* Move onto the second item in the TCB... */
 		"	ldr r2, =0xe000ed9c					\n" /* Region Base Address register. */
-		"	ldmia r1!, {r4-r11}					\n" /* Read 4 sets of MPU registers. */
-		"	stmia r2!, {r4-r11}					\n" /* Write 4 sets of MPU registers. */
+		"	ldmia r1!, {r4-r7}					\n" /* Read 2 sets of MPU registers. */
+		"	stmia r2!, {r4-r7}					\n" /* Write 2 sets of MPU registers. */
 		"	ldmia r0!, {r3-r11, r14}			\n" /* Pop the registers that are not automatically saved on exception entry. */
 		"	msr control, r3						\n"
 		"										\n"
@@ -986,10 +986,14 @@ extern uint32_t __privileged_data_end__[];
 extern uint32_t __kstack_start__[];
 extern uint32_t __kstack_end__[];
 extern uint32_t __SRAM_segment_start__[];
+extern uint32_t __SRAM2_segment_end__[];
 extern uint32_t __TSTACK_segment_start__[];
 extern uint32_t __SRAM_segment_end__[];
 extern uint32_t __data_region_start__[];
 extern uint32_t __data_region_end__[];
+extern uint32_t _etext[];
+extern uint32_t __bss_start__[];
+extern uint32_t __task_stack_end__[];
 
 	/* Check the expected MPU is present. */
 	if( portMPU_TYPE_REG == portEXPECTED_MPU_TYPE_VALUE )
@@ -999,52 +1003,59 @@ extern uint32_t __data_region_end__[];
 											( portMPU_REGION_VALID ) |
 											( portUNPRIVILEGED_FLASH_REGION );
 
-		portMPU_REGION_ATTRIBUTE_REG =	( portMPU_REGION_READ_ONLY ) |
+		portMPU_REGION_ATTRIBUTE_REG =	( portMPU_REGION_READ_ONLY | portMPU_REGION_EXECUTE_NEVER ) |
 										( portMPU_REGION_CACHEABLE_BUFFERABLE ) |
 										( prvGetMPURegionSizeSetting( ( uint32_t ) __FLASH_segment_end__ - ( uint32_t ) __FLASH_segment_start__ ) ) |
 										( portMPU_REGION_ENABLE );
 
-//		/* Setup the first nK for privileged only access (even though less
-//		than 10K is actually being used).  This is where the kernel code is
-//		placed. */
-//		portMPU_REGION_BASE_ADDRESS_REG =	( ( uint32_t ) __FLASH_segment_start__ ) | /* Base address. */
-//											( portMPU_REGION_VALID ) |
-//											( portPRIVILEGED_FLASH_REGION );
-//
-//		portMPU_REGION_ATTRIBUTE_REG =	( portMPU_REGION_PRIVILEGED_READ_ONLY ) |
-//										( portMPU_REGION_CACHEABLE_BUFFERABLE ) |
-//										( prvGetMPURegionSizeSetting( ( uint32_t ) __privileged_functions_end__ - ( uint32_t ) __FLASH_segment_start__ ) ) |
-//										( portMPU_REGION_ENABLE );
-
-		/* Silhouette: Set all RAM beside kernel SS to RW and XN */
-		portMPU_REGION_BASE_ADDRESS_REG =	( ( uint32_t ) __TSTACK_segment_start__ ) | /* Base address. */
+		/* Enable execution access to code region */
+		portMPU_REGION_BASE_ADDRESS_REG =	( ( uint32_t ) __FLASH_segment_start__ ) | /* Base address. */
 											( portMPU_REGION_VALID ) |
-											( portUNPRIVILEGED_RAM_REGION );
+											( portUNPRIVILEGED_CODE_REGION );
 
-		portMPU_REGION_ATTRIBUTE_REG =	( portMPU_REGION_READ_WRITE | portMPU_REGION_EXECUTE_NEVER ) |
+		portMPU_REGION_ATTRIBUTE_REG =	( portMPU_REGION_READ_ONLY ) |
 										( portMPU_REGION_CACHEABLE_BUFFERABLE ) |
-										( prvGetMPURegionSizeSetting( ( uint32_t ) __SRAM_segment_end__ - ( uint32_t ) __TSTACK_segment_start__ ) ) |
+										( prvGetMPURegionSizeSetting( ( uint32_t ) _etext - ( uint32_t ) __FLASH_segment_start__ ) ) |
 										( portMPU_REGION_ENABLE );
 
-		/* Setup the privileged data RAM region.  This is where the kernel data
-		is placed. */
-		portMPU_REGION_BASE_ADDRESS_REG =	( ( uint32_t ) __privileged_data_start__ ) | /* Base address. */
+		/* Setup the RAM region */
+		portMPU_REGION_BASE_ADDRESS_REG =	( ( uint32_t ) __TSTACK_segment_start__ ) | /* Base address. */
 											( portMPU_REGION_VALID ) |
 											( portPRIVILEGED_RAM_REGION );
 
-		portMPU_REGION_ATTRIBUTE_REG =	( portMPU_REGION_PRIVILEGED_READ_WRITE | portMPU_REGION_EXECUTE_NEVER ) |
+		portMPU_REGION_ATTRIBUTE_REG =	( portMPU_REGION_PRIVILEGED_READ_WRITE  | portMPU_REGION_EXECUTE_NEVER ) |
 										( portMPU_REGION_CACHEABLE_BUFFERABLE ) |
-										prvGetMPURegionSizeSetting( ( uint32_t ) __privileged_data_end__ - ( uint32_t ) __privileged_data_start__ ) |
+										prvGetMPURegionSizeSetting( ( uint32_t ) __SRAM_segment_end__ - ( uint32_t ) __TSTACK_segment_start__ ) |
 										( portMPU_REGION_ENABLE );
 
-		/* By default allow everything to access the general peripherals.  The
-		system peripherals and registers are protected. */
-		portMPU_REGION_BASE_ADDRESS_REG =	( portPERIPHERALS_START_ADDRESS ) |
+		/* Setup the RAM2 region */
+		portMPU_REGION_BASE_ADDRESS_REG =	( ( uint32_t ) __SRAM_segment_start__ ) | /* Base address. */
 											( portMPU_REGION_VALID ) |
-											( portGENERAL_PERIPHERALS_REGION );
+											( portPRIVILEGED_RAM2_REGION );
 
-		portMPU_REGION_ATTRIBUTE_REG =	( portMPU_REGION_PRIVILEGED_READ_WRITE | portMPU_REGION_EXECUTE_NEVER ) |
-										( prvGetMPURegionSizeSetting( portPERIPHERALS_END_ADDRESS - portPERIPHERALS_START_ADDRESS ) ) |
+		portMPU_REGION_ATTRIBUTE_REG =	( portMPU_REGION_PRIVILEGED_READ_WRITE  | portMPU_REGION_EXECUTE_NEVER ) |
+										( portMPU_REGION_CACHEABLE_BUFFERABLE ) |
+										prvGetMPURegionSizeSetting( ( uint32_t ) __SRAM2_segment_end__ - ( uint32_t ) __SRAM_segment_start__ ) |
+										( portMPU_REGION_ENABLE );
+
+		/* Setup the unprivileged data region */
+		portMPU_REGION_BASE_ADDRESS_REG =	( ( uint32_t ) __data_region_start__ ) | /* Base address. */
+											( portMPU_REGION_VALID ) |
+											( portUNPRIVILEGED_DATA_REGION );
+
+		portMPU_REGION_ATTRIBUTE_REG =	( portMPU_REGION_READ_WRITE | portMPU_REGION_EXECUTE_NEVER ) |
+										( portMPU_REGION_CACHEABLE_BUFFERABLE ) |
+										prvGetMPURegionSizeSetting( ( uint32_t ) __SRAM2_segment_end__ - ( uint32_t ) __data_region_start__ ) |
+										( portMPU_REGION_ENABLE );
+
+		/* Setup the unprivileged kernel stack region */
+		portMPU_REGION_BASE_ADDRESS_REG =	( ( uint32_t ) __bss_start__ ) | /* Base address. */
+											( portMPU_REGION_VALID ) |
+											( portUNPRIVILEGED_KSTACK_REGION );
+
+		portMPU_REGION_ATTRIBUTE_REG =	( portMPU_REGION_READ_WRITE | portMPU_REGION_EXECUTE_NEVER ) |
+										( portMPU_REGION_CACHEABLE_BUFFERABLE ) |
+										prvGetMPURegionSizeSetting( ( uint32_t ) __kstack_end__ - ( uint32_t ) __bss_start__ ) |
 										( portMPU_REGION_ENABLE );
 
 		/* Enable the memory fault exception. */
@@ -1145,60 +1156,25 @@ extern uint32_t ulCycleSpill;
 
 	if( xRegions == NULL )
 	{
-		/* Define the region that disallows access to other stacks or shadow stack. */
+
+		/* Define the region that allows access to the task stack. */
 		xMPUSettings->xRegion[ 0 ].ulRegionBaseAddress =
-				( ( uint32_t ) __task_stack_start__ ) |
+				( ( uint32_t ) pxBottomOfStack ) |
 				( portMPU_REGION_VALID ) |
 				( portSTACK_REGION ); /* Region number. */
 
 		xMPUSettings->xRegion[ 0 ].ulRegionAttribute =
-				( portMPU_REGION_PRIVILEGED_READ_WRITE | portMPU_REGION_EXECUTE_NEVER ) | /* Read and write. */
-				( prvGetMPURegionSizeSetting( ( uint32_t ) __task_stack_end__ - ( uint32_t ) __task_stack_start__ ) ) |
-				( portMPU_REGION_CACHEABLE_BUFFERABLE ) |
-				( portMPU_REGION_ENABLE );
-
-		/* Define the region that allows access to data and user_heap_stack. */
-		xMPUSettings->xRegion[ 1 ].ulRegionBaseAddress =
-				( ( uint32_t ) __data_region_start__ ) |
-				( portMPU_REGION_VALID ) |
-				( portSTACK_REGION + 1 ); /* Region number. */
-
-		xMPUSettings->xRegion[ 1 ].ulRegionAttribute =
-				( portMPU_REGION_READ_WRITE | portMPU_REGION_EXECUTE_NEVER ) | /* Read and write. */
-				( prvGetMPURegionSizeSetting( ( uint32_t ) __SRAM2_segment_end__ - ( uint32_t ) __data_region_start__ ) ) |
-				( portMPU_REGION_CACHEABLE_BUFFERABLE ) |
-				( portMPU_REGION_ENABLE );
-
-		/* Define the region that disallows access to kernel shadow stack. */
-		xMPUSettings->xRegion[ 2 ].ulRegionBaseAddress =
-				( ( uint32_t ) __SS_segment_start__ ) |
-				( portMPU_REGION_VALID ) |
-				( portSTACK_REGION + 2 ); /* Region number. */
-
-		xMPUSettings->xRegion[ 2 ].ulRegionAttribute =
-				( portMPU_REGION_PRIVILEGED_READ_WRITE | portMPU_REGION_EXECUTE_NEVER ) | /* Read and write. */
-				( prvGetMPURegionSizeSetting( ( uint32_t ) __SS_segment_end__ - ( uint32_t ) __SS_segment_start__ ) ) |
-				( portMPU_REGION_CACHEABLE_BUFFERABLE ) |
-				( portMPU_REGION_ENABLE );
-
-		/* Define the region that disallows access to kernel shadow stack. */
-		xMPUSettings->xRegion[ 3 ].ulRegionBaseAddress =
-				( ( uint32_t ) pxBottomOfStack - STACK_SIZE_IN_BYTES ) |
-				( portMPU_REGION_VALID ) |
-				( portSTACK_REGION + 2 ); /* Region number. */
-
-		xMPUSettings->xRegion[ 3 ].ulRegionAttribute =
 				( portMPU_REGION_READ_WRITE | portMPU_REGION_EXECUTE_NEVER ) | /* Read and write. */
 				( prvGetMPURegionSizeSetting( ( uint32_t ) STACK_SIZE_IN_BYTES ) ) |
 				( portMPU_REGION_CACHEABLE_BUFFERABLE ) |
 				( portMPU_REGION_ENABLE );
 
-//		/* Invalidate all other regions. */
-//		for( ul = 2; ul <= portNUM_CONFIGURABLE_REGIONS; ul++ )
-//		{
-//			xMPUSettings->xRegion[ ul ].ulRegionBaseAddress = ( portSTACK_REGION + ul ) | portMPU_REGION_VALID;
-//			xMPUSettings->xRegion[ ul ].ulRegionAttribute = 0UL;
-//		}
+		/* Invalidate all other regions. */
+		for( ul = 1; ul <= portNUM_CONFIGURABLE_REGIONS; ul++ )
+		{
+			xMPUSettings->xRegion[ ul ].ulRegionBaseAddress = ( portUNPRIVILEGED_KSTACK_REGION + ul ) | portMPU_REGION_VALID;
+			xMPUSettings->xRegion[ ul ].ulRegionAttribute = 0UL;
+		}
 	}
 	else
 	{
@@ -1238,49 +1214,24 @@ extern uint32_t ulCycleSpill;
 		which case the stack region parameters will be valid.  At all other
 		times the stack parameters will not be valid and it is assumed that the
 		stack region has already been configured. */
-		// Silhouette: All unprivileged ram is RW so no need to configure here
 		if( ulStackDepth > 0 )
 		{
-			/* Define the region that disallows access to other stacks or shadow stack. */
+			/* Define the region that allows access to the task stack. */
 			xMPUSettings->xRegion[ 0 ].ulRegionBaseAddress =
-					( ( uint32_t ) __task_stack_start__ ) |
+					( ( uint32_t ) pxBottomOfStack ) |
 					( portMPU_REGION_VALID ) |
 					( portSTACK_REGION ); /* Region number. */
 
 			xMPUSettings->xRegion[ 0 ].ulRegionAttribute =
-					( portMPU_REGION_PRIVILEGED_READ_WRITE | portMPU_REGION_EXECUTE_NEVER ) | /* Read and write. */
-					( prvGetMPURegionSizeSetting( ( uint32_t ) __task_stack_end__ - ( uint32_t ) __task_stack_start__ ) ) |
-					( portMPU_REGION_CACHEABLE_BUFFERABLE ) |
-					( portMPU_REGION_ENABLE );
-
-			/* Define the region that allows access to data. */
-			xMPUSettings->xRegion[ 1 ].ulRegionBaseAddress =
-					( ( uint32_t ) __data_region_start__ ) |
-					( portMPU_REGION_VALID ) |
-					( portSTACK_REGION + 1 ); /* Region number. */
-
-			xMPUSettings->xRegion[ 1 ].ulRegionAttribute =
 					( portMPU_REGION_READ_WRITE | portMPU_REGION_EXECUTE_NEVER ) | /* Read and write. */
-					( prvGetMPURegionSizeSetting( ( uint32_t ) __SRAM2_segment_end__ - ( uint32_t ) __data_region_start__ ) ) |
-					( portMPU_REGION_CACHEABLE_BUFFERABLE ) |
-					( portMPU_REGION_ENABLE );
-
-			/* Define the region that disallows access to kernel shadow stack. */
-			xMPUSettings->xRegion[ 2 ].ulRegionBaseAddress =
-					( ( uint32_t ) __SS_segment_start__ ) |
-					( portMPU_REGION_VALID ) |
-					( portSTACK_REGION + 2 ); /* Region number. */
-
-			xMPUSettings->xRegion[ 2 ].ulRegionAttribute =
-					( portMPU_REGION_PRIVILEGED_READ_WRITE | portMPU_REGION_EXECUTE_NEVER ) | /* Read and write. */
-					( prvGetMPURegionSizeSetting( ( uint32_t ) __SS_segment_end__ - ( uint32_t ) __SS_segment_start__ ) ) |
+					( prvGetMPURegionSizeSetting( ( uint32_t ) STACK_SIZE_IN_BYTES ) ) |
 					( portMPU_REGION_CACHEABLE_BUFFERABLE ) |
 					( portMPU_REGION_ENABLE );
 		}
 
 		lIndex = 0;
 
-		for( ul = 3; ul <= portNUM_CONFIGURABLE_REGIONS; ul++ )
+		for( ul = 1; ul <= portNUM_CONFIGURABLE_REGIONS; ul++ )
 		{
 			if( ( xRegions[ lIndex ] ).ulLengthInBytes > 0UL )
 			{

@@ -77,9 +77,9 @@ void start_microbenchmark()
 		// xRegions - Allocate up to three separate memory regions for access by
 		// the task, with appropriate access permissions.
 		{
-			{ &demoStackBuffer[0],	STACK_SIZE_IN_BYTES, portMPU_REGION_READ_WRITE }, // the other two region left unused.
-			{ 0,0,0 },
-			{ 0,0,0 }
+//			{ &demoStackBuffer[0],	STACK_SIZE_IN_BYTES, portMPU_REGION_READ_WRITE }, // the other two region left unused.
+			{ 0x2000a000, 16384, portMPU_REGION_READ_WRITE }
+//			{ 0,0,0 }
 		}
 	};
 	if( xTaskCreateRestricted( &microTaskParameters, &highMicroTask ) == pdPASS )
@@ -114,9 +114,7 @@ void start_microbenchmark()
 			// the task, with appropriate access permissions.
 			{
 				// {Base address,	Length,	Parameters}
-	//			{ &logStackBuffer[STACK_SIZE],	STACK_SIZE_IN_BYTES, portMPU_REGION_PRIVILEGED_READ_WRITE }, // shadow stack.
-				{ &demoStackBufferT[0],	STACK_SIZE_IN_BYTES, portMPU_REGION_READ_WRITE }, // the other two region left unused.
-				{ 0,0,0 },
+//				{ &demoStackBufferT[0],	STACK_SIZE_IN_BYTES, portMPU_REGION_READ_WRITE }, // the other two region left unused.
 				{ 0,0,0 }
 			}
 		};
@@ -216,9 +214,7 @@ void start_beebsbenchmark()
 		// the task, with appropriate access permissions.
 		{
 			// {Base address,	Length,	Parameters}
-//			{ &logStackBuffer[STACK_SIZE],	STACK_SIZE_IN_BYTES, portMPU_REGION_PRIVILEGED_READ_WRITE }, // shadow stack.
-			{ &demoStackBuffer[0],	STACK_SIZE_IN_BYTES, portMPU_REGION_READ_WRITE }, // the other two region left unused.
-			{ 0,0,0 },
+//			{ &demoStackBuffer[0],	STACK_SIZE_IN_BYTES, portMPU_REGION_READ_WRITE }, // the other two region left unused.
 			{ 0,0,0 }
 		}
 	};
@@ -251,9 +247,7 @@ void start_beebsbenchmark()
 		// the task, with appropriate access permissions.
 		{
 			// {Base address,	Length,	Parameters}
-//			{ &logStackBuffer[STACK_SIZE],	STACK_SIZE_IN_BYTES, portMPU_REGION_PRIVILEGED_READ_WRITE }, // shadow stack.
-			{ &demoStackBufferT[0],	STACK_SIZE_IN_BYTES, portMPU_REGION_READ_WRITE }, // the other two region left unused.
-			{ 0,0,0 },
+//			{ &demoStackBufferT[0],	STACK_SIZE_IN_BYTES, portMPU_REGION_READ_WRITE }, // the other two region left unused.
 			{ 0,0,0 }
 		}
 	};

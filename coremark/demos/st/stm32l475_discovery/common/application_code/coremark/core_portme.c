@@ -446,8 +446,8 @@ core_start_parallel(core_results *res)
         (configMAX_PRIORITIES - 3 | portPRIVILEGE_BIT),
 		taskStackBuffer[current_task],
         {
-            { &taskStackBuffer[current_task][0],	STACK_SIZE_IN_BYTES, portMPU_REGION_READ_WRITE }, // the other two region left unused.
-			{ 0,0,0 },
+//            { &taskStackBuffer[current_task][0],	STACK_SIZE_IN_BYTES, portMPU_REGION_READ_WRITE }, // the other two region left unused.
+//			{ 0,0,0 },
 			{ 0,0,0 }
         }
     };

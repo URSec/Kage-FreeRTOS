@@ -109,9 +109,7 @@ BaseType_t xLoggingTaskInitialize( uint16_t usStackSize,
 		// the task, with appropriate access permissions.
 		{
 			// {Base address,	Length,	Parameters}
-//			{ &logStackBuffer[STACK_SIZE],	STACK_SIZE_IN_BYTES, portMPU_REGION_PRIVILEGED_READ_WRITE }, // shadow stack.
-			{ &logStackBuffer[0],	STACK_SIZE_IN_BYTES, portMPU_REGION_READ_WRITE }, // the other two region left unused.
-			{ 0,0,0 },
+//			{ &logStackBuffer[0],	STACK_SIZE_IN_BYTES, portMPU_REGION_READ_WRITE }, // the other two region left unused.
 			{ 0,0,0 }
 		}
 	};

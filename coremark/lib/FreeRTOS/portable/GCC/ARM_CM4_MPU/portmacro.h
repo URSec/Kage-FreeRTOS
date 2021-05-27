@@ -97,11 +97,13 @@ task.h is included from an application file. */
 
 #define portUNPRIVILEGED_FLASH_REGION		( 0UL )
 // #define portPRIVILEGED_FLASH_REGION			( 1UL )
-#define portUNPRIVILEGED_RAM_REGION			( 1UL ) // Silhouette
-#define portPRIVILEGED_RAM_REGION			( 2UL )
-#define portGENERAL_PERIPHERALS_REGION		( 3UL )
-#define portSTACK_REGION					( 4UL )
-#define portFIRST_CONFIGURABLE_REGION	    ( 5UL )
+#define portUNPRIVILEGED_CODE_REGION		( 1UL )
+#define portPRIVILEGED_RAM_REGION			( 2UL ) // Silhouette
+#define portPRIVILEGED_RAM2_REGION			( 3UL )
+#define portUNPRIVILEGED_DATA_REGION		( 4UL )
+#define portUNPRIVILEGED_KSTACK_REGION		( 5UL )
+#define portSTACK_REGION					( 6UL )
+#define portFIRST_CONFIGURABLE_REGION	    ( 7UL )
 #define portLAST_CONFIGURABLE_REGION		( 7UL )
 #define portNUM_CONFIGURABLE_REGIONS		( ( portLAST_CONFIGURABLE_REGION - portFIRST_CONFIGURABLE_REGION ) + 1 )
 #define portTOTAL_NUM_REGIONS				( portNUM_CONFIGURABLE_REGIONS + 1 ) /* Plus one to make space for the stack region. */

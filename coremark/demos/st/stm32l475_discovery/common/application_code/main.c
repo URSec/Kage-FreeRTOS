@@ -174,7 +174,7 @@ void vApplicationDaemonTaskStartupHook( void )
 	printMPUConfig(6);
 	printMPUConfig(7);
 #endif
-coremark_main();
+	coremark_main();
 #ifdef MICRO_BENCHMARK
 extern uint32_t ulCycleSpill;
 extern uint32_t ulCycleRestore;
@@ -572,7 +572,7 @@ void vMainUARTPrintString( char * pcString ) PRIVILEGED_FUNCTION
 }
 /*-----------------------------------------------------------*/
 
-void prvGetRegistersFromStack( uint32_t * pulFaultStackAddress ) __attribute__((used))
+void prvGetRegistersFromStack( uint32_t * pulFaultStackAddress ) __attribute__((used)) PRIVILEGED_FUNCTION
 {
 /* These are volatile to try and prevent the compiler/linker optimising them
  * away as the variables never actually get used.  If the debugger won't show the
