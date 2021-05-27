@@ -40,6 +40,10 @@ task.h is included from an application file. */
 #include "timers.h"
 #include "stack_macros.h"
 
+#ifdef DISABLE_CACHE
+#include "stm32l4xx_ll_system.h"
+#endif
+
 /* Lint e9021, e961 and e750 are suppressed as a MISRA exception justified
 because the MPU ports require MPU_WRAPPERS_INCLUDED_FROM_API_FILE to be defined
 for the header files above, but not in this file, in order to generate the
@@ -1967,6 +1971,11 @@ static void prvAddNewTaskToReadyList( TCB_t *pxNewTCB )
 void vTaskStartScheduler( void )
 {
 BaseType_t xReturn;
+
+#ifdef DISABLE_CACHE
+	LL_FLASH_DisableInstCache();
+    LL_FLASH_DisableDataCache();
+#endif
 
 	/* Add the idle task at the lowest priority. */
 	#if( configSUPPORT_STATIC_ALLOCATION == 1 )

@@ -72,6 +72,8 @@
 #define configOVERRIDE_DEFAULT_TICK_CONFIGURATION    1
 #define configRECORD_STACK_HIGH_ADDRESS              1
 
+//#define DISABLE_CACHE
+
 /* Co-routine definitions. */
 #define configUSE_CO_ROUTINES                        0
 #define configMAX_CO_ROUTINE_PRIORITIES              ( 2 )
