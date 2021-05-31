@@ -5630,6 +5630,12 @@ uint32_t cycles;
 	vVerifyUntrustedData(dummyData, dataSize);
 	cycles = KIN1_GetCycleCounter();
 	configPRINTF( ( "xVerifyUntrustedData: %u\r\n", cycles ) );
+
+	vPortRaiseBASEPRI();
+	KIN1_ResetCycleCounter(); /* reset cycle counter */
+	configASSERT( ulPortGetBASEPRI() == configMAX_SYSCALL_INTERRUPT_PRIORITY );
+	cycles = KIN1_GetCycleCounter();
+	configPRINTF( ( "Exception priority: %u\r\n", cycles ) );
 }
 
 #endif
