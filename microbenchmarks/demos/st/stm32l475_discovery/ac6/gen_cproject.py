@@ -206,6 +206,11 @@ configurations = {
             '-mllvm -enable-arm-silhouette-str2strt',
         ],
     },
+    'kage-no-silhouette': {
+        'cflags': [
+            '-mexecute-only',
+        ]
+    },
 }
 
 ###############################################################################

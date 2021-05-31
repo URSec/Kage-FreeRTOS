@@ -792,6 +792,796 @@
       </storageModule>
       <storageModule moduleId="org.eclipse.cdt.core.externalSettings"/>
     </cconfiguration>
+    <!-- Configuration of kage-no-silhouette-context-switch -->
+    <cconfiguration id="fr.ac6.managedbuild.config.gnu.cross.exe.release.kage-no-silhouette-context-switch">
+      <storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="fr.ac6.managedbuild.config.gnu.cross.exe.release.kage-no-silhouette-context-switch" moduleId="org.eclipse.cdt.core.settings" name="kage-no-silhouette-context-switch">
+        <externalSettings/>
+        <extensions>
+          <extension id="org.eclipse.cdt.core.ELF" point="org.eclipse.cdt.core.BinaryParser"/>
+          <extension id="org.eclipse.cdt.core.GASErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+          <extension id="org.eclipse.cdt.core.GmakeErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+          <extension id="org.eclipse.cdt.core.GLDErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+          <extension id="org.eclipse.cdt.core.CWDLocator" point="org.eclipse.cdt.core.ErrorParser"/>
+          <extension id="org.eclipse.cdt.core.GCCErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+        </extensions>
+      </storageModule>
+      <storageModule moduleId="cdtBuildSystem" version="4.0.0">
+        <configuration artifactExtension="elf" artifactName="${ConfigName}" buildArtefactType="org.eclipse.cdt.build.core.buildArtefactType.exe" buildProperties="org.eclipse.cdt.build.core.buildArtefactType=org.eclipse.cdt.build.core.buildArtefactType.exe,org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release" cleanCommand="rm -rf" description="" id="fr.ac6.managedbuild.config.gnu.cross.exe.release.kage-no-silhouette-context-switch" name="kage-no-silhouette-context-switch" parent="fr.ac6.managedbuild.config.gnu.cross.exe.release" postannouncebuildStep="Running code scanner, Generating binary, and Printing size information:" postbuildStep="&quot;${workspace_loc}/../scripts/code-scanner.py&quot; &quot;${BuildArtifactFileBaseName}.elf&quot; &amp;&amp; arm-none-eabi-objcopy -O binary &quot;${BuildArtifactFileBaseName}.elf&quot; &quot;${BuildArtifactFileBaseName}.bin&quot; &amp;&amp; arm-none-eabi-objcopy -O ihex &quot;${BuildArtifactFileBaseName}.elf&quot; &quot;${BuildArtifactFileBaseName}.hex&quot; &amp;&amp; arm-none-eabi-size &quot;${BuildArtifactFileName}&quot;">
+          <folderInfo id="fr.ac6.managedbuild.config.gnu.cross.exe.release.kage-no-silhouette-context-switch." name="/" resourcePath="">
+            <toolChain id="fr.ac6.managedbuild.toolchain.gnu.cross.exe.release.kage-no-silhouette-context-switch" name="Ac6 STM32 MCU GCC" superClass="fr.ac6.managedbuild.toolchain.gnu.cross.exe.release">
+              <option id="fr.ac6.managedbuild.option.gnu.cross.mcu.kage-no-silhouette-context-switch" name="Mcu" superClass="fr.ac6.managedbuild.option.gnu.cross.mcu" value="STM32L475VGTx" valueType="string"/>
+              <option id="fr.ac6.managedbuild.option.gnu.cross.fpu.kage-no-silhouette-context-switch" name="Floating point hardware" superClass="fr.ac6.managedbuild.option.gnu.cross.fpu" value="fr.ac6.managedbuild.option.gnu.cross.fpu.fpv4-sp-d16" valueType="enumerated"/>
+              <option id="fr.ac6.managedbuild.option.gnu.cross.floatabi.kage-no-silhouette-context-switch" name="Floating-point ABI" superClass="fr.ac6.managedbuild.option.gnu.cross.floatabi" value="fr.ac6.managedbuild.option.gnu.cross.floatabi.hard" valueType="enumerated"/>
+              <option id="fr.ac6.managedbuild.option.gnu.cross.board.kage-no-silhouette-context-switch" name="Board" superClass="fr.ac6.managedbuild.option.gnu.cross.board" value="STM32L475VG" valueType="string"/>
+              <option id="fr.ac6.managedbuild.option.gnu.cross.prefix.kage-no-silhouette-context-switch" name="Prefix" superClass="fr.ac6.managedbuild.option.gnu.cross.prefix" value="" valueType="string"/>
+              <targetPlatform archList="all" binaryParser="org.eclipse.cdt.core.ELF" id="fr.ac6.managedbuild.targetPlatform.gnu.cross.kage-no-silhouette-context-switch" isAbstract="false" osList="all" superClass="fr.ac6.managedbuild.targetPlatform.gnu.cross"/>
+              <builder buildPath="${workspace_loc:/microbenchmarks}/Release" id="fr.ac6.managedbuild.builder.gnu.cross.kage-no-silhouette-context-switch" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="Gnu Make Builder" parallelBuildOn="true" parallelizationNumber="optimal" superClass="fr.ac6.managedbuild.builder.gnu.cross"/>
+              <tool command="${workspace_loc}/../build/llvm/bin/clang" id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.kage-no-silhouette-context-switch" name="MCU GCC Compiler" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler">
+                <option id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.fdata.kage-no-silhouette-context-switch" name="Place the data in their own section (-fdata-sections)" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.fdata" useByScannerDiscovery="false" value="true" valueType="boolean"/>
+                <option id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.ffunction.kage-no-silhouette-context-switch" name="Place the function in their own section (-ffunction-sections)" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.ffunction" useByScannerDiscovery="false" value="true" valueType="boolean"/>
+                <option id="fr.ac6.managedbuild.gnu.c.compiler.option.optimization.level.kage-no-silhouette-context-switch" name="Optimization Level" superClass="fr.ac6.managedbuild.gnu.c.compiler.option.optimization.level" useByScannerDiscovery="false" value="fr.ac6.managedbuild.gnu.c.optimization.level.most" valueType="enumerated"/>
+                <option defaultValue="gnu.c.debugging.level.none" id="gnu.c.compiler.option.debugging.level.kage-no-silhouette-context-switch" name="Debug Level" superClass="gnu.c.compiler.option.debugging.level" useByScannerDiscovery="false" value="gnu.c.debugging.level.default" valueType="enumerated"/>
+                <option id="gnu.c.compiler.option.preprocessor.def.symbols.kage-no-silhouette-context-switch" name="Defined symbols (-D)" superClass="gnu.c.compiler.option.preprocessor.def.symbols" useByScannerDiscovery="false" valueType="definedSymbols">
+                  <listOptionValue builtIn="false" value="USE_HAL_DRIVER"/>
+                  <listOptionValue builtIn="false" value="STM32L475xx"/>
+                  <listOptionValue builtIn="false" value="MQTTCLIENT_PLATFORM_HEADER=MQTTCMSIS.h"/>
+                  <listOptionValue builtIn="false" value="ENABLE_IOT_INFO"/>
+                  <listOptionValue builtIn="false" value="ENABLE_IOT_ERROR"/>
+                  <listOptionValue builtIn="false" value="SENSOR"/>
+                  <listOptionValue builtIn="false" value="RFU"/>
+                  <listOptionValue builtIn="false" value="USE_OFFLOAD_SSL"/>
+                  <listOptionValue builtIn="false" value="CONTEXT_SWITCH_MICRO_BENCHMARK"/>
+                </option>
+                <option id="gnu.c.compiler.option.include.paths.kage-no-silhouette-context-switch" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc}/../build/newlib-cygwin/install/arm-none-eabi/include&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/B-L475E-IOT01}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/Common}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/hts221}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/lis3mdl}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/lps22hb}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/lsm6dsl}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/vl53l0x}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/es_wifi}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/CMSIS/Include}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/CMSIS/Device/ST/STM32L4xx/Include}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/STM32L4xx_HAL_Driver/Inc}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/STM32L4xx_HAL_Driver/Inc/Legacy}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/config_files}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/aws/include}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/aws/include/private}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/aws/FreeRTOS/portable/GCC/ARM_CM4_MPU}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/jsmn}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mbedtls/include}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/pkcs11}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/tinycbor}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/beebs/include}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/silhouette_demo/include}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/st_code}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/common_demos/include}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code}&quot;"/>
+                </option>
+                <option id="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other.kage-no-silhouette-context-switch" name="Other flags" superClass="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other" useByScannerDiscovery="false" value="--target=arm-none-eabi -mexecute-only" valueType="string"/>
+                <option id="gnu.c.compiler.option.optimization.flags.kage-no-silhouette-context-switch" name="Other optimization flags" superClass="gnu.c.compiler.option.optimization.flags" useByScannerDiscovery="false" value="-ffreestanding -fomit-frame-pointer" valueType="string"/>
+                <option id="gnu.c.compiler.option.dialect.std.kage-no-silhouette-context-switch" name="Language standard" superClass="gnu.c.compiler.option.dialect.std" useByScannerDiscovery="false" value="gnu.c.compiler.dialect.default" valueType="enumerated"/>
+                <option id="gnu.c.compiler.option.misc.verbose.kage-no-silhouette-context-switch" name="Verbose (-v)" superClass="gnu.c.compiler.option.misc.verbose" useByScannerDiscovery="false" value="false" valueType="boolean"/>
+                <option id="gnu.c.compiler.option.include.files.kage-no-silhouette-context-switch" name="Include files (-include)" superClass="gnu.c.compiler.option.include.files" useByScannerDiscovery="false"/>
+                <inputType id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.c.kage-no-silhouette-context-switch" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.c"/>
+                <inputType id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.s.kage-no-silhouette-context-switch" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.s"/>
+              </tool>
+              <tool id="fr.ac6.managedbuild.tool.gnu.cross.cpp.compiler.kage-no-silhouette-context-switch" name="MCU G++ Compiler" superClass="fr.ac6.managedbuild.tool.gnu.cross.cpp.compiler">
+                <option id="fr.ac6.managedbuild.gnu.cpp.compiler.option.optimization.level.kage-no-silhouette-context-switch" name="Optimization Level" superClass="fr.ac6.managedbuild.gnu.cpp.compiler.option.optimization.level" useByScannerDiscovery="false" value="fr.ac6.managedbuild.gnu.cpp.optimization.level.most" valueType="enumerated"/>
+                <option defaultValue="gnu.cpp.compiler.debugging.level.none" id="gnu.cpp.compiler.option.debugging.level.kage-no-silhouette-context-switch" name="Debug Level" superClass="gnu.cpp.compiler.option.debugging.level" useByScannerDiscovery="false" valueType="enumerated"/>
+              </tool>
+              <tool command="${workspace_loc}/../build/llvm/bin/clang" id="fr.ac6.managedbuild.tool.gnu.cross.c.linker.kage-no-silhouette-context-switch" name="MCU GCC Linker" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.linker">
+                <option id="fr.ac6.managedbuild.tool.gnu.cross.c.linker.script.kage-no-silhouette-context-switch" name="Linker Script (-T)" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.linker.script" useByScannerDiscovery="false" value="${ProjDirPath}/STM32L475VGTx_FLASH_MPU.ld" valueType="string"/>
+                <option id="gnu.c.link.option.libs.kage-no-silhouette-context-switch" name="Libraries (-l)" superClass="gnu.c.link.option.libs" useByScannerDiscovery="false" valueType="libs">
+                  <listOptionValue builtIn="false" value="c"/>
+                  <listOptionValue builtIn="false" value="clang_rt.builtins-armhf"/>
+                </option>
+                <option id="gnu.c.link.option.ldflags.kage-no-silhouette-context-switch" name="Linker flags" superClass="gnu.c.link.option.ldflags" useByScannerDiscovery="false" value="--target=arm-none-eabi -fuse-ld=lld" valueType="string"/>
+                <option id="gnu.c.link.option.paths.kage-no-silhouette-context-switch" name="Library search path (-L)" superClass="gnu.c.link.option.paths" useByScannerDiscovery="false" valueType="libPaths">
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc}/../build/newlib-cygwin/install/arm-none-eabi/lib&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc}/../build/compiler-rt/install/lib/baremetal&quot;"/>
+                </option>
+                <option id="gnu.c.link.option.userobjs.kage-no-silhouette-context-switch" name="Other objects" superClass="gnu.c.link.option.userobjs" useByScannerDiscovery="false" valueType="userObjs">
+                </option>
+                <option id="fr.ac6.managedbuild.tool.gnu.cross.c.linker.gcsections.kage-no-silhouette-context-switch" name="Discard unused sections (-Wl,--gc-sections)" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.linker.gcsections" useByScannerDiscovery="false" value="true" valueType="boolean"/>
+                <inputType id="cdt.managedbuild.tool.gnu.c.linker.input.kage-no-silhouette-context-switch" superClass="cdt.managedbuild.tool.gnu.c.linker.input">
+                  <additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
+                  <additionalInput kind="additionalinput" paths="$(LIBS)"/>
+                </inputType>
+              </tool>
+              <tool id="fr.ac6.managedbuild.tool.gnu.cross.cpp.linker.kage-no-silhouette-context-switch" name="MCU G++ Linker" superClass="fr.ac6.managedbuild.tool.gnu.cross.cpp.linker"/>
+              <tool id="fr.ac6.managedbuild.tool.gnu.archiver.kage-no-silhouette-context-switch" name="MCU GCC Archiver" superClass="fr.ac6.managedbuild.tool.gnu.archiver"/>
+              <tool command="${workspace_loc}/../build/llvm/bin/clang" id="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.kage-no-silhouette-context-switch" name="MCU GCC Assembler" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release">
+                <option id="gnu.both.asm.option.include.paths.kage-no-silhouette-context-switch" name="Include paths (-I)" superClass="gnu.both.asm.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc}/../build/newlib-cygwin/install/arm-none-eabi/include&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/B-L475E-IOT01}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/Common}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/hts221}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/lis3mdl}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/lps22hb}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/lsm6dsl}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/vl53l0x}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/es_wifi}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/CMSIS/Include}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/CMSIS/Device/ST/STM32L4xx/Include}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/STM32L4xx_HAL_Driver/Inc}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/STM32L4xx_HAL_Driver/Inc/Legacy}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/config_files}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/aws/include}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/aws/include/private}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/aws/FreeRTOS/portable/GCC/ARM_CM4_MPU}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/jsmn}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mbedtls/include}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/pkcs11}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/tinycbor}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/beebs/include}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/silhouette_demo/include}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/st_code}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/common_demos/include}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code}&quot;"/>
+                </option>
+                <option id="gnu.both.asm.option.flags.kage-no-silhouette-context-switch" name="Assembler flags" superClass="gnu.both.asm.option.flags" useByScannerDiscovery="false" value="--target=arm-none-eabi -c" valueType="string"/>
+                <inputType id="cdt.managedbuild.tool.gnu.assembler.input.kage-no-silhouette-context-switch" superClass="cdt.managedbuild.tool.gnu.assembler.input"/>
+                <inputType id="fr.ac6.managedbuild.tool.gnu.cross.assembler.input.kage-no-silhouette-context-switch" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.input"/>
+              </tool>
+            </toolChain>
+          </folderInfo>
+          <folderInfo id="fr.ac6.managedbuild.config.gnu.cross.exe.release.kage-no-silhouette-context-switch.hal" name="/" resourcePath="lib/third_party/mcu_vendor/st/stm32l475_discovery">
+            <toolChain id="fr.ac6.managedbuild.toolchain.gnu.cross.exe.release.kage-no-silhouette-context-switch.hal" name="Ac6 STM32 MCU GCC" superClass="fr.ac6.managedbuild.toolchain.gnu.cross.exe.release.kage-no-silhouette-context-switch" unusedChildren="">
+              <tool id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.kage-no-silhouette-context-switch.hal" name="MCU GCC Compiler" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.kage-no-silhouette-context-switch">
+                <option id="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other.kage-no-silhouette-context-switch.hal" superClass="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other" value="--target=arm-none-eabi -mllvm -enable-arm-kage-privilege-promotion -mexecute-only" valueType="string"/>
+              </tool>
+              <tool id="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.kage-no-silhouette-context-switch.hal" name="MCU GCC Assembler" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.kage-no-silhouette-context-switch"/>
+            </toolChain>
+          </folderInfo>
+          <folderInfo id="fr.ac6.managedbuild.config.gnu.cross.exe.release.kage-no-silhouette-context-switch.hal-2" name="/" resourcePath="application_code/st_code">
+            <toolChain id="fr.ac6.managedbuild.toolchain.gnu.cross.exe.release.kage-no-silhouette-context-switch.hal-2" name="Ac6 STM32 MCU GCC" superClass="fr.ac6.managedbuild.toolchain.gnu.cross.exe.release.kage-no-silhouette-context-switch" unusedChildren="">
+              <tool id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.kage-no-silhouette-context-switch.hal-2" name="MCU GCC Compiler" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.kage-no-silhouette-context-switch">
+                <option id="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other.kage-no-silhouette-context-switch.hal-2" superClass="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other" value="--target=arm-none-eabi -mllvm -enable-arm-kage-privilege-promotion -mexecute-only" valueType="string"/>
+              </tool>
+              <tool id="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.kage-no-silhouette-context-switch.hal-2" name="MCU GCC Assembler" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.kage-no-silhouette-context-switch"/>
+            </toolChain>
+          </folderInfo>
+          <sourceEntries>
+          </sourceEntries>
+        </configuration>
+      </storageModule>
+      <storageModule moduleId="org.eclipse.cdt.core.externalSettings"/>
+    </cconfiguration>
+    <!-- Configuration of kage-no-silhouette-exception-dispatcher -->
+    <cconfiguration id="fr.ac6.managedbuild.config.gnu.cross.exe.release.kage-no-silhouette-exception-dispatcher">
+      <storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="fr.ac6.managedbuild.config.gnu.cross.exe.release.kage-no-silhouette-exception-dispatcher" moduleId="org.eclipse.cdt.core.settings" name="kage-no-silhouette-exception-dispatcher">
+        <externalSettings/>
+        <extensions>
+          <extension id="org.eclipse.cdt.core.ELF" point="org.eclipse.cdt.core.BinaryParser"/>
+          <extension id="org.eclipse.cdt.core.GASErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+          <extension id="org.eclipse.cdt.core.GmakeErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+          <extension id="org.eclipse.cdt.core.GLDErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+          <extension id="org.eclipse.cdt.core.CWDLocator" point="org.eclipse.cdt.core.ErrorParser"/>
+          <extension id="org.eclipse.cdt.core.GCCErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+        </extensions>
+      </storageModule>
+      <storageModule moduleId="cdtBuildSystem" version="4.0.0">
+        <configuration artifactExtension="elf" artifactName="${ConfigName}" buildArtefactType="org.eclipse.cdt.build.core.buildArtefactType.exe" buildProperties="org.eclipse.cdt.build.core.buildArtefactType=org.eclipse.cdt.build.core.buildArtefactType.exe,org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release" cleanCommand="rm -rf" description="" id="fr.ac6.managedbuild.config.gnu.cross.exe.release.kage-no-silhouette-exception-dispatcher" name="kage-no-silhouette-exception-dispatcher" parent="fr.ac6.managedbuild.config.gnu.cross.exe.release" postannouncebuildStep="Running code scanner, Generating binary, and Printing size information:" postbuildStep="&quot;${workspace_loc}/../scripts/code-scanner.py&quot; &quot;${BuildArtifactFileBaseName}.elf&quot; &amp;&amp; arm-none-eabi-objcopy -O binary &quot;${BuildArtifactFileBaseName}.elf&quot; &quot;${BuildArtifactFileBaseName}.bin&quot; &amp;&amp; arm-none-eabi-objcopy -O ihex &quot;${BuildArtifactFileBaseName}.elf&quot; &quot;${BuildArtifactFileBaseName}.hex&quot; &amp;&amp; arm-none-eabi-size &quot;${BuildArtifactFileName}&quot;">
+          <folderInfo id="fr.ac6.managedbuild.config.gnu.cross.exe.release.kage-no-silhouette-exception-dispatcher." name="/" resourcePath="">
+            <toolChain id="fr.ac6.managedbuild.toolchain.gnu.cross.exe.release.kage-no-silhouette-exception-dispatcher" name="Ac6 STM32 MCU GCC" superClass="fr.ac6.managedbuild.toolchain.gnu.cross.exe.release">
+              <option id="fr.ac6.managedbuild.option.gnu.cross.mcu.kage-no-silhouette-exception-dispatcher" name="Mcu" superClass="fr.ac6.managedbuild.option.gnu.cross.mcu" value="STM32L475VGTx" valueType="string"/>
+              <option id="fr.ac6.managedbuild.option.gnu.cross.fpu.kage-no-silhouette-exception-dispatcher" name="Floating point hardware" superClass="fr.ac6.managedbuild.option.gnu.cross.fpu" value="fr.ac6.managedbuild.option.gnu.cross.fpu.fpv4-sp-d16" valueType="enumerated"/>
+              <option id="fr.ac6.managedbuild.option.gnu.cross.floatabi.kage-no-silhouette-exception-dispatcher" name="Floating-point ABI" superClass="fr.ac6.managedbuild.option.gnu.cross.floatabi" value="fr.ac6.managedbuild.option.gnu.cross.floatabi.hard" valueType="enumerated"/>
+              <option id="fr.ac6.managedbuild.option.gnu.cross.board.kage-no-silhouette-exception-dispatcher" name="Board" superClass="fr.ac6.managedbuild.option.gnu.cross.board" value="STM32L475VG" valueType="string"/>
+              <option id="fr.ac6.managedbuild.option.gnu.cross.prefix.kage-no-silhouette-exception-dispatcher" name="Prefix" superClass="fr.ac6.managedbuild.option.gnu.cross.prefix" value="" valueType="string"/>
+              <targetPlatform archList="all" binaryParser="org.eclipse.cdt.core.ELF" id="fr.ac6.managedbuild.targetPlatform.gnu.cross.kage-no-silhouette-exception-dispatcher" isAbstract="false" osList="all" superClass="fr.ac6.managedbuild.targetPlatform.gnu.cross"/>
+              <builder buildPath="${workspace_loc:/microbenchmarks}/Release" id="fr.ac6.managedbuild.builder.gnu.cross.kage-no-silhouette-exception-dispatcher" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="Gnu Make Builder" parallelBuildOn="true" parallelizationNumber="optimal" superClass="fr.ac6.managedbuild.builder.gnu.cross"/>
+              <tool command="${workspace_loc}/../build/llvm/bin/clang" id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.kage-no-silhouette-exception-dispatcher" name="MCU GCC Compiler" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler">
+                <option id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.fdata.kage-no-silhouette-exception-dispatcher" name="Place the data in their own section (-fdata-sections)" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.fdata" useByScannerDiscovery="false" value="true" valueType="boolean"/>
+                <option id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.ffunction.kage-no-silhouette-exception-dispatcher" name="Place the function in their own section (-ffunction-sections)" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.ffunction" useByScannerDiscovery="false" value="true" valueType="boolean"/>
+                <option id="fr.ac6.managedbuild.gnu.c.compiler.option.optimization.level.kage-no-silhouette-exception-dispatcher" name="Optimization Level" superClass="fr.ac6.managedbuild.gnu.c.compiler.option.optimization.level" useByScannerDiscovery="false" value="fr.ac6.managedbuild.gnu.c.optimization.level.most" valueType="enumerated"/>
+                <option defaultValue="gnu.c.debugging.level.none" id="gnu.c.compiler.option.debugging.level.kage-no-silhouette-exception-dispatcher" name="Debug Level" superClass="gnu.c.compiler.option.debugging.level" useByScannerDiscovery="false" value="gnu.c.debugging.level.default" valueType="enumerated"/>
+                <option id="gnu.c.compiler.option.preprocessor.def.symbols.kage-no-silhouette-exception-dispatcher" name="Defined symbols (-D)" superClass="gnu.c.compiler.option.preprocessor.def.symbols" useByScannerDiscovery="false" valueType="definedSymbols">
+                  <listOptionValue builtIn="false" value="USE_HAL_DRIVER"/>
+                  <listOptionValue builtIn="false" value="STM32L475xx"/>
+                  <listOptionValue builtIn="false" value="MQTTCLIENT_PLATFORM_HEADER=MQTTCMSIS.h"/>
+                  <listOptionValue builtIn="false" value="ENABLE_IOT_INFO"/>
+                  <listOptionValue builtIn="false" value="ENABLE_IOT_ERROR"/>
+                  <listOptionValue builtIn="false" value="SENSOR"/>
+                  <listOptionValue builtIn="false" value="RFU"/>
+                  <listOptionValue builtIn="false" value="USE_OFFLOAD_SSL"/>
+                  <listOptionValue builtIn="false" value="EXCEPTION_NEW_MICRO_BENCHMARK"/>
+                </option>
+                <option id="gnu.c.compiler.option.include.paths.kage-no-silhouette-exception-dispatcher" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc}/../build/newlib-cygwin/install/arm-none-eabi/include&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/B-L475E-IOT01}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/Common}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/hts221}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/lis3mdl}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/lps22hb}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/lsm6dsl}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/vl53l0x}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/es_wifi}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/CMSIS/Include}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/CMSIS/Device/ST/STM32L4xx/Include}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/STM32L4xx_HAL_Driver/Inc}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/STM32L4xx_HAL_Driver/Inc/Legacy}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/config_files}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/aws/include}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/aws/include/private}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/aws/FreeRTOS/portable/GCC/ARM_CM4_MPU}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/jsmn}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mbedtls/include}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/pkcs11}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/tinycbor}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/beebs/include}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/silhouette_demo/include}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/st_code}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/common_demos/include}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code}&quot;"/>
+                </option>
+                <option id="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other.kage-no-silhouette-exception-dispatcher" name="Other flags" superClass="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other" useByScannerDiscovery="false" value="--target=arm-none-eabi -mexecute-only" valueType="string"/>
+                <option id="gnu.c.compiler.option.optimization.flags.kage-no-silhouette-exception-dispatcher" name="Other optimization flags" superClass="gnu.c.compiler.option.optimization.flags" useByScannerDiscovery="false" value="-ffreestanding -fomit-frame-pointer" valueType="string"/>
+                <option id="gnu.c.compiler.option.dialect.std.kage-no-silhouette-exception-dispatcher" name="Language standard" superClass="gnu.c.compiler.option.dialect.std" useByScannerDiscovery="false" value="gnu.c.compiler.dialect.default" valueType="enumerated"/>
+                <option id="gnu.c.compiler.option.misc.verbose.kage-no-silhouette-exception-dispatcher" name="Verbose (-v)" superClass="gnu.c.compiler.option.misc.verbose" useByScannerDiscovery="false" value="false" valueType="boolean"/>
+                <option id="gnu.c.compiler.option.include.files.kage-no-silhouette-exception-dispatcher" name="Include files (-include)" superClass="gnu.c.compiler.option.include.files" useByScannerDiscovery="false"/>
+                <inputType id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.c.kage-no-silhouette-exception-dispatcher" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.c"/>
+                <inputType id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.s.kage-no-silhouette-exception-dispatcher" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.s"/>
+              </tool>
+              <tool id="fr.ac6.managedbuild.tool.gnu.cross.cpp.compiler.kage-no-silhouette-exception-dispatcher" name="MCU G++ Compiler" superClass="fr.ac6.managedbuild.tool.gnu.cross.cpp.compiler">
+                <option id="fr.ac6.managedbuild.gnu.cpp.compiler.option.optimization.level.kage-no-silhouette-exception-dispatcher" name="Optimization Level" superClass="fr.ac6.managedbuild.gnu.cpp.compiler.option.optimization.level" useByScannerDiscovery="false" value="fr.ac6.managedbuild.gnu.cpp.optimization.level.most" valueType="enumerated"/>
+                <option defaultValue="gnu.cpp.compiler.debugging.level.none" id="gnu.cpp.compiler.option.debugging.level.kage-no-silhouette-exception-dispatcher" name="Debug Level" superClass="gnu.cpp.compiler.option.debugging.level" useByScannerDiscovery="false" valueType="enumerated"/>
+              </tool>
+              <tool command="${workspace_loc}/../build/llvm/bin/clang" id="fr.ac6.managedbuild.tool.gnu.cross.c.linker.kage-no-silhouette-exception-dispatcher" name="MCU GCC Linker" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.linker">
+                <option id="fr.ac6.managedbuild.tool.gnu.cross.c.linker.script.kage-no-silhouette-exception-dispatcher" name="Linker Script (-T)" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.linker.script" useByScannerDiscovery="false" value="${ProjDirPath}/STM32L475VGTx_FLASH_MPU.ld" valueType="string"/>
+                <option id="gnu.c.link.option.libs.kage-no-silhouette-exception-dispatcher" name="Libraries (-l)" superClass="gnu.c.link.option.libs" useByScannerDiscovery="false" valueType="libs">
+                  <listOptionValue builtIn="false" value="c"/>
+                  <listOptionValue builtIn="false" value="clang_rt.builtins-armhf"/>
+                </option>
+                <option id="gnu.c.link.option.ldflags.kage-no-silhouette-exception-dispatcher" name="Linker flags" superClass="gnu.c.link.option.ldflags" useByScannerDiscovery="false" value="--target=arm-none-eabi -fuse-ld=lld" valueType="string"/>
+                <option id="gnu.c.link.option.paths.kage-no-silhouette-exception-dispatcher" name="Library search path (-L)" superClass="gnu.c.link.option.paths" useByScannerDiscovery="false" valueType="libPaths">
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc}/../build/newlib-cygwin/install/arm-none-eabi/lib&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc}/../build/compiler-rt/install/lib/baremetal&quot;"/>
+                </option>
+                <option id="gnu.c.link.option.userobjs.kage-no-silhouette-exception-dispatcher" name="Other objects" superClass="gnu.c.link.option.userobjs" useByScannerDiscovery="false" valueType="userObjs">
+                </option>
+                <option id="fr.ac6.managedbuild.tool.gnu.cross.c.linker.gcsections.kage-no-silhouette-exception-dispatcher" name="Discard unused sections (-Wl,--gc-sections)" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.linker.gcsections" useByScannerDiscovery="false" value="true" valueType="boolean"/>
+                <inputType id="cdt.managedbuild.tool.gnu.c.linker.input.kage-no-silhouette-exception-dispatcher" superClass="cdt.managedbuild.tool.gnu.c.linker.input">
+                  <additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
+                  <additionalInput kind="additionalinput" paths="$(LIBS)"/>
+                </inputType>
+              </tool>
+              <tool id="fr.ac6.managedbuild.tool.gnu.cross.cpp.linker.kage-no-silhouette-exception-dispatcher" name="MCU G++ Linker" superClass="fr.ac6.managedbuild.tool.gnu.cross.cpp.linker"/>
+              <tool id="fr.ac6.managedbuild.tool.gnu.archiver.kage-no-silhouette-exception-dispatcher" name="MCU GCC Archiver" superClass="fr.ac6.managedbuild.tool.gnu.archiver"/>
+              <tool command="${workspace_loc}/../build/llvm/bin/clang" id="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.kage-no-silhouette-exception-dispatcher" name="MCU GCC Assembler" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release">
+                <option id="gnu.both.asm.option.include.paths.kage-no-silhouette-exception-dispatcher" name="Include paths (-I)" superClass="gnu.both.asm.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc}/../build/newlib-cygwin/install/arm-none-eabi/include&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/B-L475E-IOT01}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/Common}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/hts221}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/lis3mdl}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/lps22hb}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/lsm6dsl}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/vl53l0x}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/es_wifi}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/CMSIS/Include}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/CMSIS/Device/ST/STM32L4xx/Include}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/STM32L4xx_HAL_Driver/Inc}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/STM32L4xx_HAL_Driver/Inc/Legacy}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/config_files}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/aws/include}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/aws/include/private}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/aws/FreeRTOS/portable/GCC/ARM_CM4_MPU}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/jsmn}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mbedtls/include}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/pkcs11}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/tinycbor}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/beebs/include}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/silhouette_demo/include}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/st_code}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/common_demos/include}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code}&quot;"/>
+                </option>
+                <option id="gnu.both.asm.option.flags.kage-no-silhouette-exception-dispatcher" name="Assembler flags" superClass="gnu.both.asm.option.flags" useByScannerDiscovery="false" value="--target=arm-none-eabi -c" valueType="string"/>
+                <inputType id="cdt.managedbuild.tool.gnu.assembler.input.kage-no-silhouette-exception-dispatcher" superClass="cdt.managedbuild.tool.gnu.assembler.input"/>
+                <inputType id="fr.ac6.managedbuild.tool.gnu.cross.assembler.input.kage-no-silhouette-exception-dispatcher" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.input"/>
+              </tool>
+            </toolChain>
+          </folderInfo>
+          <folderInfo id="fr.ac6.managedbuild.config.gnu.cross.exe.release.kage-no-silhouette-exception-dispatcher.hal" name="/" resourcePath="lib/third_party/mcu_vendor/st/stm32l475_discovery">
+            <toolChain id="fr.ac6.managedbuild.toolchain.gnu.cross.exe.release.kage-no-silhouette-exception-dispatcher.hal" name="Ac6 STM32 MCU GCC" superClass="fr.ac6.managedbuild.toolchain.gnu.cross.exe.release.kage-no-silhouette-exception-dispatcher" unusedChildren="">
+              <tool id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.kage-no-silhouette-exception-dispatcher.hal" name="MCU GCC Compiler" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.kage-no-silhouette-exception-dispatcher">
+                <option id="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other.kage-no-silhouette-exception-dispatcher.hal" superClass="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other" value="--target=arm-none-eabi -mllvm -enable-arm-kage-privilege-promotion -mexecute-only" valueType="string"/>
+              </tool>
+              <tool id="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.kage-no-silhouette-exception-dispatcher.hal" name="MCU GCC Assembler" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.kage-no-silhouette-exception-dispatcher"/>
+            </toolChain>
+          </folderInfo>
+          <folderInfo id="fr.ac6.managedbuild.config.gnu.cross.exe.release.kage-no-silhouette-exception-dispatcher.hal-2" name="/" resourcePath="application_code/st_code">
+            <toolChain id="fr.ac6.managedbuild.toolchain.gnu.cross.exe.release.kage-no-silhouette-exception-dispatcher.hal-2" name="Ac6 STM32 MCU GCC" superClass="fr.ac6.managedbuild.toolchain.gnu.cross.exe.release.kage-no-silhouette-exception-dispatcher" unusedChildren="">
+              <tool id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.kage-no-silhouette-exception-dispatcher.hal-2" name="MCU GCC Compiler" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.kage-no-silhouette-exception-dispatcher">
+                <option id="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other.kage-no-silhouette-exception-dispatcher.hal-2" superClass="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other" value="--target=arm-none-eabi -mllvm -enable-arm-kage-privilege-promotion -mexecute-only" valueType="string"/>
+              </tool>
+              <tool id="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.kage-no-silhouette-exception-dispatcher.hal-2" name="MCU GCC Assembler" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.kage-no-silhouette-exception-dispatcher"/>
+            </toolChain>
+          </folderInfo>
+          <sourceEntries>
+          </sourceEntries>
+        </configuration>
+      </storageModule>
+      <storageModule moduleId="org.eclipse.cdt.core.externalSettings"/>
+    </cconfiguration>
+    <!-- Configuration of kage-no-silhouette-queue -->
+    <cconfiguration id="fr.ac6.managedbuild.config.gnu.cross.exe.release.kage-no-silhouette-queue">
+      <storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="fr.ac6.managedbuild.config.gnu.cross.exe.release.kage-no-silhouette-queue" moduleId="org.eclipse.cdt.core.settings" name="kage-no-silhouette-queue">
+        <externalSettings/>
+        <extensions>
+          <extension id="org.eclipse.cdt.core.ELF" point="org.eclipse.cdt.core.BinaryParser"/>
+          <extension id="org.eclipse.cdt.core.GASErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+          <extension id="org.eclipse.cdt.core.GmakeErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+          <extension id="org.eclipse.cdt.core.GLDErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+          <extension id="org.eclipse.cdt.core.CWDLocator" point="org.eclipse.cdt.core.ErrorParser"/>
+          <extension id="org.eclipse.cdt.core.GCCErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+        </extensions>
+      </storageModule>
+      <storageModule moduleId="cdtBuildSystem" version="4.0.0">
+        <configuration artifactExtension="elf" artifactName="${ConfigName}" buildArtefactType="org.eclipse.cdt.build.core.buildArtefactType.exe" buildProperties="org.eclipse.cdt.build.core.buildArtefactType=org.eclipse.cdt.build.core.buildArtefactType.exe,org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release" cleanCommand="rm -rf" description="" id="fr.ac6.managedbuild.config.gnu.cross.exe.release.kage-no-silhouette-queue" name="kage-no-silhouette-queue" parent="fr.ac6.managedbuild.config.gnu.cross.exe.release" postannouncebuildStep="Running code scanner, Generating binary, and Printing size information:" postbuildStep="&quot;${workspace_loc}/../scripts/code-scanner.py&quot; &quot;${BuildArtifactFileBaseName}.elf&quot; &amp;&amp; arm-none-eabi-objcopy -O binary &quot;${BuildArtifactFileBaseName}.elf&quot; &quot;${BuildArtifactFileBaseName}.bin&quot; &amp;&amp; arm-none-eabi-objcopy -O ihex &quot;${BuildArtifactFileBaseName}.elf&quot; &quot;${BuildArtifactFileBaseName}.hex&quot; &amp;&amp; arm-none-eabi-size &quot;${BuildArtifactFileName}&quot;">
+          <folderInfo id="fr.ac6.managedbuild.config.gnu.cross.exe.release.kage-no-silhouette-queue." name="/" resourcePath="">
+            <toolChain id="fr.ac6.managedbuild.toolchain.gnu.cross.exe.release.kage-no-silhouette-queue" name="Ac6 STM32 MCU GCC" superClass="fr.ac6.managedbuild.toolchain.gnu.cross.exe.release">
+              <option id="fr.ac6.managedbuild.option.gnu.cross.mcu.kage-no-silhouette-queue" name="Mcu" superClass="fr.ac6.managedbuild.option.gnu.cross.mcu" value="STM32L475VGTx" valueType="string"/>
+              <option id="fr.ac6.managedbuild.option.gnu.cross.fpu.kage-no-silhouette-queue" name="Floating point hardware" superClass="fr.ac6.managedbuild.option.gnu.cross.fpu" value="fr.ac6.managedbuild.option.gnu.cross.fpu.fpv4-sp-d16" valueType="enumerated"/>
+              <option id="fr.ac6.managedbuild.option.gnu.cross.floatabi.kage-no-silhouette-queue" name="Floating-point ABI" superClass="fr.ac6.managedbuild.option.gnu.cross.floatabi" value="fr.ac6.managedbuild.option.gnu.cross.floatabi.hard" valueType="enumerated"/>
+              <option id="fr.ac6.managedbuild.option.gnu.cross.board.kage-no-silhouette-queue" name="Board" superClass="fr.ac6.managedbuild.option.gnu.cross.board" value="STM32L475VG" valueType="string"/>
+              <option id="fr.ac6.managedbuild.option.gnu.cross.prefix.kage-no-silhouette-queue" name="Prefix" superClass="fr.ac6.managedbuild.option.gnu.cross.prefix" value="" valueType="string"/>
+              <targetPlatform archList="all" binaryParser="org.eclipse.cdt.core.ELF" id="fr.ac6.managedbuild.targetPlatform.gnu.cross.kage-no-silhouette-queue" isAbstract="false" osList="all" superClass="fr.ac6.managedbuild.targetPlatform.gnu.cross"/>
+              <builder buildPath="${workspace_loc:/microbenchmarks}/Release" id="fr.ac6.managedbuild.builder.gnu.cross.kage-no-silhouette-queue" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="Gnu Make Builder" parallelBuildOn="true" parallelizationNumber="optimal" superClass="fr.ac6.managedbuild.builder.gnu.cross"/>
+              <tool command="${workspace_loc}/../build/llvm/bin/clang" id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.kage-no-silhouette-queue" name="MCU GCC Compiler" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler">
+                <option id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.fdata.kage-no-silhouette-queue" name="Place the data in their own section (-fdata-sections)" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.fdata" useByScannerDiscovery="false" value="true" valueType="boolean"/>
+                <option id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.ffunction.kage-no-silhouette-queue" name="Place the function in their own section (-ffunction-sections)" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.ffunction" useByScannerDiscovery="false" value="true" valueType="boolean"/>
+                <option id="fr.ac6.managedbuild.gnu.c.compiler.option.optimization.level.kage-no-silhouette-queue" name="Optimization Level" superClass="fr.ac6.managedbuild.gnu.c.compiler.option.optimization.level" useByScannerDiscovery="false" value="fr.ac6.managedbuild.gnu.c.optimization.level.most" valueType="enumerated"/>
+                <option defaultValue="gnu.c.debugging.level.none" id="gnu.c.compiler.option.debugging.level.kage-no-silhouette-queue" name="Debug Level" superClass="gnu.c.compiler.option.debugging.level" useByScannerDiscovery="false" value="gnu.c.debugging.level.default" valueType="enumerated"/>
+                <option id="gnu.c.compiler.option.preprocessor.def.symbols.kage-no-silhouette-queue" name="Defined symbols (-D)" superClass="gnu.c.compiler.option.preprocessor.def.symbols" useByScannerDiscovery="false" valueType="definedSymbols">
+                  <listOptionValue builtIn="false" value="USE_HAL_DRIVER"/>
+                  <listOptionValue builtIn="false" value="STM32L475xx"/>
+                  <listOptionValue builtIn="false" value="MQTTCLIENT_PLATFORM_HEADER=MQTTCMSIS.h"/>
+                  <listOptionValue builtIn="false" value="ENABLE_IOT_INFO"/>
+                  <listOptionValue builtIn="false" value="ENABLE_IOT_ERROR"/>
+                  <listOptionValue builtIn="false" value="SENSOR"/>
+                  <listOptionValue builtIn="false" value="RFU"/>
+                  <listOptionValue builtIn="false" value="USE_OFFLOAD_SSL"/>
+                  <listOptionValue builtIn="false" value="QUEUE_BENCHMARK"/>
+                </option>
+                <option id="gnu.c.compiler.option.include.paths.kage-no-silhouette-queue" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc}/../build/newlib-cygwin/install/arm-none-eabi/include&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/B-L475E-IOT01}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/Common}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/hts221}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/lis3mdl}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/lps22hb}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/lsm6dsl}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/vl53l0x}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/es_wifi}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/CMSIS/Include}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/CMSIS/Device/ST/STM32L4xx/Include}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/STM32L4xx_HAL_Driver/Inc}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/STM32L4xx_HAL_Driver/Inc/Legacy}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/config_files}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/aws/include}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/aws/include/private}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/aws/FreeRTOS/portable/GCC/ARM_CM4_MPU}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/jsmn}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mbedtls/include}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/pkcs11}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/tinycbor}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/beebs/include}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/silhouette_demo/include}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/st_code}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/common_demos/include}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code}&quot;"/>
+                </option>
+                <option id="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other.kage-no-silhouette-queue" name="Other flags" superClass="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other" useByScannerDiscovery="false" value="--target=arm-none-eabi -mexecute-only" valueType="string"/>
+                <option id="gnu.c.compiler.option.optimization.flags.kage-no-silhouette-queue" name="Other optimization flags" superClass="gnu.c.compiler.option.optimization.flags" useByScannerDiscovery="false" value="-ffreestanding -fomit-frame-pointer" valueType="string"/>
+                <option id="gnu.c.compiler.option.dialect.std.kage-no-silhouette-queue" name="Language standard" superClass="gnu.c.compiler.option.dialect.std" useByScannerDiscovery="false" value="gnu.c.compiler.dialect.default" valueType="enumerated"/>
+                <option id="gnu.c.compiler.option.misc.verbose.kage-no-silhouette-queue" name="Verbose (-v)" superClass="gnu.c.compiler.option.misc.verbose" useByScannerDiscovery="false" value="false" valueType="boolean"/>
+                <option id="gnu.c.compiler.option.include.files.kage-no-silhouette-queue" name="Include files (-include)" superClass="gnu.c.compiler.option.include.files" useByScannerDiscovery="false"/>
+                <inputType id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.c.kage-no-silhouette-queue" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.c"/>
+                <inputType id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.s.kage-no-silhouette-queue" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.s"/>
+              </tool>
+              <tool id="fr.ac6.managedbuild.tool.gnu.cross.cpp.compiler.kage-no-silhouette-queue" name="MCU G++ Compiler" superClass="fr.ac6.managedbuild.tool.gnu.cross.cpp.compiler">
+                <option id="fr.ac6.managedbuild.gnu.cpp.compiler.option.optimization.level.kage-no-silhouette-queue" name="Optimization Level" superClass="fr.ac6.managedbuild.gnu.cpp.compiler.option.optimization.level" useByScannerDiscovery="false" value="fr.ac6.managedbuild.gnu.cpp.optimization.level.most" valueType="enumerated"/>
+                <option defaultValue="gnu.cpp.compiler.debugging.level.none" id="gnu.cpp.compiler.option.debugging.level.kage-no-silhouette-queue" name="Debug Level" superClass="gnu.cpp.compiler.option.debugging.level" useByScannerDiscovery="false" valueType="enumerated"/>
+              </tool>
+              <tool command="${workspace_loc}/../build/llvm/bin/clang" id="fr.ac6.managedbuild.tool.gnu.cross.c.linker.kage-no-silhouette-queue" name="MCU GCC Linker" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.linker">
+                <option id="fr.ac6.managedbuild.tool.gnu.cross.c.linker.script.kage-no-silhouette-queue" name="Linker Script (-T)" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.linker.script" useByScannerDiscovery="false" value="${ProjDirPath}/STM32L475VGTx_FLASH_MPU.ld" valueType="string"/>
+                <option id="gnu.c.link.option.libs.kage-no-silhouette-queue" name="Libraries (-l)" superClass="gnu.c.link.option.libs" useByScannerDiscovery="false" valueType="libs">
+                  <listOptionValue builtIn="false" value="c"/>
+                  <listOptionValue builtIn="false" value="clang_rt.builtins-armhf"/>
+                </option>
+                <option id="gnu.c.link.option.ldflags.kage-no-silhouette-queue" name="Linker flags" superClass="gnu.c.link.option.ldflags" useByScannerDiscovery="false" value="--target=arm-none-eabi -fuse-ld=lld" valueType="string"/>
+                <option id="gnu.c.link.option.paths.kage-no-silhouette-queue" name="Library search path (-L)" superClass="gnu.c.link.option.paths" useByScannerDiscovery="false" valueType="libPaths">
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc}/../build/newlib-cygwin/install/arm-none-eabi/lib&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc}/../build/compiler-rt/install/lib/baremetal&quot;"/>
+                </option>
+                <option id="gnu.c.link.option.userobjs.kage-no-silhouette-queue" name="Other objects" superClass="gnu.c.link.option.userobjs" useByScannerDiscovery="false" valueType="userObjs">
+                </option>
+                <option id="fr.ac6.managedbuild.tool.gnu.cross.c.linker.gcsections.kage-no-silhouette-queue" name="Discard unused sections (-Wl,--gc-sections)" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.linker.gcsections" useByScannerDiscovery="false" value="true" valueType="boolean"/>
+                <inputType id="cdt.managedbuild.tool.gnu.c.linker.input.kage-no-silhouette-queue" superClass="cdt.managedbuild.tool.gnu.c.linker.input">
+                  <additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
+                  <additionalInput kind="additionalinput" paths="$(LIBS)"/>
+                </inputType>
+              </tool>
+              <tool id="fr.ac6.managedbuild.tool.gnu.cross.cpp.linker.kage-no-silhouette-queue" name="MCU G++ Linker" superClass="fr.ac6.managedbuild.tool.gnu.cross.cpp.linker"/>
+              <tool id="fr.ac6.managedbuild.tool.gnu.archiver.kage-no-silhouette-queue" name="MCU GCC Archiver" superClass="fr.ac6.managedbuild.tool.gnu.archiver"/>
+              <tool command="${workspace_loc}/../build/llvm/bin/clang" id="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.kage-no-silhouette-queue" name="MCU GCC Assembler" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release">
+                <option id="gnu.both.asm.option.include.paths.kage-no-silhouette-queue" name="Include paths (-I)" superClass="gnu.both.asm.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc}/../build/newlib-cygwin/install/arm-none-eabi/include&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/B-L475E-IOT01}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/Common}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/hts221}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/lis3mdl}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/lps22hb}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/lsm6dsl}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/vl53l0x}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/es_wifi}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/CMSIS/Include}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/CMSIS/Device/ST/STM32L4xx/Include}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/STM32L4xx_HAL_Driver/Inc}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/STM32L4xx_HAL_Driver/Inc/Legacy}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/config_files}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/aws/include}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/aws/include/private}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/aws/FreeRTOS/portable/GCC/ARM_CM4_MPU}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/jsmn}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mbedtls/include}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/pkcs11}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/tinycbor}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/beebs/include}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/silhouette_demo/include}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/st_code}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/common_demos/include}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code}&quot;"/>
+                </option>
+                <option id="gnu.both.asm.option.flags.kage-no-silhouette-queue" name="Assembler flags" superClass="gnu.both.asm.option.flags" useByScannerDiscovery="false" value="--target=arm-none-eabi -c" valueType="string"/>
+                <inputType id="cdt.managedbuild.tool.gnu.assembler.input.kage-no-silhouette-queue" superClass="cdt.managedbuild.tool.gnu.assembler.input"/>
+                <inputType id="fr.ac6.managedbuild.tool.gnu.cross.assembler.input.kage-no-silhouette-queue" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.input"/>
+              </tool>
+            </toolChain>
+          </folderInfo>
+          <folderInfo id="fr.ac6.managedbuild.config.gnu.cross.exe.release.kage-no-silhouette-queue.hal" name="/" resourcePath="lib/third_party/mcu_vendor/st/stm32l475_discovery">
+            <toolChain id="fr.ac6.managedbuild.toolchain.gnu.cross.exe.release.kage-no-silhouette-queue.hal" name="Ac6 STM32 MCU GCC" superClass="fr.ac6.managedbuild.toolchain.gnu.cross.exe.release.kage-no-silhouette-queue" unusedChildren="">
+              <tool id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.kage-no-silhouette-queue.hal" name="MCU GCC Compiler" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.kage-no-silhouette-queue">
+                <option id="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other.kage-no-silhouette-queue.hal" superClass="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other" value="--target=arm-none-eabi -mllvm -enable-arm-kage-privilege-promotion -mexecute-only" valueType="string"/>
+              </tool>
+              <tool id="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.kage-no-silhouette-queue.hal" name="MCU GCC Assembler" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.kage-no-silhouette-queue"/>
+            </toolChain>
+          </folderInfo>
+          <folderInfo id="fr.ac6.managedbuild.config.gnu.cross.exe.release.kage-no-silhouette-queue.hal-2" name="/" resourcePath="application_code/st_code">
+            <toolChain id="fr.ac6.managedbuild.toolchain.gnu.cross.exe.release.kage-no-silhouette-queue.hal-2" name="Ac6 STM32 MCU GCC" superClass="fr.ac6.managedbuild.toolchain.gnu.cross.exe.release.kage-no-silhouette-queue" unusedChildren="">
+              <tool id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.kage-no-silhouette-queue.hal-2" name="MCU GCC Compiler" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.kage-no-silhouette-queue">
+                <option id="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other.kage-no-silhouette-queue.hal-2" superClass="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other" value="--target=arm-none-eabi -mllvm -enable-arm-kage-privilege-promotion -mexecute-only" valueType="string"/>
+              </tool>
+              <tool id="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.kage-no-silhouette-queue.hal-2" name="MCU GCC Assembler" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.kage-no-silhouette-queue"/>
+            </toolChain>
+          </folderInfo>
+          <sourceEntries>
+          </sourceEntries>
+        </configuration>
+      </storageModule>
+      <storageModule moduleId="org.eclipse.cdt.core.externalSettings"/>
+    </cconfiguration>
+    <!-- Configuration of kage-no-silhouette-secure-api -->
+    <cconfiguration id="fr.ac6.managedbuild.config.gnu.cross.exe.release.kage-no-silhouette-secure-api">
+      <storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="fr.ac6.managedbuild.config.gnu.cross.exe.release.kage-no-silhouette-secure-api" moduleId="org.eclipse.cdt.core.settings" name="kage-no-silhouette-secure-api">
+        <externalSettings/>
+        <extensions>
+          <extension id="org.eclipse.cdt.core.ELF" point="org.eclipse.cdt.core.BinaryParser"/>
+          <extension id="org.eclipse.cdt.core.GASErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+          <extension id="org.eclipse.cdt.core.GmakeErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+          <extension id="org.eclipse.cdt.core.GLDErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+          <extension id="org.eclipse.cdt.core.CWDLocator" point="org.eclipse.cdt.core.ErrorParser"/>
+          <extension id="org.eclipse.cdt.core.GCCErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+        </extensions>
+      </storageModule>
+      <storageModule moduleId="cdtBuildSystem" version="4.0.0">
+        <configuration artifactExtension="elf" artifactName="${ConfigName}" buildArtefactType="org.eclipse.cdt.build.core.buildArtefactType.exe" buildProperties="org.eclipse.cdt.build.core.buildArtefactType=org.eclipse.cdt.build.core.buildArtefactType.exe,org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release" cleanCommand="rm -rf" description="" id="fr.ac6.managedbuild.config.gnu.cross.exe.release.kage-no-silhouette-secure-api" name="kage-no-silhouette-secure-api" parent="fr.ac6.managedbuild.config.gnu.cross.exe.release" postannouncebuildStep="Running code scanner, Generating binary, and Printing size information:" postbuildStep="&quot;${workspace_loc}/../scripts/code-scanner.py&quot; &quot;${BuildArtifactFileBaseName}.elf&quot; &amp;&amp; arm-none-eabi-objcopy -O binary &quot;${BuildArtifactFileBaseName}.elf&quot; &quot;${BuildArtifactFileBaseName}.bin&quot; &amp;&amp; arm-none-eabi-objcopy -O ihex &quot;${BuildArtifactFileBaseName}.elf&quot; &quot;${BuildArtifactFileBaseName}.hex&quot; &amp;&amp; arm-none-eabi-size &quot;${BuildArtifactFileName}&quot;">
+          <folderInfo id="fr.ac6.managedbuild.config.gnu.cross.exe.release.kage-no-silhouette-secure-api." name="/" resourcePath="">
+            <toolChain id="fr.ac6.managedbuild.toolchain.gnu.cross.exe.release.kage-no-silhouette-secure-api" name="Ac6 STM32 MCU GCC" superClass="fr.ac6.managedbuild.toolchain.gnu.cross.exe.release">
+              <option id="fr.ac6.managedbuild.option.gnu.cross.mcu.kage-no-silhouette-secure-api" name="Mcu" superClass="fr.ac6.managedbuild.option.gnu.cross.mcu" value="STM32L475VGTx" valueType="string"/>
+              <option id="fr.ac6.managedbuild.option.gnu.cross.fpu.kage-no-silhouette-secure-api" name="Floating point hardware" superClass="fr.ac6.managedbuild.option.gnu.cross.fpu" value="fr.ac6.managedbuild.option.gnu.cross.fpu.fpv4-sp-d16" valueType="enumerated"/>
+              <option id="fr.ac6.managedbuild.option.gnu.cross.floatabi.kage-no-silhouette-secure-api" name="Floating-point ABI" superClass="fr.ac6.managedbuild.option.gnu.cross.floatabi" value="fr.ac6.managedbuild.option.gnu.cross.floatabi.hard" valueType="enumerated"/>
+              <option id="fr.ac6.managedbuild.option.gnu.cross.board.kage-no-silhouette-secure-api" name="Board" superClass="fr.ac6.managedbuild.option.gnu.cross.board" value="STM32L475VG" valueType="string"/>
+              <option id="fr.ac6.managedbuild.option.gnu.cross.prefix.kage-no-silhouette-secure-api" name="Prefix" superClass="fr.ac6.managedbuild.option.gnu.cross.prefix" value="" valueType="string"/>
+              <targetPlatform archList="all" binaryParser="org.eclipse.cdt.core.ELF" id="fr.ac6.managedbuild.targetPlatform.gnu.cross.kage-no-silhouette-secure-api" isAbstract="false" osList="all" superClass="fr.ac6.managedbuild.targetPlatform.gnu.cross"/>
+              <builder buildPath="${workspace_loc:/microbenchmarks}/Release" id="fr.ac6.managedbuild.builder.gnu.cross.kage-no-silhouette-secure-api" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="Gnu Make Builder" parallelBuildOn="true" parallelizationNumber="optimal" superClass="fr.ac6.managedbuild.builder.gnu.cross"/>
+              <tool command="${workspace_loc}/../build/llvm/bin/clang" id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.kage-no-silhouette-secure-api" name="MCU GCC Compiler" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler">
+                <option id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.fdata.kage-no-silhouette-secure-api" name="Place the data in their own section (-fdata-sections)" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.fdata" useByScannerDiscovery="false" value="true" valueType="boolean"/>
+                <option id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.ffunction.kage-no-silhouette-secure-api" name="Place the function in their own section (-ffunction-sections)" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.ffunction" useByScannerDiscovery="false" value="true" valueType="boolean"/>
+                <option id="fr.ac6.managedbuild.gnu.c.compiler.option.optimization.level.kage-no-silhouette-secure-api" name="Optimization Level" superClass="fr.ac6.managedbuild.gnu.c.compiler.option.optimization.level" useByScannerDiscovery="false" value="fr.ac6.managedbuild.gnu.c.optimization.level.most" valueType="enumerated"/>
+                <option defaultValue="gnu.c.debugging.level.none" id="gnu.c.compiler.option.debugging.level.kage-no-silhouette-secure-api" name="Debug Level" superClass="gnu.c.compiler.option.debugging.level" useByScannerDiscovery="false" value="gnu.c.debugging.level.default" valueType="enumerated"/>
+                <option id="gnu.c.compiler.option.preprocessor.def.symbols.kage-no-silhouette-secure-api" name="Defined symbols (-D)" superClass="gnu.c.compiler.option.preprocessor.def.symbols" useByScannerDiscovery="false" valueType="definedSymbols">
+                  <listOptionValue builtIn="false" value="USE_HAL_DRIVER"/>
+                  <listOptionValue builtIn="false" value="STM32L475xx"/>
+                  <listOptionValue builtIn="false" value="MQTTCLIENT_PLATFORM_HEADER=MQTTCMSIS.h"/>
+                  <listOptionValue builtIn="false" value="ENABLE_IOT_INFO"/>
+                  <listOptionValue builtIn="false" value="ENABLE_IOT_ERROR"/>
+                  <listOptionValue builtIn="false" value="SENSOR"/>
+                  <listOptionValue builtIn="false" value="RFU"/>
+                  <listOptionValue builtIn="false" value="USE_OFFLOAD_SSL"/>
+                  <listOptionValue builtIn="false" value="SECURE_API_MICRO_BENCHMARK"/>
+                </option>
+                <option id="gnu.c.compiler.option.include.paths.kage-no-silhouette-secure-api" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc}/../build/newlib-cygwin/install/arm-none-eabi/include&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/B-L475E-IOT01}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/Common}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/hts221}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/lis3mdl}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/lps22hb}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/lsm6dsl}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/vl53l0x}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/es_wifi}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/CMSIS/Include}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/CMSIS/Device/ST/STM32L4xx/Include}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/STM32L4xx_HAL_Driver/Inc}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/STM32L4xx_HAL_Driver/Inc/Legacy}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/config_files}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/aws/include}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/aws/include/private}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/aws/FreeRTOS/portable/GCC/ARM_CM4_MPU}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/jsmn}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mbedtls/include}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/pkcs11}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/tinycbor}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/beebs/include}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/silhouette_demo/include}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/st_code}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/common_demos/include}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code}&quot;"/>
+                </option>
+                <option id="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other.kage-no-silhouette-secure-api" name="Other flags" superClass="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other" useByScannerDiscovery="false" value="--target=arm-none-eabi -mexecute-only" valueType="string"/>
+                <option id="gnu.c.compiler.option.optimization.flags.kage-no-silhouette-secure-api" name="Other optimization flags" superClass="gnu.c.compiler.option.optimization.flags" useByScannerDiscovery="false" value="-ffreestanding -fomit-frame-pointer" valueType="string"/>
+                <option id="gnu.c.compiler.option.dialect.std.kage-no-silhouette-secure-api" name="Language standard" superClass="gnu.c.compiler.option.dialect.std" useByScannerDiscovery="false" value="gnu.c.compiler.dialect.default" valueType="enumerated"/>
+                <option id="gnu.c.compiler.option.misc.verbose.kage-no-silhouette-secure-api" name="Verbose (-v)" superClass="gnu.c.compiler.option.misc.verbose" useByScannerDiscovery="false" value="false" valueType="boolean"/>
+                <option id="gnu.c.compiler.option.include.files.kage-no-silhouette-secure-api" name="Include files (-include)" superClass="gnu.c.compiler.option.include.files" useByScannerDiscovery="false"/>
+                <inputType id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.c.kage-no-silhouette-secure-api" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.c"/>
+                <inputType id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.s.kage-no-silhouette-secure-api" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.s"/>
+              </tool>
+              <tool id="fr.ac6.managedbuild.tool.gnu.cross.cpp.compiler.kage-no-silhouette-secure-api" name="MCU G++ Compiler" superClass="fr.ac6.managedbuild.tool.gnu.cross.cpp.compiler">
+                <option id="fr.ac6.managedbuild.gnu.cpp.compiler.option.optimization.level.kage-no-silhouette-secure-api" name="Optimization Level" superClass="fr.ac6.managedbuild.gnu.cpp.compiler.option.optimization.level" useByScannerDiscovery="false" value="fr.ac6.managedbuild.gnu.cpp.optimization.level.most" valueType="enumerated"/>
+                <option defaultValue="gnu.cpp.compiler.debugging.level.none" id="gnu.cpp.compiler.option.debugging.level.kage-no-silhouette-secure-api" name="Debug Level" superClass="gnu.cpp.compiler.option.debugging.level" useByScannerDiscovery="false" valueType="enumerated"/>
+              </tool>
+              <tool command="${workspace_loc}/../build/llvm/bin/clang" id="fr.ac6.managedbuild.tool.gnu.cross.c.linker.kage-no-silhouette-secure-api" name="MCU GCC Linker" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.linker">
+                <option id="fr.ac6.managedbuild.tool.gnu.cross.c.linker.script.kage-no-silhouette-secure-api" name="Linker Script (-T)" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.linker.script" useByScannerDiscovery="false" value="${ProjDirPath}/STM32L475VGTx_FLASH_MPU.ld" valueType="string"/>
+                <option id="gnu.c.link.option.libs.kage-no-silhouette-secure-api" name="Libraries (-l)" superClass="gnu.c.link.option.libs" useByScannerDiscovery="false" valueType="libs">
+                  <listOptionValue builtIn="false" value="c"/>
+                  <listOptionValue builtIn="false" value="clang_rt.builtins-armhf"/>
+                </option>
+                <option id="gnu.c.link.option.ldflags.kage-no-silhouette-secure-api" name="Linker flags" superClass="gnu.c.link.option.ldflags" useByScannerDiscovery="false" value="--target=arm-none-eabi -fuse-ld=lld" valueType="string"/>
+                <option id="gnu.c.link.option.paths.kage-no-silhouette-secure-api" name="Library search path (-L)" superClass="gnu.c.link.option.paths" useByScannerDiscovery="false" valueType="libPaths">
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc}/../build/newlib-cygwin/install/arm-none-eabi/lib&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc}/../build/compiler-rt/install/lib/baremetal&quot;"/>
+                </option>
+                <option id="gnu.c.link.option.userobjs.kage-no-silhouette-secure-api" name="Other objects" superClass="gnu.c.link.option.userobjs" useByScannerDiscovery="false" valueType="userObjs">
+                </option>
+                <option id="fr.ac6.managedbuild.tool.gnu.cross.c.linker.gcsections.kage-no-silhouette-secure-api" name="Discard unused sections (-Wl,--gc-sections)" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.linker.gcsections" useByScannerDiscovery="false" value="true" valueType="boolean"/>
+                <inputType id="cdt.managedbuild.tool.gnu.c.linker.input.kage-no-silhouette-secure-api" superClass="cdt.managedbuild.tool.gnu.c.linker.input">
+                  <additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
+                  <additionalInput kind="additionalinput" paths="$(LIBS)"/>
+                </inputType>
+              </tool>
+              <tool id="fr.ac6.managedbuild.tool.gnu.cross.cpp.linker.kage-no-silhouette-secure-api" name="MCU G++ Linker" superClass="fr.ac6.managedbuild.tool.gnu.cross.cpp.linker"/>
+              <tool id="fr.ac6.managedbuild.tool.gnu.archiver.kage-no-silhouette-secure-api" name="MCU GCC Archiver" superClass="fr.ac6.managedbuild.tool.gnu.archiver"/>
+              <tool command="${workspace_loc}/../build/llvm/bin/clang" id="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.kage-no-silhouette-secure-api" name="MCU GCC Assembler" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release">
+                <option id="gnu.both.asm.option.include.paths.kage-no-silhouette-secure-api" name="Include paths (-I)" superClass="gnu.both.asm.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc}/../build/newlib-cygwin/install/arm-none-eabi/include&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/B-L475E-IOT01}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/Common}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/hts221}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/lis3mdl}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/lps22hb}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/lsm6dsl}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/vl53l0x}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/es_wifi}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/CMSIS/Include}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/CMSIS/Device/ST/STM32L4xx/Include}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/STM32L4xx_HAL_Driver/Inc}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/STM32L4xx_HAL_Driver/Inc/Legacy}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/config_files}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/aws/include}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/aws/include/private}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/aws/FreeRTOS/portable/GCC/ARM_CM4_MPU}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/jsmn}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mbedtls/include}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/pkcs11}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/tinycbor}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/beebs/include}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/silhouette_demo/include}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/st_code}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/common_demos/include}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code}&quot;"/>
+                </option>
+                <option id="gnu.both.asm.option.flags.kage-no-silhouette-secure-api" name="Assembler flags" superClass="gnu.both.asm.option.flags" useByScannerDiscovery="false" value="--target=arm-none-eabi -c" valueType="string"/>
+                <inputType id="cdt.managedbuild.tool.gnu.assembler.input.kage-no-silhouette-secure-api" superClass="cdt.managedbuild.tool.gnu.assembler.input"/>
+                <inputType id="fr.ac6.managedbuild.tool.gnu.cross.assembler.input.kage-no-silhouette-secure-api" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.input"/>
+              </tool>
+            </toolChain>
+          </folderInfo>
+          <folderInfo id="fr.ac6.managedbuild.config.gnu.cross.exe.release.kage-no-silhouette-secure-api.hal" name="/" resourcePath="lib/third_party/mcu_vendor/st/stm32l475_discovery">
+            <toolChain id="fr.ac6.managedbuild.toolchain.gnu.cross.exe.release.kage-no-silhouette-secure-api.hal" name="Ac6 STM32 MCU GCC" superClass="fr.ac6.managedbuild.toolchain.gnu.cross.exe.release.kage-no-silhouette-secure-api" unusedChildren="">
+              <tool id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.kage-no-silhouette-secure-api.hal" name="MCU GCC Compiler" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.kage-no-silhouette-secure-api">
+                <option id="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other.kage-no-silhouette-secure-api.hal" superClass="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other" value="--target=arm-none-eabi -mllvm -enable-arm-kage-privilege-promotion -mexecute-only" valueType="string"/>
+              </tool>
+              <tool id="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.kage-no-silhouette-secure-api.hal" name="MCU GCC Assembler" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.kage-no-silhouette-secure-api"/>
+            </toolChain>
+          </folderInfo>
+          <folderInfo id="fr.ac6.managedbuild.config.gnu.cross.exe.release.kage-no-silhouette-secure-api.hal-2" name="/" resourcePath="application_code/st_code">
+            <toolChain id="fr.ac6.managedbuild.toolchain.gnu.cross.exe.release.kage-no-silhouette-secure-api.hal-2" name="Ac6 STM32 MCU GCC" superClass="fr.ac6.managedbuild.toolchain.gnu.cross.exe.release.kage-no-silhouette-secure-api" unusedChildren="">
+              <tool id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.kage-no-silhouette-secure-api.hal-2" name="MCU GCC Compiler" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.kage-no-silhouette-secure-api">
+                <option id="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other.kage-no-silhouette-secure-api.hal-2" superClass="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other" value="--target=arm-none-eabi -mllvm -enable-arm-kage-privilege-promotion -mexecute-only" valueType="string"/>
+              </tool>
+              <tool id="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.kage-no-silhouette-secure-api.hal-2" name="MCU GCC Assembler" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.kage-no-silhouette-secure-api"/>
+            </toolChain>
+          </folderInfo>
+          <sourceEntries>
+          </sourceEntries>
+        </configuration>
+      </storageModule>
+      <storageModule moduleId="org.eclipse.cdt.core.externalSettings"/>
+    </cconfiguration>
+    <!-- Configuration of kage-no-silhouette-stream-buffer -->
+    <cconfiguration id="fr.ac6.managedbuild.config.gnu.cross.exe.release.kage-no-silhouette-stream-buffer">
+      <storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="fr.ac6.managedbuild.config.gnu.cross.exe.release.kage-no-silhouette-stream-buffer" moduleId="org.eclipse.cdt.core.settings" name="kage-no-silhouette-stream-buffer">
+        <externalSettings/>
+        <extensions>
+          <extension id="org.eclipse.cdt.core.ELF" point="org.eclipse.cdt.core.BinaryParser"/>
+          <extension id="org.eclipse.cdt.core.GASErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+          <extension id="org.eclipse.cdt.core.GmakeErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+          <extension id="org.eclipse.cdt.core.GLDErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+          <extension id="org.eclipse.cdt.core.CWDLocator" point="org.eclipse.cdt.core.ErrorParser"/>
+          <extension id="org.eclipse.cdt.core.GCCErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+        </extensions>
+      </storageModule>
+      <storageModule moduleId="cdtBuildSystem" version="4.0.0">
+        <configuration artifactExtension="elf" artifactName="${ConfigName}" buildArtefactType="org.eclipse.cdt.build.core.buildArtefactType.exe" buildProperties="org.eclipse.cdt.build.core.buildArtefactType=org.eclipse.cdt.build.core.buildArtefactType.exe,org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release" cleanCommand="rm -rf" description="" id="fr.ac6.managedbuild.config.gnu.cross.exe.release.kage-no-silhouette-stream-buffer" name="kage-no-silhouette-stream-buffer" parent="fr.ac6.managedbuild.config.gnu.cross.exe.release" postannouncebuildStep="Running code scanner, Generating binary, and Printing size information:" postbuildStep="&quot;${workspace_loc}/../scripts/code-scanner.py&quot; &quot;${BuildArtifactFileBaseName}.elf&quot; &amp;&amp; arm-none-eabi-objcopy -O binary &quot;${BuildArtifactFileBaseName}.elf&quot; &quot;${BuildArtifactFileBaseName}.bin&quot; &amp;&amp; arm-none-eabi-objcopy -O ihex &quot;${BuildArtifactFileBaseName}.elf&quot; &quot;${BuildArtifactFileBaseName}.hex&quot; &amp;&amp; arm-none-eabi-size &quot;${BuildArtifactFileName}&quot;">
+          <folderInfo id="fr.ac6.managedbuild.config.gnu.cross.exe.release.kage-no-silhouette-stream-buffer." name="/" resourcePath="">
+            <toolChain id="fr.ac6.managedbuild.toolchain.gnu.cross.exe.release.kage-no-silhouette-stream-buffer" name="Ac6 STM32 MCU GCC" superClass="fr.ac6.managedbuild.toolchain.gnu.cross.exe.release">
+              <option id="fr.ac6.managedbuild.option.gnu.cross.mcu.kage-no-silhouette-stream-buffer" name="Mcu" superClass="fr.ac6.managedbuild.option.gnu.cross.mcu" value="STM32L475VGTx" valueType="string"/>
+              <option id="fr.ac6.managedbuild.option.gnu.cross.fpu.kage-no-silhouette-stream-buffer" name="Floating point hardware" superClass="fr.ac6.managedbuild.option.gnu.cross.fpu" value="fr.ac6.managedbuild.option.gnu.cross.fpu.fpv4-sp-d16" valueType="enumerated"/>
+              <option id="fr.ac6.managedbuild.option.gnu.cross.floatabi.kage-no-silhouette-stream-buffer" name="Floating-point ABI" superClass="fr.ac6.managedbuild.option.gnu.cross.floatabi" value="fr.ac6.managedbuild.option.gnu.cross.floatabi.hard" valueType="enumerated"/>
+              <option id="fr.ac6.managedbuild.option.gnu.cross.board.kage-no-silhouette-stream-buffer" name="Board" superClass="fr.ac6.managedbuild.option.gnu.cross.board" value="STM32L475VG" valueType="string"/>
+              <option id="fr.ac6.managedbuild.option.gnu.cross.prefix.kage-no-silhouette-stream-buffer" name="Prefix" superClass="fr.ac6.managedbuild.option.gnu.cross.prefix" value="" valueType="string"/>
+              <targetPlatform archList="all" binaryParser="org.eclipse.cdt.core.ELF" id="fr.ac6.managedbuild.targetPlatform.gnu.cross.kage-no-silhouette-stream-buffer" isAbstract="false" osList="all" superClass="fr.ac6.managedbuild.targetPlatform.gnu.cross"/>
+              <builder buildPath="${workspace_loc:/microbenchmarks}/Release" id="fr.ac6.managedbuild.builder.gnu.cross.kage-no-silhouette-stream-buffer" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="Gnu Make Builder" parallelBuildOn="true" parallelizationNumber="optimal" superClass="fr.ac6.managedbuild.builder.gnu.cross"/>
+              <tool command="${workspace_loc}/../build/llvm/bin/clang" id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.kage-no-silhouette-stream-buffer" name="MCU GCC Compiler" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler">
+                <option id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.fdata.kage-no-silhouette-stream-buffer" name="Place the data in their own section (-fdata-sections)" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.fdata" useByScannerDiscovery="false" value="true" valueType="boolean"/>
+                <option id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.ffunction.kage-no-silhouette-stream-buffer" name="Place the function in their own section (-ffunction-sections)" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.ffunction" useByScannerDiscovery="false" value="true" valueType="boolean"/>
+                <option id="fr.ac6.managedbuild.gnu.c.compiler.option.optimization.level.kage-no-silhouette-stream-buffer" name="Optimization Level" superClass="fr.ac6.managedbuild.gnu.c.compiler.option.optimization.level" useByScannerDiscovery="false" value="fr.ac6.managedbuild.gnu.c.optimization.level.most" valueType="enumerated"/>
+                <option defaultValue="gnu.c.debugging.level.none" id="gnu.c.compiler.option.debugging.level.kage-no-silhouette-stream-buffer" name="Debug Level" superClass="gnu.c.compiler.option.debugging.level" useByScannerDiscovery="false" value="gnu.c.debugging.level.default" valueType="enumerated"/>
+                <option id="gnu.c.compiler.option.preprocessor.def.symbols.kage-no-silhouette-stream-buffer" name="Defined symbols (-D)" superClass="gnu.c.compiler.option.preprocessor.def.symbols" useByScannerDiscovery="false" valueType="definedSymbols">
+                  <listOptionValue builtIn="false" value="USE_HAL_DRIVER"/>
+                  <listOptionValue builtIn="false" value="STM32L475xx"/>
+                  <listOptionValue builtIn="false" value="MQTTCLIENT_PLATFORM_HEADER=MQTTCMSIS.h"/>
+                  <listOptionValue builtIn="false" value="ENABLE_IOT_INFO"/>
+                  <listOptionValue builtIn="false" value="ENABLE_IOT_ERROR"/>
+                  <listOptionValue builtIn="false" value="SENSOR"/>
+                  <listOptionValue builtIn="false" value="RFU"/>
+                  <listOptionValue builtIn="false" value="USE_OFFLOAD_SSL"/>
+                  <listOptionValue builtIn="false" value="STREAM_BUFFER_BENCHMARK"/>
+                </option>
+                <option id="gnu.c.compiler.option.include.paths.kage-no-silhouette-stream-buffer" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc}/../build/newlib-cygwin/install/arm-none-eabi/include&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/B-L475E-IOT01}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/Common}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/hts221}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/lis3mdl}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/lps22hb}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/lsm6dsl}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/vl53l0x}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/es_wifi}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/CMSIS/Include}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/CMSIS/Device/ST/STM32L4xx/Include}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/STM32L4xx_HAL_Driver/Inc}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/STM32L4xx_HAL_Driver/Inc/Legacy}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/config_files}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/aws/include}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/aws/include/private}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/aws/FreeRTOS/portable/GCC/ARM_CM4_MPU}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/jsmn}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mbedtls/include}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/pkcs11}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/tinycbor}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/beebs/include}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/silhouette_demo/include}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/st_code}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/common_demos/include}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code}&quot;"/>
+                </option>
+                <option id="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other.kage-no-silhouette-stream-buffer" name="Other flags" superClass="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other" useByScannerDiscovery="false" value="--target=arm-none-eabi -mexecute-only" valueType="string"/>
+                <option id="gnu.c.compiler.option.optimization.flags.kage-no-silhouette-stream-buffer" name="Other optimization flags" superClass="gnu.c.compiler.option.optimization.flags" useByScannerDiscovery="false" value="-ffreestanding -fomit-frame-pointer" valueType="string"/>
+                <option id="gnu.c.compiler.option.dialect.std.kage-no-silhouette-stream-buffer" name="Language standard" superClass="gnu.c.compiler.option.dialect.std" useByScannerDiscovery="false" value="gnu.c.compiler.dialect.default" valueType="enumerated"/>
+                <option id="gnu.c.compiler.option.misc.verbose.kage-no-silhouette-stream-buffer" name="Verbose (-v)" superClass="gnu.c.compiler.option.misc.verbose" useByScannerDiscovery="false" value="false" valueType="boolean"/>
+                <option id="gnu.c.compiler.option.include.files.kage-no-silhouette-stream-buffer" name="Include files (-include)" superClass="gnu.c.compiler.option.include.files" useByScannerDiscovery="false"/>
+                <inputType id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.c.kage-no-silhouette-stream-buffer" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.c"/>
+                <inputType id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.s.kage-no-silhouette-stream-buffer" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.s"/>
+              </tool>
+              <tool id="fr.ac6.managedbuild.tool.gnu.cross.cpp.compiler.kage-no-silhouette-stream-buffer" name="MCU G++ Compiler" superClass="fr.ac6.managedbuild.tool.gnu.cross.cpp.compiler">
+                <option id="fr.ac6.managedbuild.gnu.cpp.compiler.option.optimization.level.kage-no-silhouette-stream-buffer" name="Optimization Level" superClass="fr.ac6.managedbuild.gnu.cpp.compiler.option.optimization.level" useByScannerDiscovery="false" value="fr.ac6.managedbuild.gnu.cpp.optimization.level.most" valueType="enumerated"/>
+                <option defaultValue="gnu.cpp.compiler.debugging.level.none" id="gnu.cpp.compiler.option.debugging.level.kage-no-silhouette-stream-buffer" name="Debug Level" superClass="gnu.cpp.compiler.option.debugging.level" useByScannerDiscovery="false" valueType="enumerated"/>
+              </tool>
+              <tool command="${workspace_loc}/../build/llvm/bin/clang" id="fr.ac6.managedbuild.tool.gnu.cross.c.linker.kage-no-silhouette-stream-buffer" name="MCU GCC Linker" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.linker">
+                <option id="fr.ac6.managedbuild.tool.gnu.cross.c.linker.script.kage-no-silhouette-stream-buffer" name="Linker Script (-T)" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.linker.script" useByScannerDiscovery="false" value="${ProjDirPath}/STM32L475VGTx_FLASH_MPU.ld" valueType="string"/>
+                <option id="gnu.c.link.option.libs.kage-no-silhouette-stream-buffer" name="Libraries (-l)" superClass="gnu.c.link.option.libs" useByScannerDiscovery="false" valueType="libs">
+                  <listOptionValue builtIn="false" value="c"/>
+                  <listOptionValue builtIn="false" value="clang_rt.builtins-armhf"/>
+                </option>
+                <option id="gnu.c.link.option.ldflags.kage-no-silhouette-stream-buffer" name="Linker flags" superClass="gnu.c.link.option.ldflags" useByScannerDiscovery="false" value="--target=arm-none-eabi -fuse-ld=lld" valueType="string"/>
+                <option id="gnu.c.link.option.paths.kage-no-silhouette-stream-buffer" name="Library search path (-L)" superClass="gnu.c.link.option.paths" useByScannerDiscovery="false" valueType="libPaths">
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc}/../build/newlib-cygwin/install/arm-none-eabi/lib&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc}/../build/compiler-rt/install/lib/baremetal&quot;"/>
+                </option>
+                <option id="gnu.c.link.option.userobjs.kage-no-silhouette-stream-buffer" name="Other objects" superClass="gnu.c.link.option.userobjs" useByScannerDiscovery="false" valueType="userObjs">
+                </option>
+                <option id="fr.ac6.managedbuild.tool.gnu.cross.c.linker.gcsections.kage-no-silhouette-stream-buffer" name="Discard unused sections (-Wl,--gc-sections)" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.linker.gcsections" useByScannerDiscovery="false" value="true" valueType="boolean"/>
+                <inputType id="cdt.managedbuild.tool.gnu.c.linker.input.kage-no-silhouette-stream-buffer" superClass="cdt.managedbuild.tool.gnu.c.linker.input">
+                  <additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
+                  <additionalInput kind="additionalinput" paths="$(LIBS)"/>
+                </inputType>
+              </tool>
+              <tool id="fr.ac6.managedbuild.tool.gnu.cross.cpp.linker.kage-no-silhouette-stream-buffer" name="MCU G++ Linker" superClass="fr.ac6.managedbuild.tool.gnu.cross.cpp.linker"/>
+              <tool id="fr.ac6.managedbuild.tool.gnu.archiver.kage-no-silhouette-stream-buffer" name="MCU GCC Archiver" superClass="fr.ac6.managedbuild.tool.gnu.archiver"/>
+              <tool command="${workspace_loc}/../build/llvm/bin/clang" id="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.kage-no-silhouette-stream-buffer" name="MCU GCC Assembler" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release">
+                <option id="gnu.both.asm.option.include.paths.kage-no-silhouette-stream-buffer" name="Include paths (-I)" superClass="gnu.both.asm.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc}/../build/newlib-cygwin/install/arm-none-eabi/include&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/B-L475E-IOT01}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/Common}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/hts221}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/lis3mdl}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/lps22hb}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/lsm6dsl}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/vl53l0x}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/es_wifi}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/CMSIS/Include}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/CMSIS/Device/ST/STM32L4xx/Include}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/STM32L4xx_HAL_Driver/Inc}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/STM32L4xx_HAL_Driver/Inc/Legacy}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/config_files}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/aws/include}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/aws/include/private}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/aws/FreeRTOS/portable/GCC/ARM_CM4_MPU}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/jsmn}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mbedtls/include}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/pkcs11}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/tinycbor}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/beebs/include}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/silhouette_demo/include}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/st_code}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/common_demos/include}&quot;"/>
+                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code}&quot;"/>
+                </option>
+                <option id="gnu.both.asm.option.flags.kage-no-silhouette-stream-buffer" name="Assembler flags" superClass="gnu.both.asm.option.flags" useByScannerDiscovery="false" value="--target=arm-none-eabi -c" valueType="string"/>
+                <inputType id="cdt.managedbuild.tool.gnu.assembler.input.kage-no-silhouette-stream-buffer" superClass="cdt.managedbuild.tool.gnu.assembler.input"/>
+                <inputType id="fr.ac6.managedbuild.tool.gnu.cross.assembler.input.kage-no-silhouette-stream-buffer" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.input"/>
+              </tool>
+            </toolChain>
+          </folderInfo>
+          <folderInfo id="fr.ac6.managedbuild.config.gnu.cross.exe.release.kage-no-silhouette-stream-buffer.hal" name="/" resourcePath="lib/third_party/mcu_vendor/st/stm32l475_discovery">
+            <toolChain id="fr.ac6.managedbuild.toolchain.gnu.cross.exe.release.kage-no-silhouette-stream-buffer.hal" name="Ac6 STM32 MCU GCC" superClass="fr.ac6.managedbuild.toolchain.gnu.cross.exe.release.kage-no-silhouette-stream-buffer" unusedChildren="">
+              <tool id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.kage-no-silhouette-stream-buffer.hal" name="MCU GCC Compiler" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.kage-no-silhouette-stream-buffer">
+                <option id="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other.kage-no-silhouette-stream-buffer.hal" superClass="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other" value="--target=arm-none-eabi -mllvm -enable-arm-kage-privilege-promotion -mexecute-only" valueType="string"/>
+              </tool>
+              <tool id="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.kage-no-silhouette-stream-buffer.hal" name="MCU GCC Assembler" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.kage-no-silhouette-stream-buffer"/>
+            </toolChain>
+          </folderInfo>
+          <folderInfo id="fr.ac6.managedbuild.config.gnu.cross.exe.release.kage-no-silhouette-stream-buffer.hal-2" name="/" resourcePath="application_code/st_code">
+            <toolChain id="fr.ac6.managedbuild.toolchain.gnu.cross.exe.release.kage-no-silhouette-stream-buffer.hal-2" name="Ac6 STM32 MCU GCC" superClass="fr.ac6.managedbuild.toolchain.gnu.cross.exe.release.kage-no-silhouette-stream-buffer" unusedChildren="">
+              <tool id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.kage-no-silhouette-stream-buffer.hal-2" name="MCU GCC Compiler" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.kage-no-silhouette-stream-buffer">
+                <option id="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other.kage-no-silhouette-stream-buffer.hal-2" superClass="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other" value="--target=arm-none-eabi -mllvm -enable-arm-kage-privilege-promotion -mexecute-only" valueType="string"/>
+              </tool>
+              <tool id="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.kage-no-silhouette-stream-buffer.hal-2" name="MCU GCC Assembler" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.kage-no-silhouette-stream-buffer"/>
+            </toolChain>
+          </folderInfo>
+          <sourceEntries>
+          </sourceEntries>
+        </configuration>
+      </storageModule>
+      <storageModule moduleId="org.eclipse.cdt.core.externalSettings"/>
+    </cconfiguration>
   </storageModule>
   <storageModule moduleId="refreshScope" versionNumber="2">
     <configuration configurationName="kage-context-switch">
@@ -807,6 +1597,21 @@
       <resource resourceType="PROJECT" workspacePath="/microbenchmarks"/>
     </configuration>
     <configuration configurationName="kage-stream-buffer">
+      <resource resourceType="PROJECT" workspacePath="/microbenchmarks"/>
+    </configuration>
+    <configuration configurationName="kage-no-silhouette-context-switch">
+      <resource resourceType="PROJECT" workspacePath="/microbenchmarks"/>
+    </configuration>
+    <configuration configurationName="kage-no-silhouette-exception-dispatcher">
+      <resource resourceType="PROJECT" workspacePath="/microbenchmarks"/>
+    </configuration>
+    <configuration configurationName="kage-no-silhouette-queue">
+      <resource resourceType="PROJECT" workspacePath="/microbenchmarks"/>
+    </configuration>
+    <configuration configurationName="kage-no-silhouette-secure-api">
+      <resource resourceType="PROJECT" workspacePath="/microbenchmarks"/>
+    </configuration>
+    <configuration configurationName="kage-no-silhouette-stream-buffer">
       <resource resourceType="PROJECT" workspacePath="/microbenchmarks"/>
     </configuration>
   </storageModule>
@@ -825,6 +1630,21 @@
       <autodiscovery enabled="false" problemReportingEnabled="false" selectedProfileId=""/>
     </scannerConfigBuildInfo>
     <scannerConfigBuildInfo instanceId="fr.ac6.managedbuild.config.gnu.cross.exe.release.kage-stream-buffer;fr.ac6.managedbuild.config.gnu.cross.exe.release.kage-stream-buffer.;fr.ac6.managedbuild.tool.gnu.cross.c.compiler.kage-stream-buffer;fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.c.kage-stream-buffer">
+      <autodiscovery enabled="false" problemReportingEnabled="false" selectedProfileId=""/>
+    </scannerConfigBuildInfo>
+    <scannerConfigBuildInfo instanceId="fr.ac6.managedbuild.config.gnu.cross.exe.release.kage-no-silhouette-context-switch;fr.ac6.managedbuild.config.gnu.cross.exe.release.kage-no-silhouette-context-switch.;fr.ac6.managedbuild.tool.gnu.cross.c.compiler.kage-no-silhouette-context-switch;fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.c.kage-no-silhouette-context-switch">
+      <autodiscovery enabled="false" problemReportingEnabled="false" selectedProfileId=""/>
+    </scannerConfigBuildInfo>
+    <scannerConfigBuildInfo instanceId="fr.ac6.managedbuild.config.gnu.cross.exe.release.kage-no-silhouette-exception-dispatcher;fr.ac6.managedbuild.config.gnu.cross.exe.release.kage-no-silhouette-exception-dispatcher.;fr.ac6.managedbuild.tool.gnu.cross.c.compiler.kage-no-silhouette-exception-dispatcher;fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.c.kage-no-silhouette-exception-dispatcher">
+      <autodiscovery enabled="false" problemReportingEnabled="false" selectedProfileId=""/>
+    </scannerConfigBuildInfo>
+    <scannerConfigBuildInfo instanceId="fr.ac6.managedbuild.config.gnu.cross.exe.release.kage-no-silhouette-queue;fr.ac6.managedbuild.config.gnu.cross.exe.release.kage-no-silhouette-queue.;fr.ac6.managedbuild.tool.gnu.cross.c.compiler.kage-no-silhouette-queue;fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.c.kage-no-silhouette-queue">
+      <autodiscovery enabled="false" problemReportingEnabled="false" selectedProfileId=""/>
+    </scannerConfigBuildInfo>
+    <scannerConfigBuildInfo instanceId="fr.ac6.managedbuild.config.gnu.cross.exe.release.kage-no-silhouette-secure-api;fr.ac6.managedbuild.config.gnu.cross.exe.release.kage-no-silhouette-secure-api.;fr.ac6.managedbuild.tool.gnu.cross.c.compiler.kage-no-silhouette-secure-api;fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.c.kage-no-silhouette-secure-api">
+      <autodiscovery enabled="false" problemReportingEnabled="false" selectedProfileId=""/>
+    </scannerConfigBuildInfo>
+    <scannerConfigBuildInfo instanceId="fr.ac6.managedbuild.config.gnu.cross.exe.release.kage-no-silhouette-stream-buffer;fr.ac6.managedbuild.config.gnu.cross.exe.release.kage-no-silhouette-stream-buffer.;fr.ac6.managedbuild.tool.gnu.cross.c.compiler.kage-no-silhouette-stream-buffer;fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.c.kage-no-silhouette-stream-buffer">
       <autodiscovery enabled="false" problemReportingEnabled="false" selectedProfileId=""/>
     </scannerConfigBuildInfo>
   </storageModule>

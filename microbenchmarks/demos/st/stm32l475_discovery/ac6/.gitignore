@@ -11,3 +11,8 @@
 # Ignore run configurations except one
 *.cfg
 !STM32L475VG.cfg
+/kage-no-silhouette-context-switch/
+/kage-no-silhouette-exception-dispatcher/
+/kage-no-silhouette-queue/
+/kage-no-silhouette-stream-buffer/
+/kage-no-silhouette-secure-api/
