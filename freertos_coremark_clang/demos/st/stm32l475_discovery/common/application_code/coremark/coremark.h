@@ -181,6 +181,3 @@ ee_u32 core_init_matrix(ee_u32      blksize,
                         ee_s32      seed,
                         mat_params *p);
 ee_u16 core_bench_matrix(mat_params *p, ee_s16 seed, ee_u16 crc);
-
-/* renamed main function for FreeRTOS */
-MAIN_RETURN_TYPE coremark_main(void);

@@ -140,7 +140,7 @@ static void prvInitializeHeap( void ) PRIVILEGED_FUNCTION;
 /**
  * @brief Application runtime entry point.
  */
-int main( void ) PRIVILEGED_FUNCTION
+int os_main( void ) PRIVILEGED_FUNCTION
 {
     /* Perform any hardware initialization that does not require the RTOS to be
      * running.  */
@@ -174,7 +174,7 @@ void vApplicationDaemonTaskStartupHook( void )
 	printMPUConfig(6);
 	printMPUConfig(7);
 #endif
-	coremark_main();
+	main();
 #ifdef MICRO_BENCHMARK
 extern uint32_t ulCycleSpill;
 extern uint32_t ulCycleRestore;

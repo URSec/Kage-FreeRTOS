@@ -136,7 +136,7 @@ static void prvInitializeHeap( void );
 /**
  * @brief Application runtime entry point.
  */
-int main( void )
+int os_main( void )
 {
     /* Perform any hardware initialization that does not require the RTOS to be
      * running.  */
@@ -158,7 +158,7 @@ int main( void )
 
 void vApplicationDaemonTaskStartupHook( void )
 {
-	coremark_main();
+	main();
 //    WIFIReturnCode_t xWifiStatus;
 //
 //    /* Turn on the WiFi before key provisioning. This is needed because
