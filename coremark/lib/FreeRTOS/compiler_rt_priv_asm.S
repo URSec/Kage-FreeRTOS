@@ -192,7 +192,7 @@
 
         .syntax unified
         .p2align 2
-	.section privileged_functions,"ax",%progbits
+	.section privileged_functions.__aeabi_uldivmodPriv,"ax",%progbits
 DEFINE_COMPILERRT_FUNCTION(__aeabi_uldivmodPriv)
         push	{r6, lr}
         sub	sp, sp, #16

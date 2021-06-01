@@ -8,7 +8,7 @@
  */
 
 	.macro def_fn f p2align=0
-	.section privileged_functions,"ax",%progbits
+	.section privileged_functions.\f,"ax",%progbits
 	.p2align \p2align
 	.global \f
 	.type \f, %function

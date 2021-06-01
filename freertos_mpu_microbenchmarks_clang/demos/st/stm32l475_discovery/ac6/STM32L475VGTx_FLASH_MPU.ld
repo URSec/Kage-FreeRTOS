@@ -74,6 +74,7 @@ SECTIONS
   {
   	KEEP(*(.isr_vector))
   	*(privileged_functions)
+  	*(privileged_functions.*)
   } > FLASH
   
   freertos_system_calls :
@@ -166,6 +167,7 @@ SECTIONS
   	__privileged_data_start__ = .;
 	_sdata = .;        /* create a global symbol at data start */
   	*(privileged_data);
+  	*(privileged_data.*);
   	. = ALIGN(0x20);
   	__privileged_data_end__ = .;
   } > RAM2 AT>FLASH
