@@ -646,6 +646,30 @@
             "ldr    r2, %5                      \n\t"   \
             "ldr    r3, %6                      \n\t"
 
+#ifdef SILHOUETTE
+
+#define MULADDC_CORE                                    \
+            "ldr    r4, [r0], #4                \n\t"   \
+            "mov    r5, #0                      \n\t"   \
+            "ldr    r6, [r1]                    \n\t"   \
+            "umlal  r2, r5, r3, r4              \n\t"   \
+            "adds   r7, r6, r2                  \n\t"   \
+            "adc    r2, r5, #0                  \n\t"   \
+            "strt   r7, [r1]                    \n\t"   \
+            "add    r1, r1, #4                  \n\t"
+
+#define MULADDC_STOP                                    \
+            "strt   r2, %0                      \n\t"   \
+            "strt   r1, %1                      \n\t"   \
+            "strt   r0, %2                      \n\t"   \
+         : "=m" (c),  "=m" (d), "=m" (s)        \
+         : "m" (s), "m" (d), "m" (c), "m" (b)   \
+         : "r0", "r1", "r2", "r3", "r4", "r5",  \
+           "r6", "r7", "cc"                     \
+         );
+
+#else /* ! SILHOUETTE */
+
 #define MULADDC_CORE                                    \
             "ldr    r4, [r0], #4                \n\t"   \
             "mov    r5, #0                      \n\t"   \
@@ -664,6 +688,8 @@
          : "r0", "r1", "r2", "r3", "r4", "r5",  \
            "r6", "r7", "cc"                     \
          );
+
+#endif /* SILHOUETTE */
 
 #endif /* Thumb */
 
