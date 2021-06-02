@@ -961,7 +961,7 @@ __attribute__(( weak )) void vPortSetupTimerInterrupt( void )
 /*-----------------------------------------------------------*/
 
 /* This is a naked function. */
-static void vPortEnableVFP( void )
+static void vPortEnableVFP( void ) PRIVILEGED_FUNCTION
 {
 	__asm volatile
 	(
