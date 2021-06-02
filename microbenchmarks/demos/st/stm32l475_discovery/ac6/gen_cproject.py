@@ -199,6 +199,9 @@ programs = {
 #
 configurations = {
     'kage': {
+        'defines': [
+            'SILHOUETTE',
+        ],
         'cflags': [
             '-mexecute-only',
             '-mllvm -enable-arm-silhouette-shadowstack',

@@ -40,6 +40,7 @@
                   <listOptionValue builtIn="false" value="SENSOR"/>
                   <listOptionValue builtIn="false" value="RFU"/>
                   <listOptionValue builtIn="false" value="USE_OFFLOAD_SSL"/>
+                  <listOptionValue builtIn="false" value="SILHOUETTE"/>
                 </option>
                 <option id="gnu.c.compiler.option.include.paths.kage-coremark" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
                   <listOptionValue builtIn="false" value="&quot;${workspace_loc}/../build/newlib-cygwin/install/arm-none-eabi/include&quot;"/>

@@ -40,6 +40,7 @@
                   <listOptionValue builtIn="false" value="SENSOR"/>
                   <listOptionValue builtIn="false" value="RFU"/>
                   <listOptionValue builtIn="false" value="USE_OFFLOAD_SSL"/>
+                  <listOptionValue builtIn="false" value="SILHOUETTE"/>
                   <listOptionValue builtIn="false" value="CONTEXT_SWITCH_MICRO_BENCHMARK"/>
                 </option>
                 <option id="gnu.c.compiler.option.include.paths.kage-context-switch" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
@@ -198,6 +199,7 @@
                   <listOptionValue builtIn="false" value="SENSOR"/>
                   <listOptionValue builtIn="false" value="RFU"/>
                   <listOptionValue builtIn="false" value="USE_OFFLOAD_SSL"/>
+                  <listOptionValue builtIn="false" value="SILHOUETTE"/>
                   <listOptionValue builtIn="false" value="EXCEPTION_NEW_MICRO_BENCHMARK"/>
                 </option>
                 <option id="gnu.c.compiler.option.include.paths.kage-exception-dispatcher" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
@@ -356,6 +358,7 @@
                   <listOptionValue builtIn="false" value="SENSOR"/>
                   <listOptionValue builtIn="false" value="RFU"/>
                   <listOptionValue builtIn="false" value="USE_OFFLOAD_SSL"/>
+                  <listOptionValue builtIn="false" value="SILHOUETTE"/>
                   <listOptionValue builtIn="false" value="QUEUE_BENCHMARK"/>
                 </option>
                 <option id="gnu.c.compiler.option.include.paths.kage-queue" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
@@ -514,6 +517,7 @@
                   <listOptionValue builtIn="false" value="SENSOR"/>
                   <listOptionValue builtIn="false" value="RFU"/>
                   <listOptionValue builtIn="false" value="USE_OFFLOAD_SSL"/>
+                  <listOptionValue builtIn="false" value="SILHOUETTE"/>
                   <listOptionValue builtIn="false" value="SECURE_API_MICRO_BENCHMARK"/>
                 </option>
                 <option id="gnu.c.compiler.option.include.paths.kage-secure-api" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
@@ -672,6 +676,7 @@
                   <listOptionValue builtIn="false" value="SENSOR"/>
                   <listOptionValue builtIn="false" value="RFU"/>
                   <listOptionValue builtIn="false" value="USE_OFFLOAD_SSL"/>
+                  <listOptionValue builtIn="false" value="SILHOUETTE"/>
                   <listOptionValue builtIn="false" value="STREAM_BUFFER_BENCHMARK"/>
                 </option>
                 <option id="gnu.c.compiler.option.include.paths.kage-stream-buffer" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
