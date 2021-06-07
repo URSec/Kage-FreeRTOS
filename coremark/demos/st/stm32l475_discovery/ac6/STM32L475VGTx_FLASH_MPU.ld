@@ -213,10 +213,10 @@ SECTIONS
 	 */
   task_stack :
   {
-  	. = ALIGN(4096);
+  	. = ALIGN(8192);
   	__task_stack_start__ = .;
   	*(task_stack);
-  	. = ALIGN(4096);
+  	. = ALIGN(8192);
   	__task_stack_end__ = .;
   	
   	/* Silhouette: MPU alignment padding: 
@@ -251,6 +251,7 @@ SECTIONS
   
   kernel_stack :
   {
+  	. = ALIGN(8192);
   	__kernel_stack_start__ = .;
   	. = . + _Stack_Size;
   	__kernel_stack_end__ = .;

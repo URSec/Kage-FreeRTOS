@@ -723,6 +723,17 @@ void HardFault_Handler( void ) PRIVILEGED_FUNCTION
 					"	ldr r3, [r2]					\n"
 					"	add r3, r3, #1					\n"
 					"	str r3, [r2]					\n"
+					// Check for stack overflow
+					// r2 temporarily used here
+					"	and r2, r0, #4096				\n"
+					"	teq r2, #0						\n"
+					// If stack overflow is detected, manually trigger
+					// a HardFault by writing garbage data to
+					// System Control Register using strt
+					"	ittt ne							\n"
+					"	movne r2, #60888				\n"
+					"	movtne r2, #57344				\n"
+					"	strtne r3, [r2]					\n"
 #ifndef KAGE_INVERT
 					// Copy hardware-saved processor state to r0 + offset
 					"	add r2, r0, #4096		\n"

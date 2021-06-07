@@ -45,6 +45,10 @@ task.h is included from an application file. */
 #include "stm32l4xx_ll_system.h"
 #endif
 
+#ifdef DISABLE_CACHE
+#include "stm32l4xx_ll_system.h"
+#endif
+
 /* Kage Silhouette: Include privileged memset */
 #include "newlib_priv.h"
 
