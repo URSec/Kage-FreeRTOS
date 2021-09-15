@@ -702,10 +702,17 @@ void HardFault_Handler( void ) PRIVILEGED_FUNCTION
 					// r2: shadow stack of r0
 					// r3: temp register to hold values
 
+					// Disable all interrupts first
+					"	cpsid i							\n"
+					"	isb								\n"
+					"	dsb								\n"
 					// Set priority to highest to disable interrupt preemption
 					"	mrs r1, basepri					\n"
 					"	mov r0, %1						\n"
 					"	msr basepri, r0					\n"
+					// Enable all interrupts (with basepri set, only trusted
+					// exceptions can preempt)
+					"	cpsie i							\n"
 					"	isb								\n"
 					"	dsb								\n"
 				#ifndef USE_PROCESS_STACK	/* Code should not be required if a main() is using the process stack. */
@@ -716,7 +723,7 @@ void HardFault_Handler( void ) PRIVILEGED_FUNCTION
 				#else
 					"	mrs r0, psp						\n"
 				#endif
-					"	isb								\n"
+//					"	isb								\n"
 					// Increment the nested untrusted exception counter
 					// r2 and r3 temporarily used here to hold counter
 					"	ldr r2, numNested				\n"
@@ -813,8 +820,8 @@ void HardFault_Handler( void ) PRIVILEGED_FUNCTION
 					"	str r2, [r0]					\n"
 					// Reset basepri
 					"	msr basepri, r1					\n"
-					"	isb								\n"
-					"	dsb								\n"
+//					"	isb								\n"
+//					"	dsb								\n"
 					// Clear r0-r3 before calling C function
 					"	mov r0, #0						\n"
 					"	mov r1, #0						\n"
@@ -823,9 +830,13 @@ void HardFault_Handler( void ) PRIVILEGED_FUNCTION
 					// Call the C handler function
 					"	bl %0							\n"
 					// Set priority to highest to disable interrupt preemption
+					"	cpsid i							\n"
+					"	isb								\n"
+					"	dsb								\n"
 					"	mrs r1, basepri					\n"
 					"	mov r0, %1						\n"
 					"	msr basepri, r0					\n"
+					"	cpsie i							\n"
 					"	isb								\n"
 					"	dsb								\n"
 					// Decrement the nested untrusted exception counter
@@ -918,8 +929,8 @@ void HardFault_Handler( void ) PRIVILEGED_FUNCTION
 #endif
 					// Reset basepri
 					"	msr basepri, r1					\n"
-					"	isb								\n"
-					"	dsb								\n"
+//					"	isb								\n"
+//					"	dsb								\n"
 					// Exception return
 					"	bx r14							\n"
 					// Reference of the nested handler counter
