@@ -1,183 +1,1025 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<?fileVersion 4.0.0?>
-<cproject storage_type_id="org.eclipse.cdt.core.XmlProjectDescriptionStorage">
-  <storageModule moduleId="org.eclipse.cdt.core.settings">
-    <!-- Configuration of kage-coremark -->
-    <cconfiguration id="fr.ac6.managedbuild.config.gnu.cross.exe.release.kage-coremark">
-      <storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="fr.ac6.managedbuild.config.gnu.cross.exe.release.kage-coremark" moduleId="org.eclipse.cdt.core.settings" name="kage-coremark">
-        <externalSettings/>
-        <extensions>
-          <extension id="org.eclipse.cdt.core.ELF" point="org.eclipse.cdt.core.BinaryParser"/>
-          <extension id="org.eclipse.cdt.core.GASErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
-          <extension id="org.eclipse.cdt.core.GmakeErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
-          <extension id="org.eclipse.cdt.core.GLDErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
-          <extension id="org.eclipse.cdt.core.CWDLocator" point="org.eclipse.cdt.core.ErrorParser"/>
-          <extension id="org.eclipse.cdt.core.GCCErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
-        </extensions>
-      </storageModule>
-      <storageModule moduleId="cdtBuildSystem" version="4.0.0">
-        <configuration artifactExtension="elf" artifactName="${ConfigName}" buildArtefactType="org.eclipse.cdt.build.core.buildArtefactType.exe" buildProperties="org.eclipse.cdt.build.core.buildArtefactType=org.eclipse.cdt.build.core.buildArtefactType.exe,org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release" cleanCommand="rm -rf" description="" id="fr.ac6.managedbuild.config.gnu.cross.exe.release.kage-coremark" name="kage-coremark" parent="fr.ac6.managedbuild.config.gnu.cross.exe.release" postannouncebuildStep="Running code scanner, Generating binary, and Printing size information:" postbuildStep="&quot;${workspace_loc}/../scripts/code-scanner.py&quot; &quot;${BuildArtifactFileBaseName}.elf&quot; &amp;&amp; arm-none-eabi-objcopy -O binary &quot;${BuildArtifactFileBaseName}.elf&quot; &quot;${BuildArtifactFileBaseName}.bin&quot; &amp;&amp; arm-none-eabi-objcopy -O ihex &quot;${BuildArtifactFileBaseName}.elf&quot; &quot;${BuildArtifactFileBaseName}.hex&quot; &amp;&amp; arm-none-eabi-size &quot;${BuildArtifactFileName}&quot;">
-          <folderInfo id="fr.ac6.managedbuild.config.gnu.cross.exe.release.kage-coremark." name="/" resourcePath="">
-            <toolChain id="fr.ac6.managedbuild.toolchain.gnu.cross.exe.release.kage-coremark" name="Ac6 STM32 MCU GCC" superClass="fr.ac6.managedbuild.toolchain.gnu.cross.exe.release">
-              <option id="fr.ac6.managedbuild.option.gnu.cross.mcu.kage-coremark" name="Mcu" superClass="fr.ac6.managedbuild.option.gnu.cross.mcu" value="STM32L475VGTx" valueType="string"/>
-              <option id="fr.ac6.managedbuild.option.gnu.cross.fpu.kage-coremark" name="Floating point hardware" superClass="fr.ac6.managedbuild.option.gnu.cross.fpu" value="fr.ac6.managedbuild.option.gnu.cross.fpu.fpv4-sp-d16" valueType="enumerated"/>
-              <option id="fr.ac6.managedbuild.option.gnu.cross.floatabi.kage-coremark" name="Floating-point ABI" superClass="fr.ac6.managedbuild.option.gnu.cross.floatabi" value="fr.ac6.managedbuild.option.gnu.cross.floatabi.hard" valueType="enumerated"/>
-              <option id="fr.ac6.managedbuild.option.gnu.cross.board.kage-coremark" name="Board" superClass="fr.ac6.managedbuild.option.gnu.cross.board" value="STM32L475VG" valueType="string"/>
-              <option id="fr.ac6.managedbuild.option.gnu.cross.prefix.kage-coremark" name="Prefix" superClass="fr.ac6.managedbuild.option.gnu.cross.prefix" value="" valueType="string"/>
-              <targetPlatform archList="all" binaryParser="org.eclipse.cdt.core.ELF" id="fr.ac6.managedbuild.targetPlatform.gnu.cross.kage-coremark" isAbstract="false" osList="all" superClass="fr.ac6.managedbuild.targetPlatform.gnu.cross"/>
-              <builder buildPath="${workspace_loc:/coremark}/Release" id="fr.ac6.managedbuild.builder.gnu.cross.kage-coremark" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="Gnu Make Builder" parallelBuildOn="true" parallelizationNumber="optimal" superClass="fr.ac6.managedbuild.builder.gnu.cross"/>
-              <tool command="${workspace_loc}/../build/llvm/bin/clang" id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.kage-coremark" name="MCU GCC Compiler" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler">
-                <option id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.fdata.kage-coremark" name="Place the data in their own section (-fdata-sections)" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.fdata" useByScannerDiscovery="false" value="true" valueType="boolean"/>
-                <option id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.ffunction.kage-coremark" name="Place the function in their own section (-ffunction-sections)" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.ffunction" useByScannerDiscovery="false" value="true" valueType="boolean"/>
-                <option id="fr.ac6.managedbuild.gnu.c.compiler.option.optimization.level.kage-coremark" name="Optimization Level" superClass="fr.ac6.managedbuild.gnu.c.compiler.option.optimization.level" useByScannerDiscovery="false" value="fr.ac6.managedbuild.gnu.c.optimization.level.most" valueType="enumerated"/>
-                <option defaultValue="gnu.c.debugging.level.none" id="gnu.c.compiler.option.debugging.level.kage-coremark" name="Debug Level" superClass="gnu.c.compiler.option.debugging.level" useByScannerDiscovery="false" value="gnu.c.debugging.level.default" valueType="enumerated"/>
-                <option id="gnu.c.compiler.option.preprocessor.def.symbols.kage-coremark" name="Defined symbols (-D)" superClass="gnu.c.compiler.option.preprocessor.def.symbols" useByScannerDiscovery="false" valueType="definedSymbols">
-                  <listOptionValue builtIn="false" value="USE_HAL_DRIVER"/>
-                  <listOptionValue builtIn="false" value="STM32L475xx"/>
-                  <listOptionValue builtIn="false" value="MQTTCLIENT_PLATFORM_HEADER=MQTTCMSIS.h"/>
-                  <listOptionValue builtIn="false" value="ENABLE_IOT_INFO"/>
-                  <listOptionValue builtIn="false" value="ENABLE_IOT_ERROR"/>
-                  <listOptionValue builtIn="false" value="SENSOR"/>
-                  <listOptionValue builtIn="false" value="RFU"/>
-                  <listOptionValue builtIn="false" value="USE_OFFLOAD_SSL"/>
-                  <listOptionValue builtIn="false" value="SILHOUETTE"/>
-                </option>
-                <option id="gnu.c.compiler.option.include.paths.kage-coremark" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
-                  <listOptionValue builtIn="false" value="&quot;${workspace_loc}/../build/newlib-cygwin/install/arm-none-eabi/include&quot;"/>
-                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/B-L475E-IOT01}&quot;"/>
-                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/Common}&quot;"/>
-                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/hts221}&quot;"/>
-                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/lis3mdl}&quot;"/>
-                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/lps22hb}&quot;"/>
-                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/lsm6dsl}&quot;"/>
-                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/vl53l0x}&quot;"/>
-                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/es_wifi}&quot;"/>
-                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/CMSIS/Include}&quot;"/>
-                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/CMSIS/Device/ST/STM32L4xx/Include}&quot;"/>
-                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/STM32L4xx_HAL_Driver/Inc}&quot;"/>
-                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/STM32L4xx_HAL_Driver/Inc/Legacy}&quot;"/>
-                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/config_files}&quot;"/>
-                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/aws/include}&quot;"/>
-                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/aws/include/private}&quot;"/>
-                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/aws/FreeRTOS/portable/GCC/ARM_CM4_MPU}&quot;"/>
-                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/jsmn}&quot;"/>
-                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mbedtls/include}&quot;"/>
-                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/pkcs11}&quot;"/>
-                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/tinycbor}&quot;"/>
-                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/coremark}&quot;"/>
-                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/beebs/include}&quot;"/>
-                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/silhouette_demo/include}&quot;"/>
-                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/st_code}&quot;"/>
-                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/common_demos/include}&quot;"/>
-                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code}&quot;"/>
-                </option>
-                <option id="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other.kage-coremark" name="Other flags" superClass="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other" useByScannerDiscovery="false" value="--target=arm-none-eabi -mexecute-only -mllvm -enable-arm-silhouette-shadowstack -mllvm -enable-arm-silhouette-cfi -mllvm -enable-arm-silhouette-str2strt" valueType="string"/>
-                <option id="gnu.c.compiler.option.optimization.flags.kage-coremark" name="Other optimization flags" superClass="gnu.c.compiler.option.optimization.flags" useByScannerDiscovery="false" value="-ffreestanding -fomit-frame-pointer" valueType="string"/>
-                <option id="gnu.c.compiler.option.dialect.std.kage-coremark" name="Language standard" superClass="gnu.c.compiler.option.dialect.std" useByScannerDiscovery="false" value="gnu.c.compiler.dialect.default" valueType="enumerated"/>
-                <option id="gnu.c.compiler.option.misc.verbose.kage-coremark" name="Verbose (-v)" superClass="gnu.c.compiler.option.misc.verbose" useByScannerDiscovery="false" value="false" valueType="boolean"/>
-                <option id="gnu.c.compiler.option.include.files.kage-coremark" name="Include files (-include)" superClass="gnu.c.compiler.option.include.files" useByScannerDiscovery="false"/>
-                <inputType id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.c.kage-coremark" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.c"/>
-                <inputType id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.s.kage-coremark" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.s"/>
-              </tool>
-              <tool id="fr.ac6.managedbuild.tool.gnu.cross.cpp.compiler.kage-coremark" name="MCU G++ Compiler" superClass="fr.ac6.managedbuild.tool.gnu.cross.cpp.compiler">
-                <option id="fr.ac6.managedbuild.gnu.cpp.compiler.option.optimization.level.kage-coremark" name="Optimization Level" superClass="fr.ac6.managedbuild.gnu.cpp.compiler.option.optimization.level" useByScannerDiscovery="false" value="fr.ac6.managedbuild.gnu.cpp.optimization.level.most" valueType="enumerated"/>
-                <option defaultValue="gnu.cpp.compiler.debugging.level.none" id="gnu.cpp.compiler.option.debugging.level.kage-coremark" name="Debug Level" superClass="gnu.cpp.compiler.option.debugging.level" useByScannerDiscovery="false" valueType="enumerated"/>
-              </tool>
-              <tool command="${workspace_loc}/../build/llvm/bin/clang" id="fr.ac6.managedbuild.tool.gnu.cross.c.linker.kage-coremark" name="MCU GCC Linker" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.linker">
-                <option id="fr.ac6.managedbuild.tool.gnu.cross.c.linker.script.kage-coremark" name="Linker Script (-T)" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.linker.script" useByScannerDiscovery="false" value="${ProjDirPath}/STM32L475VGTx_FLASH_MPU.ld" valueType="string"/>
-                <option id="gnu.c.link.option.libs.kage-coremark" name="Libraries (-l)" superClass="gnu.c.link.option.libs" useByScannerDiscovery="false" valueType="libs">
-                  <listOptionValue builtIn="false" value="c"/>
-                  <listOptionValue builtIn="false" value="clang_rt.builtins-armhf"/>
-                </option>
-                <option id="gnu.c.link.option.ldflags.kage-coremark" name="Linker flags" superClass="gnu.c.link.option.ldflags" useByScannerDiscovery="false" value="--target=arm-none-eabi -fuse-ld=lld" valueType="string"/>
-                <option id="gnu.c.link.option.paths.kage-coremark" name="Library search path (-L)" superClass="gnu.c.link.option.paths" useByScannerDiscovery="false" valueType="libPaths">
-                  <listOptionValue builtIn="false" value="&quot;${workspace_loc}/../build/newlib-cygwin/install/arm-none-eabi/lib&quot;"/>
-                  <listOptionValue builtIn="false" value="&quot;${workspace_loc}/../build/compiler-rt/install/lib/baremetal&quot;"/>
-                </option>
-                <option id="gnu.c.link.option.userobjs.kage-coremark" name="Other objects" superClass="gnu.c.link.option.userobjs" useByScannerDiscovery="false" valueType="userObjs">
-                </option>
-                <option id="fr.ac6.managedbuild.tool.gnu.cross.c.linker.gcsections.kage-coremark" name="Discard unused sections (-Wl,--gc-sections)" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.linker.gcsections" useByScannerDiscovery="false" value="true" valueType="boolean"/>
-                <inputType id="cdt.managedbuild.tool.gnu.c.linker.input.kage-coremark" superClass="cdt.managedbuild.tool.gnu.c.linker.input">
-                  <additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
-                  <additionalInput kind="additionalinput" paths="$(LIBS)"/>
-                </inputType>
-              </tool>
-              <tool id="fr.ac6.managedbuild.tool.gnu.cross.cpp.linker.kage-coremark" name="MCU G++ Linker" superClass="fr.ac6.managedbuild.tool.gnu.cross.cpp.linker"/>
-              <tool id="fr.ac6.managedbuild.tool.gnu.archiver.kage-coremark" name="MCU GCC Archiver" superClass="fr.ac6.managedbuild.tool.gnu.archiver"/>
-              <tool command="${workspace_loc}/../build/llvm/bin/clang" id="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.kage-coremark" name="MCU GCC Assembler" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release">
-                <option id="gnu.both.asm.option.include.paths.kage-coremark" name="Include paths (-I)" superClass="gnu.both.asm.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
-                  <listOptionValue builtIn="false" value="&quot;${workspace_loc}/../build/newlib-cygwin/install/arm-none-eabi/include&quot;"/>
-                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/B-L475E-IOT01}&quot;"/>
-                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/Common}&quot;"/>
-                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/hts221}&quot;"/>
-                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/lis3mdl}&quot;"/>
-                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/lps22hb}&quot;"/>
-                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/lsm6dsl}&quot;"/>
-                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/vl53l0x}&quot;"/>
-                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/es_wifi}&quot;"/>
-                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/CMSIS/Include}&quot;"/>
-                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/CMSIS/Device/ST/STM32L4xx/Include}&quot;"/>
-                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/STM32L4xx_HAL_Driver/Inc}&quot;"/>
-                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/STM32L4xx_HAL_Driver/Inc/Legacy}&quot;"/>
-                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/config_files}&quot;"/>
-                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/aws/include}&quot;"/>
-                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/aws/include/private}&quot;"/>
-                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/aws/FreeRTOS/portable/GCC/ARM_CM4_MPU}&quot;"/>
-                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/jsmn}&quot;"/>
-                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mbedtls/include}&quot;"/>
-                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/pkcs11}&quot;"/>
-                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/tinycbor}&quot;"/>
-                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/coremark}&quot;"/>
-                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/beebs/include}&quot;"/>
-                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/silhouette_demo/include}&quot;"/>
-                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/st_code}&quot;"/>
-                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/common_demos/include}&quot;"/>
-                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code}&quot;"/>
-                </option>
-                <option id="gnu.both.asm.option.flags.kage-coremark" name="Assembler flags" superClass="gnu.both.asm.option.flags" useByScannerDiscovery="false" value="--target=arm-none-eabi -c" valueType="string"/>
-                <inputType id="cdt.managedbuild.tool.gnu.assembler.input.kage-coremark" superClass="cdt.managedbuild.tool.gnu.assembler.input"/>
-                <inputType id="fr.ac6.managedbuild.tool.gnu.cross.assembler.input.kage-coremark" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.input"/>
-              </tool>
-            </toolChain>
-          </folderInfo>
-          <folderInfo id="fr.ac6.managedbuild.config.gnu.cross.exe.release.kage-coremark.hal" name="/" resourcePath="lib/third_party/mcu_vendor/st/stm32l475_discovery">
-            <toolChain id="fr.ac6.managedbuild.toolchain.gnu.cross.exe.release.kage-coremark.hal" name="Ac6 STM32 MCU GCC" superClass="fr.ac6.managedbuild.toolchain.gnu.cross.exe.release.kage-coremark" unusedChildren="">
-              <tool id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.kage-coremark.hal" name="MCU GCC Compiler" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.kage-coremark">
-                <option id="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other.kage-coremark.hal" superClass="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other" value="--target=arm-none-eabi -mllvm -enable-arm-kage-privilege-promotion -mexecute-only" valueType="string"/>
-              </tool>
-              <tool id="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.kage-coremark.hal" name="MCU GCC Assembler" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.kage-coremark"/>
-            </toolChain>
-          </folderInfo>
-          <folderInfo id="fr.ac6.managedbuild.config.gnu.cross.exe.release.kage-coremark.hal-2" name="/" resourcePath="application_code/st_code">
-            <toolChain id="fr.ac6.managedbuild.toolchain.gnu.cross.exe.release.kage-coremark.hal-2" name="Ac6 STM32 MCU GCC" superClass="fr.ac6.managedbuild.toolchain.gnu.cross.exe.release.kage-coremark" unusedChildren="">
-              <tool id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.kage-coremark.hal-2" name="MCU GCC Compiler" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.kage-coremark">
-                <option id="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other.kage-coremark.hal-2" superClass="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other" value="--target=arm-none-eabi -mllvm -enable-arm-kage-privilege-promotion -mexecute-only" valueType="string"/>
-              </tool>
-              <tool id="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.kage-coremark.hal-2" name="MCU GCC Assembler" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.kage-coremark"/>
-            </toolChain>
-          </folderInfo>
-          <sourceEntries>
-          </sourceEntries>
-        </configuration>
-      </storageModule>
-      <storageModule moduleId="org.eclipse.cdt.core.externalSettings"/>
-    </cconfiguration>
-  </storageModule>
-  <storageModule moduleId="refreshScope" versionNumber="2">
-    <configuration configurationName="kage-coremark">
-      <resource resourceType="PROJECT" workspacePath="/coremark"/>
-    </configuration>
-  </storageModule>
-  <storageModule moduleId="scannerConfiguration">
-    <autodiscovery enabled="false" problemReportingEnabled="false" selectedProfileId=""/>
-    <scannerConfigBuildInfo instanceId="fr.ac6.managedbuild.config.gnu.cross.exe.release.kage-coremark;fr.ac6.managedbuild.config.gnu.cross.exe.release.kage-coremark.;fr.ac6.managedbuild.tool.gnu.cross.c.compiler.kage-coremark;fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.c.kage-coremark">
-      <autodiscovery enabled="false" problemReportingEnabled="false" selectedProfileId=""/>
-    </scannerConfigBuildInfo>
-  </storageModule>
-  <storageModule moduleId="cdtBuildSystem" version="4.0.0">
-    <project id="coremark.fr.ac6.managedbuild.target.gnu.cross.exe" name="Executable" projectType="fr.ac6.managedbuild.target.gnu.cross.exe"/>
-  </storageModule>
-  <storageModule moduleId="org.eclipse.cdt.core.LanguageSettingsProviders"/>
-  <storageModule moduleId="org.eclipse.cdt.make.core.buildtargets"/>
-  <storageModule moduleId="org.eclipse.cdt.internal.ui.text.commentOwnerProjectMappings"/>
+<?fileVersion 4.0.0?><cproject storage_type_id="org.eclipse.cdt.core.XmlProjectDescriptionStorage">
+	<storageModule moduleId="org.eclipse.cdt.core.settings">
+		<!-- Configuration of kage-coremark -->
+		<cconfiguration id="fr.ac6.managedbuild.config.gnu.cross.exe.release.kage-coremark">
+			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="fr.ac6.managedbuild.config.gnu.cross.exe.release.kage-coremark" moduleId="org.eclipse.cdt.core.settings" name="kage-coremark-1-thread">
+				<externalSettings/>
+				<extensions>
+					<extension id="org.eclipse.cdt.core.ELF" point="org.eclipse.cdt.core.BinaryParser"/>
+					<extension id="org.eclipse.cdt.core.GASErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="org.eclipse.cdt.core.GmakeErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="org.eclipse.cdt.core.GLDErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="org.eclipse.cdt.core.CWDLocator" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="org.eclipse.cdt.core.GCCErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+				</extensions>
+			</storageModule>
+			<storageModule moduleId="cdtBuildSystem" version="4.0.0">
+				<configuration artifactExtension="elf" artifactName="${ConfigName}" buildArtefactType="org.eclipse.cdt.build.core.buildArtefactType.exe" buildProperties="org.eclipse.cdt.build.core.buildArtefactType=org.eclipse.cdt.build.core.buildArtefactType.exe,org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release" cleanCommand="rm -rf" description="" id="fr.ac6.managedbuild.config.gnu.cross.exe.release.kage-coremark" name="kage-coremark-1-thread" parent="fr.ac6.managedbuild.config.gnu.cross.exe.release" postannouncebuildStep="Running code scanner, Generating binary, and Printing size information:" postbuildStep="&quot;${workspace_loc}/../scripts/code-scanner.py&quot; &quot;${BuildArtifactFileBaseName}.elf&quot; &amp;&amp; arm-none-eabi-objcopy -O binary &quot;${BuildArtifactFileBaseName}.elf&quot; &quot;${BuildArtifactFileBaseName}.bin&quot; &amp;&amp; arm-none-eabi-objcopy -O ihex &quot;${BuildArtifactFileBaseName}.elf&quot; &quot;${BuildArtifactFileBaseName}.hex&quot; &amp;&amp; arm-none-eabi-size &quot;${BuildArtifactFileName}&quot;">
+					<folderInfo id="fr.ac6.managedbuild.config.gnu.cross.exe.release.kage-coremark." name="/" resourcePath="">
+						<toolChain id="fr.ac6.managedbuild.toolchain.gnu.cross.exe.release.kage-coremark" name="Ac6 STM32 MCU GCC" superClass="fr.ac6.managedbuild.toolchain.gnu.cross.exe.release">
+							<option id="fr.ac6.managedbuild.option.gnu.cross.mcu.kage-coremark" name="Mcu" superClass="fr.ac6.managedbuild.option.gnu.cross.mcu" useByScannerDiscovery="false" value="STM32L475VGTx" valueType="string"/>
+							<option id="fr.ac6.managedbuild.option.gnu.cross.fpu.kage-coremark" name="Floating point hardware" superClass="fr.ac6.managedbuild.option.gnu.cross.fpu" useByScannerDiscovery="false" value="fr.ac6.managedbuild.option.gnu.cross.fpu.fpv4-sp-d16" valueType="enumerated"/>
+							<option id="fr.ac6.managedbuild.option.gnu.cross.floatabi.kage-coremark" name="Floating-point ABI" superClass="fr.ac6.managedbuild.option.gnu.cross.floatabi" useByScannerDiscovery="false" value="fr.ac6.managedbuild.option.gnu.cross.floatabi.hard" valueType="enumerated"/>
+							<option id="fr.ac6.managedbuild.option.gnu.cross.board.kage-coremark" name="Board" superClass="fr.ac6.managedbuild.option.gnu.cross.board" useByScannerDiscovery="false" value="STM32L475VG" valueType="string"/>
+							<option id="fr.ac6.managedbuild.option.gnu.cross.prefix.kage-coremark" name="Prefix" superClass="fr.ac6.managedbuild.option.gnu.cross.prefix" useByScannerDiscovery="false" value="" valueType="string"/>
+							<targetPlatform archList="all" binaryParser="org.eclipse.cdt.core.ELF" id="fr.ac6.managedbuild.targetPlatform.gnu.cross.kage-coremark" isAbstract="false" osList="all" superClass="fr.ac6.managedbuild.targetPlatform.gnu.cross"/>
+							<builder buildPath="${workspace_loc:/coremark}/Release" id="fr.ac6.managedbuild.builder.gnu.cross.kage-coremark" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="Gnu Make Builder" parallelBuildOn="true" parallelizationNumber="optimal" superClass="fr.ac6.managedbuild.builder.gnu.cross"/>
+							<tool command="${workspace_loc}/../build/llvm/bin/clang" id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.kage-coremark" name="MCU GCC Compiler" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler">
+								<option id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.fdata.kage-coremark" name="Place the data in their own section (-fdata-sections)" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.fdata" useByScannerDiscovery="false" value="true" valueType="boolean"/>
+								<option id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.ffunction.kage-coremark" name="Place the function in their own section (-ffunction-sections)" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.ffunction" useByScannerDiscovery="false" value="true" valueType="boolean"/>
+								<option id="fr.ac6.managedbuild.gnu.c.compiler.option.optimization.level.kage-coremark" name="Optimization Level" superClass="fr.ac6.managedbuild.gnu.c.compiler.option.optimization.level" useByScannerDiscovery="false" value="fr.ac6.managedbuild.gnu.c.optimization.level.most" valueType="enumerated"/>
+								<option defaultValue="gnu.c.debugging.level.none" id="gnu.c.compiler.option.debugging.level.kage-coremark" name="Debug Level" superClass="gnu.c.compiler.option.debugging.level" useByScannerDiscovery="false" value="gnu.c.debugging.level.default" valueType="enumerated"/>
+								<option id="gnu.c.compiler.option.preprocessor.def.symbols.kage-coremark" name="Defined symbols (-D)" superClass="gnu.c.compiler.option.preprocessor.def.symbols" useByScannerDiscovery="false" valueType="definedSymbols">
+									<listOptionValue builtIn="false" value="USE_HAL_DRIVER"/>
+									<listOptionValue builtIn="false" value="SINGLE_T"/>
+									<listOptionValue builtIn="false" value="STM32L475xx"/>
+									<listOptionValue builtIn="false" value="MQTTCLIENT_PLATFORM_HEADER=MQTTCMSIS.h"/>
+									<listOptionValue builtIn="false" value="ENABLE_IOT_INFO"/>
+									<listOptionValue builtIn="false" value="ENABLE_IOT_ERROR"/>
+									<listOptionValue builtIn="false" value="SENSOR"/>
+									<listOptionValue builtIn="false" value="RFU"/>
+									<listOptionValue builtIn="false" value="USE_OFFLOAD_SSL"/>
+									<listOptionValue builtIn="false" value="SILHOUETTE"/>
+								</option>
+								<option id="gnu.c.compiler.option.include.paths.kage-coremark" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc}/../build/newlib-cygwin/install/arm-none-eabi/include&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/B-L475E-IOT01}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/Common}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/hts221}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/lis3mdl}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/lps22hb}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/lsm6dsl}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/vl53l0x}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/es_wifi}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/CMSIS/Include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/CMSIS/Device/ST/STM32L4xx/Include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/STM32L4xx_HAL_Driver/Inc}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/STM32L4xx_HAL_Driver/Inc/Legacy}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/config_files}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/aws/include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/aws/include/private}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/aws/FreeRTOS/portable/GCC/ARM_CM4_MPU}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/jsmn}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mbedtls/include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/pkcs11}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/tinycbor}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/coremark}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/beebs/include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/silhouette_demo/include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/st_code}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/common_demos/include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code}&quot;"/>
+								</option>
+								<option id="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other.kage-coremark" name="Other flags" superClass="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other" useByScannerDiscovery="false" value="--target=arm-none-eabi -mexecute-only -mllvm -enable-arm-silhouette-shadowstack -mllvm -enable-arm-silhouette-cfi -mllvm -enable-arm-silhouette-str2strt" valueType="string"/>
+								<option id="gnu.c.compiler.option.optimization.flags.kage-coremark" name="Other optimization flags" superClass="gnu.c.compiler.option.optimization.flags" useByScannerDiscovery="false" value="-ffreestanding -fomit-frame-pointer" valueType="string"/>
+								<option id="gnu.c.compiler.option.dialect.std.kage-coremark" name="Language standard" superClass="gnu.c.compiler.option.dialect.std" useByScannerDiscovery="false" value="gnu.c.compiler.dialect.default" valueType="enumerated"/>
+								<option id="gnu.c.compiler.option.misc.verbose.kage-coremark" name="Verbose (-v)" superClass="gnu.c.compiler.option.misc.verbose" useByScannerDiscovery="false" value="false" valueType="boolean"/>
+								<option id="gnu.c.compiler.option.include.files.kage-coremark" name="Include files (-include)" superClass="gnu.c.compiler.option.include.files" useByScannerDiscovery="false"/>
+								<inputType id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.c.kage-coremark" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.c"/>
+								<inputType id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.s.kage-coremark" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.s"/>
+							</tool>
+							<tool id="fr.ac6.managedbuild.tool.gnu.cross.cpp.compiler.kage-coremark" name="MCU G++ Compiler" superClass="fr.ac6.managedbuild.tool.gnu.cross.cpp.compiler">
+								<option id="fr.ac6.managedbuild.gnu.cpp.compiler.option.optimization.level.kage-coremark" name="Optimization Level" superClass="fr.ac6.managedbuild.gnu.cpp.compiler.option.optimization.level" useByScannerDiscovery="false" value="fr.ac6.managedbuild.gnu.cpp.optimization.level.most" valueType="enumerated"/>
+								<option defaultValue="gnu.cpp.compiler.debugging.level.none" id="gnu.cpp.compiler.option.debugging.level.kage-coremark" name="Debug Level" superClass="gnu.cpp.compiler.option.debugging.level" useByScannerDiscovery="false" valueType="enumerated"/>
+							</tool>
+							<tool command="${workspace_loc}/../build/llvm/bin/clang" id="fr.ac6.managedbuild.tool.gnu.cross.c.linker.kage-coremark" name="MCU GCC Linker" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.linker">
+								<option id="fr.ac6.managedbuild.tool.gnu.cross.c.linker.script.kage-coremark" name="Linker Script (-T)" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.linker.script" useByScannerDiscovery="false" value="${ProjDirPath}/STM32L475VGTx_FLASH_MPU.ld" valueType="string"/>
+								<option id="gnu.c.link.option.libs.kage-coremark" name="Libraries (-l)" superClass="gnu.c.link.option.libs" useByScannerDiscovery="false" valueType="libs">
+									<listOptionValue builtIn="false" value="c"/>
+									<listOptionValue builtIn="false" value="clang_rt.builtins-armhf"/>
+								</option>
+								<option id="gnu.c.link.option.ldflags.kage-coremark" name="Linker flags" superClass="gnu.c.link.option.ldflags" useByScannerDiscovery="false" value="--target=arm-none-eabi -fuse-ld=lld" valueType="string"/>
+								<option id="gnu.c.link.option.paths.kage-coremark" name="Library search path (-L)" superClass="gnu.c.link.option.paths" useByScannerDiscovery="false" valueType="libPaths">
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc}/../build/newlib-cygwin/install/arm-none-eabi/lib&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc}/../build/compiler-rt/install/lib/baremetal&quot;"/>
+								</option>
+								<option id="gnu.c.link.option.userobjs.kage-coremark" name="Other objects" superClass="gnu.c.link.option.userobjs" useByScannerDiscovery="false"/>
+								<option id="fr.ac6.managedbuild.tool.gnu.cross.c.linker.gcsections.kage-coremark" name="Discard unused sections (-Wl,--gc-sections)" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.linker.gcsections" useByScannerDiscovery="false" value="true" valueType="boolean"/>
+								<inputType id="cdt.managedbuild.tool.gnu.c.linker.input.kage-coremark" superClass="cdt.managedbuild.tool.gnu.c.linker.input">
+									<additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
+									<additionalInput kind="additionalinput" paths="$(LIBS)"/>
+								</inputType>
+							</tool>
+							<tool id="fr.ac6.managedbuild.tool.gnu.cross.cpp.linker.kage-coremark" name="MCU G++ Linker" superClass="fr.ac6.managedbuild.tool.gnu.cross.cpp.linker"/>
+							<tool id="fr.ac6.managedbuild.tool.gnu.archiver.kage-coremark" name="MCU GCC Archiver" superClass="fr.ac6.managedbuild.tool.gnu.archiver"/>
+							<tool command="${workspace_loc}/../build/llvm/bin/clang" id="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.kage-coremark" name="MCU GCC Assembler" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release">
+								<option id="gnu.both.asm.option.include.paths.kage-coremark" name="Include paths (-I)" superClass="gnu.both.asm.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc}/../build/newlib-cygwin/install/arm-none-eabi/include&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/B-L475E-IOT01}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/Common}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/hts221}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/lis3mdl}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/lps22hb}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/lsm6dsl}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/vl53l0x}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/es_wifi}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/CMSIS/Include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/CMSIS/Device/ST/STM32L4xx/Include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/STM32L4xx_HAL_Driver/Inc}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/STM32L4xx_HAL_Driver/Inc/Legacy}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/config_files}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/aws/include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/aws/include/private}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/aws/FreeRTOS/portable/GCC/ARM_CM4_MPU}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/jsmn}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mbedtls/include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/pkcs11}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/tinycbor}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/coremark}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/beebs/include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/silhouette_demo/include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/st_code}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/common_demos/include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code}&quot;"/>
+								</option>
+								<option id="gnu.both.asm.option.flags.kage-coremark" name="Assembler flags" superClass="gnu.both.asm.option.flags" useByScannerDiscovery="false" value="--target=arm-none-eabi -c" valueType="string"/>
+								<inputType id="cdt.managedbuild.tool.gnu.assembler.input.kage-coremark" superClass="cdt.managedbuild.tool.gnu.assembler.input"/>
+								<inputType id="fr.ac6.managedbuild.tool.gnu.cross.assembler.input.kage-coremark" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.input"/>
+							</tool>
+						</toolChain>
+					</folderInfo>
+					<folderInfo id="fr.ac6.managedbuild.config.gnu.cross.exe.release.kage-coremark.hal" name="/" resourcePath="lib/third_party/mcu_vendor/st/stm32l475_discovery">
+						<toolChain id="fr.ac6.managedbuild.toolchain.gnu.cross.exe.release.kage-coremark.hal" name="Ac6 STM32 MCU GCC" unusedChildren="">
+							<tool id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.kage-coremark.hal" name="MCU GCC Compiler" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.kage-coremark">
+								<option id="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other.kage-coremark.hal" name="Other flags" superClass="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other" value="--target=arm-none-eabi -mllvm -enable-arm-kage-privilege-promotion -mexecute-only" valueType="string"/>
+								<inputType id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.c.1109022177" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.c"/>
+								<inputType id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.s.1338779148" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.s"/>
+							</tool>
+							<tool id="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.kage-coremark.hal" name="MCU GCC Assembler" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.kage-coremark">
+								<inputType id="cdt.managedbuild.tool.gnu.assembler.input.1708829607" superClass="cdt.managedbuild.tool.gnu.assembler.input"/>
+								<inputType id="fr.ac6.managedbuild.tool.gnu.cross.assembler.input.879829438" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.input"/>
+							</tool>
+						</toolChain>
+					</folderInfo>
+					<folderInfo id="fr.ac6.managedbuild.config.gnu.cross.exe.release.kage-coremark.hal-2" name="/" resourcePath="application_code/st_code">
+						<toolChain id="fr.ac6.managedbuild.toolchain.gnu.cross.exe.release.kage-coremark.hal-2" name="Ac6 STM32 MCU GCC" unusedChildren="">
+							<tool id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.kage-coremark.hal-2" name="MCU GCC Compiler" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.kage-coremark">
+								<option id="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other.kage-coremark.hal-2" name="Other flags" superClass="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other" value="--target=arm-none-eabi -mllvm -enable-arm-kage-privilege-promotion -mexecute-only" valueType="string"/>
+								<inputType id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.c.1982194406" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.c"/>
+								<inputType id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.s.1749176398" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.s"/>
+							</tool>
+							<tool id="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.kage-coremark.hal-2" name="MCU GCC Assembler" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.kage-coremark">
+								<inputType id="cdt.managedbuild.tool.gnu.assembler.input.1358897456" superClass="cdt.managedbuild.tool.gnu.assembler.input"/>
+								<inputType id="fr.ac6.managedbuild.tool.gnu.cross.assembler.input.2140738412" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.input"/>
+							</tool>
+						</toolChain>
+					</folderInfo>
+				</configuration>
+			</storageModule>
+			<storageModule moduleId="org.eclipse.cdt.core.externalSettings"/>
+		</cconfiguration>
+		<cconfiguration id="fr.ac6.managedbuild.config.gnu.cross.exe.release.kage-coremark.1247378527">
+			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="fr.ac6.managedbuild.config.gnu.cross.exe.release.kage-coremark.1247378527" moduleId="org.eclipse.cdt.core.settings" name="kage-coremark-2-threads">
+				<externalSettings/>
+				<extensions>
+					<extension id="org.eclipse.cdt.core.ELF" point="org.eclipse.cdt.core.BinaryParser"/>
+					<extension id="org.eclipse.cdt.core.GASErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="org.eclipse.cdt.core.GmakeErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="org.eclipse.cdt.core.GLDErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="org.eclipse.cdt.core.CWDLocator" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="org.eclipse.cdt.core.GCCErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+				</extensions>
+			</storageModule>
+			<storageModule moduleId="cdtBuildSystem" version="4.0.0">
+				<configuration artifactExtension="elf" artifactName="${ConfigName}" buildArtefactType="org.eclipse.cdt.build.core.buildArtefactType.exe" buildProperties="org.eclipse.cdt.build.core.buildArtefactType=org.eclipse.cdt.build.core.buildArtefactType.exe,org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release" cleanCommand="rm -rf" description="" id="fr.ac6.managedbuild.config.gnu.cross.exe.release.kage-coremark.1247378527" name="kage-coremark-2-threads" parent="fr.ac6.managedbuild.config.gnu.cross.exe.release" postannouncebuildStep="Running code scanner, Generating binary, and Printing size information:" postbuildStep="&quot;${workspace_loc}/../scripts/code-scanner.py&quot; &quot;${BuildArtifactFileBaseName}.elf&quot; &amp;&amp; arm-none-eabi-objcopy -O binary &quot;${BuildArtifactFileBaseName}.elf&quot; &quot;${BuildArtifactFileBaseName}.bin&quot; &amp;&amp; arm-none-eabi-objcopy -O ihex &quot;${BuildArtifactFileBaseName}.elf&quot; &quot;${BuildArtifactFileBaseName}.hex&quot; &amp;&amp; arm-none-eabi-size &quot;${BuildArtifactFileName}&quot;">
+					<folderInfo id="fr.ac6.managedbuild.config.gnu.cross.exe.release.kage-coremark.1247378527." name="/" resourcePath="">
+						<toolChain id="fr.ac6.managedbuild.toolchain.gnu.cross.exe.release.197572770" name="Ac6 STM32 MCU GCC" superClass="fr.ac6.managedbuild.toolchain.gnu.cross.exe.release">
+							<option id="fr.ac6.managedbuild.option.gnu.cross.mcu.244766322" name="Mcu" superClass="fr.ac6.managedbuild.option.gnu.cross.mcu" useByScannerDiscovery="false" value="STM32L475VGTx" valueType="string"/>
+							<option id="fr.ac6.managedbuild.option.gnu.cross.fpu.185817196" name="Floating point hardware" superClass="fr.ac6.managedbuild.option.gnu.cross.fpu" useByScannerDiscovery="false" value="fr.ac6.managedbuild.option.gnu.cross.fpu.fpv4-sp-d16" valueType="enumerated"/>
+							<option id="fr.ac6.managedbuild.option.gnu.cross.floatabi.1765523549" name="Floating-point ABI" superClass="fr.ac6.managedbuild.option.gnu.cross.floatabi" useByScannerDiscovery="false" value="fr.ac6.managedbuild.option.gnu.cross.floatabi.hard" valueType="enumerated"/>
+							<option id="fr.ac6.managedbuild.option.gnu.cross.board.612320908" name="Board" superClass="fr.ac6.managedbuild.option.gnu.cross.board" useByScannerDiscovery="false" value="STM32L475VG" valueType="string"/>
+							<option id="fr.ac6.managedbuild.option.gnu.cross.prefix.1881639991" name="Prefix" superClass="fr.ac6.managedbuild.option.gnu.cross.prefix" useByScannerDiscovery="false" value="" valueType="string"/>
+							<targetPlatform archList="all" binaryParser="org.eclipse.cdt.core.ELF" id="fr.ac6.managedbuild.targetPlatform.gnu.cross.1414646867" isAbstract="false" osList="all" superClass="fr.ac6.managedbuild.targetPlatform.gnu.cross"/>
+							<builder buildPath="${workspace_loc:/coremark}/Release" id="fr.ac6.managedbuild.builder.gnu.cross.904079952" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="Gnu Make Builder" parallelBuildOn="true" parallelizationNumber="optimal" superClass="fr.ac6.managedbuild.builder.gnu.cross"/>
+							<tool command="${workspace_loc}/../build/llvm/bin/clang" id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.440292067" name="MCU GCC Compiler" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler">
+								<option id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.fdata.1551389503" name="Place the data in their own section (-fdata-sections)" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.fdata" useByScannerDiscovery="false" value="true" valueType="boolean"/>
+								<option id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.ffunction.1601608281" name="Place the function in their own section (-ffunction-sections)" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.ffunction" useByScannerDiscovery="false" value="true" valueType="boolean"/>
+								<option id="fr.ac6.managedbuild.gnu.c.compiler.option.optimization.level.1774712586" name="Optimization Level" superClass="fr.ac6.managedbuild.gnu.c.compiler.option.optimization.level" useByScannerDiscovery="false" value="fr.ac6.managedbuild.gnu.c.optimization.level.most" valueType="enumerated"/>
+								<option defaultValue="gnu.c.debugging.level.none" id="gnu.c.compiler.option.debugging.level.1582104194" name="Debug Level" superClass="gnu.c.compiler.option.debugging.level" useByScannerDiscovery="false" value="gnu.c.debugging.level.default" valueType="enumerated"/>
+								<option id="gnu.c.compiler.option.preprocessor.def.symbols.711305667" name="Defined symbols (-D)" superClass="gnu.c.compiler.option.preprocessor.def.symbols" useByScannerDiscovery="false" valueType="definedSymbols">
+									<listOptionValue builtIn="false" value="USE_HAL_DRIVER"/>
+									<listOptionValue builtIn="false" value="DOUBLE_T"/>
+									<listOptionValue builtIn="false" value="STM32L475xx"/>
+									<listOptionValue builtIn="false" value="MQTTCLIENT_PLATFORM_HEADER=MQTTCMSIS.h"/>
+									<listOptionValue builtIn="false" value="ENABLE_IOT_INFO"/>
+									<listOptionValue builtIn="false" value="ENABLE_IOT_ERROR"/>
+									<listOptionValue builtIn="false" value="SENSOR"/>
+									<listOptionValue builtIn="false" value="RFU"/>
+									<listOptionValue builtIn="false" value="USE_OFFLOAD_SSL"/>
+									<listOptionValue builtIn="false" value="SILHOUETTE"/>
+								</option>
+								<option id="gnu.c.compiler.option.include.paths.660916731" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc}/../build/newlib-cygwin/install/arm-none-eabi/include&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/B-L475E-IOT01}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/Common}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/hts221}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/lis3mdl}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/lps22hb}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/lsm6dsl}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/vl53l0x}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/es_wifi}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/CMSIS/Include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/CMSIS/Device/ST/STM32L4xx/Include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/STM32L4xx_HAL_Driver/Inc}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/STM32L4xx_HAL_Driver/Inc/Legacy}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/config_files}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/aws/include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/aws/include/private}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/aws/FreeRTOS/portable/GCC/ARM_CM4_MPU}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/jsmn}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mbedtls/include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/pkcs11}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/tinycbor}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/coremark}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/beebs/include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/silhouette_demo/include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/st_code}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/common_demos/include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code}&quot;"/>
+								</option>
+								<option id="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other.957427264" name="Other flags" superClass="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other" useByScannerDiscovery="false" value="--target=arm-none-eabi -mexecute-only -mllvm -enable-arm-silhouette-shadowstack -mllvm -enable-arm-silhouette-cfi -mllvm -enable-arm-silhouette-str2strt" valueType="string"/>
+								<option id="gnu.c.compiler.option.optimization.flags.342682204" name="Other optimization flags" superClass="gnu.c.compiler.option.optimization.flags" useByScannerDiscovery="false" value="-ffreestanding -fomit-frame-pointer" valueType="string"/>
+								<option id="gnu.c.compiler.option.dialect.std.902984675" name="Language standard" superClass="gnu.c.compiler.option.dialect.std" useByScannerDiscovery="false" value="gnu.c.compiler.dialect.default" valueType="enumerated"/>
+								<option id="gnu.c.compiler.option.misc.verbose.696717535" name="Verbose (-v)" superClass="gnu.c.compiler.option.misc.verbose" useByScannerDiscovery="false" value="false" valueType="boolean"/>
+								<option id="gnu.c.compiler.option.include.files.511315159" name="Include files (-include)" superClass="gnu.c.compiler.option.include.files" useByScannerDiscovery="false"/>
+								<inputType id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.c.1633244662" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.c"/>
+								<inputType id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.s.733069665" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.s"/>
+							</tool>
+							<tool id="fr.ac6.managedbuild.tool.gnu.cross.cpp.compiler.954996283" name="MCU G++ Compiler" superClass="fr.ac6.managedbuild.tool.gnu.cross.cpp.compiler">
+								<option id="fr.ac6.managedbuild.gnu.cpp.compiler.option.optimization.level.1563917836" name="Optimization Level" superClass="fr.ac6.managedbuild.gnu.cpp.compiler.option.optimization.level" useByScannerDiscovery="false" value="fr.ac6.managedbuild.gnu.cpp.optimization.level.most" valueType="enumerated"/>
+								<option defaultValue="gnu.cpp.compiler.debugging.level.none" id="gnu.cpp.compiler.option.debugging.level.1281937132" name="Debug Level" superClass="gnu.cpp.compiler.option.debugging.level" useByScannerDiscovery="false" valueType="enumerated"/>
+							</tool>
+							<tool command="${workspace_loc}/../build/llvm/bin/clang" id="fr.ac6.managedbuild.tool.gnu.cross.c.linker.344247307" name="MCU GCC Linker" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.linker">
+								<option id="fr.ac6.managedbuild.tool.gnu.cross.c.linker.script.1492979659" name="Linker Script (-T)" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.linker.script" useByScannerDiscovery="false" value="${ProjDirPath}/STM32L475VGTx_FLASH_MPU.ld" valueType="string"/>
+								<option id="gnu.c.link.option.libs.420532372" name="Libraries (-l)" superClass="gnu.c.link.option.libs" useByScannerDiscovery="false" valueType="libs">
+									<listOptionValue builtIn="false" value="c"/>
+									<listOptionValue builtIn="false" value="clang_rt.builtins-armhf"/>
+								</option>
+								<option id="gnu.c.link.option.ldflags.2033707849" name="Linker flags" superClass="gnu.c.link.option.ldflags" useByScannerDiscovery="false" value="--target=arm-none-eabi -fuse-ld=lld" valueType="string"/>
+								<option id="gnu.c.link.option.paths.884813511" name="Library search path (-L)" superClass="gnu.c.link.option.paths" useByScannerDiscovery="false" valueType="libPaths">
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc}/../build/newlib-cygwin/install/arm-none-eabi/lib&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc}/../build/compiler-rt/install/lib/baremetal&quot;"/>
+								</option>
+								<option id="gnu.c.link.option.userobjs.1029787616" name="Other objects" superClass="gnu.c.link.option.userobjs" useByScannerDiscovery="false"/>
+								<option id="fr.ac6.managedbuild.tool.gnu.cross.c.linker.gcsections.661462512" name="Discard unused sections (-Wl,--gc-sections)" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.linker.gcsections" useByScannerDiscovery="false" value="true" valueType="boolean"/>
+								<inputType id="cdt.managedbuild.tool.gnu.c.linker.input.1551849286" superClass="cdt.managedbuild.tool.gnu.c.linker.input">
+									<additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
+									<additionalInput kind="additionalinput" paths="$(LIBS)"/>
+								</inputType>
+							</tool>
+							<tool id="fr.ac6.managedbuild.tool.gnu.cross.cpp.linker.1017245586" name="MCU G++ Linker" superClass="fr.ac6.managedbuild.tool.gnu.cross.cpp.linker"/>
+							<tool id="fr.ac6.managedbuild.tool.gnu.archiver.1359025653" name="MCU GCC Archiver" superClass="fr.ac6.managedbuild.tool.gnu.archiver"/>
+							<tool command="${workspace_loc}/../build/llvm/bin/clang" id="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.1156122190" name="MCU GCC Assembler" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release">
+								<option id="gnu.both.asm.option.include.paths.103305206" name="Include paths (-I)" superClass="gnu.both.asm.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc}/../build/newlib-cygwin/install/arm-none-eabi/include&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/B-L475E-IOT01}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/Common}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/hts221}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/lis3mdl}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/lps22hb}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/lsm6dsl}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/vl53l0x}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/es_wifi}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/CMSIS/Include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/CMSIS/Device/ST/STM32L4xx/Include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/STM32L4xx_HAL_Driver/Inc}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/STM32L4xx_HAL_Driver/Inc/Legacy}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/config_files}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/aws/include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/aws/include/private}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/aws/FreeRTOS/portable/GCC/ARM_CM4_MPU}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/jsmn}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mbedtls/include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/pkcs11}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/tinycbor}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/coremark}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/beebs/include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/silhouette_demo/include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/st_code}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/common_demos/include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code}&quot;"/>
+								</option>
+								<option id="gnu.both.asm.option.flags.112944197" name="Assembler flags" superClass="gnu.both.asm.option.flags" useByScannerDiscovery="false" value="--target=arm-none-eabi -c" valueType="string"/>
+								<inputType id="cdt.managedbuild.tool.gnu.assembler.input.239352910" superClass="cdt.managedbuild.tool.gnu.assembler.input"/>
+								<inputType id="fr.ac6.managedbuild.tool.gnu.cross.assembler.input.123971141" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.input"/>
+							</tool>
+						</toolChain>
+					</folderInfo>
+					<folderInfo id="fr.ac6.managedbuild.config.gnu.cross.exe.release.kage-coremark.1247378527.lib/third_party/mcu_vendor/st/stm32l475_discovery" name="/" resourcePath="lib/third_party/mcu_vendor/st/stm32l475_discovery">
+						<toolChain id="fr.ac6.managedbuild.toolchain.gnu.cross.exe.release.kage-coremark.hal.167452127" name="Ac6 STM32 MCU GCC" unusedChildren="">
+							<tool id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.91441765" name="MCU GCC Compiler" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.440292067">
+								<option id="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other.2068646339" name="Other flags" superClass="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other" value="--target=arm-none-eabi -mllvm -enable-arm-kage-privilege-promotion -mexecute-only" valueType="string"/>
+								<inputType id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.c.340241714" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.c"/>
+								<inputType id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.s.1430911704" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.s"/>
+							</tool>
+							<tool id="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.1492300229" name="MCU GCC Assembler" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.1156122190">
+								<inputType id="cdt.managedbuild.tool.gnu.assembler.input.145541197" superClass="cdt.managedbuild.tool.gnu.assembler.input"/>
+								<inputType id="fr.ac6.managedbuild.tool.gnu.cross.assembler.input.1987655900" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.input"/>
+							</tool>
+						</toolChain>
+					</folderInfo>
+					<folderInfo id="fr.ac6.managedbuild.config.gnu.cross.exe.release.kage-coremark.1247378527.application_code/st_code" name="/" resourcePath="application_code/st_code">
+						<toolChain id="fr.ac6.managedbuild.toolchain.gnu.cross.exe.release.kage-coremark.hal-2.330712829" name="Ac6 STM32 MCU GCC" unusedChildren="">
+							<tool id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.1697663087" name="MCU GCC Compiler" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.440292067">
+								<option id="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other.1770671489" name="Other flags" superClass="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other" value="--target=arm-none-eabi -mllvm -enable-arm-kage-privilege-promotion -mexecute-only" valueType="string"/>
+								<inputType id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.c.211151078" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.c"/>
+								<inputType id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.s.809624509" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.s"/>
+							</tool>
+							<tool id="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.1683744874" name="MCU GCC Assembler" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.1156122190">
+								<inputType id="cdt.managedbuild.tool.gnu.assembler.input.618895347" superClass="cdt.managedbuild.tool.gnu.assembler.input"/>
+								<inputType id="fr.ac6.managedbuild.tool.gnu.cross.assembler.input.1919613666" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.input"/>
+							</tool>
+						</toolChain>
+					</folderInfo>
+				</configuration>
+			</storageModule>
+			<storageModule moduleId="org.eclipse.cdt.core.externalSettings"/>
+		</cconfiguration>
+		<cconfiguration id="fr.ac6.managedbuild.config.gnu.cross.exe.release.kage-coremark.2024570232">
+			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="fr.ac6.managedbuild.config.gnu.cross.exe.release.kage-coremark.2024570232" moduleId="org.eclipse.cdt.core.settings" name="kage-coremark-3-threads">
+				<externalSettings/>
+				<extensions>
+					<extension id="org.eclipse.cdt.core.ELF" point="org.eclipse.cdt.core.BinaryParser"/>
+					<extension id="org.eclipse.cdt.core.GASErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="org.eclipse.cdt.core.GmakeErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="org.eclipse.cdt.core.GLDErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="org.eclipse.cdt.core.CWDLocator" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="org.eclipse.cdt.core.GCCErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+				</extensions>
+			</storageModule>
+			<storageModule moduleId="cdtBuildSystem" version="4.0.0">
+				<configuration artifactExtension="elf" artifactName="${ConfigName}" buildArtefactType="org.eclipse.cdt.build.core.buildArtefactType.exe" buildProperties="org.eclipse.cdt.build.core.buildArtefactType=org.eclipse.cdt.build.core.buildArtefactType.exe,org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release" cleanCommand="rm -rf" description="" id="fr.ac6.managedbuild.config.gnu.cross.exe.release.kage-coremark.2024570232" name="kage-coremark-3-threads" parent="fr.ac6.managedbuild.config.gnu.cross.exe.release" postannouncebuildStep="Running code scanner, Generating binary, and Printing size information:" postbuildStep="&quot;${workspace_loc}/../scripts/code-scanner.py&quot; &quot;${BuildArtifactFileBaseName}.elf&quot; &amp;&amp; arm-none-eabi-objcopy -O binary &quot;${BuildArtifactFileBaseName}.elf&quot; &quot;${BuildArtifactFileBaseName}.bin&quot; &amp;&amp; arm-none-eabi-objcopy -O ihex &quot;${BuildArtifactFileBaseName}.elf&quot; &quot;${BuildArtifactFileBaseName}.hex&quot; &amp;&amp; arm-none-eabi-size &quot;${BuildArtifactFileName}&quot;">
+					<folderInfo id="fr.ac6.managedbuild.config.gnu.cross.exe.release.kage-coremark.2024570232." name="/" resourcePath="">
+						<toolChain id="fr.ac6.managedbuild.toolchain.gnu.cross.exe.release.603979025" name="Ac6 STM32 MCU GCC" superClass="fr.ac6.managedbuild.toolchain.gnu.cross.exe.release">
+							<option id="fr.ac6.managedbuild.option.gnu.cross.mcu.1190612578" name="Mcu" superClass="fr.ac6.managedbuild.option.gnu.cross.mcu" useByScannerDiscovery="false" value="STM32L475VGTx" valueType="string"/>
+							<option id="fr.ac6.managedbuild.option.gnu.cross.fpu.975111586" name="Floating point hardware" superClass="fr.ac6.managedbuild.option.gnu.cross.fpu" useByScannerDiscovery="false" value="fr.ac6.managedbuild.option.gnu.cross.fpu.fpv4-sp-d16" valueType="enumerated"/>
+							<option id="fr.ac6.managedbuild.option.gnu.cross.floatabi.797494183" name="Floating-point ABI" superClass="fr.ac6.managedbuild.option.gnu.cross.floatabi" useByScannerDiscovery="false" value="fr.ac6.managedbuild.option.gnu.cross.floatabi.hard" valueType="enumerated"/>
+							<option id="fr.ac6.managedbuild.option.gnu.cross.board.792115422" name="Board" superClass="fr.ac6.managedbuild.option.gnu.cross.board" useByScannerDiscovery="false" value="STM32L475VG" valueType="string"/>
+							<option id="fr.ac6.managedbuild.option.gnu.cross.prefix.1401336379" name="Prefix" superClass="fr.ac6.managedbuild.option.gnu.cross.prefix" useByScannerDiscovery="false" value="" valueType="string"/>
+							<targetPlatform archList="all" binaryParser="org.eclipse.cdt.core.ELF" id="fr.ac6.managedbuild.targetPlatform.gnu.cross.1477412608" isAbstract="false" osList="all" superClass="fr.ac6.managedbuild.targetPlatform.gnu.cross"/>
+							<builder buildPath="${workspace_loc:/coremark}/Release" id="fr.ac6.managedbuild.builder.gnu.cross.1789331055" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="Gnu Make Builder" parallelBuildOn="true" parallelizationNumber="optimal" superClass="fr.ac6.managedbuild.builder.gnu.cross"/>
+							<tool command="${workspace_loc}/../build/llvm/bin/clang" id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.855393918" name="MCU GCC Compiler" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler">
+								<option id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.fdata.1823332281" name="Place the data in their own section (-fdata-sections)" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.fdata" useByScannerDiscovery="false" value="true" valueType="boolean"/>
+								<option id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.ffunction.325934360" name="Place the function in their own section (-ffunction-sections)" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.ffunction" useByScannerDiscovery="false" value="true" valueType="boolean"/>
+								<option id="fr.ac6.managedbuild.gnu.c.compiler.option.optimization.level.1279802613" name="Optimization Level" superClass="fr.ac6.managedbuild.gnu.c.compiler.option.optimization.level" useByScannerDiscovery="false" value="fr.ac6.managedbuild.gnu.c.optimization.level.most" valueType="enumerated"/>
+								<option defaultValue="gnu.c.debugging.level.none" id="gnu.c.compiler.option.debugging.level.662047023" name="Debug Level" superClass="gnu.c.compiler.option.debugging.level" useByScannerDiscovery="false" value="gnu.c.debugging.level.default" valueType="enumerated"/>
+								<option id="gnu.c.compiler.option.preprocessor.def.symbols.466014329" name="Defined symbols (-D)" superClass="gnu.c.compiler.option.preprocessor.def.symbols" useByScannerDiscovery="false" valueType="definedSymbols">
+									<listOptionValue builtIn="false" value="USE_HAL_DRIVER"/>
+									<listOptionValue builtIn="false" value="TRIPLE_T"/>
+									<listOptionValue builtIn="false" value="STM32L475xx"/>
+									<listOptionValue builtIn="false" value="MQTTCLIENT_PLATFORM_HEADER=MQTTCMSIS.h"/>
+									<listOptionValue builtIn="false" value="ENABLE_IOT_INFO"/>
+									<listOptionValue builtIn="false" value="ENABLE_IOT_ERROR"/>
+									<listOptionValue builtIn="false" value="SENSOR"/>
+									<listOptionValue builtIn="false" value="RFU"/>
+									<listOptionValue builtIn="false" value="USE_OFFLOAD_SSL"/>
+									<listOptionValue builtIn="false" value="SILHOUETTE"/>
+								</option>
+								<option id="gnu.c.compiler.option.include.paths.1981917092" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc}/../build/newlib-cygwin/install/arm-none-eabi/include&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/B-L475E-IOT01}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/Common}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/hts221}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/lis3mdl}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/lps22hb}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/lsm6dsl}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/vl53l0x}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/es_wifi}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/CMSIS/Include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/CMSIS/Device/ST/STM32L4xx/Include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/STM32L4xx_HAL_Driver/Inc}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/STM32L4xx_HAL_Driver/Inc/Legacy}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/config_files}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/aws/include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/aws/include/private}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/aws/FreeRTOS/portable/GCC/ARM_CM4_MPU}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/jsmn}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mbedtls/include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/pkcs11}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/tinycbor}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/coremark}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/beebs/include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/silhouette_demo/include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/st_code}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/common_demos/include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code}&quot;"/>
+								</option>
+								<option id="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other.1063788753" name="Other flags" superClass="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other" useByScannerDiscovery="false" value="--target=arm-none-eabi -mexecute-only -mllvm -enable-arm-silhouette-shadowstack -mllvm -enable-arm-silhouette-cfi -mllvm -enable-arm-silhouette-str2strt" valueType="string"/>
+								<option id="gnu.c.compiler.option.optimization.flags.530152914" name="Other optimization flags" superClass="gnu.c.compiler.option.optimization.flags" useByScannerDiscovery="false" value="-ffreestanding -fomit-frame-pointer" valueType="string"/>
+								<option id="gnu.c.compiler.option.dialect.std.669966689" name="Language standard" superClass="gnu.c.compiler.option.dialect.std" useByScannerDiscovery="false" value="gnu.c.compiler.dialect.default" valueType="enumerated"/>
+								<option id="gnu.c.compiler.option.misc.verbose.1423091347" name="Verbose (-v)" superClass="gnu.c.compiler.option.misc.verbose" useByScannerDiscovery="false" value="false" valueType="boolean"/>
+								<option id="gnu.c.compiler.option.include.files.1182559633" name="Include files (-include)" superClass="gnu.c.compiler.option.include.files" useByScannerDiscovery="false"/>
+								<inputType id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.c.354300415" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.c"/>
+								<inputType id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.s.641794881" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.s"/>
+							</tool>
+							<tool id="fr.ac6.managedbuild.tool.gnu.cross.cpp.compiler.706534284" name="MCU G++ Compiler" superClass="fr.ac6.managedbuild.tool.gnu.cross.cpp.compiler">
+								<option id="fr.ac6.managedbuild.gnu.cpp.compiler.option.optimization.level.289450036" name="Optimization Level" superClass="fr.ac6.managedbuild.gnu.cpp.compiler.option.optimization.level" useByScannerDiscovery="false" value="fr.ac6.managedbuild.gnu.cpp.optimization.level.most" valueType="enumerated"/>
+								<option defaultValue="gnu.cpp.compiler.debugging.level.none" id="gnu.cpp.compiler.option.debugging.level.1807648792" name="Debug Level" superClass="gnu.cpp.compiler.option.debugging.level" useByScannerDiscovery="false" valueType="enumerated"/>
+							</tool>
+							<tool command="${workspace_loc}/../build/llvm/bin/clang" id="fr.ac6.managedbuild.tool.gnu.cross.c.linker.1449882533" name="MCU GCC Linker" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.linker">
+								<option id="fr.ac6.managedbuild.tool.gnu.cross.c.linker.script.386782917" name="Linker Script (-T)" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.linker.script" useByScannerDiscovery="false" value="${ProjDirPath}/STM32L475VGTx_FLASH_MPU.ld" valueType="string"/>
+								<option id="gnu.c.link.option.libs.723524321" name="Libraries (-l)" superClass="gnu.c.link.option.libs" useByScannerDiscovery="false" valueType="libs">
+									<listOptionValue builtIn="false" value="c"/>
+									<listOptionValue builtIn="false" value="clang_rt.builtins-armhf"/>
+								</option>
+								<option id="gnu.c.link.option.ldflags.1762164772" name="Linker flags" superClass="gnu.c.link.option.ldflags" useByScannerDiscovery="false" value="--target=arm-none-eabi -fuse-ld=lld" valueType="string"/>
+								<option id="gnu.c.link.option.paths.867429120" name="Library search path (-L)" superClass="gnu.c.link.option.paths" useByScannerDiscovery="false" valueType="libPaths">
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc}/../build/newlib-cygwin/install/arm-none-eabi/lib&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc}/../build/compiler-rt/install/lib/baremetal&quot;"/>
+								</option>
+								<option id="gnu.c.link.option.userobjs.1712636743" name="Other objects" superClass="gnu.c.link.option.userobjs" useByScannerDiscovery="false"/>
+								<option id="fr.ac6.managedbuild.tool.gnu.cross.c.linker.gcsections.2108731796" name="Discard unused sections (-Wl,--gc-sections)" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.linker.gcsections" useByScannerDiscovery="false" value="true" valueType="boolean"/>
+								<inputType id="cdt.managedbuild.tool.gnu.c.linker.input.1481262350" superClass="cdt.managedbuild.tool.gnu.c.linker.input">
+									<additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
+									<additionalInput kind="additionalinput" paths="$(LIBS)"/>
+								</inputType>
+							</tool>
+							<tool id="fr.ac6.managedbuild.tool.gnu.cross.cpp.linker.1898010135" name="MCU G++ Linker" superClass="fr.ac6.managedbuild.tool.gnu.cross.cpp.linker"/>
+							<tool id="fr.ac6.managedbuild.tool.gnu.archiver.1075961513" name="MCU GCC Archiver" superClass="fr.ac6.managedbuild.tool.gnu.archiver"/>
+							<tool command="${workspace_loc}/../build/llvm/bin/clang" id="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.716248295" name="MCU GCC Assembler" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release">
+								<option id="gnu.both.asm.option.include.paths.338756488" name="Include paths (-I)" superClass="gnu.both.asm.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc}/../build/newlib-cygwin/install/arm-none-eabi/include&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/B-L475E-IOT01}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/Common}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/hts221}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/lis3mdl}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/lps22hb}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/lsm6dsl}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/vl53l0x}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/es_wifi}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/CMSIS/Include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/CMSIS/Device/ST/STM32L4xx/Include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/STM32L4xx_HAL_Driver/Inc}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/STM32L4xx_HAL_Driver/Inc/Legacy}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/config_files}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/aws/include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/aws/include/private}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/aws/FreeRTOS/portable/GCC/ARM_CM4_MPU}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/jsmn}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mbedtls/include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/pkcs11}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/tinycbor}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/coremark}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/beebs/include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/silhouette_demo/include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/st_code}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/common_demos/include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code}&quot;"/>
+								</option>
+								<option id="gnu.both.asm.option.flags.1233412922" name="Assembler flags" superClass="gnu.both.asm.option.flags" useByScannerDiscovery="false" value="--target=arm-none-eabi -c" valueType="string"/>
+								<inputType id="cdt.managedbuild.tool.gnu.assembler.input.841983329" superClass="cdt.managedbuild.tool.gnu.assembler.input"/>
+								<inputType id="fr.ac6.managedbuild.tool.gnu.cross.assembler.input.1125383083" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.input"/>
+							</tool>
+						</toolChain>
+					</folderInfo>
+					<folderInfo id="fr.ac6.managedbuild.config.gnu.cross.exe.release.kage-coremark.2024570232.lib/third_party/mcu_vendor/st/stm32l475_discovery" name="/" resourcePath="lib/third_party/mcu_vendor/st/stm32l475_discovery">
+						<toolChain id="fr.ac6.managedbuild.toolchain.gnu.cross.exe.release.kage-coremark.hal.1801913794" name="Ac6 STM32 MCU GCC" unusedChildren="">
+							<tool id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.1261440100" name="MCU GCC Compiler" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.855393918">
+								<option id="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other.1408419921" name="Other flags" superClass="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other" value="--target=arm-none-eabi -mllvm -enable-arm-kage-privilege-promotion -mexecute-only" valueType="string"/>
+								<inputType id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.c.2119308985" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.c"/>
+								<inputType id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.s.995787263" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.s"/>
+							</tool>
+							<tool id="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.2051282816" name="MCU GCC Assembler" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.716248295">
+								<inputType id="cdt.managedbuild.tool.gnu.assembler.input.1212415361" superClass="cdt.managedbuild.tool.gnu.assembler.input"/>
+								<inputType id="fr.ac6.managedbuild.tool.gnu.cross.assembler.input.1709302017" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.input"/>
+							</tool>
+						</toolChain>
+					</folderInfo>
+					<folderInfo id="fr.ac6.managedbuild.config.gnu.cross.exe.release.kage-coremark.2024570232.application_code/st_code" name="/" resourcePath="application_code/st_code">
+						<toolChain id="fr.ac6.managedbuild.toolchain.gnu.cross.exe.release.kage-coremark.hal-2.1000411984" name="Ac6 STM32 MCU GCC" unusedChildren="">
+							<tool id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.1279055523" name="MCU GCC Compiler" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.855393918">
+								<option id="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other.1442393610" name="Other flags" superClass="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other" value="--target=arm-none-eabi -mllvm -enable-arm-kage-privilege-promotion -mexecute-only" valueType="string"/>
+								<inputType id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.c.1881798130" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.c"/>
+								<inputType id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.s.1594085433" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.s"/>
+							</tool>
+							<tool id="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.1236563573" name="MCU GCC Assembler" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.716248295">
+								<inputType id="cdt.managedbuild.tool.gnu.assembler.input.1789084512" superClass="cdt.managedbuild.tool.gnu.assembler.input"/>
+								<inputType id="fr.ac6.managedbuild.tool.gnu.cross.assembler.input.1066892129" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.input"/>
+							</tool>
+						</toolChain>
+					</folderInfo>
+				</configuration>
+			</storageModule>
+			<storageModule moduleId="org.eclipse.cdt.core.externalSettings"/>
+		</cconfiguration>
+		<cconfiguration id="fr.ac6.managedbuild.config.gnu.cross.exe.release.kage-coremark.561728385">
+			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="fr.ac6.managedbuild.config.gnu.cross.exe.release.kage-coremark.561728385" moduleId="org.eclipse.cdt.core.settings" name="kage-os-only-coremark-1-thread">
+				<externalSettings/>
+				<extensions>
+					<extension id="org.eclipse.cdt.core.ELF" point="org.eclipse.cdt.core.BinaryParser"/>
+					<extension id="org.eclipse.cdt.core.GASErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="org.eclipse.cdt.core.GmakeErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="org.eclipse.cdt.core.GLDErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="org.eclipse.cdt.core.CWDLocator" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="org.eclipse.cdt.core.GCCErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+				</extensions>
+			</storageModule>
+			<storageModule moduleId="cdtBuildSystem" version="4.0.0">
+				<configuration artifactExtension="elf" artifactName="${ConfigName}" buildArtefactType="org.eclipse.cdt.build.core.buildArtefactType.exe" buildProperties="org.eclipse.cdt.build.core.buildArtefactType=org.eclipse.cdt.build.core.buildArtefactType.exe,org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release" cleanCommand="rm -rf" description="" id="fr.ac6.managedbuild.config.gnu.cross.exe.release.kage-coremark.561728385" name="kage-os-only-coremark-1-thread" parent="fr.ac6.managedbuild.config.gnu.cross.exe.release" postannouncebuildStep="Running code scanner, Generating binary, and Printing size information:" postbuildStep="&quot;${workspace_loc}/../scripts/code-scanner.py&quot; &quot;${BuildArtifactFileBaseName}.elf&quot; &amp;&amp; arm-none-eabi-objcopy -O binary &quot;${BuildArtifactFileBaseName}.elf&quot; &quot;${BuildArtifactFileBaseName}.bin&quot; &amp;&amp; arm-none-eabi-objcopy -O ihex &quot;${BuildArtifactFileBaseName}.elf&quot; &quot;${BuildArtifactFileBaseName}.hex&quot; &amp;&amp; arm-none-eabi-size &quot;${BuildArtifactFileName}&quot;">
+					<folderInfo id="fr.ac6.managedbuild.config.gnu.cross.exe.release.kage-coremark.561728385." name="/" resourcePath="">
+						<toolChain id="fr.ac6.managedbuild.toolchain.gnu.cross.exe.release.25069381" name="Ac6 STM32 MCU GCC" superClass="fr.ac6.managedbuild.toolchain.gnu.cross.exe.release">
+							<option id="fr.ac6.managedbuild.option.gnu.cross.mcu.1030556730" name="Mcu" superClass="fr.ac6.managedbuild.option.gnu.cross.mcu" useByScannerDiscovery="false" value="STM32L475VGTx" valueType="string"/>
+							<option id="fr.ac6.managedbuild.option.gnu.cross.fpu.558880663" name="Floating point hardware" superClass="fr.ac6.managedbuild.option.gnu.cross.fpu" useByScannerDiscovery="false" value="fr.ac6.managedbuild.option.gnu.cross.fpu.fpv4-sp-d16" valueType="enumerated"/>
+							<option id="fr.ac6.managedbuild.option.gnu.cross.floatabi.113213809" name="Floating-point ABI" superClass="fr.ac6.managedbuild.option.gnu.cross.floatabi" useByScannerDiscovery="false" value="fr.ac6.managedbuild.option.gnu.cross.floatabi.hard" valueType="enumerated"/>
+							<option id="fr.ac6.managedbuild.option.gnu.cross.board.1843377566" name="Board" superClass="fr.ac6.managedbuild.option.gnu.cross.board" useByScannerDiscovery="false" value="STM32L475VG" valueType="string"/>
+							<option id="fr.ac6.managedbuild.option.gnu.cross.prefix.1761055823" name="Prefix" superClass="fr.ac6.managedbuild.option.gnu.cross.prefix" useByScannerDiscovery="false" value="" valueType="string"/>
+							<targetPlatform archList="all" binaryParser="org.eclipse.cdt.core.ELF" id="fr.ac6.managedbuild.targetPlatform.gnu.cross.693888697" isAbstract="false" osList="all" superClass="fr.ac6.managedbuild.targetPlatform.gnu.cross"/>
+							<builder buildPath="${workspace_loc:/coremark}/Release" id="fr.ac6.managedbuild.builder.gnu.cross.32436327" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="Gnu Make Builder" parallelBuildOn="true" parallelizationNumber="optimal" superClass="fr.ac6.managedbuild.builder.gnu.cross"/>
+							<tool command="${workspace_loc}/../build/llvm/bin/clang" id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.539809941" name="MCU GCC Compiler" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler">
+								<option id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.fdata.1488808531" name="Place the data in their own section (-fdata-sections)" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.fdata" useByScannerDiscovery="false" value="true" valueType="boolean"/>
+								<option id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.ffunction.1721345879" name="Place the function in their own section (-ffunction-sections)" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.ffunction" useByScannerDiscovery="false" value="true" valueType="boolean"/>
+								<option id="fr.ac6.managedbuild.gnu.c.compiler.option.optimization.level.329487582" name="Optimization Level" superClass="fr.ac6.managedbuild.gnu.c.compiler.option.optimization.level" useByScannerDiscovery="false" value="fr.ac6.managedbuild.gnu.c.optimization.level.most" valueType="enumerated"/>
+								<option defaultValue="gnu.c.debugging.level.none" id="gnu.c.compiler.option.debugging.level.982338847" name="Debug Level" superClass="gnu.c.compiler.option.debugging.level" useByScannerDiscovery="false" value="gnu.c.debugging.level.default" valueType="enumerated"/>
+								<option id="gnu.c.compiler.option.preprocessor.def.symbols.494674065" name="Defined symbols (-D)" superClass="gnu.c.compiler.option.preprocessor.def.symbols" useByScannerDiscovery="false" valueType="definedSymbols">
+									<listOptionValue builtIn="false" value="USE_HAL_DRIVER"/>
+									<listOptionValue builtIn="false" value="SINGLE_T"/>
+									<listOptionValue builtIn="false" value="STM32L475xx"/>
+									<listOptionValue builtIn="false" value="MQTTCLIENT_PLATFORM_HEADER=MQTTCMSIS.h"/>
+									<listOptionValue builtIn="false" value="ENABLE_IOT_INFO"/>
+									<listOptionValue builtIn="false" value="ENABLE_IOT_ERROR"/>
+									<listOptionValue builtIn="false" value="SENSOR"/>
+									<listOptionValue builtIn="false" value="RFU"/>
+									<listOptionValue builtIn="false" value="USE_OFFLOAD_SSL"/>
+									<listOptionValue builtIn="false" value="SILHOUETTE"/>
+								</option>
+								<option id="gnu.c.compiler.option.include.paths.2004054720" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc}/../build/newlib-cygwin/install/arm-none-eabi/include&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/B-L475E-IOT01}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/Common}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/hts221}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/lis3mdl}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/lps22hb}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/lsm6dsl}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/vl53l0x}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/es_wifi}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/CMSIS/Include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/CMSIS/Device/ST/STM32L4xx/Include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/STM32L4xx_HAL_Driver/Inc}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/STM32L4xx_HAL_Driver/Inc/Legacy}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/config_files}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/aws/include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/aws/include/private}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/aws/FreeRTOS/portable/GCC/ARM_CM4_MPU}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/jsmn}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mbedtls/include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/pkcs11}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/tinycbor}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/coremark}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/beebs/include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/silhouette_demo/include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/st_code}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/common_demos/include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code}&quot;"/>
+								</option>
+								<option id="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other.1373364771" name="Other flags" superClass="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other" useByScannerDiscovery="false" value="--target=arm-none-eabi -mexecute-only" valueType="string"/>
+								<option id="gnu.c.compiler.option.optimization.flags.1790789173" name="Other optimization flags" superClass="gnu.c.compiler.option.optimization.flags" useByScannerDiscovery="false" value="-ffreestanding -fomit-frame-pointer" valueType="string"/>
+								<option id="gnu.c.compiler.option.dialect.std.1662796412" name="Language standard" superClass="gnu.c.compiler.option.dialect.std" useByScannerDiscovery="false" value="gnu.c.compiler.dialect.default" valueType="enumerated"/>
+								<option id="gnu.c.compiler.option.misc.verbose.529526232" name="Verbose (-v)" superClass="gnu.c.compiler.option.misc.verbose" useByScannerDiscovery="false" value="false" valueType="boolean"/>
+								<option id="gnu.c.compiler.option.include.files.2023568069" name="Include files (-include)" superClass="gnu.c.compiler.option.include.files" useByScannerDiscovery="false"/>
+								<inputType id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.c.1275476153" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.c"/>
+								<inputType id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.s.2055276972" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.s"/>
+							</tool>
+							<tool id="fr.ac6.managedbuild.tool.gnu.cross.cpp.compiler.1528202418" name="MCU G++ Compiler" superClass="fr.ac6.managedbuild.tool.gnu.cross.cpp.compiler">
+								<option id="fr.ac6.managedbuild.gnu.cpp.compiler.option.optimization.level.1252566874" name="Optimization Level" superClass="fr.ac6.managedbuild.gnu.cpp.compiler.option.optimization.level" useByScannerDiscovery="false" value="fr.ac6.managedbuild.gnu.cpp.optimization.level.most" valueType="enumerated"/>
+								<option defaultValue="gnu.cpp.compiler.debugging.level.none" id="gnu.cpp.compiler.option.debugging.level.1641920618" name="Debug Level" superClass="gnu.cpp.compiler.option.debugging.level" useByScannerDiscovery="false" valueType="enumerated"/>
+							</tool>
+							<tool command="${workspace_loc}/../build/llvm/bin/clang" id="fr.ac6.managedbuild.tool.gnu.cross.c.linker.446957068" name="MCU GCC Linker" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.linker">
+								<option id="fr.ac6.managedbuild.tool.gnu.cross.c.linker.script.802559191" name="Linker Script (-T)" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.linker.script" useByScannerDiscovery="false" value="${ProjDirPath}/STM32L475VGTx_FLASH_MPU.ld" valueType="string"/>
+								<option id="gnu.c.link.option.libs.1693871251" name="Libraries (-l)" superClass="gnu.c.link.option.libs" useByScannerDiscovery="false" valueType="libs">
+									<listOptionValue builtIn="false" value="c"/>
+									<listOptionValue builtIn="false" value="clang_rt.builtins-armhf"/>
+								</option>
+								<option id="gnu.c.link.option.ldflags.1676713704" name="Linker flags" superClass="gnu.c.link.option.ldflags" useByScannerDiscovery="false" value="--target=arm-none-eabi -fuse-ld=lld" valueType="string"/>
+								<option id="gnu.c.link.option.paths.557446761" name="Library search path (-L)" superClass="gnu.c.link.option.paths" useByScannerDiscovery="false" valueType="libPaths">
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc}/../build/newlib-cygwin/install/arm-none-eabi/lib&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc}/../build/compiler-rt/install/lib/baremetal&quot;"/>
+								</option>
+								<option id="gnu.c.link.option.userobjs.1502360106" name="Other objects" superClass="gnu.c.link.option.userobjs" useByScannerDiscovery="false"/>
+								<option id="fr.ac6.managedbuild.tool.gnu.cross.c.linker.gcsections.421441014" name="Discard unused sections (-Wl,--gc-sections)" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.linker.gcsections" useByScannerDiscovery="false" value="true" valueType="boolean"/>
+								<inputType id="cdt.managedbuild.tool.gnu.c.linker.input.1873575566" superClass="cdt.managedbuild.tool.gnu.c.linker.input">
+									<additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
+									<additionalInput kind="additionalinput" paths="$(LIBS)"/>
+								</inputType>
+							</tool>
+							<tool id="fr.ac6.managedbuild.tool.gnu.cross.cpp.linker.929804102" name="MCU G++ Linker" superClass="fr.ac6.managedbuild.tool.gnu.cross.cpp.linker"/>
+							<tool id="fr.ac6.managedbuild.tool.gnu.archiver.797983895" name="MCU GCC Archiver" superClass="fr.ac6.managedbuild.tool.gnu.archiver"/>
+							<tool command="${workspace_loc}/../build/llvm/bin/clang" id="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.98976266" name="MCU GCC Assembler" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release">
+								<option id="gnu.both.asm.option.include.paths.2056327997" name="Include paths (-I)" superClass="gnu.both.asm.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc}/../build/newlib-cygwin/install/arm-none-eabi/include&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/B-L475E-IOT01}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/Common}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/hts221}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/lis3mdl}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/lps22hb}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/lsm6dsl}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/vl53l0x}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/es_wifi}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/CMSIS/Include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/CMSIS/Device/ST/STM32L4xx/Include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/STM32L4xx_HAL_Driver/Inc}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/STM32L4xx_HAL_Driver/Inc/Legacy}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/config_files}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/aws/include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/aws/include/private}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/aws/FreeRTOS/portable/GCC/ARM_CM4_MPU}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/jsmn}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mbedtls/include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/pkcs11}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/tinycbor}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/coremark}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/beebs/include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/silhouette_demo/include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/st_code}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/common_demos/include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code}&quot;"/>
+								</option>
+								<option id="gnu.both.asm.option.flags.1522653585" name="Assembler flags" superClass="gnu.both.asm.option.flags" useByScannerDiscovery="false" value="--target=arm-none-eabi -c" valueType="string"/>
+								<inputType id="cdt.managedbuild.tool.gnu.assembler.input.1445876168" superClass="cdt.managedbuild.tool.gnu.assembler.input"/>
+								<inputType id="fr.ac6.managedbuild.tool.gnu.cross.assembler.input.1449114895" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.input"/>
+							</tool>
+						</toolChain>
+					</folderInfo>
+					<folderInfo id="fr.ac6.managedbuild.config.gnu.cross.exe.release.kage-coremark.561728385.lib/third_party/mcu_vendor/st/stm32l475_discovery" name="/" resourcePath="lib/third_party/mcu_vendor/st/stm32l475_discovery">
+						<toolChain id="fr.ac6.managedbuild.toolchain.gnu.cross.exe.release.kage-coremark.hal.934190479" name="Ac6 STM32 MCU GCC" unusedChildren="">
+							<tool id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.1756146409" name="MCU GCC Compiler" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.539809941">
+								<option id="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other.208055406" name="Other flags" superClass="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other" value="--target=arm-none-eabi -mllvm -enable-arm-kage-privilege-promotion -mexecute-only" valueType="string"/>
+								<inputType id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.c.2137847840" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.c"/>
+								<inputType id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.s.392307824" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.s"/>
+							</tool>
+							<tool id="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.1752656611" name="MCU GCC Assembler" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.98976266">
+								<inputType id="cdt.managedbuild.tool.gnu.assembler.input.216765530" superClass="cdt.managedbuild.tool.gnu.assembler.input"/>
+								<inputType id="fr.ac6.managedbuild.tool.gnu.cross.assembler.input.1459439582" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.input"/>
+							</tool>
+						</toolChain>
+					</folderInfo>
+					<folderInfo id="fr.ac6.managedbuild.config.gnu.cross.exe.release.kage-coremark.561728385.application_code/st_code" name="/" resourcePath="application_code/st_code">
+						<toolChain id="fr.ac6.managedbuild.toolchain.gnu.cross.exe.release.kage-coremark.hal-2.1194234258" name="Ac6 STM32 MCU GCC" unusedChildren="">
+							<tool id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.1717513488" name="MCU GCC Compiler" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.539809941">
+								<option id="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other.213749953" name="Other flags" superClass="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other" value="--target=arm-none-eabi -mllvm -enable-arm-kage-privilege-promotion -mexecute-only" valueType="string"/>
+								<inputType id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.c.1957690236" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.c"/>
+								<inputType id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.s.154945901" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.s"/>
+							</tool>
+							<tool id="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.179647762" name="MCU GCC Assembler" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.98976266">
+								<inputType id="cdt.managedbuild.tool.gnu.assembler.input.1266433489" superClass="cdt.managedbuild.tool.gnu.assembler.input"/>
+								<inputType id="fr.ac6.managedbuild.tool.gnu.cross.assembler.input.315376198" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.input"/>
+							</tool>
+						</toolChain>
+					</folderInfo>
+				</configuration>
+			</storageModule>
+			<storageModule moduleId="org.eclipse.cdt.core.externalSettings"/>
+		</cconfiguration>
+		<cconfiguration id="fr.ac6.managedbuild.config.gnu.cross.exe.release.kage-coremark.1247378527.428969154">
+			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="fr.ac6.managedbuild.config.gnu.cross.exe.release.kage-coremark.1247378527.428969154" moduleId="org.eclipse.cdt.core.settings" name="kage-os-only-coremark-2-threads">
+				<externalSettings/>
+				<extensions>
+					<extension id="org.eclipse.cdt.core.ELF" point="org.eclipse.cdt.core.BinaryParser"/>
+					<extension id="org.eclipse.cdt.core.GASErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="org.eclipse.cdt.core.GmakeErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="org.eclipse.cdt.core.GLDErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="org.eclipse.cdt.core.CWDLocator" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="org.eclipse.cdt.core.GCCErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+				</extensions>
+			</storageModule>
+			<storageModule moduleId="cdtBuildSystem" version="4.0.0">
+				<configuration artifactExtension="elf" artifactName="${ConfigName}" buildArtefactType="org.eclipse.cdt.build.core.buildArtefactType.exe" buildProperties="org.eclipse.cdt.build.core.buildArtefactType=org.eclipse.cdt.build.core.buildArtefactType.exe,org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release" cleanCommand="rm -rf" description="" id="fr.ac6.managedbuild.config.gnu.cross.exe.release.kage-coremark.1247378527.428969154" name="kage-os-only-coremark-2-threads" parent="fr.ac6.managedbuild.config.gnu.cross.exe.release" postannouncebuildStep="Running code scanner, Generating binary, and Printing size information:" postbuildStep="&quot;${workspace_loc}/../scripts/code-scanner.py&quot; &quot;${BuildArtifactFileBaseName}.elf&quot; &amp;&amp; arm-none-eabi-objcopy -O binary &quot;${BuildArtifactFileBaseName}.elf&quot; &quot;${BuildArtifactFileBaseName}.bin&quot; &amp;&amp; arm-none-eabi-objcopy -O ihex &quot;${BuildArtifactFileBaseName}.elf&quot; &quot;${BuildArtifactFileBaseName}.hex&quot; &amp;&amp; arm-none-eabi-size &quot;${BuildArtifactFileName}&quot;">
+					<folderInfo id="fr.ac6.managedbuild.config.gnu.cross.exe.release.kage-coremark.1247378527.428969154." name="/" resourcePath="">
+						<toolChain id="fr.ac6.managedbuild.toolchain.gnu.cross.exe.release.870694414" name="Ac6 STM32 MCU GCC" superClass="fr.ac6.managedbuild.toolchain.gnu.cross.exe.release">
+							<option id="fr.ac6.managedbuild.option.gnu.cross.mcu.1233786892" name="Mcu" superClass="fr.ac6.managedbuild.option.gnu.cross.mcu" useByScannerDiscovery="false" value="STM32L475VGTx" valueType="string"/>
+							<option id="fr.ac6.managedbuild.option.gnu.cross.fpu.718770046" name="Floating point hardware" superClass="fr.ac6.managedbuild.option.gnu.cross.fpu" useByScannerDiscovery="false" value="fr.ac6.managedbuild.option.gnu.cross.fpu.fpv4-sp-d16" valueType="enumerated"/>
+							<option id="fr.ac6.managedbuild.option.gnu.cross.floatabi.1784186010" name="Floating-point ABI" superClass="fr.ac6.managedbuild.option.gnu.cross.floatabi" useByScannerDiscovery="false" value="fr.ac6.managedbuild.option.gnu.cross.floatabi.hard" valueType="enumerated"/>
+							<option id="fr.ac6.managedbuild.option.gnu.cross.board.2125569181" name="Board" superClass="fr.ac6.managedbuild.option.gnu.cross.board" useByScannerDiscovery="false" value="STM32L475VG" valueType="string"/>
+							<option id="fr.ac6.managedbuild.option.gnu.cross.prefix.154435663" name="Prefix" superClass="fr.ac6.managedbuild.option.gnu.cross.prefix" useByScannerDiscovery="false" value="" valueType="string"/>
+							<targetPlatform archList="all" binaryParser="org.eclipse.cdt.core.ELF" id="fr.ac6.managedbuild.targetPlatform.gnu.cross.2107916437" isAbstract="false" osList="all" superClass="fr.ac6.managedbuild.targetPlatform.gnu.cross"/>
+							<builder buildPath="${workspace_loc:/coremark}/Release" id="fr.ac6.managedbuild.builder.gnu.cross.839575521" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="Gnu Make Builder" parallelBuildOn="true" parallelizationNumber="optimal" superClass="fr.ac6.managedbuild.builder.gnu.cross"/>
+							<tool command="${workspace_loc}/../build/llvm/bin/clang" id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.1851669415" name="MCU GCC Compiler" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler">
+								<option id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.fdata.617149588" name="Place the data in their own section (-fdata-sections)" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.fdata" useByScannerDiscovery="false" value="true" valueType="boolean"/>
+								<option id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.ffunction.926859971" name="Place the function in their own section (-ffunction-sections)" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.ffunction" useByScannerDiscovery="false" value="true" valueType="boolean"/>
+								<option id="fr.ac6.managedbuild.gnu.c.compiler.option.optimization.level.710853959" name="Optimization Level" superClass="fr.ac6.managedbuild.gnu.c.compiler.option.optimization.level" useByScannerDiscovery="false" value="fr.ac6.managedbuild.gnu.c.optimization.level.most" valueType="enumerated"/>
+								<option defaultValue="gnu.c.debugging.level.none" id="gnu.c.compiler.option.debugging.level.860445322" name="Debug Level" superClass="gnu.c.compiler.option.debugging.level" useByScannerDiscovery="false" value="gnu.c.debugging.level.default" valueType="enumerated"/>
+								<option id="gnu.c.compiler.option.preprocessor.def.symbols.1821274809" name="Defined symbols (-D)" superClass="gnu.c.compiler.option.preprocessor.def.symbols" useByScannerDiscovery="false" valueType="definedSymbols">
+									<listOptionValue builtIn="false" value="USE_HAL_DRIVER"/>
+									<listOptionValue builtIn="false" value="DOUBLE_T"/>
+									<listOptionValue builtIn="false" value="STM32L475xx"/>
+									<listOptionValue builtIn="false" value="MQTTCLIENT_PLATFORM_HEADER=MQTTCMSIS.h"/>
+									<listOptionValue builtIn="false" value="ENABLE_IOT_INFO"/>
+									<listOptionValue builtIn="false" value="ENABLE_IOT_ERROR"/>
+									<listOptionValue builtIn="false" value="SENSOR"/>
+									<listOptionValue builtIn="false" value="RFU"/>
+									<listOptionValue builtIn="false" value="USE_OFFLOAD_SSL"/>
+									<listOptionValue builtIn="false" value="SILHOUETTE"/>
+								</option>
+								<option id="gnu.c.compiler.option.include.paths.1994586851" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc}/../build/newlib-cygwin/install/arm-none-eabi/include&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/B-L475E-IOT01}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/Common}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/hts221}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/lis3mdl}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/lps22hb}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/lsm6dsl}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/vl53l0x}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/es_wifi}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/CMSIS/Include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/CMSIS/Device/ST/STM32L4xx/Include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/STM32L4xx_HAL_Driver/Inc}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/STM32L4xx_HAL_Driver/Inc/Legacy}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/config_files}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/aws/include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/aws/include/private}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/aws/FreeRTOS/portable/GCC/ARM_CM4_MPU}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/jsmn}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mbedtls/include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/pkcs11}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/tinycbor}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/coremark}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/beebs/include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/silhouette_demo/include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/st_code}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/common_demos/include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code}&quot;"/>
+								</option>
+								<option id="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other.1279019987" name="Other flags" superClass="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other" useByScannerDiscovery="false" value="--target=arm-none-eabi -mexecute-only" valueType="string"/>
+								<option id="gnu.c.compiler.option.optimization.flags.554633744" name="Other optimization flags" superClass="gnu.c.compiler.option.optimization.flags" useByScannerDiscovery="false" value="-ffreestanding -fomit-frame-pointer" valueType="string"/>
+								<option id="gnu.c.compiler.option.dialect.std.1624687862" name="Language standard" superClass="gnu.c.compiler.option.dialect.std" useByScannerDiscovery="false" value="gnu.c.compiler.dialect.default" valueType="enumerated"/>
+								<option id="gnu.c.compiler.option.misc.verbose.2015778441" name="Verbose (-v)" superClass="gnu.c.compiler.option.misc.verbose" useByScannerDiscovery="false" value="false" valueType="boolean"/>
+								<option id="gnu.c.compiler.option.include.files.987672569" name="Include files (-include)" superClass="gnu.c.compiler.option.include.files" useByScannerDiscovery="false"/>
+								<inputType id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.c.144995076" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.c"/>
+								<inputType id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.s.2129667154" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.s"/>
+							</tool>
+							<tool id="fr.ac6.managedbuild.tool.gnu.cross.cpp.compiler.358141088" name="MCU G++ Compiler" superClass="fr.ac6.managedbuild.tool.gnu.cross.cpp.compiler">
+								<option id="fr.ac6.managedbuild.gnu.cpp.compiler.option.optimization.level.1654309667" name="Optimization Level" superClass="fr.ac6.managedbuild.gnu.cpp.compiler.option.optimization.level" useByScannerDiscovery="false" value="fr.ac6.managedbuild.gnu.cpp.optimization.level.most" valueType="enumerated"/>
+								<option defaultValue="gnu.cpp.compiler.debugging.level.none" id="gnu.cpp.compiler.option.debugging.level.1705152666" name="Debug Level" superClass="gnu.cpp.compiler.option.debugging.level" useByScannerDiscovery="false" valueType="enumerated"/>
+							</tool>
+							<tool command="${workspace_loc}/../build/llvm/bin/clang" id="fr.ac6.managedbuild.tool.gnu.cross.c.linker.529920425" name="MCU GCC Linker" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.linker">
+								<option id="fr.ac6.managedbuild.tool.gnu.cross.c.linker.script.198927773" name="Linker Script (-T)" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.linker.script" useByScannerDiscovery="false" value="${ProjDirPath}/STM32L475VGTx_FLASH_MPU.ld" valueType="string"/>
+								<option id="gnu.c.link.option.libs.1843717020" name="Libraries (-l)" superClass="gnu.c.link.option.libs" useByScannerDiscovery="false" valueType="libs">
+									<listOptionValue builtIn="false" value="c"/>
+									<listOptionValue builtIn="false" value="clang_rt.builtins-armhf"/>
+								</option>
+								<option id="gnu.c.link.option.ldflags.216335337" name="Linker flags" superClass="gnu.c.link.option.ldflags" useByScannerDiscovery="false" value="--target=arm-none-eabi -fuse-ld=lld" valueType="string"/>
+								<option id="gnu.c.link.option.paths.1058717176" name="Library search path (-L)" superClass="gnu.c.link.option.paths" useByScannerDiscovery="false" valueType="libPaths">
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc}/../build/newlib-cygwin/install/arm-none-eabi/lib&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc}/../build/compiler-rt/install/lib/baremetal&quot;"/>
+								</option>
+								<option id="gnu.c.link.option.userobjs.20716658" name="Other objects" superClass="gnu.c.link.option.userobjs" useByScannerDiscovery="false"/>
+								<option id="fr.ac6.managedbuild.tool.gnu.cross.c.linker.gcsections.1934634903" name="Discard unused sections (-Wl,--gc-sections)" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.linker.gcsections" useByScannerDiscovery="false" value="true" valueType="boolean"/>
+								<inputType id="cdt.managedbuild.tool.gnu.c.linker.input.351874121" superClass="cdt.managedbuild.tool.gnu.c.linker.input">
+									<additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
+									<additionalInput kind="additionalinput" paths="$(LIBS)"/>
+								</inputType>
+							</tool>
+							<tool id="fr.ac6.managedbuild.tool.gnu.cross.cpp.linker.1974605843" name="MCU G++ Linker" superClass="fr.ac6.managedbuild.tool.gnu.cross.cpp.linker"/>
+							<tool id="fr.ac6.managedbuild.tool.gnu.archiver.2077598378" name="MCU GCC Archiver" superClass="fr.ac6.managedbuild.tool.gnu.archiver"/>
+							<tool command="${workspace_loc}/../build/llvm/bin/clang" id="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.1486210019" name="MCU GCC Assembler" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release">
+								<option id="gnu.both.asm.option.include.paths.198399553" name="Include paths (-I)" superClass="gnu.both.asm.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc}/../build/newlib-cygwin/install/arm-none-eabi/include&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/B-L475E-IOT01}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/Common}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/hts221}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/lis3mdl}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/lps22hb}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/lsm6dsl}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/vl53l0x}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/es_wifi}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/CMSIS/Include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/CMSIS/Device/ST/STM32L4xx/Include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/STM32L4xx_HAL_Driver/Inc}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/STM32L4xx_HAL_Driver/Inc/Legacy}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/config_files}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/aws/include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/aws/include/private}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/aws/FreeRTOS/portable/GCC/ARM_CM4_MPU}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/jsmn}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mbedtls/include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/pkcs11}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/tinycbor}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/coremark}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/beebs/include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/silhouette_demo/include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/st_code}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/common_demos/include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code}&quot;"/>
+								</option>
+								<option id="gnu.both.asm.option.flags.151016894" name="Assembler flags" superClass="gnu.both.asm.option.flags" useByScannerDiscovery="false" value="--target=arm-none-eabi -c" valueType="string"/>
+								<inputType id="cdt.managedbuild.tool.gnu.assembler.input.626613245" superClass="cdt.managedbuild.tool.gnu.assembler.input"/>
+								<inputType id="fr.ac6.managedbuild.tool.gnu.cross.assembler.input.1371229727" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.input"/>
+							</tool>
+						</toolChain>
+					</folderInfo>
+					<folderInfo id="fr.ac6.managedbuild.config.gnu.cross.exe.release.kage-coremark.1247378527.428969154.lib/third_party/mcu_vendor/st/stm32l475_discovery" name="/" resourcePath="lib/third_party/mcu_vendor/st/stm32l475_discovery">
+						<toolChain id="fr.ac6.managedbuild.toolchain.gnu.cross.exe.release.kage-coremark.hal.167452127.878168159" name="Ac6 STM32 MCU GCC" unusedChildren="">
+							<tool id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.798064183" name="MCU GCC Compiler" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.1851669415">
+								<option id="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other.757594037" name="Other flags" superClass="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other" value="--target=arm-none-eabi -mllvm -enable-arm-kage-privilege-promotion -mexecute-only" valueType="string"/>
+								<inputType id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.c.1211794715" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.c"/>
+								<inputType id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.s.1026771547" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.s"/>
+							</tool>
+							<tool id="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.1256675496" name="MCU GCC Assembler" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.1486210019">
+								<inputType id="cdt.managedbuild.tool.gnu.assembler.input.789789757" superClass="cdt.managedbuild.tool.gnu.assembler.input"/>
+								<inputType id="fr.ac6.managedbuild.tool.gnu.cross.assembler.input.1593460653" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.input"/>
+							</tool>
+						</toolChain>
+					</folderInfo>
+					<folderInfo id="fr.ac6.managedbuild.config.gnu.cross.exe.release.kage-coremark.1247378527.428969154.application_code/st_code" name="/" resourcePath="application_code/st_code">
+						<toolChain id="fr.ac6.managedbuild.toolchain.gnu.cross.exe.release.kage-coremark.hal-2.330712829.865922768" name="Ac6 STM32 MCU GCC" unusedChildren="">
+							<tool id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.1537774599" name="MCU GCC Compiler" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.1851669415">
+								<option id="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other.1603638688" name="Other flags" superClass="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other" value="--target=arm-none-eabi -mllvm -enable-arm-kage-privilege-promotion -mexecute-only" valueType="string"/>
+								<inputType id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.c.1750198233" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.c"/>
+								<inputType id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.s.1710294786" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.s"/>
+							</tool>
+							<tool id="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.913376746" name="MCU GCC Assembler" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.1486210019">
+								<inputType id="cdt.managedbuild.tool.gnu.assembler.input.1258101532" superClass="cdt.managedbuild.tool.gnu.assembler.input"/>
+								<inputType id="fr.ac6.managedbuild.tool.gnu.cross.assembler.input.785099491" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.input"/>
+							</tool>
+						</toolChain>
+					</folderInfo>
+				</configuration>
+			</storageModule>
+			<storageModule moduleId="org.eclipse.cdt.core.externalSettings"/>
+		</cconfiguration>
+		<cconfiguration id="fr.ac6.managedbuild.config.gnu.cross.exe.release.kage-coremark.2024570232.562158283">
+			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="fr.ac6.managedbuild.config.gnu.cross.exe.release.kage-coremark.2024570232.562158283" moduleId="org.eclipse.cdt.core.settings" name="kage-os-only-coremark-3-threads">
+				<externalSettings/>
+				<extensions>
+					<extension id="org.eclipse.cdt.core.ELF" point="org.eclipse.cdt.core.BinaryParser"/>
+					<extension id="org.eclipse.cdt.core.GASErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="org.eclipse.cdt.core.GmakeErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="org.eclipse.cdt.core.GLDErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="org.eclipse.cdt.core.CWDLocator" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="org.eclipse.cdt.core.GCCErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+				</extensions>
+			</storageModule>
+			<storageModule moduleId="cdtBuildSystem" version="4.0.0">
+				<configuration artifactExtension="elf" artifactName="${ConfigName}" buildArtefactType="org.eclipse.cdt.build.core.buildArtefactType.exe" buildProperties="org.eclipse.cdt.build.core.buildArtefactType=org.eclipse.cdt.build.core.buildArtefactType.exe,org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release" cleanCommand="rm -rf" description="" id="fr.ac6.managedbuild.config.gnu.cross.exe.release.kage-coremark.2024570232.562158283" name="kage-os-only-coremark-3-threads" parent="fr.ac6.managedbuild.config.gnu.cross.exe.release" postannouncebuildStep="Running code scanner, Generating binary, and Printing size information:" postbuildStep="&quot;${workspace_loc}/../scripts/code-scanner.py&quot; &quot;${BuildArtifactFileBaseName}.elf&quot; &amp;&amp; arm-none-eabi-objcopy -O binary &quot;${BuildArtifactFileBaseName}.elf&quot; &quot;${BuildArtifactFileBaseName}.bin&quot; &amp;&amp; arm-none-eabi-objcopy -O ihex &quot;${BuildArtifactFileBaseName}.elf&quot; &quot;${BuildArtifactFileBaseName}.hex&quot; &amp;&amp; arm-none-eabi-size &quot;${BuildArtifactFileName}&quot;">
+					<folderInfo id="fr.ac6.managedbuild.config.gnu.cross.exe.release.kage-coremark.2024570232.562158283." name="/" resourcePath="">
+						<toolChain id="fr.ac6.managedbuild.toolchain.gnu.cross.exe.release.338025747" name="Ac6 STM32 MCU GCC" superClass="fr.ac6.managedbuild.toolchain.gnu.cross.exe.release">
+							<option id="fr.ac6.managedbuild.option.gnu.cross.mcu.980007415" name="Mcu" superClass="fr.ac6.managedbuild.option.gnu.cross.mcu" useByScannerDiscovery="false" value="STM32L475VGTx" valueType="string"/>
+							<option id="fr.ac6.managedbuild.option.gnu.cross.fpu.1381792262" name="Floating point hardware" superClass="fr.ac6.managedbuild.option.gnu.cross.fpu" useByScannerDiscovery="false" value="fr.ac6.managedbuild.option.gnu.cross.fpu.fpv4-sp-d16" valueType="enumerated"/>
+							<option id="fr.ac6.managedbuild.option.gnu.cross.floatabi.521715487" name="Floating-point ABI" superClass="fr.ac6.managedbuild.option.gnu.cross.floatabi" useByScannerDiscovery="false" value="fr.ac6.managedbuild.option.gnu.cross.floatabi.hard" valueType="enumerated"/>
+							<option id="fr.ac6.managedbuild.option.gnu.cross.board.1496934698" name="Board" superClass="fr.ac6.managedbuild.option.gnu.cross.board" useByScannerDiscovery="false" value="STM32L475VG" valueType="string"/>
+							<option id="fr.ac6.managedbuild.option.gnu.cross.prefix.463090396" name="Prefix" superClass="fr.ac6.managedbuild.option.gnu.cross.prefix" useByScannerDiscovery="false" value="" valueType="string"/>
+							<targetPlatform archList="all" binaryParser="org.eclipse.cdt.core.ELF" id="fr.ac6.managedbuild.targetPlatform.gnu.cross.595636168" isAbstract="false" osList="all" superClass="fr.ac6.managedbuild.targetPlatform.gnu.cross"/>
+							<builder buildPath="${workspace_loc:/coremark}/Release" id="fr.ac6.managedbuild.builder.gnu.cross.641982012" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="Gnu Make Builder" parallelBuildOn="true" parallelizationNumber="optimal" superClass="fr.ac6.managedbuild.builder.gnu.cross"/>
+							<tool command="${workspace_loc}/../build/llvm/bin/clang" id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.287489408" name="MCU GCC Compiler" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler">
+								<option id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.fdata.703843388" name="Place the data in their own section (-fdata-sections)" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.fdata" useByScannerDiscovery="false" value="true" valueType="boolean"/>
+								<option id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.ffunction.156805108" name="Place the function in their own section (-ffunction-sections)" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.ffunction" useByScannerDiscovery="false" value="true" valueType="boolean"/>
+								<option id="fr.ac6.managedbuild.gnu.c.compiler.option.optimization.level.141930889" name="Optimization Level" superClass="fr.ac6.managedbuild.gnu.c.compiler.option.optimization.level" useByScannerDiscovery="false" value="fr.ac6.managedbuild.gnu.c.optimization.level.most" valueType="enumerated"/>
+								<option defaultValue="gnu.c.debugging.level.none" id="gnu.c.compiler.option.debugging.level.366806768" name="Debug Level" superClass="gnu.c.compiler.option.debugging.level" useByScannerDiscovery="false" value="gnu.c.debugging.level.default" valueType="enumerated"/>
+								<option id="gnu.c.compiler.option.preprocessor.def.symbols.1453226020" name="Defined symbols (-D)" superClass="gnu.c.compiler.option.preprocessor.def.symbols" useByScannerDiscovery="false" valueType="definedSymbols">
+									<listOptionValue builtIn="false" value="USE_HAL_DRIVER"/>
+									<listOptionValue builtIn="false" value="TRIPLE_T"/>
+									<listOptionValue builtIn="false" value="STM32L475xx"/>
+									<listOptionValue builtIn="false" value="MQTTCLIENT_PLATFORM_HEADER=MQTTCMSIS.h"/>
+									<listOptionValue builtIn="false" value="ENABLE_IOT_INFO"/>
+									<listOptionValue builtIn="false" value="ENABLE_IOT_ERROR"/>
+									<listOptionValue builtIn="false" value="SENSOR"/>
+									<listOptionValue builtIn="false" value="RFU"/>
+									<listOptionValue builtIn="false" value="USE_OFFLOAD_SSL"/>
+									<listOptionValue builtIn="false" value="SILHOUETTE"/>
+								</option>
+								<option id="gnu.c.compiler.option.include.paths.1020412802" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc}/../build/newlib-cygwin/install/arm-none-eabi/include&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/B-L475E-IOT01}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/Common}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/hts221}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/lis3mdl}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/lps22hb}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/lsm6dsl}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/vl53l0x}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/es_wifi}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/CMSIS/Include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/CMSIS/Device/ST/STM32L4xx/Include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/STM32L4xx_HAL_Driver/Inc}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/STM32L4xx_HAL_Driver/Inc/Legacy}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/config_files}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/aws/include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/aws/include/private}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/aws/FreeRTOS/portable/GCC/ARM_CM4_MPU}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/jsmn}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mbedtls/include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/pkcs11}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/tinycbor}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/coremark}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/beebs/include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/silhouette_demo/include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/st_code}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/common_demos/include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code}&quot;"/>
+								</option>
+								<option id="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other.1579262727" name="Other flags" superClass="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other" useByScannerDiscovery="false" value="--target=arm-none-eabi -mexecute-only" valueType="string"/>
+								<option id="gnu.c.compiler.option.optimization.flags.1868020603" name="Other optimization flags" superClass="gnu.c.compiler.option.optimization.flags" useByScannerDiscovery="false" value="-ffreestanding -fomit-frame-pointer" valueType="string"/>
+								<option id="gnu.c.compiler.option.dialect.std.1904425607" name="Language standard" superClass="gnu.c.compiler.option.dialect.std" useByScannerDiscovery="false" value="gnu.c.compiler.dialect.default" valueType="enumerated"/>
+								<option id="gnu.c.compiler.option.misc.verbose.601712999" name="Verbose (-v)" superClass="gnu.c.compiler.option.misc.verbose" useByScannerDiscovery="false" value="false" valueType="boolean"/>
+								<option id="gnu.c.compiler.option.include.files.2071676355" name="Include files (-include)" superClass="gnu.c.compiler.option.include.files" useByScannerDiscovery="false"/>
+								<inputType id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.c.341323895" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.c"/>
+								<inputType id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.s.560368891" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.s"/>
+							</tool>
+							<tool id="fr.ac6.managedbuild.tool.gnu.cross.cpp.compiler.419361324" name="MCU G++ Compiler" superClass="fr.ac6.managedbuild.tool.gnu.cross.cpp.compiler">
+								<option id="fr.ac6.managedbuild.gnu.cpp.compiler.option.optimization.level.587786751" name="Optimization Level" superClass="fr.ac6.managedbuild.gnu.cpp.compiler.option.optimization.level" useByScannerDiscovery="false" value="fr.ac6.managedbuild.gnu.cpp.optimization.level.most" valueType="enumerated"/>
+								<option defaultValue="gnu.cpp.compiler.debugging.level.none" id="gnu.cpp.compiler.option.debugging.level.1788092538" name="Debug Level" superClass="gnu.cpp.compiler.option.debugging.level" useByScannerDiscovery="false" valueType="enumerated"/>
+							</tool>
+							<tool command="${workspace_loc}/../build/llvm/bin/clang" id="fr.ac6.managedbuild.tool.gnu.cross.c.linker.1139398248" name="MCU GCC Linker" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.linker">
+								<option id="fr.ac6.managedbuild.tool.gnu.cross.c.linker.script.287515464" name="Linker Script (-T)" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.linker.script" useByScannerDiscovery="false" value="${ProjDirPath}/STM32L475VGTx_FLASH_MPU.ld" valueType="string"/>
+								<option id="gnu.c.link.option.libs.489706955" name="Libraries (-l)" superClass="gnu.c.link.option.libs" useByScannerDiscovery="false" valueType="libs">
+									<listOptionValue builtIn="false" value="c"/>
+									<listOptionValue builtIn="false" value="clang_rt.builtins-armhf"/>
+								</option>
+								<option id="gnu.c.link.option.ldflags.693380771" name="Linker flags" superClass="gnu.c.link.option.ldflags" useByScannerDiscovery="false" value="--target=arm-none-eabi -fuse-ld=lld" valueType="string"/>
+								<option id="gnu.c.link.option.paths.533876469" name="Library search path (-L)" superClass="gnu.c.link.option.paths" useByScannerDiscovery="false" valueType="libPaths">
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc}/../build/newlib-cygwin/install/arm-none-eabi/lib&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc}/../build/compiler-rt/install/lib/baremetal&quot;"/>
+								</option>
+								<option id="gnu.c.link.option.userobjs.960880054" name="Other objects" superClass="gnu.c.link.option.userobjs" useByScannerDiscovery="false"/>
+								<option id="fr.ac6.managedbuild.tool.gnu.cross.c.linker.gcsections.2086966921" name="Discard unused sections (-Wl,--gc-sections)" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.linker.gcsections" useByScannerDiscovery="false" value="true" valueType="boolean"/>
+								<inputType id="cdt.managedbuild.tool.gnu.c.linker.input.310541550" superClass="cdt.managedbuild.tool.gnu.c.linker.input">
+									<additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
+									<additionalInput kind="additionalinput" paths="$(LIBS)"/>
+								</inputType>
+							</tool>
+							<tool id="fr.ac6.managedbuild.tool.gnu.cross.cpp.linker.691764519" name="MCU G++ Linker" superClass="fr.ac6.managedbuild.tool.gnu.cross.cpp.linker"/>
+							<tool id="fr.ac6.managedbuild.tool.gnu.archiver.53892401" name="MCU GCC Archiver" superClass="fr.ac6.managedbuild.tool.gnu.archiver"/>
+							<tool command="${workspace_loc}/../build/llvm/bin/clang" id="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.1006803802" name="MCU GCC Assembler" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release">
+								<option id="gnu.both.asm.option.include.paths.1526704183" name="Include paths (-I)" superClass="gnu.both.asm.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc}/../build/newlib-cygwin/install/arm-none-eabi/include&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/B-L475E-IOT01}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/Common}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/hts221}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/lis3mdl}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/lps22hb}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/lsm6dsl}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/vl53l0x}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/es_wifi}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/CMSIS/Include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/CMSIS/Device/ST/STM32L4xx/Include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/STM32L4xx_HAL_Driver/Inc}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/STM32L4xx_HAL_Driver/Inc/Legacy}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/config_files}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/aws/include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/aws/include/private}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/aws/FreeRTOS/portable/GCC/ARM_CM4_MPU}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/jsmn}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mbedtls/include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/pkcs11}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/tinycbor}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/coremark}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/beebs/include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/silhouette_demo/include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/st_code}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/common_demos/include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code}&quot;"/>
+								</option>
+								<option id="gnu.both.asm.option.flags.1336003202" name="Assembler flags" superClass="gnu.both.asm.option.flags" useByScannerDiscovery="false" value="--target=arm-none-eabi -c" valueType="string"/>
+								<inputType id="cdt.managedbuild.tool.gnu.assembler.input.10482683" superClass="cdt.managedbuild.tool.gnu.assembler.input"/>
+								<inputType id="fr.ac6.managedbuild.tool.gnu.cross.assembler.input.1522734129" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.input"/>
+							</tool>
+						</toolChain>
+					</folderInfo>
+					<folderInfo id="fr.ac6.managedbuild.config.gnu.cross.exe.release.kage-coremark.2024570232.562158283.lib/third_party/mcu_vendor/st/stm32l475_discovery" name="/" resourcePath="lib/third_party/mcu_vendor/st/stm32l475_discovery">
+						<toolChain id="fr.ac6.managedbuild.toolchain.gnu.cross.exe.release.kage-coremark.hal.1801913794.1672822604" name="Ac6 STM32 MCU GCC" unusedChildren="">
+							<tool id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.531730883" name="MCU GCC Compiler" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.287489408">
+								<option id="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other.2027396987" name="Other flags" superClass="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other" value="--target=arm-none-eabi -mllvm -enable-arm-kage-privilege-promotion -mexecute-only" valueType="string"/>
+								<inputType id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.c.846424704" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.c"/>
+								<inputType id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.s.1756988674" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.s"/>
+							</tool>
+							<tool id="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.2072549921" name="MCU GCC Assembler" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.1006803802">
+								<inputType id="cdt.managedbuild.tool.gnu.assembler.input.680849041" superClass="cdt.managedbuild.tool.gnu.assembler.input"/>
+								<inputType id="fr.ac6.managedbuild.tool.gnu.cross.assembler.input.1792015846" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.input"/>
+							</tool>
+						</toolChain>
+					</folderInfo>
+					<folderInfo id="fr.ac6.managedbuild.config.gnu.cross.exe.release.kage-coremark.2024570232.562158283.application_code/st_code" name="/" resourcePath="application_code/st_code">
+						<toolChain id="fr.ac6.managedbuild.toolchain.gnu.cross.exe.release.kage-coremark.hal-2.1000411984.1431148539" name="Ac6 STM32 MCU GCC" unusedChildren="">
+							<tool id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.1742744619" name="MCU GCC Compiler" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.287489408">
+								<option id="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other.92027345" name="Other flags" superClass="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other" value="--target=arm-none-eabi -mllvm -enable-arm-kage-privilege-promotion -mexecute-only" valueType="string"/>
+								<inputType id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.c.833792527" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.c"/>
+								<inputType id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.s.1234881695" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.s"/>
+							</tool>
+							<tool id="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.2049261398" name="MCU GCC Assembler" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.1006803802">
+								<inputType id="cdt.managedbuild.tool.gnu.assembler.input.831758995" superClass="cdt.managedbuild.tool.gnu.assembler.input"/>
+								<inputType id="fr.ac6.managedbuild.tool.gnu.cross.assembler.input.126731358" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.input"/>
+							</tool>
+						</toolChain>
+					</folderInfo>
+				</configuration>
+			</storageModule>
+			<storageModule moduleId="org.eclipse.cdt.core.externalSettings"/>
+		</cconfiguration>
+	</storageModule>
+	<storageModule moduleId="refreshScope" versionNumber="2">
+		<configuration configurationName="kage-coremark">
+			<resource resourceType="PROJECT" workspacePath="/coremark"/>
+		</configuration>
+	</storageModule>
+	<storageModule moduleId="scannerConfiguration">
+		<autodiscovery enabled="false" problemReportingEnabled="false" selectedProfileId=""/>
+		<scannerConfigBuildInfo instanceId="fr.ac6.managedbuild.config.gnu.cross.exe.release.kage-coremark;fr.ac6.managedbuild.config.gnu.cross.exe.release.kage-coremark.;fr.ac6.managedbuild.tool.gnu.cross.c.compiler.kage-coremark;fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.c.kage-coremark">
+			<autodiscovery enabled="false" problemReportingEnabled="false" selectedProfileId=""/>
+		</scannerConfigBuildInfo>
+	</storageModule>
+	<storageModule moduleId="cdtBuildSystem" version="4.0.0">
+		<project id="coremark.fr.ac6.managedbuild.target.gnu.cross.exe" name="Executable" projectType="fr.ac6.managedbuild.target.gnu.cross.exe"/>
+	</storageModule>
+	<storageModule moduleId="org.eclipse.cdt.core.LanguageSettingsProviders"/>
+	<storageModule moduleId="org.eclipse.cdt.make.core.buildtargets"/>
+	<storageModule moduleId="org.eclipse.cdt.internal.ui.text.commentOwnerProjectMappings"/>
 </cproject>

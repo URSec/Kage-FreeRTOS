@@ -1,170 +1,458 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<?fileVersion 4.0.0?>
-<cproject storage_type_id="org.eclipse.cdt.core.XmlProjectDescriptionStorage">
-  <storageModule moduleId="org.eclipse.cdt.core.settings">
-    <!-- Configuration of baseline-coremark -->
-    <cconfiguration id="fr.ac6.managedbuild.config.gnu.cross.exe.release.baseline-coremark">
-      <storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="fr.ac6.managedbuild.config.gnu.cross.exe.release.baseline-coremark" moduleId="org.eclipse.cdt.core.settings" name="baseline-coremark">
-        <externalSettings/>
-        <extensions>
-          <extension id="org.eclipse.cdt.core.ELF" point="org.eclipse.cdt.core.BinaryParser"/>
-          <extension id="org.eclipse.cdt.core.GASErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
-          <extension id="org.eclipse.cdt.core.GmakeErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
-          <extension id="org.eclipse.cdt.core.GLDErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
-          <extension id="org.eclipse.cdt.core.CWDLocator" point="org.eclipse.cdt.core.ErrorParser"/>
-          <extension id="org.eclipse.cdt.core.GCCErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
-        </extensions>
-      </storageModule>
-      <storageModule moduleId="cdtBuildSystem" version="4.0.0">
-        <configuration artifactExtension="elf" artifactName="${ConfigName}" buildArtefactType="org.eclipse.cdt.build.core.buildArtefactType.exe" buildProperties="org.eclipse.cdt.build.core.buildArtefactType=org.eclipse.cdt.build.core.buildArtefactType.exe,org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release" cleanCommand="rm -rf" description="" id="fr.ac6.managedbuild.config.gnu.cross.exe.release.baseline-coremark" name="baseline-coremark" parent="fr.ac6.managedbuild.config.gnu.cross.exe.release" postannouncebuildStep="Generating binary and Printing size information:" postbuildStep="arm-none-eabi-objcopy -O binary &quot;${BuildArtifactFileBaseName}.elf&quot; &quot;${BuildArtifactFileBaseName}.bin&quot; &amp;&amp; arm-none-eabi-objcopy -O ihex &quot;${BuildArtifactFileBaseName}.elf&quot; &quot;${BuildArtifactFileBaseName}.hex&quot; &amp;&amp; arm-none-eabi-size &quot;${BuildArtifactFileName}&quot;">
-          <folderInfo id="fr.ac6.managedbuild.config.gnu.cross.exe.release.baseline-coremark." name="/" resourcePath="">
-            <toolChain id="fr.ac6.managedbuild.toolchain.gnu.cross.exe.release.baseline-coremark" name="Ac6 STM32 MCU GCC" superClass="fr.ac6.managedbuild.toolchain.gnu.cross.exe.release">
-              <option id="fr.ac6.managedbuild.option.gnu.cross.mcu.baseline-coremark" name="Mcu" superClass="fr.ac6.managedbuild.option.gnu.cross.mcu" value="STM32L475VGTx" valueType="string"/>
-              <option id="fr.ac6.managedbuild.option.gnu.cross.fpu.baseline-coremark" name="Floating point hardware" superClass="fr.ac6.managedbuild.option.gnu.cross.fpu" value="fr.ac6.managedbuild.option.gnu.cross.fpu.fpv4-sp-d16" valueType="enumerated"/>
-              <option id="fr.ac6.managedbuild.option.gnu.cross.floatabi.baseline-coremark" name="Floating-point ABI" superClass="fr.ac6.managedbuild.option.gnu.cross.floatabi" value="fr.ac6.managedbuild.option.gnu.cross.floatabi.hard" valueType="enumerated"/>
-              <option id="fr.ac6.managedbuild.option.gnu.cross.board.baseline-coremark" name="Board" superClass="fr.ac6.managedbuild.option.gnu.cross.board" value="STM32L475VG" valueType="string"/>
-              <option id="fr.ac6.managedbuild.option.gnu.cross.prefix.baseline-coremark" name="Prefix" superClass="fr.ac6.managedbuild.option.gnu.cross.prefix" value="" valueType="string"/>
-              <targetPlatform archList="all" binaryParser="org.eclipse.cdt.core.ELF" id="fr.ac6.managedbuild.targetPlatform.gnu.cross.baseline-coremark" isAbstract="false" osList="all" superClass="fr.ac6.managedbuild.targetPlatform.gnu.cross"/>
-              <builder buildPath="${workspace_loc:/freertos_coremark_clang}/Release" id="fr.ac6.managedbuild.builder.gnu.cross.baseline-coremark" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="Gnu Make Builder" parallelBuildOn="true" parallelizationNumber="optimal" superClass="fr.ac6.managedbuild.builder.gnu.cross"/>
-              <tool command="${workspace_loc}/../build/llvm/bin/clang" id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.baseline-coremark" name="MCU GCC Compiler" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler">
-                <option id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.fdata.baseline-coremark" name="Place the data in their own section (-fdata-sections)" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.fdata" useByScannerDiscovery="false" value="true" valueType="boolean"/>
-                <option id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.ffunction.baseline-coremark" name="Place the function in their own section (-ffunction-sections)" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.ffunction" useByScannerDiscovery="false" value="true" valueType="boolean"/>
-                <option id="fr.ac6.managedbuild.gnu.c.compiler.option.optimization.level.baseline-coremark" name="Optimization Level" superClass="fr.ac6.managedbuild.gnu.c.compiler.option.optimization.level" useByScannerDiscovery="false" value="fr.ac6.managedbuild.gnu.c.optimization.level.most" valueType="enumerated"/>
-                <option defaultValue="gnu.c.debugging.level.none" id="gnu.c.compiler.option.debugging.level.baseline-coremark" name="Debug Level" superClass="gnu.c.compiler.option.debugging.level" useByScannerDiscovery="false" value="gnu.c.debugging.level.default" valueType="enumerated"/>
-                <option id="gnu.c.compiler.option.preprocessor.def.symbols.baseline-coremark" name="Defined symbols (-D)" superClass="gnu.c.compiler.option.preprocessor.def.symbols" useByScannerDiscovery="false" valueType="definedSymbols">
-                  <listOptionValue builtIn="false" value="USE_HAL_DRIVER"/>
-                  <listOptionValue builtIn="false" value="STM32L475xx"/>
-                  <listOptionValue builtIn="false" value="MQTTCLIENT_PLATFORM_HEADER=MQTTCMSIS.h"/>
-                  <listOptionValue builtIn="false" value="ENABLE_IOT_INFO"/>
-                  <listOptionValue builtIn="false" value="ENABLE_IOT_ERROR"/>
-                  <listOptionValue builtIn="false" value="SENSOR"/>
-                  <listOptionValue builtIn="false" value="RFU"/>
-                  <listOptionValue builtIn="false" value="USE_OFFLOAD_SSL"/>
-                </option>
-                <option id="gnu.c.compiler.option.include.paths.baseline-coremark" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
-                  <listOptionValue builtIn="false" value="&quot;${openstm32_compiler_path}/../arm-none-eabi/include&quot;"/>
-                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/B-L475E-IOT01}&quot;"/>
-                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/Common}&quot;"/>
-                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/hts221}&quot;"/>
-                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/lis3mdl}&quot;"/>
-                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/lps22hb}&quot;"/>
-                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/lsm6dsl}&quot;"/>
-                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/vl53l0x}&quot;"/>
-                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/es_wifi}&quot;"/>
-                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/CMSIS/Include}&quot;"/>
-                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/CMSIS/Device/ST/STM32L4xx/Include}&quot;"/>
-                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/STM32L4xx_HAL_Driver/Inc}&quot;"/>
-                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/STM32L4xx_HAL_Driver/Inc/Legacy}&quot;"/>
-                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/config_files}&quot;"/>
-                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/aws/include}&quot;"/>
-                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/aws/include/private}&quot;"/>
-                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/aws/FreeRTOS/portable/GCC/ARM_CM4F}&quot;"/>
-                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/jsmn}&quot;"/>
-                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mbedtls/include}&quot;"/>
-                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/pkcs11}&quot;"/>
-                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/tinycbor}&quot;"/>
-                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/coremark}&quot;"/>
-                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/st_code}&quot;"/>
-                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/common_demos/include}&quot;"/>
-                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code}&quot;"/>
-                </option>
-                <option id="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other.baseline-coremark" name="Other flags" superClass="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other" useByScannerDiscovery="false" value="--target=arm-none-eabi" valueType="string"/>
-                <option id="gnu.c.compiler.option.optimization.flags.baseline-coremark" name="Other optimization flags" superClass="gnu.c.compiler.option.optimization.flags" useByScannerDiscovery="false" value="-ffreestanding -fomit-frame-pointer" valueType="string"/>
-                <option id="gnu.c.compiler.option.dialect.std.baseline-coremark" name="Language standard" superClass="gnu.c.compiler.option.dialect.std" useByScannerDiscovery="false" value="gnu.c.compiler.dialect.default" valueType="enumerated"/>
-                <option id="gnu.c.compiler.option.misc.verbose.baseline-coremark" name="Verbose (-v)" superClass="gnu.c.compiler.option.misc.verbose" useByScannerDiscovery="false" value="false" valueType="boolean"/>
-                <option id="gnu.c.compiler.option.include.files.baseline-coremark" name="Include files (-include)" superClass="gnu.c.compiler.option.include.files" useByScannerDiscovery="false"/>
-                <inputType id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.c.baseline-coremark" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.c"/>
-                <inputType id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.s.baseline-coremark" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.s"/>
-              </tool>
-              <tool id="fr.ac6.managedbuild.tool.gnu.cross.cpp.compiler.baseline-coremark" name="MCU G++ Compiler" superClass="fr.ac6.managedbuild.tool.gnu.cross.cpp.compiler">
-                <option id="fr.ac6.managedbuild.gnu.cpp.compiler.option.optimization.level.baseline-coremark" name="Optimization Level" superClass="fr.ac6.managedbuild.gnu.cpp.compiler.option.optimization.level" useByScannerDiscovery="false" value="fr.ac6.managedbuild.gnu.cpp.optimization.level.most" valueType="enumerated"/>
-                <option defaultValue="gnu.cpp.compiler.debugging.level.none" id="gnu.cpp.compiler.option.debugging.level.baseline-coremark" name="Debug Level" superClass="gnu.cpp.compiler.option.debugging.level" useByScannerDiscovery="false" valueType="enumerated"/>
-              </tool>
-              <tool command="${workspace_loc}/../build/llvm/bin/clang" id="fr.ac6.managedbuild.tool.gnu.cross.c.linker.baseline-coremark" name="MCU GCC Linker" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.linker">
-                <option id="fr.ac6.managedbuild.tool.gnu.cross.c.linker.script.baseline-coremark" name="Linker Script (-T)" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.linker.script" useByScannerDiscovery="false" value="${ProjDirPath}/STM32L475VGTx_FLASH.ld" valueType="string"/>
-                <option id="gnu.c.link.option.libs.baseline-coremark" name="Libraries (-l)" superClass="gnu.c.link.option.libs" useByScannerDiscovery="false" valueType="libs">
-                  <listOptionValue builtIn="false" value="c"/>
-                  <listOptionValue builtIn="false" value="gcc"/>
-                </option>
-                <option id="gnu.c.link.option.ldflags.baseline-coremark" name="Linker flags" superClass="gnu.c.link.option.ldflags" useByScannerDiscovery="false" value="--target=arm-none-eabi -fuse-ld=lld" valueType="string"/>
-                <option id="gnu.c.link.option.paths.baseline-coremark" name="Library search path (-L)" superClass="gnu.c.link.option.paths" useByScannerDiscovery="false" valueType="libPaths">
-                  <listOptionValue builtIn="false" value="&quot;${openstm32_compiler_path}/../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard&quot;"/>
-                  <listOptionValue builtIn="false" value="&quot;${openstm32_compiler_path}/../arm-none-eabi/lib&quot;"/>
-                  <listOptionValue builtIn="false" value="&quot;${openstm32_compiler_path}/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard&quot;"/>
-                  <listOptionValue builtIn="false" value="&quot;${openstm32_compiler_path}/../lib/gcc/arm-none-eabi/7.3.1&quot;"/>
-                  <listOptionValue builtIn="false" value="&quot;${openstm32_compiler_path}/../lib/gcc&quot;"/>
-                </option>
-                <option id="gnu.c.link.option.userobjs.baseline-coremark" name="Other objects" superClass="gnu.c.link.option.userobjs" useByScannerDiscovery="false" valueType="userObjs">
-                  <listOptionValue builtIn="false" value="&quot;${openstm32_compiler_path}/../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/crt0.o&quot;"/>
-                  <listOptionValue builtIn="false" value="&quot;${openstm32_compiler_path}/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/crti.o&quot;"/>
-                  <listOptionValue builtIn="false" value="&quot;${openstm32_compiler_path}/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/crtbegin.o&quot;"/>
-                  <listOptionValue builtIn="false" value="&quot;${openstm32_compiler_path}/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/crtend.o&quot;"/>
-                  <listOptionValue builtIn="false" value="&quot;${openstm32_compiler_path}/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/crtn.o&quot;"/>
-                </option>
-                <option id="fr.ac6.managedbuild.tool.gnu.cross.c.linker.gcsections.baseline-coremark" name="Discard unused sections (-Wl,--gc-sections)" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.linker.gcsections" useByScannerDiscovery="false" value="true" valueType="boolean"/>
-                <inputType id="cdt.managedbuild.tool.gnu.c.linker.input.baseline-coremark" superClass="cdt.managedbuild.tool.gnu.c.linker.input">
-                  <additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
-                  <additionalInput kind="additionalinput" paths="$(LIBS)"/>
-                </inputType>
-              </tool>
-              <tool id="fr.ac6.managedbuild.tool.gnu.cross.cpp.linker.baseline-coremark" name="MCU G++ Linker" superClass="fr.ac6.managedbuild.tool.gnu.cross.cpp.linker"/>
-              <tool id="fr.ac6.managedbuild.tool.gnu.archiver.baseline-coremark" name="MCU GCC Archiver" superClass="fr.ac6.managedbuild.tool.gnu.archiver"/>
-              <tool command="${workspace_loc}/../build/llvm/bin/clang" id="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.baseline-coremark" name="MCU GCC Assembler" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release">
-                <option id="gnu.both.asm.option.include.paths.baseline-coremark" name="Include paths (-I)" superClass="gnu.both.asm.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
-                  <listOptionValue builtIn="false" value="&quot;${openstm32_compiler_path}/../arm-none-eabi/include&quot;"/>
-                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/B-L475E-IOT01}&quot;"/>
-                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/Common}&quot;"/>
-                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/hts221}&quot;"/>
-                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/lis3mdl}&quot;"/>
-                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/lps22hb}&quot;"/>
-                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/lsm6dsl}&quot;"/>
-                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/vl53l0x}&quot;"/>
-                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/es_wifi}&quot;"/>
-                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/CMSIS/Include}&quot;"/>
-                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/CMSIS/Device/ST/STM32L4xx/Include}&quot;"/>
-                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/STM32L4xx_HAL_Driver/Inc}&quot;"/>
-                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/STM32L4xx_HAL_Driver/Inc/Legacy}&quot;"/>
-                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/config_files}&quot;"/>
-                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/aws/include}&quot;"/>
-                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/aws/include/private}&quot;"/>
-                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/aws/FreeRTOS/portable/GCC/ARM_CM4F}&quot;"/>
-                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/jsmn}&quot;"/>
-                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mbedtls/include}&quot;"/>
-                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/pkcs11}&quot;"/>
-                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/tinycbor}&quot;"/>
-                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/coremark}&quot;"/>
-                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/st_code}&quot;"/>
-                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/common_demos/include}&quot;"/>
-                  <listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code}&quot;"/>
-                </option>
-                <option id="gnu.both.asm.option.flags.baseline-coremark" name="Assembler flags" superClass="gnu.both.asm.option.flags" useByScannerDiscovery="false" value="--target=arm-none-eabi -c" valueType="string"/>
-                <inputType id="cdt.managedbuild.tool.gnu.assembler.input.baseline-coremark" superClass="cdt.managedbuild.tool.gnu.assembler.input"/>
-                <inputType id="fr.ac6.managedbuild.tool.gnu.cross.assembler.input.baseline-coremark" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.input"/>
-              </tool>
-            </toolChain>
-          </folderInfo>
-          <sourceEntries>
-          </sourceEntries>
-        </configuration>
-      </storageModule>
-      <storageModule moduleId="org.eclipse.cdt.core.externalSettings"/>
-    </cconfiguration>
-  </storageModule>
-  <storageModule moduleId="refreshScope" versionNumber="2">
-    <configuration configurationName="baseline-coremark">
-      <resource resourceType="PROJECT" workspacePath="/freertos_coremark_clang"/>
-    </configuration>
-  </storageModule>
-  <storageModule moduleId="scannerConfiguration">
-    <autodiscovery enabled="false" problemReportingEnabled="false" selectedProfileId=""/>
-    <scannerConfigBuildInfo instanceId="fr.ac6.managedbuild.config.gnu.cross.exe.release.baseline-coremark;fr.ac6.managedbuild.config.gnu.cross.exe.release.baseline-coremark.;fr.ac6.managedbuild.tool.gnu.cross.c.compiler.baseline-coremark;fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.c.baseline-coremark">
-      <autodiscovery enabled="false" problemReportingEnabled="false" selectedProfileId=""/>
-    </scannerConfigBuildInfo>
-  </storageModule>
-  <storageModule moduleId="cdtBuildSystem" version="4.0.0">
-    <project id="freertos_coremark_clang.fr.ac6.managedbuild.target.gnu.cross.exe" name="Executable" projectType="fr.ac6.managedbuild.target.gnu.cross.exe"/>
-  </storageModule>
-  <storageModule moduleId="org.eclipse.cdt.core.LanguageSettingsProviders"/>
-  <storageModule moduleId="org.eclipse.cdt.make.core.buildtargets"/>
-  <storageModule moduleId="org.eclipse.cdt.internal.ui.text.commentOwnerProjectMappings"/>
+<?fileVersion 4.0.0?><cproject storage_type_id="org.eclipse.cdt.core.XmlProjectDescriptionStorage">
+	<storageModule moduleId="org.eclipse.cdt.core.settings">
+		<!-- Configuration of baseline-coremark -->
+		<cconfiguration id="fr.ac6.managedbuild.config.gnu.cross.exe.release.baseline-coremark">
+			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="fr.ac6.managedbuild.config.gnu.cross.exe.release.baseline-coremark" moduleId="org.eclipse.cdt.core.settings" name="baseline-coremark-1-thread">
+				<externalSettings/>
+				<extensions>
+					<extension id="org.eclipse.cdt.core.ELF" point="org.eclipse.cdt.core.BinaryParser"/>
+					<extension id="org.eclipse.cdt.core.GASErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="org.eclipse.cdt.core.GmakeErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="org.eclipse.cdt.core.GLDErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="org.eclipse.cdt.core.CWDLocator" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="org.eclipse.cdt.core.GCCErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+				</extensions>
+			</storageModule>
+			<storageModule moduleId="cdtBuildSystem" version="4.0.0">
+				<configuration artifactExtension="elf" artifactName="${ConfigName}" buildArtefactType="org.eclipse.cdt.build.core.buildArtefactType.exe" buildProperties="org.eclipse.cdt.build.core.buildArtefactType=org.eclipse.cdt.build.core.buildArtefactType.exe,org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release" cleanCommand="rm -rf" description="" id="fr.ac6.managedbuild.config.gnu.cross.exe.release.baseline-coremark" name="baseline-coremark-1-thread" parent="fr.ac6.managedbuild.config.gnu.cross.exe.release" postannouncebuildStep="Generating binary and Printing size information:" postbuildStep="arm-none-eabi-objcopy -O binary &quot;${BuildArtifactFileBaseName}.elf&quot; &quot;${BuildArtifactFileBaseName}.bin&quot; &amp;&amp; arm-none-eabi-objcopy -O ihex &quot;${BuildArtifactFileBaseName}.elf&quot; &quot;${BuildArtifactFileBaseName}.hex&quot; &amp;&amp; arm-none-eabi-size &quot;${BuildArtifactFileName}&quot;">
+					<folderInfo id="fr.ac6.managedbuild.config.gnu.cross.exe.release.baseline-coremark." name="/" resourcePath="">
+						<toolChain id="fr.ac6.managedbuild.toolchain.gnu.cross.exe.release.baseline-coremark" name="Ac6 STM32 MCU GCC" superClass="fr.ac6.managedbuild.toolchain.gnu.cross.exe.release">
+							<option id="fr.ac6.managedbuild.option.gnu.cross.mcu.baseline-coremark" name="Mcu" superClass="fr.ac6.managedbuild.option.gnu.cross.mcu" useByScannerDiscovery="false" value="STM32L475VGTx" valueType="string"/>
+							<option id="fr.ac6.managedbuild.option.gnu.cross.fpu.baseline-coremark" name="Floating point hardware" superClass="fr.ac6.managedbuild.option.gnu.cross.fpu" useByScannerDiscovery="false" value="fr.ac6.managedbuild.option.gnu.cross.fpu.fpv4-sp-d16" valueType="enumerated"/>
+							<option id="fr.ac6.managedbuild.option.gnu.cross.floatabi.baseline-coremark" name="Floating-point ABI" superClass="fr.ac6.managedbuild.option.gnu.cross.floatabi" useByScannerDiscovery="false" value="fr.ac6.managedbuild.option.gnu.cross.floatabi.hard" valueType="enumerated"/>
+							<option id="fr.ac6.managedbuild.option.gnu.cross.board.baseline-coremark" name="Board" superClass="fr.ac6.managedbuild.option.gnu.cross.board" useByScannerDiscovery="false" value="STM32L475VG" valueType="string"/>
+							<option id="fr.ac6.managedbuild.option.gnu.cross.prefix.baseline-coremark" name="Prefix" superClass="fr.ac6.managedbuild.option.gnu.cross.prefix" useByScannerDiscovery="false" value="" valueType="string"/>
+							<targetPlatform archList="all" binaryParser="org.eclipse.cdt.core.ELF" id="fr.ac6.managedbuild.targetPlatform.gnu.cross.baseline-coremark" isAbstract="false" osList="all" superClass="fr.ac6.managedbuild.targetPlatform.gnu.cross"/>
+							<builder buildPath="${workspace_loc:/freertos_coremark_clang}/Release" id="fr.ac6.managedbuild.builder.gnu.cross.baseline-coremark" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="Gnu Make Builder" parallelBuildOn="true" parallelizationNumber="optimal" superClass="fr.ac6.managedbuild.builder.gnu.cross"/>
+							<tool command="${workspace_loc}/../build/llvm/bin/clang" id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.baseline-coremark" name="MCU GCC Compiler" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler">
+								<option id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.fdata.baseline-coremark" name="Place the data in their own section (-fdata-sections)" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.fdata" useByScannerDiscovery="false" value="true" valueType="boolean"/>
+								<option id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.ffunction.baseline-coremark" name="Place the function in their own section (-ffunction-sections)" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.ffunction" useByScannerDiscovery="false" value="true" valueType="boolean"/>
+								<option id="fr.ac6.managedbuild.gnu.c.compiler.option.optimization.level.baseline-coremark" name="Optimization Level" superClass="fr.ac6.managedbuild.gnu.c.compiler.option.optimization.level" useByScannerDiscovery="false" value="fr.ac6.managedbuild.gnu.c.optimization.level.most" valueType="enumerated"/>
+								<option defaultValue="gnu.c.debugging.level.none" id="gnu.c.compiler.option.debugging.level.baseline-coremark" name="Debug Level" superClass="gnu.c.compiler.option.debugging.level" useByScannerDiscovery="false" value="gnu.c.debugging.level.default" valueType="enumerated"/>
+								<option id="gnu.c.compiler.option.preprocessor.def.symbols.baseline-coremark" name="Defined symbols (-D)" superClass="gnu.c.compiler.option.preprocessor.def.symbols" useByScannerDiscovery="false" valueType="definedSymbols">
+									<listOptionValue builtIn="false" value="USE_HAL_DRIVER"/>
+									<listOptionValue builtIn="false" value="SINGLE_T"/>
+									<listOptionValue builtIn="false" value="STM32L475xx"/>
+									<listOptionValue builtIn="false" value="MQTTCLIENT_PLATFORM_HEADER=MQTTCMSIS.h"/>
+									<listOptionValue builtIn="false" value="ENABLE_IOT_INFO"/>
+									<listOptionValue builtIn="false" value="ENABLE_IOT_ERROR"/>
+									<listOptionValue builtIn="false" value="SENSOR"/>
+									<listOptionValue builtIn="false" value="RFU"/>
+									<listOptionValue builtIn="false" value="USE_OFFLOAD_SSL"/>
+								</option>
+								<option id="gnu.c.compiler.option.include.paths.baseline-coremark" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
+									<listOptionValue builtIn="false" value="&quot;${openstm32_compiler_path}/../arm-none-eabi/include&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/B-L475E-IOT01}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/Common}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/hts221}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/lis3mdl}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/lps22hb}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/lsm6dsl}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/vl53l0x}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/es_wifi}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/CMSIS/Include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/CMSIS/Device/ST/STM32L4xx/Include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/STM32L4xx_HAL_Driver/Inc}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/STM32L4xx_HAL_Driver/Inc/Legacy}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/config_files}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/aws/include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/aws/include/private}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/aws/FreeRTOS/portable/GCC/ARM_CM4F}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/jsmn}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mbedtls/include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/pkcs11}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/tinycbor}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/coremark}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/st_code}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/common_demos/include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code}&quot;"/>
+								</option>
+								<option id="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other.baseline-coremark" name="Other flags" superClass="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other" useByScannerDiscovery="false" value="--target=arm-none-eabi" valueType="string"/>
+								<option id="gnu.c.compiler.option.optimization.flags.baseline-coremark" name="Other optimization flags" superClass="gnu.c.compiler.option.optimization.flags" useByScannerDiscovery="false" value="-ffreestanding -fomit-frame-pointer" valueType="string"/>
+								<option id="gnu.c.compiler.option.dialect.std.baseline-coremark" name="Language standard" superClass="gnu.c.compiler.option.dialect.std" useByScannerDiscovery="false" value="gnu.c.compiler.dialect.default" valueType="enumerated"/>
+								<option id="gnu.c.compiler.option.misc.verbose.baseline-coremark" name="Verbose (-v)" superClass="gnu.c.compiler.option.misc.verbose" useByScannerDiscovery="false" value="false" valueType="boolean"/>
+								<option id="gnu.c.compiler.option.include.files.baseline-coremark" name="Include files (-include)" superClass="gnu.c.compiler.option.include.files" useByScannerDiscovery="false"/>
+								<inputType id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.c.baseline-coremark" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.c"/>
+								<inputType id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.s.baseline-coremark" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.s"/>
+							</tool>
+							<tool id="fr.ac6.managedbuild.tool.gnu.cross.cpp.compiler.baseline-coremark" name="MCU G++ Compiler" superClass="fr.ac6.managedbuild.tool.gnu.cross.cpp.compiler">
+								<option id="fr.ac6.managedbuild.gnu.cpp.compiler.option.optimization.level.baseline-coremark" name="Optimization Level" superClass="fr.ac6.managedbuild.gnu.cpp.compiler.option.optimization.level" useByScannerDiscovery="false" value="fr.ac6.managedbuild.gnu.cpp.optimization.level.most" valueType="enumerated"/>
+								<option defaultValue="gnu.cpp.compiler.debugging.level.none" id="gnu.cpp.compiler.option.debugging.level.baseline-coremark" name="Debug Level" superClass="gnu.cpp.compiler.option.debugging.level" useByScannerDiscovery="false" valueType="enumerated"/>
+							</tool>
+							<tool command="${workspace_loc}/../build/llvm/bin/clang" id="fr.ac6.managedbuild.tool.gnu.cross.c.linker.baseline-coremark" name="MCU GCC Linker" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.linker">
+								<option id="fr.ac6.managedbuild.tool.gnu.cross.c.linker.script.baseline-coremark" name="Linker Script (-T)" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.linker.script" useByScannerDiscovery="false" value="${ProjDirPath}/STM32L475VGTx_FLASH.ld" valueType="string"/>
+								<option id="gnu.c.link.option.libs.baseline-coremark" name="Libraries (-l)" superClass="gnu.c.link.option.libs" useByScannerDiscovery="false" valueType="libs">
+									<listOptionValue builtIn="false" value="c"/>
+									<listOptionValue builtIn="false" value="gcc"/>
+								</option>
+								<option id="gnu.c.link.option.ldflags.baseline-coremark" name="Linker flags" superClass="gnu.c.link.option.ldflags" useByScannerDiscovery="false" value="--target=arm-none-eabi -fuse-ld=lld" valueType="string"/>
+								<option id="gnu.c.link.option.paths.baseline-coremark" name="Library search path (-L)" superClass="gnu.c.link.option.paths" useByScannerDiscovery="false" valueType="libPaths">
+									<listOptionValue builtIn="false" value="&quot;${openstm32_compiler_path}/../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${openstm32_compiler_path}/../arm-none-eabi/lib&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${openstm32_compiler_path}/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${openstm32_compiler_path}/../lib/gcc/arm-none-eabi/7.3.1&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${openstm32_compiler_path}/../lib/gcc&quot;"/>
+								</option>
+								<option id="gnu.c.link.option.userobjs.baseline-coremark" name="Other objects" superClass="gnu.c.link.option.userobjs" useByScannerDiscovery="false" valueType="userObjs">
+									<listOptionValue builtIn="false" value="&quot;${openstm32_compiler_path}/../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/crt0.o&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${openstm32_compiler_path}/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/crti.o&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${openstm32_compiler_path}/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/crtbegin.o&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${openstm32_compiler_path}/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/crtend.o&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${openstm32_compiler_path}/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/crtn.o&quot;"/>
+								</option>
+								<option id="fr.ac6.managedbuild.tool.gnu.cross.c.linker.gcsections.baseline-coremark" name="Discard unused sections (-Wl,--gc-sections)" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.linker.gcsections" useByScannerDiscovery="false" value="true" valueType="boolean"/>
+								<inputType id="cdt.managedbuild.tool.gnu.c.linker.input.baseline-coremark" superClass="cdt.managedbuild.tool.gnu.c.linker.input">
+									<additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
+									<additionalInput kind="additionalinput" paths="$(LIBS)"/>
+								</inputType>
+							</tool>
+							<tool id="fr.ac6.managedbuild.tool.gnu.cross.cpp.linker.baseline-coremark" name="MCU G++ Linker" superClass="fr.ac6.managedbuild.tool.gnu.cross.cpp.linker"/>
+							<tool id="fr.ac6.managedbuild.tool.gnu.archiver.baseline-coremark" name="MCU GCC Archiver" superClass="fr.ac6.managedbuild.tool.gnu.archiver"/>
+							<tool command="${workspace_loc}/../build/llvm/bin/clang" id="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.baseline-coremark" name="MCU GCC Assembler" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release">
+								<option id="gnu.both.asm.option.include.paths.baseline-coremark" name="Include paths (-I)" superClass="gnu.both.asm.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
+									<listOptionValue builtIn="false" value="&quot;${openstm32_compiler_path}/../arm-none-eabi/include&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/B-L475E-IOT01}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/Common}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/hts221}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/lis3mdl}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/lps22hb}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/lsm6dsl}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/vl53l0x}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/es_wifi}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/CMSIS/Include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/CMSIS/Device/ST/STM32L4xx/Include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/STM32L4xx_HAL_Driver/Inc}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/STM32L4xx_HAL_Driver/Inc/Legacy}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/config_files}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/aws/include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/aws/include/private}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/aws/FreeRTOS/portable/GCC/ARM_CM4F}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/jsmn}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mbedtls/include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/pkcs11}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/tinycbor}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/coremark}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/st_code}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/common_demos/include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code}&quot;"/>
+								</option>
+								<option id="gnu.both.asm.option.flags.baseline-coremark" name="Assembler flags" superClass="gnu.both.asm.option.flags" useByScannerDiscovery="false" value="--target=arm-none-eabi -c" valueType="string"/>
+								<inputType id="cdt.managedbuild.tool.gnu.assembler.input.baseline-coremark" superClass="cdt.managedbuild.tool.gnu.assembler.input"/>
+								<inputType id="fr.ac6.managedbuild.tool.gnu.cross.assembler.input.baseline-coremark" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.input"/>
+							</tool>
+						</toolChain>
+					</folderInfo>
+				</configuration>
+			</storageModule>
+			<storageModule moduleId="org.eclipse.cdt.core.externalSettings"/>
+		</cconfiguration>
+		<cconfiguration id="fr.ac6.managedbuild.config.gnu.cross.exe.release.baseline-coremark.490091901">
+			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="fr.ac6.managedbuild.config.gnu.cross.exe.release.baseline-coremark.490091901" moduleId="org.eclipse.cdt.core.settings" name="baseline-coremark-2-threads">
+				<externalSettings/>
+				<extensions>
+					<extension id="org.eclipse.cdt.core.ELF" point="org.eclipse.cdt.core.BinaryParser"/>
+					<extension id="org.eclipse.cdt.core.GASErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="org.eclipse.cdt.core.GmakeErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="org.eclipse.cdt.core.GLDErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="org.eclipse.cdt.core.CWDLocator" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="org.eclipse.cdt.core.GCCErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+				</extensions>
+			</storageModule>
+			<storageModule moduleId="cdtBuildSystem" version="4.0.0">
+				<configuration artifactExtension="elf" artifactName="${ConfigName}" buildArtefactType="org.eclipse.cdt.build.core.buildArtefactType.exe" buildProperties="org.eclipse.cdt.build.core.buildArtefactType=org.eclipse.cdt.build.core.buildArtefactType.exe,org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release" cleanCommand="rm -rf" description="" id="fr.ac6.managedbuild.config.gnu.cross.exe.release.baseline-coremark.490091901" name="baseline-coremark-2-threads" parent="fr.ac6.managedbuild.config.gnu.cross.exe.release" postannouncebuildStep="Generating binary and Printing size information:" postbuildStep="arm-none-eabi-objcopy -O binary &quot;${BuildArtifactFileBaseName}.elf&quot; &quot;${BuildArtifactFileBaseName}.bin&quot; &amp;&amp; arm-none-eabi-objcopy -O ihex &quot;${BuildArtifactFileBaseName}.elf&quot; &quot;${BuildArtifactFileBaseName}.hex&quot; &amp;&amp; arm-none-eabi-size &quot;${BuildArtifactFileName}&quot;">
+					<folderInfo id="fr.ac6.managedbuild.config.gnu.cross.exe.release.baseline-coremark.490091901." name="/" resourcePath="">
+						<toolChain id="fr.ac6.managedbuild.toolchain.gnu.cross.exe.release.606122678" name="Ac6 STM32 MCU GCC" superClass="fr.ac6.managedbuild.toolchain.gnu.cross.exe.release">
+							<option id="fr.ac6.managedbuild.option.gnu.cross.mcu.1491532742" name="Mcu" superClass="fr.ac6.managedbuild.option.gnu.cross.mcu" useByScannerDiscovery="false" value="STM32L475VGTx" valueType="string"/>
+							<option id="fr.ac6.managedbuild.option.gnu.cross.fpu.1492878263" name="Floating point hardware" superClass="fr.ac6.managedbuild.option.gnu.cross.fpu" useByScannerDiscovery="false" value="fr.ac6.managedbuild.option.gnu.cross.fpu.fpv4-sp-d16" valueType="enumerated"/>
+							<option id="fr.ac6.managedbuild.option.gnu.cross.floatabi.46597543" name="Floating-point ABI" superClass="fr.ac6.managedbuild.option.gnu.cross.floatabi" useByScannerDiscovery="false" value="fr.ac6.managedbuild.option.gnu.cross.floatabi.hard" valueType="enumerated"/>
+							<option id="fr.ac6.managedbuild.option.gnu.cross.board.717087083" name="Board" superClass="fr.ac6.managedbuild.option.gnu.cross.board" useByScannerDiscovery="false" value="STM32L475VG" valueType="string"/>
+							<option id="fr.ac6.managedbuild.option.gnu.cross.prefix.1692207201" name="Prefix" superClass="fr.ac6.managedbuild.option.gnu.cross.prefix" useByScannerDiscovery="false" value="" valueType="string"/>
+							<targetPlatform archList="all" binaryParser="org.eclipse.cdt.core.ELF" id="fr.ac6.managedbuild.targetPlatform.gnu.cross.188908231" isAbstract="false" osList="all" superClass="fr.ac6.managedbuild.targetPlatform.gnu.cross"/>
+							<builder buildPath="${workspace_loc:/freertos_coremark_clang}/Release" id="fr.ac6.managedbuild.builder.gnu.cross.1627199717" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="Gnu Make Builder" parallelBuildOn="true" parallelizationNumber="optimal" superClass="fr.ac6.managedbuild.builder.gnu.cross"/>
+							<tool command="${workspace_loc}/../build/llvm/bin/clang" id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.759849152" name="MCU GCC Compiler" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler">
+								<option id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.fdata.1726650470" name="Place the data in their own section (-fdata-sections)" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.fdata" useByScannerDiscovery="false" value="true" valueType="boolean"/>
+								<option id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.ffunction.1731334114" name="Place the function in their own section (-ffunction-sections)" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.ffunction" useByScannerDiscovery="false" value="true" valueType="boolean"/>
+								<option id="fr.ac6.managedbuild.gnu.c.compiler.option.optimization.level.373143731" name="Optimization Level" superClass="fr.ac6.managedbuild.gnu.c.compiler.option.optimization.level" useByScannerDiscovery="false" value="fr.ac6.managedbuild.gnu.c.optimization.level.most" valueType="enumerated"/>
+								<option defaultValue="gnu.c.debugging.level.none" id="gnu.c.compiler.option.debugging.level.1352415003" name="Debug Level" superClass="gnu.c.compiler.option.debugging.level" useByScannerDiscovery="false" value="gnu.c.debugging.level.default" valueType="enumerated"/>
+								<option id="gnu.c.compiler.option.preprocessor.def.symbols.2028103235" name="Defined symbols (-D)" superClass="gnu.c.compiler.option.preprocessor.def.symbols" useByScannerDiscovery="false" valueType="definedSymbols">
+									<listOptionValue builtIn="false" value="USE_HAL_DRIVER"/>
+									<listOptionValue builtIn="false" value="DOUBLE_T"/>
+									<listOptionValue builtIn="false" value="STM32L475xx"/>
+									<listOptionValue builtIn="false" value="MQTTCLIENT_PLATFORM_HEADER=MQTTCMSIS.h"/>
+									<listOptionValue builtIn="false" value="ENABLE_IOT_INFO"/>
+									<listOptionValue builtIn="false" value="ENABLE_IOT_ERROR"/>
+									<listOptionValue builtIn="false" value="SENSOR"/>
+									<listOptionValue builtIn="false" value="RFU"/>
+									<listOptionValue builtIn="false" value="USE_OFFLOAD_SSL"/>
+								</option>
+								<option id="gnu.c.compiler.option.include.paths.1583911537" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
+									<listOptionValue builtIn="false" value="&quot;${openstm32_compiler_path}/../arm-none-eabi/include&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/B-L475E-IOT01}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/Common}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/hts221}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/lis3mdl}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/lps22hb}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/lsm6dsl}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/vl53l0x}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/es_wifi}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/CMSIS/Include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/CMSIS/Device/ST/STM32L4xx/Include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/STM32L4xx_HAL_Driver/Inc}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/STM32L4xx_HAL_Driver/Inc/Legacy}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/config_files}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/aws/include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/aws/include/private}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/aws/FreeRTOS/portable/GCC/ARM_CM4F}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/jsmn}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mbedtls/include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/pkcs11}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/tinycbor}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/coremark}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/st_code}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/common_demos/include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code}&quot;"/>
+								</option>
+								<option id="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other.855867577" name="Other flags" superClass="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other" useByScannerDiscovery="false" value="--target=arm-none-eabi" valueType="string"/>
+								<option id="gnu.c.compiler.option.optimization.flags.829101132" name="Other optimization flags" superClass="gnu.c.compiler.option.optimization.flags" useByScannerDiscovery="false" value="-ffreestanding -fomit-frame-pointer" valueType="string"/>
+								<option id="gnu.c.compiler.option.dialect.std.977224203" name="Language standard" superClass="gnu.c.compiler.option.dialect.std" useByScannerDiscovery="false" value="gnu.c.compiler.dialect.default" valueType="enumerated"/>
+								<option id="gnu.c.compiler.option.misc.verbose.1495840175" name="Verbose (-v)" superClass="gnu.c.compiler.option.misc.verbose" useByScannerDiscovery="false" value="false" valueType="boolean"/>
+								<option id="gnu.c.compiler.option.include.files.948444682" name="Include files (-include)" superClass="gnu.c.compiler.option.include.files" useByScannerDiscovery="false"/>
+								<inputType id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.c.433981716" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.c"/>
+								<inputType id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.s.1577341971" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.s"/>
+							</tool>
+							<tool id="fr.ac6.managedbuild.tool.gnu.cross.cpp.compiler.279544336" name="MCU G++ Compiler" superClass="fr.ac6.managedbuild.tool.gnu.cross.cpp.compiler">
+								<option id="fr.ac6.managedbuild.gnu.cpp.compiler.option.optimization.level.1519175633" name="Optimization Level" superClass="fr.ac6.managedbuild.gnu.cpp.compiler.option.optimization.level" useByScannerDiscovery="false" value="fr.ac6.managedbuild.gnu.cpp.optimization.level.most" valueType="enumerated"/>
+								<option defaultValue="gnu.cpp.compiler.debugging.level.none" id="gnu.cpp.compiler.option.debugging.level.924118578" name="Debug Level" superClass="gnu.cpp.compiler.option.debugging.level" useByScannerDiscovery="false" valueType="enumerated"/>
+							</tool>
+							<tool command="${workspace_loc}/../build/llvm/bin/clang" id="fr.ac6.managedbuild.tool.gnu.cross.c.linker.1058501404" name="MCU GCC Linker" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.linker">
+								<option id="fr.ac6.managedbuild.tool.gnu.cross.c.linker.script.187876439" name="Linker Script (-T)" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.linker.script" useByScannerDiscovery="false" value="${ProjDirPath}/STM32L475VGTx_FLASH.ld" valueType="string"/>
+								<option id="gnu.c.link.option.libs.1937766375" name="Libraries (-l)" superClass="gnu.c.link.option.libs" useByScannerDiscovery="false" valueType="libs">
+									<listOptionValue builtIn="false" value="c"/>
+									<listOptionValue builtIn="false" value="gcc"/>
+								</option>
+								<option id="gnu.c.link.option.ldflags.607847424" name="Linker flags" superClass="gnu.c.link.option.ldflags" useByScannerDiscovery="false" value="--target=arm-none-eabi -fuse-ld=lld" valueType="string"/>
+								<option id="gnu.c.link.option.paths.777141916" name="Library search path (-L)" superClass="gnu.c.link.option.paths" useByScannerDiscovery="false" valueType="libPaths">
+									<listOptionValue builtIn="false" value="&quot;${openstm32_compiler_path}/../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${openstm32_compiler_path}/../arm-none-eabi/lib&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${openstm32_compiler_path}/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${openstm32_compiler_path}/../lib/gcc/arm-none-eabi/7.3.1&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${openstm32_compiler_path}/../lib/gcc&quot;"/>
+								</option>
+								<option id="gnu.c.link.option.userobjs.697345481" name="Other objects" superClass="gnu.c.link.option.userobjs" useByScannerDiscovery="false" valueType="userObjs">
+									<listOptionValue builtIn="false" value="&quot;${openstm32_compiler_path}/../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/crt0.o&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${openstm32_compiler_path}/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/crti.o&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${openstm32_compiler_path}/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/crtbegin.o&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${openstm32_compiler_path}/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/crtend.o&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${openstm32_compiler_path}/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/crtn.o&quot;"/>
+								</option>
+								<option id="fr.ac6.managedbuild.tool.gnu.cross.c.linker.gcsections.1428769772" name="Discard unused sections (-Wl,--gc-sections)" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.linker.gcsections" useByScannerDiscovery="false" value="true" valueType="boolean"/>
+								<inputType id="cdt.managedbuild.tool.gnu.c.linker.input.528249353" superClass="cdt.managedbuild.tool.gnu.c.linker.input">
+									<additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
+									<additionalInput kind="additionalinput" paths="$(LIBS)"/>
+								</inputType>
+							</tool>
+							<tool id="fr.ac6.managedbuild.tool.gnu.cross.cpp.linker.1340531861" name="MCU G++ Linker" superClass="fr.ac6.managedbuild.tool.gnu.cross.cpp.linker"/>
+							<tool id="fr.ac6.managedbuild.tool.gnu.archiver.915110356" name="MCU GCC Archiver" superClass="fr.ac6.managedbuild.tool.gnu.archiver"/>
+							<tool command="${workspace_loc}/../build/llvm/bin/clang" id="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.1115117020" name="MCU GCC Assembler" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release">
+								<option id="gnu.both.asm.option.include.paths.294589689" name="Include paths (-I)" superClass="gnu.both.asm.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
+									<listOptionValue builtIn="false" value="&quot;${openstm32_compiler_path}/../arm-none-eabi/include&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/B-L475E-IOT01}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/Common}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/hts221}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/lis3mdl}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/lps22hb}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/lsm6dsl}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/vl53l0x}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/es_wifi}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/CMSIS/Include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/CMSIS/Device/ST/STM32L4xx/Include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/STM32L4xx_HAL_Driver/Inc}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/STM32L4xx_HAL_Driver/Inc/Legacy}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/config_files}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/aws/include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/aws/include/private}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/aws/FreeRTOS/portable/GCC/ARM_CM4F}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/jsmn}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mbedtls/include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/pkcs11}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/tinycbor}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/coremark}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/st_code}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/common_demos/include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code}&quot;"/>
+								</option>
+								<option id="gnu.both.asm.option.flags.1414620798" name="Assembler flags" superClass="gnu.both.asm.option.flags" useByScannerDiscovery="false" value="--target=arm-none-eabi -c" valueType="string"/>
+								<inputType id="cdt.managedbuild.tool.gnu.assembler.input.46418183" superClass="cdt.managedbuild.tool.gnu.assembler.input"/>
+								<inputType id="fr.ac6.managedbuild.tool.gnu.cross.assembler.input.2057255404" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.input"/>
+							</tool>
+						</toolChain>
+					</folderInfo>
+				</configuration>
+			</storageModule>
+			<storageModule moduleId="org.eclipse.cdt.core.externalSettings"/>
+		</cconfiguration>
+		<cconfiguration id="fr.ac6.managedbuild.config.gnu.cross.exe.release.baseline-coremark.451088617">
+			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="fr.ac6.managedbuild.config.gnu.cross.exe.release.baseline-coremark.451088617" moduleId="org.eclipse.cdt.core.settings" name="baseline-coremark-3-threads">
+				<externalSettings/>
+				<extensions>
+					<extension id="org.eclipse.cdt.core.ELF" point="org.eclipse.cdt.core.BinaryParser"/>
+					<extension id="org.eclipse.cdt.core.GASErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="org.eclipse.cdt.core.GmakeErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="org.eclipse.cdt.core.GLDErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="org.eclipse.cdt.core.CWDLocator" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="org.eclipse.cdt.core.GCCErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+				</extensions>
+			</storageModule>
+			<storageModule moduleId="cdtBuildSystem" version="4.0.0">
+				<configuration artifactExtension="elf" artifactName="${ConfigName}" buildArtefactType="org.eclipse.cdt.build.core.buildArtefactType.exe" buildProperties="org.eclipse.cdt.build.core.buildArtefactType=org.eclipse.cdt.build.core.buildArtefactType.exe,org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release" cleanCommand="rm -rf" description="" id="fr.ac6.managedbuild.config.gnu.cross.exe.release.baseline-coremark.451088617" name="baseline-coremark-3-threads" parent="fr.ac6.managedbuild.config.gnu.cross.exe.release" postannouncebuildStep="Generating binary and Printing size information:" postbuildStep="arm-none-eabi-objcopy -O binary &quot;${BuildArtifactFileBaseName}.elf&quot; &quot;${BuildArtifactFileBaseName}.bin&quot; &amp;&amp; arm-none-eabi-objcopy -O ihex &quot;${BuildArtifactFileBaseName}.elf&quot; &quot;${BuildArtifactFileBaseName}.hex&quot; &amp;&amp; arm-none-eabi-size &quot;${BuildArtifactFileName}&quot;">
+					<folderInfo id="fr.ac6.managedbuild.config.gnu.cross.exe.release.baseline-coremark.451088617." name="/" resourcePath="">
+						<toolChain id="fr.ac6.managedbuild.toolchain.gnu.cross.exe.release.1781107722" name="Ac6 STM32 MCU GCC" superClass="fr.ac6.managedbuild.toolchain.gnu.cross.exe.release">
+							<option id="fr.ac6.managedbuild.option.gnu.cross.mcu.970645530" name="Mcu" superClass="fr.ac6.managedbuild.option.gnu.cross.mcu" useByScannerDiscovery="false" value="STM32L475VGTx" valueType="string"/>
+							<option id="fr.ac6.managedbuild.option.gnu.cross.fpu.210174061" name="Floating point hardware" superClass="fr.ac6.managedbuild.option.gnu.cross.fpu" useByScannerDiscovery="false" value="fr.ac6.managedbuild.option.gnu.cross.fpu.fpv4-sp-d16" valueType="enumerated"/>
+							<option id="fr.ac6.managedbuild.option.gnu.cross.floatabi.1235319064" name="Floating-point ABI" superClass="fr.ac6.managedbuild.option.gnu.cross.floatabi" useByScannerDiscovery="false" value="fr.ac6.managedbuild.option.gnu.cross.floatabi.hard" valueType="enumerated"/>
+							<option id="fr.ac6.managedbuild.option.gnu.cross.board.924385302" name="Board" superClass="fr.ac6.managedbuild.option.gnu.cross.board" useByScannerDiscovery="false" value="STM32L475VG" valueType="string"/>
+							<option id="fr.ac6.managedbuild.option.gnu.cross.prefix.1808239302" name="Prefix" superClass="fr.ac6.managedbuild.option.gnu.cross.prefix" useByScannerDiscovery="false" value="" valueType="string"/>
+							<targetPlatform archList="all" binaryParser="org.eclipse.cdt.core.ELF" id="fr.ac6.managedbuild.targetPlatform.gnu.cross.1980424714" isAbstract="false" osList="all" superClass="fr.ac6.managedbuild.targetPlatform.gnu.cross"/>
+							<builder buildPath="${workspace_loc:/freertos_coremark_clang}/Release" id="fr.ac6.managedbuild.builder.gnu.cross.351938889" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="Gnu Make Builder" parallelBuildOn="true" parallelizationNumber="optimal" superClass="fr.ac6.managedbuild.builder.gnu.cross"/>
+							<tool command="${workspace_loc}/../build/llvm/bin/clang" id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.1866029387" name="MCU GCC Compiler" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler">
+								<option id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.fdata.1935084144" name="Place the data in their own section (-fdata-sections)" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.fdata" useByScannerDiscovery="false" value="true" valueType="boolean"/>
+								<option id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.ffunction.223304305" name="Place the function in their own section (-ffunction-sections)" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.ffunction" useByScannerDiscovery="false" value="true" valueType="boolean"/>
+								<option id="fr.ac6.managedbuild.gnu.c.compiler.option.optimization.level.434414951" name="Optimization Level" superClass="fr.ac6.managedbuild.gnu.c.compiler.option.optimization.level" useByScannerDiscovery="false" value="fr.ac6.managedbuild.gnu.c.optimization.level.most" valueType="enumerated"/>
+								<option defaultValue="gnu.c.debugging.level.none" id="gnu.c.compiler.option.debugging.level.1077587991" name="Debug Level" superClass="gnu.c.compiler.option.debugging.level" useByScannerDiscovery="false" value="gnu.c.debugging.level.default" valueType="enumerated"/>
+								<option id="gnu.c.compiler.option.preprocessor.def.symbols.769982855" name="Defined symbols (-D)" superClass="gnu.c.compiler.option.preprocessor.def.symbols" useByScannerDiscovery="false" valueType="definedSymbols">
+									<listOptionValue builtIn="false" value="USE_HAL_DRIVER"/>
+									<listOptionValue builtIn="false" value="TRIPLE_T"/>
+									<listOptionValue builtIn="false" value="STM32L475xx"/>
+									<listOptionValue builtIn="false" value="MQTTCLIENT_PLATFORM_HEADER=MQTTCMSIS.h"/>
+									<listOptionValue builtIn="false" value="ENABLE_IOT_INFO"/>
+									<listOptionValue builtIn="false" value="ENABLE_IOT_ERROR"/>
+									<listOptionValue builtIn="false" value="SENSOR"/>
+									<listOptionValue builtIn="false" value="RFU"/>
+									<listOptionValue builtIn="false" value="USE_OFFLOAD_SSL"/>
+								</option>
+								<option id="gnu.c.compiler.option.include.paths.1238041047" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
+									<listOptionValue builtIn="false" value="&quot;${openstm32_compiler_path}/../arm-none-eabi/include&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/B-L475E-IOT01}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/Common}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/hts221}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/lis3mdl}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/lps22hb}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/lsm6dsl}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/vl53l0x}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/es_wifi}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/CMSIS/Include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/CMSIS/Device/ST/STM32L4xx/Include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/STM32L4xx_HAL_Driver/Inc}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/STM32L4xx_HAL_Driver/Inc/Legacy}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/config_files}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/aws/include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/aws/include/private}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/aws/FreeRTOS/portable/GCC/ARM_CM4F}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/jsmn}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mbedtls/include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/pkcs11}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/tinycbor}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/coremark}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/st_code}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/common_demos/include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code}&quot;"/>
+								</option>
+								<option id="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other.1719114573" name="Other flags" superClass="fr.ac6.managedbuid.gnu.c.compiler.option.misc.other" useByScannerDiscovery="false" value="--target=arm-none-eabi" valueType="string"/>
+								<option id="gnu.c.compiler.option.optimization.flags.666218781" name="Other optimization flags" superClass="gnu.c.compiler.option.optimization.flags" useByScannerDiscovery="false" value="-ffreestanding -fomit-frame-pointer" valueType="string"/>
+								<option id="gnu.c.compiler.option.dialect.std.1795177277" name="Language standard" superClass="gnu.c.compiler.option.dialect.std" useByScannerDiscovery="false" value="gnu.c.compiler.dialect.default" valueType="enumerated"/>
+								<option id="gnu.c.compiler.option.misc.verbose.1998591109" name="Verbose (-v)" superClass="gnu.c.compiler.option.misc.verbose" useByScannerDiscovery="false" value="false" valueType="boolean"/>
+								<option id="gnu.c.compiler.option.include.files.1942905100" name="Include files (-include)" superClass="gnu.c.compiler.option.include.files" useByScannerDiscovery="false"/>
+								<inputType id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.c.1501755084" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.c"/>
+								<inputType id="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.s.421165378" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.s"/>
+							</tool>
+							<tool id="fr.ac6.managedbuild.tool.gnu.cross.cpp.compiler.260078944" name="MCU G++ Compiler" superClass="fr.ac6.managedbuild.tool.gnu.cross.cpp.compiler">
+								<option id="fr.ac6.managedbuild.gnu.cpp.compiler.option.optimization.level.723066993" name="Optimization Level" superClass="fr.ac6.managedbuild.gnu.cpp.compiler.option.optimization.level" useByScannerDiscovery="false" value="fr.ac6.managedbuild.gnu.cpp.optimization.level.most" valueType="enumerated"/>
+								<option defaultValue="gnu.cpp.compiler.debugging.level.none" id="gnu.cpp.compiler.option.debugging.level.1352133149" name="Debug Level" superClass="gnu.cpp.compiler.option.debugging.level" useByScannerDiscovery="false" valueType="enumerated"/>
+							</tool>
+							<tool command="${workspace_loc}/../build/llvm/bin/clang" id="fr.ac6.managedbuild.tool.gnu.cross.c.linker.992674429" name="MCU GCC Linker" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.linker">
+								<option id="fr.ac6.managedbuild.tool.gnu.cross.c.linker.script.2050648887" name="Linker Script (-T)" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.linker.script" useByScannerDiscovery="false" value="${ProjDirPath}/STM32L475VGTx_FLASH.ld" valueType="string"/>
+								<option id="gnu.c.link.option.libs.846277308" name="Libraries (-l)" superClass="gnu.c.link.option.libs" useByScannerDiscovery="false" valueType="libs">
+									<listOptionValue builtIn="false" value="c"/>
+									<listOptionValue builtIn="false" value="gcc"/>
+								</option>
+								<option id="gnu.c.link.option.ldflags.1712379380" name="Linker flags" superClass="gnu.c.link.option.ldflags" useByScannerDiscovery="false" value="--target=arm-none-eabi -fuse-ld=lld" valueType="string"/>
+								<option id="gnu.c.link.option.paths.1674658532" name="Library search path (-L)" superClass="gnu.c.link.option.paths" useByScannerDiscovery="false" valueType="libPaths">
+									<listOptionValue builtIn="false" value="&quot;${openstm32_compiler_path}/../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${openstm32_compiler_path}/../arm-none-eabi/lib&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${openstm32_compiler_path}/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${openstm32_compiler_path}/../lib/gcc/arm-none-eabi/7.3.1&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${openstm32_compiler_path}/../lib/gcc&quot;"/>
+								</option>
+								<option id="gnu.c.link.option.userobjs.770986868" name="Other objects" superClass="gnu.c.link.option.userobjs" useByScannerDiscovery="false" valueType="userObjs">
+									<listOptionValue builtIn="false" value="&quot;${openstm32_compiler_path}/../arm-none-eabi/lib/thumb/v7e-m/fpv4-sp/hard/crt0.o&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${openstm32_compiler_path}/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/crti.o&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${openstm32_compiler_path}/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/crtbegin.o&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${openstm32_compiler_path}/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/crtend.o&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${openstm32_compiler_path}/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7e-m/fpv4-sp/hard/crtn.o&quot;"/>
+								</option>
+								<option id="fr.ac6.managedbuild.tool.gnu.cross.c.linker.gcsections.565025011" name="Discard unused sections (-Wl,--gc-sections)" superClass="fr.ac6.managedbuild.tool.gnu.cross.c.linker.gcsections" useByScannerDiscovery="false" value="true" valueType="boolean"/>
+								<inputType id="cdt.managedbuild.tool.gnu.c.linker.input.167046328" superClass="cdt.managedbuild.tool.gnu.c.linker.input">
+									<additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
+									<additionalInput kind="additionalinput" paths="$(LIBS)"/>
+								</inputType>
+							</tool>
+							<tool id="fr.ac6.managedbuild.tool.gnu.cross.cpp.linker.365836868" name="MCU G++ Linker" superClass="fr.ac6.managedbuild.tool.gnu.cross.cpp.linker"/>
+							<tool id="fr.ac6.managedbuild.tool.gnu.archiver.810993067" name="MCU GCC Archiver" superClass="fr.ac6.managedbuild.tool.gnu.archiver"/>
+							<tool command="${workspace_loc}/../build/llvm/bin/clang" id="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release.494109762" name="MCU GCC Assembler" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.exe.release">
+								<option id="gnu.both.asm.option.include.paths.836693777" name="Include paths (-I)" superClass="gnu.both.asm.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
+									<listOptionValue builtIn="false" value="&quot;${openstm32_compiler_path}/../arm-none-eabi/include&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/B-L475E-IOT01}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/Common}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/hts221}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/lis3mdl}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/lps22hb}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/lsm6dsl}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/vl53l0x}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/BSP/Components/es_wifi}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/CMSIS/Include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/CMSIS/Device/ST/STM32L4xx/Include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/STM32L4xx_HAL_Driver/Inc}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mcu_vendor/st/stm32l475_discovery/STM32L4xx_HAL_Driver/Inc/Legacy}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/config_files}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/aws/include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/aws/include/private}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/aws/FreeRTOS/portable/GCC/ARM_CM4F}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/jsmn}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/mbedtls/include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/pkcs11}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/lib/third_party/tinycbor}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/coremark}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/st_code}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code/common_demos/include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/application_code}&quot;"/>
+								</option>
+								<option id="gnu.both.asm.option.flags.345904328" name="Assembler flags" superClass="gnu.both.asm.option.flags" useByScannerDiscovery="false" value="--target=arm-none-eabi -c" valueType="string"/>
+								<inputType id="cdt.managedbuild.tool.gnu.assembler.input.421286300" superClass="cdt.managedbuild.tool.gnu.assembler.input"/>
+								<inputType id="fr.ac6.managedbuild.tool.gnu.cross.assembler.input.2126500693" superClass="fr.ac6.managedbuild.tool.gnu.cross.assembler.input"/>
+							</tool>
+						</toolChain>
+					</folderInfo>
+				</configuration>
+			</storageModule>
+			<storageModule moduleId="org.eclipse.cdt.core.externalSettings"/>
+		</cconfiguration>
+	</storageModule>
+	<storageModule moduleId="refreshScope" versionNumber="2">
+		<configuration configurationName="baseline-coremark">
+			<resource resourceType="PROJECT" workspacePath="/freertos_coremark_clang"/>
+		</configuration>
+	</storageModule>
+	<storageModule moduleId="scannerConfiguration">
+		<autodiscovery enabled="false" problemReportingEnabled="false" selectedProfileId=""/>
+		<scannerConfigBuildInfo instanceId="fr.ac6.managedbuild.config.gnu.cross.exe.release.baseline-coremark;fr.ac6.managedbuild.config.gnu.cross.exe.release.baseline-coremark.;fr.ac6.managedbuild.tool.gnu.cross.c.compiler.baseline-coremark;fr.ac6.managedbuild.tool.gnu.cross.c.compiler.input.c.baseline-coremark">
+			<autodiscovery enabled="false" problemReportingEnabled="false" selectedProfileId=""/>
+		</scannerConfigBuildInfo>
+	</storageModule>
+	<storageModule moduleId="cdtBuildSystem" version="4.0.0">
+		<project id="freertos_coremark_clang.fr.ac6.managedbuild.target.gnu.cross.exe" name="Executable" projectType="fr.ac6.managedbuild.target.gnu.cross.exe"/>
+	</storageModule>
+	<storageModule moduleId="org.eclipse.cdt.core.LanguageSettingsProviders"/>
+	<storageModule moduleId="org.eclipse.cdt.make.core.buildtargets"/>
+	<storageModule moduleId="org.eclipse.cdt.internal.ui.text.commentOwnerProjectMappings"/>
 </cproject>

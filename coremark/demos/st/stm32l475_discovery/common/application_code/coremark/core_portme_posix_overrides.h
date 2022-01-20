@@ -34,6 +34,15 @@ Original Author: Shay Gal-on
 #define USE_FREERTOS_TASK 0
 #endif
 
+/* Set the number of threads based on symbols */
+#ifdef SINGLE_T
+#define MULTITHREAD 1
+#elif DOUBLE_T
+#define MULTITHREAD 2
+#elif TRIPLE_T
+#define MULTITHREAD 3
+#endif
+
 #include "FreeRTOS.h"
 
 #define ITERATIONS 2000
