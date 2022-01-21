@@ -7,3 +7,8 @@
 # Ignore run configurations except one
 *.cfg
 !STM32L475VG.cfg
+/baseline-coremark-1-thread/
+/baseline-coremark-2-threads/
+/baseline-coremark-3-threads/
+/baseline-coremark-2-threads-no-cache/
+/baseline-coremark-3-threads-no-cache/
